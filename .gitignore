@@ -9,5 +9,7 @@ _notes/
 /video/**/*.mp4
 /video/**/*.mp4.*
 !/video/**/teams/*.mp4
-# Adobe Premiere project configure files
+
+# Adobe Premiere project configure files and temporary files
 *.prproj
+*.tmp
