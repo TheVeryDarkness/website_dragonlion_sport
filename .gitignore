@@ -4,3 +4,6 @@
 _notes/
 /bower_components/
 /node_modules/
+
+#  Due to GitHub's size constrict
+/raw_video/*.mp4
