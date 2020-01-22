@@ -6,5 +6,5 @@ _notes/
 /node_modules/
 
 #  Due to GitHub's size constrict, ignore video files
-/raw_video/*.mp4
-/raw_video/*.mp4.*
+/raw_video/**/*.mp4
+/raw_video/**/*.mp4.*
