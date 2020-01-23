@@ -5,10 +5,8 @@ _notes/
 /bower_components/
 /node_modules/
 
-#  Due to GitHub's size constrict, ignore video files
-/video/**/*.mp4
-/video/**/*.mp4.*
-!/video/**/teams/*.mp4
+#  Due to GitHub's size constricts ans transport needs, ignore video files
+**/*.mp4
 
 # Adobe Premiere project configure files and temporary files
 *.prproj
