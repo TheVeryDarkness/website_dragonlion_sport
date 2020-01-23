@@ -5,27 +5,24 @@
 <body>
 	<main>
 		<h2>
-		第十二届全国舞龙舞狮锦标赛舞龙规定
-		<small><a href="http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html">官网</a></small>
+		<small><a href="blank">官网</a></small>
 		</h2>
-		
-		<video controls="controls">
-			<source src="2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4" type="video/mp4">
-			<source src="http://videoflv.sports.cn/201911/20191110wlgd.mp4" type="video/mp4">
-		请使用高版本浏览器或点击链接
+		<video id="video" controls="controls" type="video/mp4">
+		浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 		</video>
-
-
-		<h2>
-		第十二届全国舞龙舞狮锦标赛传统舞龙
-		<small><a href="http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html">官网</a></small>
-		</h2>
-		
-		<video controls="controls">
-			<source src="2019/全国舞龙舞狮锦标赛/传统/20191110ctwl.mp4" type="video/mp4">
-			<source src="http://videoflv.sports.cn/201911/20191109ctwl.mp4" type="video/mp4">
-		请使用高版本浏览器或点击链接
-		</video>
+		<script type="text/javascript">
+		<!--
+			var qS = document.querySelector("#video > source");
+			alert(typeof(myVideo));
+			alert(myVideo);
+			if (qS){
+				qS.src = "2019/全国舞龙舞狮锦标赛/传统/20191110ctwl.mp4";
+				alert(qS.src);
+			}
+			else alert("Failed to");
+		//-->
+		</script> 
+		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	</main>
 </body>
 
