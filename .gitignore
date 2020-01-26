@@ -11,3 +11,7 @@ _notes/
 # Adobe Premiere project configure files and temporary files
 *.prproj
 *.tmp
+
+#Windows configure
+web.config
+desktop.ini
