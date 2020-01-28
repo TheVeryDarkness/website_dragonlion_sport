@@ -24,9 +24,9 @@
 					setVideoSourcePath(qS, srcPath);
 				else alert("Failed to find a query selector with matching name.");
 			}
-			function Node(value) {
-				this.value = value;
-				this.sub = new Array;
+			function Node(callback) {
+				this.value = callback.call();
+				this.sub = new Array(0);
 				this.toString = function () {
 					var str = new String(this.value);
 					for (const child of this.sub) {
@@ -34,33 +34,38 @@
 					}
 					return str;
 				}
+				while (this.value) {
+					this.sub.push(new Node(callback));
+					if (this.sub[this.sub.length - 1].value === null) {
+						this.sub.pop();
+						break;
+					}
+				}
 			}
 			function MultiTree(callback) {
-				this.root = new Node("");
-				var i = 0;
-				var tmp;
-				while (true) {
-					tmp = callback.call();
-					if (tmp)
-						this.root.sub[i] = new Node(tmp);
-					else break;
-				}
+				this.root = new Node(callback);
 				this.toString = function () {
 					return this.root.toString();
 				}
 			}
 			function StringSplit(string) {
-				this.split = string.split(':');
+				this.split = string.split(';');
 				this.call = function (thisObject) {
 					if (this.split.length > 0)
 						return this.split.shift();
-					else return "";
+					else return null;
 				}
 			}
 			function makeAMultiTree(string) {
-				return new MultiTree(new StringSplit(string));
+				var split = new StringSplit(string);
+				var rev = new MultiTree(split);
+				if (split.length > 0)
+					for (const str of split) {
+						alert(str);
+					}
+				return rev;
 			}
-			var tree = makeAMultiTree("k:j::i::n:::z:::");
+			var tree = makeAMultiTree("k;j;;i;;n;;;z;;;");
 			alert(tree.toString());
 
 			setVideoSourcePathWithName("video", "http://videoflv.sports.cn/201911/20191109ctwl.mp4");
