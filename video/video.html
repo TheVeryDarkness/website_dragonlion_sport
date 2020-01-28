@@ -33,13 +33,13 @@
 				var i = 0;
 				var tmp;
 				while (true) {
-					tmp = callback();
+					tmp = callback.call();
 					if (tmp)
-						this.root[i] = tmp;
+						this.root[i] = new Node(tmp);
 					else break;
 				}
-				this.toString() = function () {
-					var str = new string(root);
+				this.toString = function () {
+					var str = new String(this.root);
 					for (const child in this.root.sub) {
 						str += child.toString();
 					}
@@ -47,15 +47,18 @@
 				}
 			}
 			function StringSplit(string) {
-				this.split = string.split('\\');
+				this.split = string.split(':');
 				this.call = function (thisObject) {
-					return split.shift();
+					if (this.split.length > 0)
+						return this.split.shift();
+					else return "";
 				}
 			}
 			function makeAMultiTree(string) {
-				var tree = new MultiTree();
+				return new MultiTree(new StringSplit(string));
 			}
-
+			var tree = makeAMultiTree("k:j::i::n:::z:::");
+			alert(tree.toString());
 
 			setVideoSourcePathWithName("video", "http://videoflv.sports.cn/201911/20191109ctwl.mp4");
 		//-->
