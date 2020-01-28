@@ -11,7 +11,7 @@
 		浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 		</video>
 		<script type="text/javascript">
-		<!--
+		//<!--
 			function setVideoSourcePath(querySelector, srcPath){
 				querySelector.src = srcPath;
 			}
@@ -25,11 +25,13 @@
 				else alert("Failed to find a query selector with matching name.");
 			}
 			function Node(value){
-				this.name=name;
-				this.left=null;
-				this.right=null;
+				this.value=value;
+				this.sub=new Array;
 			}
-			
+			function makeAMultiTree(){
+
+			}
+
 
 			setVideoSourcePathWithName("video", "http://videoflv.sports.cn/201911/20191109ctwl.mp4");
 		//-->
