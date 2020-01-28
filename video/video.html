@@ -28,8 +28,32 @@
 				this.value = value;
 				this.sub = new Array;
 			}
-			function makeAMultiTree() {
-
+			function MultiTree(callback) {
+				this.root = new Node("");
+				var i = 0;
+				var tmp;
+				while (true) {
+					tmp = callback();
+					if (tmp)
+						this.root[i] = tmp;
+					else break;
+				}
+				this.toString() = function () {
+					var str = new string(root);
+					for (const child in this.root.sub) {
+						str += child.toString();
+					}
+					return str;
+				}
+			}
+			function StringSplit(string) {
+				this.split = string.split('\\');
+				this.call = function (thisObject) {
+					return split.shift();
+				}
+			}
+			function makeAMultiTree(string) {
+				var tree = new MultiTree();
 			}
 
 
