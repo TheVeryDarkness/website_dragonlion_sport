@@ -5,37 +5,37 @@
 <body>
 	<main>
 		<h2>
-		<small><a href="">官网</a></small>
+			<small><a href="">官网</a></small>
 		</h2>
 		<video id="video" controls="controls" type="video/mp4">
-		浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 		</video>
 		<script type="text/javascript">
-		//<!--
-			function setVideoSourcePath(querySelector, srcPath){
+			//<!--
+			function setVideoSourcePath(querySelector, srcPath) {
 				querySelector.src = srcPath;
 			}
-			function findAQuerySelector(name){
+			function findAQuerySelector(name) {
 				return document.querySelector("#" + name);
 			}
-			function setVideoSourcePathWithName(video_name, srcPath){
+			function setVideoSourcePathWithName(video_name, srcPath) {
 				var qS = findAQuerySelector(video_name);
 				if (qS)
 					setVideoSourcePath(qS, srcPath);
 				else alert("Failed to find a query selector with matching name.");
 			}
-			function Node(value){
-				this.value=value;
-				this.sub=new Array;
+			function Node(value) {
+				this.value = value;
+				this.sub = new Array;
 			}
-			function makeAMultiTree(){
+			function makeAMultiTree() {
 
 			}
 
 
 			setVideoSourcePathWithName("video", "http://videoflv.sports.cn/201911/20191109ctwl.mp4");
 		//-->
-		</script> 
+		</script>
 		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	</main>
 </body>
