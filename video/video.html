@@ -22,7 +22,7 @@
 				var qS = findAQuerySelector(video_name);
 				if (qS)
 					setVideoSourcePath(qS, srcPath);
-				else alert("Failed to find a query selector with matching name.");
+				else console.log("Failed to find a query selector with matching name.");
 			}
 			function Node(callback) {
 				this.value = callback.call();
