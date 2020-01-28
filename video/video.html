@@ -27,6 +27,13 @@
 			function Node(value) {
 				this.value = value;
 				this.sub = new Array;
+				this.toString = function () {
+					var str = new String(this.value);
+					for (const child of this.sub) {
+						str += child.toString();
+					}
+					return str;
+				}
 			}
 			function MultiTree(callback) {
 				this.root = new Node("");
@@ -35,15 +42,11 @@
 				while (true) {
 					tmp = callback.call();
 					if (tmp)
-						this.root[i] = new Node(tmp);
+						this.root.sub[i] = new Node(tmp);
 					else break;
 				}
 				this.toString = function () {
-					var str = new String(this.root);
-					for (const child in this.root.sub) {
-						str += child.toString();
-					}
-					return str;
+					return this.root.toString();
 				}
 			}
 			function StringSplit(string) {
