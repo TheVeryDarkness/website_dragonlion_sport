@@ -78,7 +78,7 @@
 					console.log("Debug failed. Unexpected tree termination.");
 				return rev;
 			}
-			var selectBoxMaxSize = 6;
+			const selectBoxMaxSize = 6;
 			function fillSelectBoxWithSubValues(selectBox, subArray) {
 				selectBox.size = Math.min(selectBox.size + subArray.length, selectBoxMaxSize);
 				selectBox.options.length += subArray.length;
@@ -88,11 +88,9 @@
 			}
 			function fillSelectBoxWithNodes(selectBox, nodes) {
 				selectBox.size = 0;
-				for (const node of nodes) {
-					fillSelectBoxWithSubValues(selectBox, node.sub);
-				}
+				fillSelectBoxWithSubValues(selectBox, nodes);
 			}
-			function setNext(nodes, selectBox) {
+			function nextNodes(nodes, selectBox) {
 				if (selectBox.selectedIndex === -1) {
 					var rev = new Array;
 					for (const node of nodes) {
@@ -128,18 +126,18 @@
 			);
 			updateSelectBox();
 			function updateSelectBox() {
-				var nodes = new Array;
-				nodes[0] = tree.root;
-				fillSelectBoxWithNodes(s1, nodes);
-				nodes = setNext(nodes, s1);
-				fillSelectBoxWithNodes(s2, nodes);
-				nodes = setNext(nodes, s2);
-				fillSelectBoxWithNodes(s3, nodes);
-				nodes = setNext(nodes, s3);
-				fillSelectBoxWithNodes(s4, nodes);
-				nodes = setNext(nodes, s4);
+				var nodes1 = new Array;
+				nodes1[0] = tree.root;
+				fillSelectBoxWithNodes(s1, nodes1);
+				var nodes2 = nextNodes(nodes1, s1);
+				fillSelectBoxWithNodes(s2, nodes2);
+				var nodes3 = nextNodes(nodes2, s2);
+				fillSelectBoxWithNodes(s3, nodes3);
+				var nodes4 = nextNodes(nodes3, s3);
+				fillSelectBoxWithNodes(s4, nodes4);
+				var nodes5 = nextNodes(nodes4, s4);
 				if (s4.selectedIndex !== -1)
-					video.src = nodes[s4.selectedIndex].value;
+					video.src = nodes4[s4.selectedIndex].value;
 			}
 		//-->
 		</script>
