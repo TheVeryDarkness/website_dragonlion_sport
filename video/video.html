@@ -28,9 +28,9 @@
 					setVideoSourcePath(qS, srcPath);
 				else console.log("Failed to find a query selector with matching id.");
 			}
-			function Node(callback) {
-				this.value = callback.call();
-				if (this.value === null) return;
+			function Node(value) {
+				this.value = value;
+				if (this.value === null) return;//可能会提高效率
 				this.sub = new Array(0);
 				this.toString = function () {
 					var str = new String(this.value);
@@ -39,17 +39,28 @@
 					}
 					return str;
 				}
-				while (true) {
-					this.sub.push(new Node(callback));
-					if (this.sub[this.sub.length - 1].value === null) { }
-					this.sub.pop();
-					break;
-				}
 			}
 			function MultiTree(callback) {
-				this.root = new Node(callback);
+				this.root = new Node(callback.call());
 				this.toString = function () {
 					return this.root.toString();
+				}
+				var nodesStack = new Array();//里面存的都是Node对象
+				if (this.root.value !== null) {
+					nodesStack.push(this.root);
+					var tmp;
+					while (true) {
+						tmp = new Node(callback.call());
+						if (tmp.value) {
+							nodesStack[nodesStack.length - 1].sub.push(tmp);
+							nodesStack.push(tmp);
+						}
+						else {
+							if (nodesStack.size > 0)
+								nodesStack.pop();
+							else return;
+						}
+					}
 				}
 			}
 			function StringSplit(string) {
@@ -115,6 +126,7 @@
 					;\
 				".replace(/\t*/g, '')
 			);
+			console.log(tree);
 			console.log(tree.toString());
 			var nodes = new Array;
 			nodes[0] = tree.root;
