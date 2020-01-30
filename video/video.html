@@ -5,6 +5,12 @@
 <body>
 	<main>
 		<h2>
+			运动项目<select required id="s1" multiple=false></select>
+			年份<select required id="s2" multiple=false></select>
+			赛事<select required id="s3" multiple=false></select>
+			组别<select required id="s4" multiple=false></select>
+			队伍<select required id="s5" multiple=false></select>
+			动作<select required id="s6" multiple=false></select>
 			<small><a href="">官网</a></small>
 		</h2>
 		<video id="video" controls="controls" type="video/mp4">
@@ -15,14 +21,14 @@
 			function setVideoSourcePath(querySelector, srcPath) {
 				querySelector.src = srcPath;
 			}
-			function findAQuerySelector(name) {
-				return document.querySelector("#" + name);
+			function findAQuerySelector(id) {
+				return document.querySelector("#" + id);
 			}
-			function setVideoSourcePathWithName(video_name, srcPath) {
-				var qS = findAQuerySelector(video_name);
+			function setVideoSourcePathWithId(video_id, srcPath) {
+				var qS = findAQuerySelector(video_id);
 				if (qS)
 					setVideoSourcePath(qS, srcPath);
-				else console.log("Failed to find a query selector with matching name.");
+				else console.log("Failed to find a query selector with matching id.");
 			}
 			function Node(callback) {
 				this.value = callback.call();
@@ -63,9 +69,29 @@
 					console.log("Debug failed. Unexpected tree termination.");
 				return rev;
 			}
+			var selectBoxMaxSize=6;
+			
+			function fillSelectBoxWithSubValues(selectBox, subArray) {
+				selectBox.size += subArray.length;
+				selectBox.size=Math.min(selectBox.size,selectBoxMaxSize);
+				selectBox.options.length += subArray.length;
+				for (const i in subArray) {
+					selectBox.options[i].text = subArray[i].value;
+				}
+			}
+			function fillSelectBoxWithNodes(selectBox, nodes){
+			for (const node of nodes) {
+				fillSelectBoxWithSubValues(selectBox, node.sub);
+			}
+			}
+			function setNext(nodes,selectBox){
+				if(selectBox.selectedIndex===-1)
+					return nodes.sub;
+				else return {0:node.sub[s1.options[s1.selectedIndex].index]};
+			}
 			var tree = makeAMultiTree(
 				"\
-					视频;\
+					舞龙;\
 						2019;\
 							全国舞龙舞狮锦标赛;\
 								规定;\
@@ -82,11 +108,15 @@
 							;\
 						;\
 					;\
-				".replace(/\t*/g,'')
+				".replace(/\t*/g, '')
 			);
 			console.log(tree.toString());
+			var nodes = {0:tree.root};
+			fillSelectBoxWithNodes(s1,nodes);
+			setNext(nodes,s1);
+			console.log(s1.options);
 
-			setVideoSourcePathWithName("video", "http://videoflv.sports.cn/201911/20191109ctwl.mp4");
+			video.src = "http://videoflv.sports.cn/201911/20191109ctwl.mp4";
 		//-->
 		</script>
 		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
