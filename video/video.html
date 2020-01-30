@@ -13,8 +13,10 @@
 			动作<select required id="s6" multiple=false></select>
 			<small><a href="">官网</a></small>
 		</h2>
-		<video id="video" controls="controls" type="video/mp4">
+		<video id="video" controls="controls" type="video/mp4" src="default">
 			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+			<source src="movie.mp4" type="video/mp4">
+			<source src="movie.mp4" type="video/mp4">
 		</video>
 		<script type="text/javascript">
 			//<!--
@@ -32,6 +34,7 @@
 			}
 			function Node(callback) {
 				this.value = callback.call();
+				if (this.value === null) return;
 				this.sub = new Array(0);
 				this.toString = function () {
 					var str = new String(this.value);
@@ -40,12 +43,11 @@
 					}
 					return str;
 				}
-				while (this.value) {
+				while (true) {
 					this.sub.push(new Node(callback));
-					if (this.sub[this.sub.length - 1].value === null) {
-						this.sub.pop();
-						break;
-					}
+					if (this.sub[this.sub.length - 1].value === null) { }
+					this.sub.pop();
+					break;
 				}
 			}
 			function MultiTree(callback) {
@@ -69,25 +71,32 @@
 					console.log("Debug failed. Unexpected tree termination.");
 				return rev;
 			}
-			var selectBoxMaxSize=6;
-			
+			var selectBoxMaxSize = 6;
+
 			function fillSelectBoxWithSubValues(selectBox, subArray) {
 				selectBox.size += subArray.length;
-				selectBox.size=Math.min(selectBox.size,selectBoxMaxSize);
+				selectBox.size = Math.min(selectBox.size, selectBoxMaxSize);
 				selectBox.options.length += subArray.length;
 				for (const i in subArray) {
 					selectBox.options[i].text = subArray[i].value;
 				}
 			}
-			function fillSelectBoxWithNodes(selectBox, nodes){
-			for (const node of nodes) {
-				fillSelectBoxWithSubValues(selectBox, node.sub);
+			function fillSelectBoxWithNodes(selectBox, nodes) {
+				for (const node of nodes) {
+					fillSelectBoxWithSubValues(selectBox, node.sub);
+				}
 			}
-			}
-			function setNext(nodes,selectBox){
-				if(selectBox.selectedIndex===-1)
-					return nodes.sub;
-				else return {0:node.sub[s1.options[s1.selectedIndex].index]};
+			function setNext(nodes, selectBox) {
+				if (selectBox.selectedIndex === -1) {
+					var rev = new Array;
+					for (const node of nodes) {
+						rev.concat(node.sub);
+					}
+					return rev;
+				}
+				else {
+					return new Array(node.sub[s1.options[s1.selectedIndex].index]);
+				}
 			}
 			var tree = makeAMultiTree(
 				"\
@@ -111,12 +120,20 @@
 				".replace(/\t*/g, '')
 			);
 			console.log(tree.toString());
-			var nodes = {0:tree.root};
-			fillSelectBoxWithNodes(s1,nodes);
-			setNext(nodes,s1);
-			console.log(s1.options);
+			var nodes = new Array;
+			nodes[0] = tree.root;
+			fillSelectBoxWithNodes(s1, nodes);
+			nodes = setNext(nodes, s1);
+			fillSelectBoxWithNodes(s2, nodes);
+			nodes = setNext(nodes, s2);
+			fillSelectBoxWithNodes(s3, nodes);
+			nodes = setNext(nodes, s3);
+			fillSelectBoxWithNodes(s4, nodes);
+			if (s4.selectedIndex !== -1)
+				video.src = nodes[s4.selectedIndex].value;
+			console.log(video);
 
-			video.src = "http://videoflv.sports.cn/201911/20191109ctwl.mp4";
+			console.log(video.childNodes);
 		//-->
 		</script>
 		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
