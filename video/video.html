@@ -82,14 +82,13 @@
 			}
 			const selectBoxMaxSize = 6;
 			function fillSelectBoxWithSubValues(selectBox, subArray) {
-				selectBox.size = Math.min(selectBox.size + subArray.length, selectBoxMaxSize);
-				selectBox.options.length += subArray.length;
+				selectBox.options.length = subArray.length;
 				for (const i in subArray) {
 					selectBox.options[i].text = subArray[i].value;
 				}
 			}
 			function fillSelectBoxWithNodes(selectBox, nodes) {
-				selectBox.size = 0;
+				selectBox.size = Math.min(nodes.length, selectBoxMaxSize);
 				fillSelectBoxWithSubValues(selectBox, nodes);
 			}
 			function nextNodes(nodes, selectedIndex) {
