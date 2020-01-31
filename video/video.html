@@ -90,8 +90,8 @@
 				selectBox.size = 0;
 				fillSelectBoxWithSubValues(selectBox, nodes);
 			}
-			function nextNodes(nodes, selectBox) {
-				if (selectBox.selectedIndex === -1) {
+			function nextNodes(nodes, selectedIndex) {
+				if (selectedIndex === -1) {
 					var rev = new Array;
 					for (const node of nodes) {
 						rev = rev.concat(node.sub);
@@ -99,7 +99,7 @@
 					return rev;
 				}
 				else {
-					return nodes[s1.options[s1.selectedIndex].index].sub;
+					return nodes[s1.options[selectedIndex].index].sub;
 				}
 			}
 			var tree = makeAMultiTree(
@@ -126,18 +126,17 @@
 			);
 			updateSelectBox();
 			function updateSelectBox() {
-				var nodes1 = new Array;
-				nodes1[0] = tree.root;
+				var nodes1 = new Array(tree.root);
 				fillSelectBoxWithNodes(s1, nodes1);
-				var nodes2 = nextNodes(nodes1, s1);
+				var nodes2 = nextNodes(nodes1, s1.selectedIndex);
 				fillSelectBoxWithNodes(s2, nodes2);
-				var nodes3 = nextNodes(nodes2, s2);
+				var nodes3 = nextNodes(nodes2, s2.selectedIndex);
 				fillSelectBoxWithNodes(s3, nodes3);
-				var nodes4 = nextNodes(nodes3, s3);
+				var nodes4 = nextNodes(nodes3, s3.selectedIndex);
 				fillSelectBoxWithNodes(s4, nodes4);
-				var nodes5 = nextNodes(nodes4, s4);
+				var nodes5 = nextNodes(nodes4, s4.selectedIndex);
 				if (s4.selectedIndex !== -1)
-					video.src = nodes4[s4.selectedIndex].value;
+					video.src = nodes4[s4.selectedIndex].sub[0].value;
 			}
 		//-->
 		</script>
