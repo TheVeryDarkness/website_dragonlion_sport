@@ -4,17 +4,20 @@
 
 <body>
 	<main>
-		<h2>
+		<h3>
 			运动项目<select required id="s1" onchange="updateSelectBox()" size=1></select>
 			年份<select required id="s2" onchange="updateSelectBox()" size=1></select>
 			赛事<select required id="s3" onchange="updateSelectBox()" size=1></select>
 			组别<select required id="s4" onchange="updateSelectBox()" size=1></select>
 			队伍<select required id="s5" onchange="updateSelectBox()" size=1></select>
 			动作<select required id="s6" onchange="updateSelectBox()" size=1></select>
-			<small><a id="officialRef">官网</a></small>
-			<input type="button" onclick="updateSelectBox()" value="刷新"></input>
-		</h2>
-		<video id="video" controls="controls" type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+			<small>
+				<a id="originWebpage">源网页</a>
+				<a id="originVideoURL">源视频</a>
+			</small>
+			<input type="button" onclick="updateSelectBox()" value="刷新">
+		</h3>
+		<video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
 			<source id="sourceVideo"></video>
 		<script type="text/javascript">
@@ -130,6 +133,12 @@
 					;\
 				".replace(/\t*/g, '')
 			);
+			s1.selectedIndex=0;
+			s2.selectedIndex=0;
+			s3.selectedIndex=0;
+			s4.selectedIndex=0;
+			s5.selectedIndex=0;
+			s6.selectedIndex=0;
 			updateSelectBox();
 			function updateSelectBox() {
 				var nodes1 = new Array(tree.root);
@@ -143,8 +152,9 @@
 				var nodes5 = nextNodes(nodes4, s4.selectedIndex);
 				if (s4.selectedIndex !== -1) {
 					localVideoCache.src = nodes4[s4.selectedIndex].sub[0].value;
+					originVideoURL.href = nodes4[s4.selectedIndex].sub[1].value;
 					sourceVideo.src = nodes4[s4.selectedIndex].sub[1].value;
-					officialRef.href = nodes4[s4.selectedIndex].sub[2].value;
+					originWebpage.href = nodes4[s4.selectedIndex].sub[2].value;
 					video.load();
 				}
 			}
