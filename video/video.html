@@ -5,15 +5,17 @@
 <body>
 	<main>
 		<h2>
-			运动项目<select required id="s1" multiple=false onchange="updateSelectBox()"></select>
-			年份<select required id="s2" multiple=false onchange="updateSelectBox()"></select>
-			赛事<select required id="s3" multiple=false onchange="updateSelectBox()"></select>
-			组别<select required id="s4" multiple=false onchange="updateSelectBox()"></select>
-			队伍<select required id="s5" multiple=false onchange="updateSelectBox()"></select>
-			动作<select required id="s6" multiple=false onchange="updateSelectBox()"></select>
-			<small><a href="">官网</a></small>
+			运动项目<select required id="s1" multiple=false onchange="updateSelectBox()" size=1></select>
+			年份<select required id="s2" multiple=false onchange="updateSelectBox()" size=1></select>
+			赛事<select required id="s3" multiple=false onchange="updateSelectBox()" size=1></select>
+			组别<select required id="s4" multiple=false onchange="updateSelectBox()" size=1></select>
+			队伍<select required id="s5" multiple=false onchange="updateSelectBox()" size=1></select>
+			动作<select required id="s6" multiple=false onchange="updateSelectBox()" size=1></select>
+			<small><a id="officialRef">官网</a></small>
 		</h2>
-		<video id="video" controls="controls" type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接<source id="localCache"><source id="source"></video>
+		<video id="video" controls="controls" type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+			<source id="localVideoCache">
+			<source id="sourceVideo"></video>
 		<script type="text/javascript">
 			//<!--
 			function setVideoSourcePath(querySelector, srcPath) {
@@ -108,14 +110,18 @@
 						2019;\
 							全国舞龙舞狮锦标赛;\
 								规定;\
-									/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4,\
-									http://videoflv.sports.cn/201911/20191110wlgd.mp4,\
+									/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4;\
+									;\
+									http://videoflv.sports.cn/201911/20191110wlgd.mp4;\
+									;\
 									http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html;\
 									;\
 								;\
 								传统;\
-									/2019/全国舞龙舞狮锦标赛/规定/20191110ctwl.mp4,\
-									http://videoflv.sports.cn/201911/20191109ctwl.mp4,\
+									/2019/全国舞龙舞狮锦标赛/规定/20191110ctwl.mp4;\
+									;\
+									http://videoflv.sports.cn/201911/20191109ctwl.mp4;\
+									;\
 									http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html;\
 									;\
 								;\
@@ -135,8 +141,12 @@
 				var nodes4 = nextNodes(nodes3, s3.selectedIndex);
 				fillSelectBoxWithNodes(s4, nodes4);
 				var nodes5 = nextNodes(nodes4, s4.selectedIndex);
-				if (s4.selectedIndex !== -1)
-					video.src = nodes4[s4.selectedIndex].sub[0].value;
+				if (s4.selectedIndex !== -1) {
+					localVideoCache.src = nodes4[s4.selectedIndex].sub[0].value;
+					sourceVideo.src = nodes4[s4.selectedIndex].sub[1].value;
+					officialRef.href = nodes4[s4.selectedIndex].sub[2].value;
+					video.load();
+				}
 			}
 		//-->
 		</script>
