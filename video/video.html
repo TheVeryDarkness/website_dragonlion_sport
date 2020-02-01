@@ -19,7 +19,8 @@
 		</h3>
 		<video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
-			<source id="sourceVideo"></video>
+			<source id="sourceVideo">
+		</video>
 		<script type="text/javascript">
 			//<!--
 			function setVideoSourcePath(querySelector, srcPath) {
@@ -120,7 +121,7 @@
 									;\
 								;\
 								传统;\
-									/2019/全国舞龙舞狮锦标赛/规定/20191109ctwl.mp4;\
+									/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4;\
 									;\
 									http://videoflv.sports.cn/201911/20191109ctwl.mp4;\
 									;\
@@ -132,12 +133,12 @@
 					;\
 				".replace(/\t*/g, '')
 			);
-			s1.selectedIndex=0;
-			s2.selectedIndex=0;
-			s3.selectedIndex=0;
-			s4.selectedIndex=0;
-			s5.selectedIndex=0;
-			s6.selectedIndex=0;
+			s1.selectedIndex = 0;
+			s2.selectedIndex = 0;
+			s3.selectedIndex = 0;
+			s4.selectedIndex = 0;
+			s5.selectedIndex = 0;
+			s6.selectedIndex = 0;
 			updateSelectBox();
 			function updateSelectBox() {
 				var nodes1 = new Array(tree.root);
