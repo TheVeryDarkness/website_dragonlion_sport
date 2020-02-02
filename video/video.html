@@ -21,6 +21,28 @@
 			<source id="localVideoCache">
 			<source id="sourceVideo">
 		</video>
+		<p hidden id="videoSrcData">舞龙;
+				2019;
+					全国舞龙舞狮锦标赛;
+						规定;
+							2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4;
+							;
+							http://videoflv.sports.cn/201911/20191110wlgd.mp4;
+							;
+							http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html;
+							;
+						;
+						传统;
+							2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4;
+							;
+							http://videoflv.sports.cn/201911/20191109ctwl.mp4;
+							;
+							http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html;
+							;
+						;
+					;
+				;
+			;</p>
 		<script type="text/javascript">
 			//<!--
 			function setVideoSourcePath(querySelector, srcPath) {
@@ -78,8 +100,8 @@
 					else return null;
 				}
 			}
-			function makeAMultiTree(string) {
-				var split = new StringSplit(string);
+			function makeAMultiTree(str) {
+				var split = new StringSplit(str);
 				var rev = new MultiTree(split);
 				if (split.length > 0)
 					console.log("Debug failed. Unexpected tree termination.");
@@ -107,32 +129,7 @@
 					return nodes[selectedIndex].sub;
 				}
 			}
-			var tree = makeAMultiTree(
-				"\
-					舞龙;\
-						2019;\
-							全国舞龙舞狮锦标赛;\
-								规定;\
-									2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4;\
-									;\
-									http://videoflv.sports.cn/201911/20191110wlgd.mp4;\
-									;\
-									http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html;\
-									;\
-								;\
-								传统;\
-									2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4;\
-									;\
-									http://videoflv.sports.cn/201911/20191109ctwl.mp4;\
-									;\
-									http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html;\
-									;\
-								;\
-							;\
-						;\
-					;\
-				".replace(/\t*/g, '')
-			);
+			var tree = makeAMultiTree(videoSrcData.textContent.replace(/\n[\t]*/g, ''));
 			s1.selectedIndex = 0;
 			s2.selectedIndex = 0;
 			s3.selectedIndex = 0;
