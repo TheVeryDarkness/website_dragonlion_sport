@@ -107,8 +107,8 @@
 				;
 				2018;
 					亚洲舞龙舞狮锦标赛;
-						?;
-							台湾, 2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/7a6c337457516b5451775a7261777868/6e36506272684661/b3a09ea125f18dc581edcb8a43a91cd52bc3ab5b0918c85778c46c08c51bf28c292e75222ce4faf27525e1e6c5c708f5.mp4?auth_key=1589462208-0-0-0667845429c8da356905fae3511b3c8d, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video;
+						台湾, 2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/7a6c337457516b5451775a7261777868/6e36506272684661/b3a09ea125f18dc581edcb8a43a91cd52bc3ab5b0918c85778c46c08c51bf28c292e75222ce4faf27525e1e6c5c708f5.mp4?auth_key=1589462208-0-0-0667845429c8da356905fae3511b3c8d, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video;
+							台湾, 0, 545;
 							;
 						;
 					;
@@ -190,16 +190,17 @@
 			function fillSelectBoxWithNodes(selectBox, nodes) {
 				fillSelectBoxWithSubValues(selectBox, nodes);
 			}
+			const all = "all";
 			function nextNodes(nodes, selectedIndex) {
-				if (selectedIndex === -1) {
-					var rev = new Array;
+				if (selectedIndex === 0) {
+					var rev = new Array(new Node(all));
 					for (const node of nodes) {
 						rev = rev.concat(node.sub);
 					}
 					return rev;
 				}
 				else {
-					return nodes[selectedIndex].sub;
+					return new Array(new Node(all)).concat(nodes[selectedIndex].sub);
 				}
 			}
 			// Begin
@@ -214,7 +215,7 @@
 			// End
 
 			function updateSelectBox() {
-				const nodes1 = new Array(tree.root);//运动项目
+				const nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
 				fillSelectBoxWithNodes(s1, nodes1);
 				const nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
 				fillSelectBoxWithNodes(s2, nodes2);
@@ -223,7 +224,7 @@
 				const nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
 				fillSelectBoxWithNodes(s4, nodes4);
 				const nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
-				if (s4.selectedIndex !== -1) {
+				if (s4.selectedIndex !== 0) {
 					localVideoCache.src = nodes4[s4.selectedIndex].value[1];
 					originVideoURL.href = nodes4[s4.selectedIndex].value[2];
 					sourceVideo.src = nodes4[s4.selectedIndex].value[2];
@@ -235,10 +236,11 @@
 				fillSelectBoxWithNodes(s6, nodes6);
 
 				var range;
-				if(s6.selectedIndex !== -1)
+				if(s6.selectedIndex !== 0)
 					range = nodes6[s6.selectedIndex].value;
-				else if(s5.selectedIndex !== -1)
+				else if(s5.selectedIndex !== 0)
 					range = nodes5[s5.selectedIndex].value;
+				else return;
 					
 				videoTimeBegin = range[1];
 				videoTimeEnd = range[2];
