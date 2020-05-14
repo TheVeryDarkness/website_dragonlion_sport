@@ -11,15 +11,13 @@
 			组别<select required id="s4" onchange="updateSelectBox()" size=1></select>
 			队伍<select required id="s5" onchange="updateSelectBox()" size=1></select>
 			动作<select required id="s6" onchange="updateSelectBox()" size=1></select>
-			<small>
-				<a id="originWebpage">源网页</a>
-				<a id="originVideoURL">源视频</a>
-			</small>
 			<input type="button" onclick="updateSelectBox()" value="刷新">
 		</h3>
 		<h4>
 			<a>（温馨提示：请注意流量）视频时间范围：</a>
 			<a id="displayVideoTimeRange"></a>
+			<a id="originWebpage">源网页</a>
+			<a id="originVideoURL">源视频</a>
 		</h4>
 		<video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
