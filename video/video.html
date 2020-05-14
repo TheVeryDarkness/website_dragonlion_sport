@@ -21,6 +21,10 @@
 			<source id="localVideoCache">
 			<source id="sourceVideo">
 		</video>
+		<!--
+			Pay attention to the data format:
+				group name, local cache path, source video path, source webpage path
+		-->
 		<p hidden id="videoSrcData">
 			舞龙;
 				2019;
@@ -47,9 +51,7 @@
 				else console.log("Failed to find a query selector with matching id.");
 			}
 			function Node(value) {
-				if (value !== null)
-					this.value = value.split(',');
-				else this.value = null
+				this.value = value.split(',');
 				this.sub = new Array(0);
 				this.toString = function () {
 					var str = new String(this.value);
@@ -66,20 +68,20 @@
 					return this.root.toString();
 				}
 				var nodesStack = new Array();//里面存的都是Node对象
-				if (this.root.value !== null) {
-					nodesStack.push(this.root);
-					var tmp;
-					while (true) {
-						tmp = new Node(callback.call());
-						if (tmp.value) {
-							nodesStack[nodesStack.length - 1].sub.push(tmp);
-							nodesStack.push(tmp);
-						}
-						else {
-							if (nodesStack.length > 0)
-								nodesStack.pop();
-							else break;
-						}
+				if (this.root.value === null) return;
+
+				nodesStack.push(this.root);
+				while (true) {
+					var value = callback.call();
+					if (value) {
+						var tmp = new Node(value);
+						nodesStack[nodesStack.length - 1].sub.push(tmp);
+						nodesStack.push(tmp);
+					}
+					else {
+						if (nodesStack.length > 0)
+							nodesStack.pop();
+						else break;
 					}
 				}
 			}
@@ -142,8 +144,8 @@
 				if (s4.selectedIndex !== -1) {
 					localVideoCache.src = nodes4[s4.selectedIndex].value[1];
 					originVideoURL.href = nodes4[s4.selectedIndex].value[2];
-					sourceVideo.src = nodes4[s4.selectedIndex].value[1];
-					originWebpage.href = nodes4[s4.selectedIndex].value[2];
+					sourceVideo.src = nodes4[s4.selectedIndex].value[2];
+					originWebpage.href = nodes4[s4.selectedIndex].value[3];
 					video.load();
 				}
 				fillSelectBoxWithNodes(s5, nodes5);
