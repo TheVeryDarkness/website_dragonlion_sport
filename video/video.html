@@ -130,6 +130,7 @@
 					return nodes[selectedIndex].sub;
 				}
 			}
+			// Begin
 			const tree = makeAMultiTree(videoSrcData.textContent.replace(/\n[\t]*/g, ''));
 			s1.selectedIndex = -1;
 			s2.selectedIndex = -1;
@@ -138,6 +139,8 @@
 			s5.selectedIndex = -1;
 			s6.selectedIndex = -1;
 			updateSelectBox();
+			// End
+
 			function updateSelectBox() {
 				const nodes1 = new Array(tree.root);//运动项目
 				fillSelectBoxWithNodes(s1, nodes1);
@@ -160,28 +163,30 @@
 				fillSelectBoxWithNodes(s6, nodes6);
 				if(s6.selectedIndex !== -1) {
 					var range = nodes6[s6.selectedIndex].value;
-					displayVideoTimeBegin = range[1];
-					displayVideoTimeEnd = range[2];
+					videoTimeBegin = range[1];
+					videoTimeEnd = range[2];
 				}
 				else if(s5.selectedIndex !== -1) {
 					var range = nodes5[s5.selectedIndex].value;
-					displayVideoTimeBegin = range[1];
-					displayVideoTimeEnd = range[2];
+					videoTimeBegin = range[1];
+					videoTimeEnd = range[2];
 				}
 				updateVideo();
 			}
-			function updateVideo(){
-					video.currentTime = displayVideoTimeBegin;
-					video.addEventListener('timeupdate', ()=>{
-						if (video.currentTime >= displayVideoTimeEnd)
-							video.pause();
-					});
-					video.play();
+			function updateVideo() {
+				video.currentTime = videoTimeBegin;
+				video.addEventListener('timeupdate', checkTimeRange);
+				video.play();
+			}
+			function checkTimeRange() {
+				if (video.currentTime >= videoTimeEnd) {
+					video.pause();
+					video.removeEventListener('timeupdate', checkTimeRange);
+				}
 			}
 		//-->
 		</script>
 		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	</main>
 </body>
-
 </html>
