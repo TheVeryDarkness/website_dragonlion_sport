@@ -130,7 +130,7 @@
 					return nodes[selectedIndex].sub;
 				}
 			}
-			var tree = makeAMultiTree(videoSrcData.textContent.replace(/\n[\t]*/g, ''));
+			const tree = makeAMultiTree(videoSrcData.textContent.replace(/\n[\t]*/g, ''));
 			s1.selectedIndex = -1;
 			s2.selectedIndex = -1;
 			s3.selectedIndex = -1;
@@ -139,15 +139,15 @@
 			s6.selectedIndex = -1;
 			updateSelectBox();
 			function updateSelectBox() {
-				var nodes1 = new Array(tree.root);//运动项目
+				const nodes1 = new Array(tree.root);//运动项目
 				fillSelectBoxWithNodes(s1, nodes1);
-				var nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
+				const nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
 				fillSelectBoxWithNodes(s2, nodes2);
-				var nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
+				const nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
 				fillSelectBoxWithNodes(s3, nodes3);
-				var nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
+				const nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
 				fillSelectBoxWithNodes(s4, nodes4);
-				var nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
+				const nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
 				if (s4.selectedIndex !== -1) {
 					localVideoCache.src = nodes4[s4.selectedIndex].value[1];
 					originVideoURL.href = nodes4[s4.selectedIndex].value[2];
@@ -156,7 +156,7 @@
 					video.load();
 				}
 				fillSelectBoxWithNodes(s5, nodes5);
-				var nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
+				const nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
 				fillSelectBoxWithNodes(s6, nodes6);
 				if(s6.selectedIndex !== -1) {
 					var range = nodes6[s6.selectedIndex].value;
