@@ -231,6 +231,12 @@
 					originWebpage.href = nodes4[s4.selectedIndex].value[3];
 					video.load();
 				}
+				else {
+					localVideoCache.src = "";
+					originVideoURL.href = "";
+					sourceVideo.src = "";
+					originWebpage.href = "";
+				}
 				fillSelectBoxWithNodes(s5, nodes5);
 				const nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
 				fillSelectBoxWithNodes(s6, nodes6);
@@ -242,7 +248,10 @@
 					range = nodes5[s5.selectedIndex].value;
 				else if (s4.selectedIndex !== 0)
 					range = nodes4[s5.selectedIndex].value;
-				else return;
+				else {
+					displayVideoTimeRange.innerText = "";
+					return;
+				}
 
 				videoTimeBegin = range[1];
 				videoTimeEnd = range[2];
