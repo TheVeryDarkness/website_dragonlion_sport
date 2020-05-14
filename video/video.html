@@ -18,6 +18,8 @@
 			<input type="button" onclick="updateSelectBox()" value="刷新">
 		</h3>
 		<h4>
+			<p id="displayVideoTimeBegin"></p>
+			<p id="displayVideoTimeEnd"></p>
 			（温馨提示：请注意流量）
 		</h4>
 		<video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
@@ -32,9 +34,11 @@
 			舞龙;
 				2019;
 					全国舞龙舞狮锦标赛;
-						规定,2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4,http://videoflv.sports.cn/201911/20191110wlgd.mp4,http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html;
+						规定, 2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html;
+							南京理工大学, 45, 270;
+							;
 						;
-						传统,2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4,http://videoflv.sports.cn/201911/20191109ctwl.mp4,http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html;
+						传统, 2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html;
 						;
 					;
 				;
@@ -127,12 +131,12 @@
 				}
 			}
 			var tree = makeAMultiTree(videoSrcData.textContent.replace(/\n[\t]*/g, ''));
-			s1.selectedIndex = 0;
-			s2.selectedIndex = 0;
-			s3.selectedIndex = 0;
-			s4.selectedIndex = 0;
-			s5.selectedIndex = 0;
-			s6.selectedIndex = 0;
+			s1.selectedIndex = -1;
+			s2.selectedIndex = -1;
+			s3.selectedIndex = -1;
+			s4.selectedIndex = -1;
+			s5.selectedIndex = -1;
+			s6.selectedIndex = -1;
 			updateSelectBox();
 			function updateSelectBox() {
 				var nodes1 = new Array(tree.root);//运动项目
@@ -153,6 +157,26 @@
 				}
 				fillSelectBoxWithNodes(s5, nodes5);
 				var nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
+				fillSelectBoxWithNodes(s6, nodes6);
+				if(s6.selectedIndex !== -1) {
+					var range = nodes6[s6.selectedIndex].value;
+					displayVideoTimeBegin = range[1];
+					displayVideoTimeEnd = range[2];
+				}
+				else if(s5.selectedIndex !== -1) {
+					var range = nodes5[s5.selectedIndex].value;
+					displayVideoTimeBegin = range[1];
+					displayVideoTimeEnd = range[2];
+				}
+				updateVideo();
+			}
+			function updateVideo(){
+					video.currentTime = displayVideoTimeBegin;
+					video.addEventListener('timeupdate', ()=>{
+						if (video.currentTime >= displayVideoTimeEnd)
+							video.pause();
+					});
+					video.play();
 			}
 		//-->
 		</script>
