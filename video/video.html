@@ -73,7 +73,17 @@
 									;
 									躺肩挂腰（直躺挂腰）, 413, 427;
 									;
-									造型（立龙）（龙脱衣）, 427, 427;
+									造型（立龙）, 427, 448;
+									;
+									龙脱衣, 445, 455;
+									;
+									跳龙行进, 458, 476;
+									;
+									斜盘跳龙连续三次, 475, 490;
+									;
+									原地螺旋跳龙连续五次接直躺, 490, 509;
+									;
+									造型（龙腾九霄）, 509, 533;
 									;
 								;
 								湖南师范大学, 592, 1533;
@@ -242,12 +252,12 @@
 				fillSelectBoxWithNodes(s6, nodes6);
 
 				var range;
-				if (s6.selectedIndex !== 0)
-					range = nodes6[s6.selectedIndex].value;
-				else if (s5.selectedIndex !== 0)
-					range = nodes5[s5.selectedIndex].value;
-				else if (s4.selectedIndex !== 0)
-					range = nodes4[s5.selectedIndex].value;
+				if (s6.selectedIndex !== 0 && (range = nodes6[s6.selectedIndex].value).length >= 3)
+					;
+				else if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length >= 3)
+					;
+				else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length >= 3)
+					;
 				else {
 					displayVideoTimeRange.innerText = "";
 					return;
