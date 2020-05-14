@@ -58,8 +58,9 @@
 				else console.log("Failed to find a query selector with matching id.");
 			}
 			function Node(value) {
-				this.value = value;
-				if (this.value === null) return;//可能会提高效率
+				if (value !== null)
+					this.value = value.split(',');
+				else this.value = null
 				this.sub = new Array(0);
 				this.toString = function () {
 					var str = new String(this.value);
@@ -69,6 +70,7 @@
 					return str;
 				}
 			}
+			//Use callback.back() to generate a tree
 			function MultiTree(callback) {
 				this.root = new Node(callback.call());
 				this.toString = function () {
@@ -93,7 +95,8 @@
 				}
 			}
 			function StringSplit(string) {
-				this.split = string.split(';');
+				const node_separator = ';';
+				this.split = string.split(node_separator);
 				this.call = function (thisObject) {
 					if (this.split.length > 0)
 						return this.split.shift();
@@ -111,7 +114,7 @@
 			function fillSelectBoxWithSubValues(selectBox, subArray) {
 				selectBox.options.length = subArray.length;
 				for (const i in subArray) {
-					selectBox.options[i].text = subArray[i].value;
+					selectBox.options[i].text = subArray[i].value[0];
 				}
 			}
 			function fillSelectBoxWithNodes(selectBox, nodes) {
@@ -138,22 +141,24 @@
 			s6.selectedIndex = 0;
 			updateSelectBox();
 			function updateSelectBox() {
-				var nodes1 = new Array(tree.root);
+				var nodes1 = new Array(tree.root);//运动项目
 				fillSelectBoxWithNodes(s1, nodes1);
-				var nodes2 = nextNodes(nodes1, s1.selectedIndex);
+				var nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
 				fillSelectBoxWithNodes(s2, nodes2);
-				var nodes3 = nextNodes(nodes2, s2.selectedIndex);
+				var nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
 				fillSelectBoxWithNodes(s3, nodes3);
-				var nodes4 = nextNodes(nodes3, s3.selectedIndex);
+				var nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
 				fillSelectBoxWithNodes(s4, nodes4);
-				var nodes5 = nextNodes(nodes4, s4.selectedIndex);
+				var nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
 				if (s4.selectedIndex !== -1) {
-					localVideoCache.src = nodes4[s4.selectedIndex].sub[0].value;
-					originVideoURL.href = nodes4[s4.selectedIndex].sub[1].value;
-					sourceVideo.src = nodes4[s4.selectedIndex].sub[1].value;
-					originWebpage.href = nodes4[s4.selectedIndex].sub[2].value;
+					localVideoCache.src = nodes4[s4.selectedIndex].value[1];
+					originVideoURL.href = nodes4[s4.selectedIndex].value[2];
+					sourceVideo.src = nodes4[s4.selectedIndex].value[1];
+					originWebpage.href = nodes4[s4.selectedIndex].value[2];
 					video.load();
 				}
+				fillSelectBoxWithNodes(s5, nodes5);
+				var nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
 			}
 		//-->
 		</script>
