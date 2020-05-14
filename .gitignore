@@ -15,3 +15,5 @@ _notes/
 #Windows configure
 web.config
 desktop.ini
+
+.vscode/**
