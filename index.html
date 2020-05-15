@@ -9,10 +9,9 @@
 				运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select>
 				年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select>
 				赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select>
-				组别<select required id="s4" onchange="updateSelectBox(4)" size=1></select>
-				队伍<select required id="s5" onchange="updateSelectBox(5)" size=1></select>
-				动作<select required id="s6" onchange="updateSelectBox(6)" size=1></select>
-				<input type="button" onclick="updateSelectBox()" value="刷新">
+				队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select>
+				动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select>
+				<input type="button" onclick="updateSelectBox(0)" value="刷新">
 			</fieldset>
 		</h3>
 		<h4>
@@ -37,47 +36,46 @@
 			const videoSrcData = `
 舞龙
 	2019
-		全国舞龙舞狮锦标赛
-			规定（男子组）, ./video/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html
-				南京理工大学, 45, 570
-					开场造型, 68, 124
-					绕场跳龙五次, 126, 152
-					正反腾跃前进, 156, 176
-					快速游龙, 180, 190
-					连续快腾进三次, 190, 210
-					造型（尾盘，龙头戏珠）, 210, 230
-					大横8字花（成型四次）, 230, 260
-					左右螺旋跳龙接摇船, 260, 281
-					大立圆螺旋行进, 282, 305
-					起伏圆盘, 305, 321
-					双杆, 321, 357
-					造型（菱形）, 356, 363
-					换位跳龙, 363, 377
-					绕身舞龙, 377, 386
-					站腿, 386, 397
-					起伏圆盘接穿龙尾, 397, 406
-					卧龙腾飞, 405, 414
-					躺肩挂腰（直躺挂腰）, 413, 427
-					造型（立龙）, 427, 448
-					龙脱衣, 445, 455
-					跳龙行进, 458, 476
-					斜盘跳龙连续三次, 475, 490
-					原地螺旋跳龙连续五次接直躺, 490, 509
-					造型（龙腾九霄）, 509, 533
-				湖南师范大学, 592, 1533
-				湖北队, 1597, 2133
-				台州学院, 2195, 2723
-				上海三林, 2791, 3300
-				集美大学, 3348, 3888
-			传统（女子组）, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
-				常州大学, 24, 542
-				扬州工职院, 644, 1151
-				江阴职院, 1335, 1841
-				湖北队, 1929, 2463
-			传统（男子组）, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
-				南理工紫金学院, 2499, 2870
-				扬州工职院, 3026, 3512
-				常州大学, 6026, 6555
+		全国舞龙舞狮锦标赛男子规定, ./video/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html
+			南京理工大学, 45, 570
+				开场造型, 68, 124
+				绕场跳龙五次, 126, 152
+				正反腾跃前进, 156, 176
+				快速游龙, 180, 190
+				连续快腾进三次, 190, 210
+				造型（尾盘，龙头戏珠）, 210, 230
+				大横8字花（成型四次）, 230, 260
+				左右螺旋跳龙接摇船, 260, 281
+				大立圆螺旋行进, 282, 305
+				起伏圆盘, 305, 321
+				双杆, 321, 357
+				造型（菱形）, 356, 363
+				换位跳龙, 363, 377
+				绕身舞龙, 377, 386
+				站腿, 386, 397
+				起伏圆盘接穿龙尾, 397, 406
+				卧龙腾飞, 405, 414
+				躺肩挂腰（直躺挂腰）, 413, 427
+				造型（立龙）, 427, 448
+				龙脱衣, 445, 455
+				跳龙行进, 458, 476
+				斜盘跳龙连续三次, 475, 490
+				原地螺旋跳龙连续五次接直躺, 490, 509
+				造型（龙腾九霄）, 509, 533
+			湖南师范大学, 592, 1533
+			湖北队, 1597, 2133
+			台州学院, 2195, 2723
+			上海三林, 2791, 3300
+			集美大学, 3348, 3888
+		全国舞龙舞狮锦标赛女子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+			常州大学, 24, 542
+			扬州工职院, 644, 1151
+			江阴职院, 1335, 1841
+			湖北队, 1929, 2463
+		全国舞龙舞狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+			南理工紫金学院, 2499, 2870
+			扬州工职院, 3026, 3512
+			常州大学, 6026, 6555
 	2018
 		亚洲舞龙舞狮锦标赛
 			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video
@@ -151,7 +149,7 @@
 					console.log("Debug failed. Unexpected tree termination.");
 				return rev;
 			}
-			const selectBoxMaxSize = 6;
+			const selectBoxMaxSize = 5;
 			function fillSelectBoxWithSubValues(selectBox, subArray) {
 				selectBox.options.length = subArray.length;
 				for (const i in subArray) {
@@ -175,57 +173,53 @@
 				}
 			}
 			// Begin
-			var nodes1, nodes2, nodes3, nodes4, nodes5, nodes6;
+			var nodes1, nodes2, nodes3, nodes4, nodes5;
 			const tree = makeAMultiTree(videoSrcData.substring(videoSrcData.indexOf('\n') + 1, videoSrcData.lastIndexOf('\n')));
-			updateSelectBox(1);
+			updateSelectBox(0);
 			// End
 
 			function updateSelectBox(boxIndex) {
+				var loaded;
 				switch (boxIndex) {
-					case 1:
+					case 0:
 						nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
 						fillSelectBoxWithNodes(s1, nodes1);
-					case 2:
+					case 1:
 						if (s1.selectedIndex === -1) return;
 						nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
 						fillSelectBoxWithNodes(s2, nodes2);
-					case 3:
+					case 2:
 						if (s2.selectedIndex === -1) return;
 						nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
 						fillSelectBoxWithNodes(s3, nodes3);
-					case 4:
+					case 3:
 						if (s3.selectedIndex === -1) return;
-						nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
+						nodes4 = nextNodes(nodes3, s3.selectedIndex);//队伍
+						if (!loaded && s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
+							loadVideoSrc(nodes3, s3.selectedIndex);
+							video.load();
+							loaded = true;
+						}
+						else clearVideoSrc();
 						fillSelectBoxWithNodes(s4, nodes4);
-					case 5:
+					case 4:
 						if (s4.selectedIndex === -1) return;
-						nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
-						if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length >= 3) {
-							localVideoCache.src = nodes4[s4.selectedIndex].value[1];
-							originVideoURL.href = nodes4[s4.selectedIndex].value[2];
-							sourceVideo.src = nodes4[s4.selectedIndex].value[2];
-							originWebpage.href = nodes4[s4.selectedIndex].value[3];
+						nodes5 = nextNodes(nodes4, s4.selectedIndex);//动作
+						if (!loaded && s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
+							loadVideoSrc(nodes4, s4.selectedIndex);
 							video.load();
 						}
-						else {
-							localVideoCache.src = "";
-							originVideoURL.href = "";
-							sourceVideo.src = "";
-							originWebpage.href = "";
-						}
+						else clearVideoSrc();
 						fillSelectBoxWithNodes(s5, nodes5);
-					case 6:
+					case 5:
 						if (s5.selectedIndex === -1) return;
 						nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
-						fillSelectBoxWithNodes(s6, nodes6);
 					default:
 						if (s5.selectedIndex === -1) return;
 						var range;
-						if (s6.selectedIndex !== 0 && (range = nodes6[s6.selectedIndex].value).length >= 3)
+						if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
 							;
-						else if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length >= 3)
-							;
-						else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length >= 3)
+						else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length == 3)
 							;
 						else {
 							displayVideoTimeRange.innerText = "";
@@ -237,6 +231,19 @@
 						displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 						updateVideo();
 				}
+			}
+			function clearVideoSrc() {
+				localVideoCache.src = "";
+				originVideoURL.href = "";
+				sourceVideo.src = "";
+				originWebpage.href = "";
+			}
+			function loadVideoSrc(nodes, selectedIndex) {
+				localVideoCache.src = nodes[selectedIndex].value[1];
+				originVideoURL.href = nodes[selectedIndex].value[2];
+				sourceVideo.src = nodes[selectedIndex].value[2];
+				originWebpage.href = nodes[selectedIndex].value[3];
+				video.load();
 			}
 			function updateVideo() {
 				video.currentTime = videoTimeBegin;
