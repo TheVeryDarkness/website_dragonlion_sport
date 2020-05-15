@@ -4,16 +4,16 @@
 
 <body>
 	<main>
-		<h3>
+		<h2>
 			<fieldset>
 				运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select>
 				年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select>
 				赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select>
 				队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select>
 				动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select>
-				<input type="button" onclick="updateSelectBox(0)" value="刷新">
+				<input type="button" onclick="updateSelectBox(0)" value="重新播放">
 			</fieldset>
-		</h3>
+		</h2>
 		<h4>
 			（温馨提示：请注意流量）视频时间范围：
 			(
@@ -23,7 +23,8 @@
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
 		</h4>
-		<video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+		<video id="video" width="480" height="320" controls type="video/mp4">
+			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
 			<source id="sourceVideo">
 		</video>
@@ -78,11 +79,10 @@
 			常州大学, 6026, 6555
 	2018
 		亚洲舞龙舞狮锦标赛
-			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video
-				台湾, 0, 545
+			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video, 0, 545
 	2017
 		全国运动会
-			华东交通大学, ./video/2017/全国运动会群众比赛项目/华东交通大学, https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17, https://v.qq.com/x/page/h0394te13o9.html
+			华东交通大学, ./video/2017/全国运动会群众比赛项目/华东交通大学.mp4, https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17, https://v.qq.com/x/page/h0394te13o9.html
 舞狮
 			`;
 			const difficultyA = ``;
@@ -159,7 +159,7 @@
 			function fillSelectBoxWithNodes(selectBox, nodes) {
 				fillSelectBoxWithSubValues(selectBox, nodes);
 			}
-			const all = "all";
+			const all = "全选";
 			function nextNodes(nodes, selectedIndex) {
 				if (selectedIndex === 0) {
 					var rev = new Array(new Node(all));
