@@ -4,8 +4,8 @@
 
 <body>
     <main>
-        <article>
-            <h3>
+        <h3>
+            <fieldset>
                 运动项目<select required id="s1" onchange="updateSelectBox()" size=1></select>
                 年份<select required id="s2" onchange="updateSelectBox()" size=1></select>
                 赛事<select required id="s3" onchange="updateSelectBox()" size=1></select>
@@ -13,27 +13,28 @@
                 队伍<select required id="s5" onchange="updateSelectBox()" size=1></select>
                 动作<select required id="s6" onchange="updateSelectBox()" size=1></select>
                 <input type="button" onclick="updateSelectBox()" value="刷新">
-            </h3>
-            <h4>
-                （温馨提示：请注意流量）视频时间范围：
-                (
-                <a id="displayVideoTimeRange"></a>
-                )
-                视频加载自网络：
-                <a id="originWebpage">源网页</a>
-                <a id="originVideoURL">源视频</a>
-            </h4>
-            <video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
-                <source id="localVideoCache">
-                <source id="sourceVideo">
-            </video>
-            <!--
+            </fieldset>
+        </h3>
+        <h4>
+            （温馨提示：请注意流量）视频时间范围：
+            (
+            <a id="displayVideoTimeRange"></a>
+            )
+            视频加载自网络：
+            <a id="originWebpage">源网页</a>
+            <a id="originVideoURL">源视频</a>
+        </h4>
+        <video id="video" controls type="video/mp4">浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+            <source id="localVideoCache">
+            <source id="sourceVideo">
+        </video>
+        <!--
 			Pay attention to the data format:
 				group name, local cache path, source video path, source webpage path
-		-->
-            <script type="text/javascript">
-                //<!--
-                const videoSrcData = `
+		    -->
+        <script type="text/javascript">
+            //<!--
+            const videoSrcData = `
 				舞龙;
 					2019;
 						全国舞龙舞狮锦标赛;
@@ -129,192 +130,192 @@
 					;
 				;
 			`;
-                function setVideoSourcePath(querySelector, srcPath) {
-                    querySelector.src = srcPath;
-                }
-                function findAQuerySelector(id) {
-                    return document.querySelector("#" + id);
-                }
-                function setVideoSourcePathWithId(video_id, srcPath) {
-                    var qS = findAQuerySelector(video_id);
-                    if (qS)
-                        setVideoSourcePath(qS, srcPath);
-                    else console.log("Failed to find a query selector with matching id.");
-                }
-                function Node(value) {
-                    this.value = value.split(',');
-                    this.sub = new Array(0);
-                    this.toString = function () {
-                        var str = new String(this.value);
-                        for (const child of this.sub) {
-                            str += child.toString();
-                        }
-                        return str;
-                    }
-                }
-                //Use callback.back() to generate a tree
-                function MultiTree(callback) {
-                    this.root = new Node(callback.call());
-                    this.toString = function () {
-                        return this.root.toString();
-                    }
-                    var nodesStack = new Array();//里面存的都是Node对象
-                    if (this.root.value === null) return;
 
-                    nodesStack.push(this.root);
-                    while (true) {
-                        var value = callback.call();
-                        if (value) {
-                            var tmp = new Node(value);
-                            nodesStack[nodesStack.length - 1].sub.push(tmp);
-                            nodesStack.push(tmp);
-                        }
-                        else {
-                            if (nodesStack.length > 0)
-                                nodesStack.pop();
-                            else break;
-                        }
+            function setVideoSourcePath(querySelector, srcPath) {
+                querySelector.src = srcPath;
+            }
+            function findAQuerySelector(id) {
+                return document.querySelector("#" + id);
+            }
+            function setVideoSourcePathWithId(video_id, srcPath) {
+                var qS = findAQuerySelector(video_id);
+                if (qS)
+                    setVideoSourcePath(qS, srcPath);
+                else console.log("Failed to find a query selector with matching id.");
+            }
+            function Node(value) {
+                this.value = value.split(',');
+                this.sub = new Array(0);
+                this.toString = function () {
+                    var str = new String(this.value);
+                    for (const child of this.sub) {
+                        str += child.toString();
+                    }
+                    return str;
+                }
+            }
+            //Use callback.back() to generate a tree
+            function MultiTree(callback) {
+                this.root = new Node(callback.call());
+                this.toString = function () {
+                    return this.root.toString();
+                }
+                var nodesStack = new Array();//里面存的都是Node对象
+                if (this.root.value === null) return;
+
+                nodesStack.push(this.root);
+                while (true) {
+                    var value = callback.call();
+                    if (value) {
+                        var tmp = new Node(value);
+                        nodesStack[nodesStack.length - 1].sub.push(tmp);
+                        nodesStack.push(tmp);
+                    }
+                    else {
+                        if (nodesStack.length > 0)
+                            nodesStack.pop();
+                        else break;
                     }
                 }
-                function StringSplit(string) {
-                    const node_separator = ';';
-                    this.split = string.split(node_separator);
-                    this.call = function (thisObject) {
-                        if (this.split.length > 0)
-                            return this.split.shift();
-                        else return null;
-                    }
+            }
+            function StringSplit(string) {
+                const node_separator = ';';
+                this.split = string.split(node_separator);
+                this.call = function (thisObject) {
+                    if (this.split.length > 0)
+                        return this.split.shift();
+                    else return null;
                 }
-                function makeAMultiTree(str) {
-                    var split = new StringSplit(str);
-                    var rev = new MultiTree(split);
-                    if (split.length > 0)
-                        console.log("Debug failed. Unexpected tree termination.");
+            }
+            function makeAMultiTree(str) {
+                var split = new StringSplit(str);
+                var rev = new MultiTree(split);
+                if (split.length > 0)
+                    console.log("Debug failed. Unexpected tree termination.");
+                return rev;
+            }
+            const selectBoxMaxSize = 6;
+            function fillSelectBoxWithSubValues(selectBox, subArray) {
+                selectBox.options.length = subArray.length;
+                for (const i in subArray) {
+                    selectBox.options[i].text = subArray[i].value[0];
+                }
+            }
+            function fillSelectBoxWithNodes(selectBox, nodes) {
+                fillSelectBoxWithSubValues(selectBox, nodes);
+            }
+            const all = "all";
+            function nextNodes(nodes, selectedIndex) {
+                if (selectedIndex === 0) {
+                    var rev = new Array(new Node(all));
+                    for (const node of nodes) {
+                        rev = rev.concat(node.sub);
+                    }
                     return rev;
                 }
-                const selectBoxMaxSize = 6;
-                function fillSelectBoxWithSubValues(selectBox, subArray) {
-                    selectBox.options.length = subArray.length;
-                    for (const i in subArray) {
-                        selectBox.options[i].text = subArray[i].value[0];
-                    }
+                else {
+                    return new Array(new Node(all)).concat(nodes[selectedIndex].sub);
                 }
-                function fillSelectBoxWithNodes(selectBox, nodes) {
-                    fillSelectBoxWithSubValues(selectBox, nodes);
-                }
-                const all = "all";
-                function nextNodes(nodes, selectedIndex) {
-                    if (selectedIndex === 0) {
-                        var rev = new Array(new Node(all));
-                        for (const node of nodes) {
-                            rev = rev.concat(node.sub);
-                        }
-                        return rev;
-                    }
-                    else {
-                        return new Array(new Node(all)).concat(nodes[selectedIndex].sub);
-                    }
-                }
-                // Begin
-                const tree = makeAMultiTree(videoSrcData.replace(/\n[\t]*/g, ''));
-                s1.selectedIndex = 0;
-                s2.selectedIndex = 0;
-                s3.selectedIndex = 0;
-                s4.selectedIndex = 0;
-                s5.selectedIndex = 0;
-                s6.selectedIndex = 0;
-                updateSelectBox();
-                // End
+            }
+            // Begin
+            const tree = makeAMultiTree(videoSrcData.replace(/\n[\t]*/g, ''));
+            s1.selectedIndex = 0;
+            s2.selectedIndex = 0;
+            s3.selectedIndex = 0;
+            s4.selectedIndex = 0;
+            s5.selectedIndex = 0;
+            s6.selectedIndex = 0;
+            updateSelectBox();
+            // End
 
-                function updateSelectBox() {
-                    const nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
-                    fillSelectBoxWithNodes(s1, nodes1);
-                    const nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
-                    fillSelectBoxWithNodes(s2, nodes2);
-                    const nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
-                    fillSelectBoxWithNodes(s3, nodes3);
-                    const nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
-                    fillSelectBoxWithNodes(s4, nodes4);
-                    const nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
-                    if (s4.selectedIndex !== 0) {
-                        localVideoCache.src = "video/" + nodes4[s4.selectedIndex].value[1];
-                        originVideoURL.href = nodes4[s4.selectedIndex].value[2];
-                        sourceVideo.src = nodes4[s4.selectedIndex].value[2];
-                        originWebpage.href = nodes4[s4.selectedIndex].value[3];
-                        video.load();
-                    }
-                    else {
-                        localVideoCache.src = "";
-                        originVideoURL.href = "";
-                        sourceVideo.src = "";
-                        originWebpage.href = "";
-                    }
-                    fillSelectBoxWithNodes(s5, nodes5);
-                    const nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
-                    fillSelectBoxWithNodes(s6, nodes6);
+            function updateSelectBox() {
+                const nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
+                fillSelectBoxWithNodes(s1, nodes1);
+                const nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
+                fillSelectBoxWithNodes(s2, nodes2);
+                const nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
+                fillSelectBoxWithNodes(s3, nodes3);
+                const nodes4 = nextNodes(nodes3, s3.selectedIndex);//组别
+                fillSelectBoxWithNodes(s4, nodes4);
+                const nodes5 = nextNodes(nodes4, s4.selectedIndex);//队伍
+                if (s4.selectedIndex !== 0) {
+                    localVideoCache.src = "video/" + nodes4[s4.selectedIndex].value[1];
+                    originVideoURL.href = nodes4[s4.selectedIndex].value[2];
+                    sourceVideo.src = nodes4[s4.selectedIndex].value[2];
+                    originWebpage.href = nodes4[s4.selectedIndex].value[3];
+                    video.load();
+                }
+                else {
+                    localVideoCache.src = "";
+                    originVideoURL.href = "";
+                    sourceVideo.src = "";
+                    originWebpage.href = "";
+                }
+                fillSelectBoxWithNodes(s5, nodes5);
+                const nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
+                fillSelectBoxWithNodes(s6, nodes6);
 
-                    var range;
-                    if (s6.selectedIndex !== 0 && (range = nodes6[s6.selectedIndex].value).length >= 3)
-                        ;
-                    else if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length >= 3)
-                        ;
-                    else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length >= 3)
-                        ;
-                    else {
-                        displayVideoTimeRange.innerText = "";
-                        return;
-                    }
+                var range;
+                if (s6.selectedIndex !== 0 && (range = nodes6[s6.selectedIndex].value).length >= 3)
+                    ;
+                else if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length >= 3)
+                    ;
+                else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length >= 3)
+                    ;
+                else {
+                    displayVideoTimeRange.innerText = "";
+                    return;
+                }
 
-                    videoTimeBegin = range[1];
-                    videoTimeEnd = range[2];
-                    displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
-                    updateVideo();
+                videoTimeBegin = range[1];
+                videoTimeEnd = range[2];
+                displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
+                updateVideo();
+            }
+            function updateVideo() {
+                video.currentTime = videoTimeBegin;
+                video.addEventListener('timeupdate', checkTimeRange);
+                video.play();
+            }
+            function checkTimeRange() {
+                if (video.currentTime >= videoTimeEnd) {
+                    video.pause();
+                    video.removeEventListener('timeupdate', checkTimeRange);
                 }
-                function updateVideo() {
-                    video.currentTime = videoTimeBegin;
-                    video.addEventListener('timeupdate', checkTimeRange);
-                    video.play();
-                }
-                function checkTimeRange() {
-                    if (video.currentTime >= videoTimeEnd) {
-                        video.pause();
-                        video.removeEventListener('timeupdate', checkTimeRange);
-                    }
-                }
-                function secToTime(seconds) {
-                    return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
-                }
+            }
+            function secToTime(seconds) {
+                return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
+            }
 		//-->
-            </script>
-            <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-            <div>
-                <p>由同济大学龙狮协会整理。以下是友情链接：</p>
-                <aside>
-                    <ul>
-                        <li>
-                            <a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
-                            <ul>
-                                <li><a href="http://dragonlion.sport.org.cn/home/jcsp/">精彩视频</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="http://www.sports.edu.cn/">中国学生体育网</a></li>
-                        <li><a href="http://www.cudld.com/index">中国大学生体育协会舞龙舞狮分会（疑已弃用）</a></li>
-                        <li>
-                            <a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/">中南大学舞龙舞狮精品课程</a>
-                            <ul>
-                                <li><a
-                                        href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/ShouKeJiaoAn/wulongjianggao/国际舞龙舞狮竞赛规则、裁判法.htm">
-                                        龙狮文化系列讲座之国际舞龙舞狮竞赛规则、裁判法
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="https://mooc1-1.chaoxing.com/course/205382137.html">超星发现民族传统体育——舞龙（城建俞宇老师）</a></li>
-                        <li><a href="https://www.icourses.cn/sCourse/course_6711.html">爱课程舞龙舞狮（中南黄益苏老师）</a></li>
-                    </ul>
-                </aside>
-            </div>
-        </article>
+        </script>
+        <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+        <div>
+            <p>本网站由同济大学龙狮协会整理。以下是友情链接：</p>
+            <aside>
+                <ul>
+                    <li>
+                        <a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
+                        <ul>
+                            <li><a href="http://dragonlion.sport.org.cn/home/jcsp/">精彩视频</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="http://www.sports.edu.cn/">中国学生体育网</a></li>
+                    <li><a href="http://www.cudld.com/index">中国大学生体育协会舞龙舞狮分会（疑已弃用）</a></li>
+                    <li>
+                        <a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/">中南大学舞龙舞狮精品课程</a>
+                        <ul>
+                            <li><a
+                                    href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/ShouKeJiaoAn/wulongjianggao/国际舞龙舞狮竞赛规则、裁判法.htm">
+                                    龙狮文化系列讲座之国际舞龙舞狮竞赛规则、裁判法
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="https://mooc1-1.chaoxing.com/course/205382137.html">超星发现民族传统体育——舞龙（城建俞宇老师）</a></li>
+                    <li><a href="https://www.icourses.cn/sCourse/course_6711.html">爱课程舞龙舞狮（中南黄益苏老师）</a></li>
+                </ul>
+            </aside>
+        </div>
     </main>
 </body>
 
