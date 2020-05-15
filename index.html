@@ -3,6 +3,29 @@
 <meta lang="zh-Hans-CN" charset="utf-8">
 
 <body>
+
+	<head>
+		<style type="text/css">
+			body {
+				background-color: #cccccc;
+			}
+
+			video {
+				width: 60%;
+				height: 60%;
+			}
+
+			div.externalLinks {
+				margin-top: -35%;
+				margin-left: 65%;
+				margin-right: 0%;
+			}
+
+			footer {
+				text-align: center;
+			}
+		</style>
+	</head>
 	<main>
 		<h2>
 			<fieldset>
@@ -23,7 +46,7 @@
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
 		</h4>
-		<video id="video" width="480" height="320" controls type="video/mp4">
+		<video id="video" controls type="video/mp4">
 			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
 			<source id="sourceVideo">
@@ -86,18 +109,6 @@
 舞狮
 			`;
 			const difficultyA = ``;
-			function setVideoSourcePath(querySelector, srcPath) {
-				querySelector.src = srcPath;
-			}
-			function findAQuerySelector(id) {
-				return document.querySelector("#" + id);
-			}
-			function setVideoSourcePathWithId(video_id, srcPath) {
-				var qS = findAQuerySelector(video_id);
-				if (qS)
-					setVideoSourcePath(qS, srcPath);
-				else console.log("Failed to find a query selector with matching id.");
-			}
 			function Node(value) {
 				this.value = value.split(',');
 				this.sub = new Array(0);
@@ -195,21 +206,25 @@
 					case 3:
 						if (s3.selectedIndex === -1) return;
 						nodes4 = nextNodes(nodes3, s3.selectedIndex);//队伍
-						if (!loaded && s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
-							loadVideoSrc(nodes3, s3.selectedIndex);
-							video.load();
-							loaded = true;
+						if (!loaded) {
+							if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
+								loadVideoSrc(nodes3, s3.selectedIndex);
+								video.load();
+								loaded = true;
+							}
+							else clearVideoSrc();
 						}
-						else clearVideoSrc();
 						fillSelectBoxWithNodes(s4, nodes4);
 					case 4:
 						if (s4.selectedIndex === -1) return;
 						nodes5 = nextNodes(nodes4, s4.selectedIndex);//动作
-						if (!loaded && s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
-							loadVideoSrc(nodes4, s4.selectedIndex);
-							video.load();
+						if (!loaded) {
+							if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
+								loadVideoSrc(nodes4, s4.selectedIndex);
+								video.load();
+							}
+							else clearVideoSrc();
 						}
-						else clearVideoSrc();
 						fillSelectBoxWithNodes(s5, nodes5);
 					case 5:
 						if (s5.selectedIndex === -1) return;
@@ -263,7 +278,7 @@
 		</script>
 		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	</main>
-	<div>
+	<div class="externalLinks">
 		<p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
 		<ul>
 			<li>
