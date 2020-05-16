@@ -7,11 +7,11 @@
 	<head>
 		<style type="text/css">
 			body {
-				background-color: #e1fdea;
+				background-color: #e6ffee;
 			}
 
 			fieldset {
-				background-color: #e9e3f7;
+				background-color: #f1ecfc;
 				vertical-align: top;
 			}
 
@@ -29,14 +29,16 @@
 			}
 
 			div.externalLinks {
-				background-color: #ebfcdd;
-				border: #cccccc 1%;
+				background-color: #f0efe7;
+				border-style: solid;
+				border-width: 1px;
+				border-color: #888888;
 				float: right;
-				width: 20%
+				width: 29%;
 			}
 
 			footer {
-				vertical-align: text-bottom;
+				vertical-align: bottom;
 				text-align: center;
 			}
 		</style>
@@ -75,7 +77,7 @@
 			const videoSrcData = `
 舞龙
 	2019
-		全国舞龙舞狮锦标赛男子规定, ./video/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html
+		全国龙狮锦标赛男子规定, ./video/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html
 			南京理工大学, 45, 570
 				开场造型, 68, 124
 				绕场跳龙五次, 126, 152
@@ -106,17 +108,17 @@
 			台州学院, 2195, 2723
 			上海三林, 2791, 3300
 			集美大学, 3348, 3888
-		全国舞龙舞狮锦标赛女子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+		全国龙狮锦标赛女子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
 			常州大学, 24, 542
 			扬州工职院, 644, 1151
 			江阴职院, 1335, 1841
 			湖北队, 1929, 2463
-		全国舞龙舞狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+		全国龙狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
 			南理工紫金学院, 2499, 2870
 			扬州工职院, 3026, 3512
 			常州大学, 6026, 6555
 	2018
-		亚洲舞龙舞狮锦标赛
+		亚洲龙狮锦标赛
 			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video, 0, 545
 	2017
 		全国运动会
@@ -249,7 +251,7 @@
 						var range;
 						if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
 							;
-						else if (s4.selectedIndex !== 0 && (range = nodes4[s5.selectedIndex].value).length == 3)
+						else if (s4.selectedIndex !== 0 && (range = nodes4[s4.selectedIndex].value).length == 3)
 							;
 						else {
 							displayVideoTimeRange.innerText = "";
