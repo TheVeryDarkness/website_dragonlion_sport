@@ -45,17 +45,15 @@
 
 <body>
 	<main>
-		<h3>
-			<fieldset>
-				<div class="selectSet">运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select></div>
-				<div class="selectSet">年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select></div>
-				<div class="selectSet">赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select></div>
-				<div class="selectSet">队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select></div>
-				<div class="selectSet">动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select></div>
-				<input class="buttonReplay" type="button" onclick="updateSelectBox(0)" value="重新播放">
-			</fieldset>
-		</h3>
-		<h4>
+		<fieldset>
+			<div class="selectSet">运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select></div>
+			<div class="selectSet">年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select></div>
+			<div class="selectSet">赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select></div>
+			<div class="selectSet">队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select></div>
+			<div class="selectSet">动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select></div>
+			<input class="buttonReplay" type="button" onclick="updateSelectBox(0)" value="重新播放">
+		</fieldset>
+		<small>
 			（温馨提示：请注意流量）视频时间范围：
 			(
 			<a id="displayVideoTimeRange"></a>
@@ -63,7 +61,7 @@
 			视频加载自网络：
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
-		</h4>
+		</small>
 		<video id="video" controls type="video/mp4">
 			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 			<source id="localVideoCache">
