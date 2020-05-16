@@ -14,7 +14,7 @@
 			vertical-align: top;
 		}
 
-		div.selectSet {
+		div.sSet {
 			float: left;
 		}
 
@@ -26,11 +26,10 @@
 			margin-top: 1.2em;
 			width: 70%;
 			height: 70%;
-			margin-left: 0;
 		}
 
-		input.search {
-			width: 80%;
+		input.textSearch {
+			width: 99%;
 		}
 
 		select.search {
@@ -56,11 +55,11 @@
 <body>
 	<main>
 		<fieldset>
-			<div class="selectSet">运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select></div>
-			<div class="selectSet">年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select></div>
-			<div class="selectSet">赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select></div>
-			<div class="selectSet">队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select></div>
-			<div class="selectSet">动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select></div>
+			<div class="sSet"><label for="s1">运动项目</label><select id="s1" onchange="updateSelectBox(1)"></select></div>
+			<div class="sSet"><label for="s2">年份</label><select id="s2" onchange="updateSelectBox(2)"></select></div>
+			<div class="sSet"><label for="s3">赛事</label><select id="s3" onchange="updateSelectBox(3)"></select></div>
+			<div class="sSet"><label for="s4">队伍</label><select id="s4" onchange="updateSelectBox(4)"></select></div>
+			<div class="sSet"><label for="s5">动作</label><select id="s5" onchange="updateSelectBox(5)"></select></div>
 			<input class="buttonReplay" type="button" onclick="updateSelectBox(0)" value="重新播放">
 		</fieldset>
 		<small class="videoInfo">
@@ -79,7 +78,8 @@
 				<source id="sourceVideo">
 			</video>
 			<div class="externalLinks">
-				<input class="search" type="text">
+				<input class="textSearch" id="textSearchInAll" onchange="searchInSelectedNodes(textSearchInAll.value)"
+					placeholder="输入关键词以搜索" type="text">
 				<select required class="search" id="searchResults" size=5></select>
 				<p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
 				<ul>
@@ -320,8 +320,7 @@
 					case 5:
 						if (s5.selectedIndex === -1) return;
 						nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
-					default:
-						if (s5.selectedIndex === -1) return;
+						trackBack(boxIndex);
 						var range;
 						if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
 							;
@@ -336,6 +335,7 @@
 						videoTimeEnd = range[2];
 						displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 						updateVideo();
+					default:
 				}
 			}
 			function clearVideoSrc() {
@@ -362,8 +362,38 @@
 					video.removeEventListener('timeupdate', checkTimeRange);
 				}
 			}
+			function trace(selectBoxSup, selectBoxSub, nodesSup) {
+				if (selectBoxSub.selectedIndex === 0)
+					selectBoxSup.selectedIndex = 0;
+				else {
+					var lenSub = 1, indexSup = 0;
+					for (const s of nodesSup) {
+						lenSub += s.sub.length, ++indexSup;
+						if (lenSub > selectBoxSub.selectedIndex)
+							break;
+					}
+					selectBoxSup.selectedIndex = indexSup;
+				}
+			}
+			function trackBack(boxIndex) {
+				switch (boxIndex) {
+					case 5:
+						trace(s4, s5, nodes4);
+					case 4:
+						trace(s3, s4, nodes3);
+					case 3:
+						trace(s2, s3, nodes2);
+					case 2:
+						trace(s1, s2, nodes1);
+					case 1:
+					default:
+				}
+			}
 			function secToTime(seconds) {
 				return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
+			}
+			function searchInSelectedNodes(keyWords) {
+				searchResults.options.length = 0;
 			}
 		//-->
 		</script>
