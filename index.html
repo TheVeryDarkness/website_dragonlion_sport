@@ -7,18 +7,32 @@
 	<head>
 		<style type="text/css">
 			body {
-				background-color: #d1f5b4;
+				background-color: #e1fdea;
+			}
+
+			fieldset {
+				background-color: #e9e3f7;
+				vertical-align: top;
+			}
+
+			div.selectSet {
+				float: left;
+			}
+
+			input.buttonReplay {
+				float: left;
 			}
 
 			video {
-				width: 60%;
-				height: 60%;
+				width: 70%;
+				height: 70%;
 			}
 
 			div.externalLinks {
-				background-color: #c8b1fa;
+				background-color: #ebfcdd;
 				border: #cccccc 1%;
 				float: right;
+				width: 20%
 			}
 
 			footer {
@@ -28,16 +42,16 @@
 		</style>
 	</head>
 	<main>
-		<h2>
+		<h3>
 			<fieldset>
-				运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select>
-				年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select>
-				赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select>
-				队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select>
-				动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select>
-				<input type="button" onclick="updateSelectBox(0)" value="重新播放">
+				<div class="selectSet">运动项目<select required id="s1" onchange="updateSelectBox(1)" size=1></select></div>
+				<div class="selectSet">年份<select required id="s2" onchange="updateSelectBox(2)" size=1></select></div>
+				<div class="selectSet">赛事<select required id="s3" onchange="updateSelectBox(3)" size=1></select></div>
+				<div class="selectSet">队伍<select required id="s4" onchange="updateSelectBox(4)" size=1></select></div>
+				<div class="selectSet">动作<select required id="s5" onchange="updateSelectBox(5)" size=1></select></div>
+				<input class="buttonReplay" type="button" onclick="updateSelectBox(0)" value="重新播放">
 			</fieldset>
-		</h2>
+		</h3>
 		<h4>
 			（温馨提示：请注意流量）视频时间范围：
 			(
