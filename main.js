@@ -159,11 +159,11 @@ function updateSelectBox(boxIndex) {
 		case 5:
 			trackBack(boxIndex);
 		default:
-			if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
+			if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
 				loadVideoSrc(nodes3, s3.selectedIndex);
 				video.load();
 			}
-			else if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
+			else if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
 				loadVideoSrc(nodes4, s4.selectedIndex);
 				video.load();
 			}
