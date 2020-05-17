@@ -38,12 +38,12 @@ const videoSrcData = `
 			台州学院, 2195, 2723
 			上海三林, 2791, 3300
 			集美大学, 3348, 3888
-		全国龙狮锦标赛女子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+		全国龙狮锦标赛女子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html, 0, 2502
 			常州大学, 24, 542
 			扬州工职院, 644, 1151
 			江阴职院, 1335, 1841
 			湖北队, 1929, 2463
-		全国龙狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
+		全国龙狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html, 2502, 4250
 			南理工紫金学院, 2499, 2870
 			扬州工职院, 3026, 3512
 			常州大学, 3626, 4155
@@ -52,7 +52,7 @@ const videoSrcData = `
 			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video, 0, 545
 	2017
 		全国运动会
-			华东交通大学, ./video/2017/全国运动会群众比赛项目/华东交通大学.mp4, https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17, https://v.qq.com/x/page/h0394te13o9.html
+			华东交通大学, ./video/2017/全国运动会群众比赛项目/华东交通大学.mp4, https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17, https://v.qq.com/x/page/h0394te13o9.html, 0, 528
 舞狮
 `;
 const difficultyA = `
