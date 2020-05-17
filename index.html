@@ -14,7 +14,7 @@
 			vertical-align: top;
 		}
 
-		div.sSet {
+		div.selectSet {
 			float: left;
 		}
 
@@ -53,15 +53,42 @@
 </head>
 
 <body>
-	<main>
+	<header>
 		<fieldset>
-			<div class="sSet"><label for="s1">运动项目</label><select id="s1" onchange="updateSelectBox(1)"></select></div>
-			<div class="sSet"><label for="s2">年份</label><select id="s2" onchange="updateSelectBox(2)"></select></div>
-			<div class="sSet"><label for="s3">赛事</label><select id="s3" onchange="updateSelectBox(3)"></select></div>
-			<div class="sSet"><label for="s4">队伍</label><select id="s4" onchange="updateSelectBox(4)"></select></div>
-			<div class="sSet"><label for="s5">动作</label><select id="s5" onchange="updateSelectBox(5)"></select></div>
-			<input class="buttonReplay" type="button" onclick="updateSelectBox(0)" value="重新播放">
+			<div class="selectSet">
+				<label for="s1">运动项目</label>
+				<select id="s1" onchange="updateSelectBox(1)" autocomplete="off">
+					<option selected="selected">全选</option>
+				</select>
+			</div>
+			<div class="selectSet">
+				<label for="s2">年份</label>
+				<select id="s2" onchange="updateSelectBox(2)" autocomplete="off">
+					<option selected="selected">全选</option>
+				</select>
+			</div>
+			<div class="selectSet">
+				<label for="s3">赛事</label>
+				<select id="s3" onchange="updateSelectBox(3)" autocomplete="off">
+					<option selected="selected">全选</option>
+				</select>
+			</div>
+			<div class="selectSet">
+				<label for="s4">队伍</label>
+				<select id="s4" onchange="updateSelectBox(4)" autocomplete="off">
+					<option selected="selected">全选</option>
+				</select>
+			</div>
+			<div class="selectSet">
+				<label for="s5">动作</label>
+				<select id="s5" onchange="updateSelectBox(5)" autocomplete="off">
+					<option selected="selected">全选</option>
+				</select>
+			</div>
+			<input class="buttonReplay" type="button" onclick="updateSelectBox(6)" value="重新播放">
 		</fieldset>
+	</header>
+	<main>
 		<small class="videoInfo">
 			（温馨提示：请注意流量）视频时间范围：
 			(
@@ -142,13 +169,14 @@
 				</ul>
 			</div>
 		</div>
-		<!--
-			Pay attention to the data format:
-				group name, local cache path, source video path, source webpage path
-		-->
-		<script type="text/javascript">
-			//<!--
-			const videoSrcData = `
+	</main>
+	<!--
+		Pay attention to the data format:
+			group name, local cache path, source video path, source webpage path
+	-->
+	<script type="text/javascript">
+		//<!--
+		const videoSrcData = `
 舞龙
 	2019
 		全国龙狮锦标赛男子规定, ./video/2019/全国舞龙舞狮锦标赛/规定/20191110wlgd.mp4, http://videoflv.sports.cn/201911/20191110wlgd.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html
@@ -198,214 +226,202 @@
 		全国运动会
 			华东交通大学, ./video/2017/全国运动会群众比赛项目/华东交通大学.mp4, https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17, https://v.qq.com/x/page/h0394te13o9.html
 舞狮
-			`;
-			const difficultyA = ``;
-			function Node(value) {
-				this.value = value.split(',');
-				this.sub = new Array(0);
-				this.toString = function () {
-					var str = new String(this.value);
-					for (const child of this.sub) {
-						str += child.toString();
-					}
-					return str;
+		`;
+		const difficultyA = ``;
+		function Node(value) {
+			this.value = value.split(',');
+			this.sub = new Array(0);
+			this.toString = function () {
+				var str = new String(this.value);
+				for (const child of this.sub) {
+					str += child.toString();
 				}
+				return str;
 			}
-			function headTableCount(str) {
-				var count = 0;
-				for (const c of str)
-					if (c === '\t')
-						++count;
-					else break;
-				return count;
+		}
+		function headTableCount(str) {
+			var count = 0;
+			for (const c of str)
+				if (c === '\t')
+					++count;
+				else break;
+			return count;
+		}
+		function MultiTree(strings) {
+			this.root = new Array();
+			this.toString = function () {
+				return this.root.toString();
 			}
-			function MultiTree(strings) {
-				this.root = new Array();
-				this.toString = function () {
-					return this.root.toString();
-				}
-				var nodesStack = new Array();//里面存的都是Node对象
+			var nodesStack = new Array();//里面存的都是Node对象
 
-				while (true) {
-					var value = strings.shift();
-					var depth = headTableCount(value);
-					while (depth < nodesStack.length)
-						nodesStack.pop();
-					// push
-					{
-						if (depth > nodesStack.length)
-							console.log("Debug failed. Unexpected indent.");
-						var tmp = new Node(value.replace(/[\t]+/g, ''));
-						if (nodesStack.length > 0)
-							nodesStack[nodesStack.length - 1].sub.push(tmp);
-						else this.root.push(tmp);
-						nodesStack.push(tmp);
-					}
-					if (strings.length === 0) break;
+			while (true) {
+				var value = strings.shift();
+				var depth = headTableCount(value);
+				while (depth < nodesStack.length)
+					nodesStack.pop();
+				// push
+				{
+					if (depth > nodesStack.length)
+						console.log("Debug failed. Unexpected indent.");
+					var tmp = new Node(value.replace(/[\t]+/g, ''));
+					if (nodesStack.length > 0)
+						nodesStack[nodesStack.length - 1].sub.push(tmp);
+					else this.root.push(tmp);
+					nodesStack.push(tmp);
 				}
+				if (strings.length === 0) break;
 			}
-			function makeAMultiTree(str) {
-				strings = str.split('\n');
-				var rev = new MultiTree(strings);
-				if (strings.length > 0)
-					console.log("Debug failed. Unexpected tree termination.");
-				return rev;
+		}
+		function makeAMultiTree(str) {
+			strings = str.split('\n');
+			var rev = new MultiTree(strings);
+			if (strings.length > 0)
+				console.log("Debug failed. Unexpected tree termination.");
+			return rev;
+		}
+		const selectBoxMaxSize = 5;
+		function fillSelectBoxWithSubValues(selectBox, subArray) {
+			selectBox.options.length = subArray.length;
+			for (const i in subArray) {
+				selectBox.options[i].text = subArray[i].value[0];
 			}
-			const selectBoxMaxSize = 5;
-			function fillSelectBoxWithSubValues(selectBox, subArray) {
-				selectBox.options.length = subArray.length;
-				for (const i in subArray) {
-					selectBox.options[i].text = subArray[i].value[0];
-				}
-			}
-			function fillSelectBoxWithNodes(selectBox, nodes) {
-				fillSelectBoxWithSubValues(selectBox, nodes);
-			}
-			const all = "全选";
-			function nextNodes(nodes, selectedIndex) {
-				if (selectedIndex === 0) {
-					var rev = new Array(new Node(all));
-					for (const node of nodes) {
-						rev = rev.concat(node.sub);
-					}
-					return rev;
-				}
-				else {
-					return new Array(new Node(all)).concat(nodes[selectedIndex].sub);
-				}
-			}
-			// Begin
-			var nodes1, nodes2, nodes3, nodes4, nodes5;
-			const tree = makeAMultiTree(videoSrcData.substring(videoSrcData.indexOf('\n') + 1, videoSrcData.lastIndexOf('\n')));
-			updateSelectBox(0);
-			// End
+		}
+		function fillSelectBoxWithNodes(selectBox, nodes) {
+			fillSelectBoxWithSubValues(selectBox, nodes);
+		}
+		//Return nodes
+		function selectedNodes(nodes, selectedIndex) {
+			if (selectedIndex === 0)
+				return nodes;
+			else return new Array(nodes[selectedIndex]);
+		}
+		function nextNodes(nodes, selectedIndex) {
+			var rev = new Array();
+			for (const node of selectedNodes(nodes, selectedIndex))
+				rev = rev.concat(node.sub);
+			return rev;
+		}
+		const all = "全选";
+		function nextNodesAndAll(nodes, selectedIndex) {
+			return new Array(new Node(all)).concat(nextNodes(nodes, selectedIndex));
+		}
+		// Begin
+		var nodes1, nodes2, nodes3, nodes4, nodes5;
+		const tree = makeAMultiTree(videoSrcData.substring(videoSrcData.indexOf('\n') + 1, videoSrcData.lastIndexOf('\n')));
+		updateSelectBox(0);
+		// End
 
-			function updateSelectBox(boxIndex) {
-				var loaded;
-				switch (boxIndex) {
-					case 0:
-						nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
-						fillSelectBoxWithNodes(s1, nodes1);
-					case 1:
-						if (s1.selectedIndex === -1) return;
-						nodes2 = nextNodes(nodes1, s1.selectedIndex);//年份
-						fillSelectBoxWithNodes(s2, nodes2);
-					case 2:
-						if (s2.selectedIndex === -1) return;
-						nodes3 = nextNodes(nodes2, s2.selectedIndex);//赛事
-						fillSelectBoxWithNodes(s3, nodes3);
-					case 3:
-						if (s3.selectedIndex === -1) return;
-						nodes4 = nextNodes(nodes3, s3.selectedIndex);//队伍
-						if (!loaded) {
-							if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
-								loadVideoSrc(nodes3, s3.selectedIndex);
-								video.load();
-								loaded = true;
-							}
-							else clearVideoSrc();
-						}
-						fillSelectBoxWithNodes(s4, nodes4);
-					case 4:
-						if (s4.selectedIndex === -1) return;
-						nodes5 = nextNodes(nodes4, s4.selectedIndex);//动作
-						if (!loaded) {
-							if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
-								loadVideoSrc(nodes4, s4.selectedIndex);
-								video.load();
-							}
-							else clearVideoSrc();
-						}
-						fillSelectBoxWithNodes(s5, nodes5);
-					case 5:
-						if (s5.selectedIndex === -1) return;
-						nodes6 = nextNodes(nodes5, s5.selectedIndex);//动作
-						trackBack(boxIndex);
-						var range;
-						if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
-							;
-						else if (s4.selectedIndex !== 0 && (range = nodes4[s4.selectedIndex].value).length == 3)
-							;
-						else {
-							displayVideoTimeRange.innerText = "";
-							return;
-						}
-
-						videoTimeBegin = range[1];
-						videoTimeEnd = range[2];
-						displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
-						updateVideo();
-					default:
-				}
-			}
-			function clearVideoSrc() {
-				localVideoCache.src = "";
-				originVideoURL.href = "";
-				sourceVideo.src = "";
-				originWebpage.href = "";
-			}
-			function loadVideoSrc(nodes, selectedIndex) {
-				localVideoCache.src = nodes[selectedIndex].value[1];
-				originVideoURL.href = nodes[selectedIndex].value[2];
-				sourceVideo.src = nodes[selectedIndex].value[2];
-				originWebpage.href = nodes[selectedIndex].value[3];
-				video.load();
-			}
-			function updateVideo() {
-				video.currentTime = videoTimeBegin;
-				video.addEventListener('timeupdate', checkTimeRange);
-				video.play();
-			}
-			function checkTimeRange() {
-				if (video.currentTime >= videoTimeEnd) {
-					video.pause();
-					video.removeEventListener('timeupdate', checkTimeRange);
-				}
-			}
-			function trace(selectBoxSup, selectBoxSub, nodesSup) {
-				if (selectBoxSub.selectedIndex === 0)
-					selectBoxSup.selectedIndex = 0;
-				else {
-					var lenSub = 1, indexSup = 0;
-					for (const s of nodesSup) {
-						lenSub += s.sub.length, ++indexSup;
-						if (lenSub > selectBoxSub.selectedIndex)
-							break;
+		function updateSelectBox(boxIndex) {
+			switch (boxIndex) {
+				case 0:
+					nodes1 = new Array(new Node(all)).concat(tree.root);//运动项目
+					fillSelectBoxWithNodes(s1, nodes1);
+				case 1:
+					nodes2 = nextNodesAndAll(nodes1, s1.selectedIndex);//年份
+					fillSelectBoxWithNodes(s2, nodes2);
+				case 2:
+					nodes3 = nextNodesAndAll(nodes2, s2.selectedIndex);//赛事
+					fillSelectBoxWithNodes(s3, nodes3);
+				case 3:
+					nodes4 = nextNodesAndAll(nodes3, s3.selectedIndex);//队伍
+					fillSelectBoxWithNodes(s4, nodes4);
+				case 4:
+					nodes5 = nextNodesAndAll(nodes4, s4.selectedIndex);//动作
+					fillSelectBoxWithNodes(s5, nodes5);
+				case 5:
+					trackBack(boxIndex);
+				default:
+					if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
+						loadVideoSrc(nodes3, s3.selectedIndex);
+						video.load();
 					}
-					selectBoxSup.selectedIndex = indexSup;
-				}
+					else if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
+						loadVideoSrc(nodes4, s4.selectedIndex);
+						video.load();
+					}
+					else clearVideoSrc();
+					var range;
+					if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
+						;
+					else if (s4.selectedIndex !== 0 && (range = nodes4[s4.selectedIndex].value).length == 3)
+						;
+					else {
+						displayVideoTimeRange.innerText = "";
+						return;
+					}
+
+					videoTimeBegin = range[1];
+					videoTimeEnd = range[2];
+					displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
+					updateVideo();
 			}
-			function trackBack(boxIndex) {
-				switch (boxIndex) {
-					case 5:
-						trace(s4, s5, nodes4);
-					case 4:
-						trace(s3, s4, nodes3);
-					case 3:
-						trace(s2, s3, nodes2);
-					case 2:
-						trace(s1, s2, nodes1);
-					case 1:
-					default:
-				}
+		}
+		function refreshSelectBox() {
+			s1.selectedIndex = s2.selectedIndex = s3.selectedIndex = s4.selectedIndex = s5.selectedIndex = 0;
+		}
+		function clearVideoSrc() {
+			localVideoCache.src = "";
+			originVideoURL.href = "";
+			sourceVideo.src = "";
+			originWebpage.href = "";
+		}
+		function loadVideoSrc(nodes, selectedIndex) {
+			localVideoCache.src = nodes[selectedIndex].value[1];
+			originVideoURL.href = nodes[selectedIndex].value[2];
+			sourceVideo.src = nodes[selectedIndex].value[2];
+			originWebpage.href = nodes[selectedIndex].value[3];
+			video.load();
+		}
+		function updateVideo() {
+			video.currentTime = videoTimeBegin;
+			video.addEventListener('timeupdate', checkTimeRange);
+			video.play();
+		}
+		function checkTimeRange() {
+			if (video.currentTime >= videoTimeEnd) {
+				video.pause();
+				video.removeEventListener('timeupdate', checkTimeRange);
 			}
-			function secToTime(seconds) {
-				return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
+		}
+		function track(selectBoxSup, selectBoxSub, nodesSup) {
+			var lenSub = 1, indexSup = 0;
+			for (const s of nodesSup) {
+				lenSub += s.sub.length;
+				if (lenSub > selectBoxSub.selectedIndex)
+					break;
+				++indexSup;
 			}
-			function findInNodes(){
-				
+			selectBoxSup.selectedIndex = indexSup;
+		}
+		function trackBack(boxIndex) {
+			switch (boxIndex) {
+				case 5:
+					track(s4, s5, nodes4);
+				case 4:
+					track(s3, s4, nodes3);
+				case 3:
+					track(s2, s3, nodes2);
+				case 2:
+					track(s1, s2, nodes1);
+				case 1:
+				default:
 			}
-			function searchInSelectedNodes(keyWord) {
-				searchResults.options.length = 0;
-				for (const n1 of nodes1) {
-					if (n1.value[0].Math(keyWord))
-						searchResults.options += n1.value[0];
-				}
+		}
+		function secToTime(seconds) {
+			return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
+		}
+		function findInNodes(keyWord, nodes) {
+			for (const n of nodes) {
+				if (n.value[0].Math(keyWord))
+					searchResults.options += n.value[0];
 			}
-		//-->
-		</script>
-		<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-	</main>
+		}
+		function searchInSelectedNodes(keyWord) {
+			searchResults.options.length = 0;
+		}
+	//-->
+	</script>
+	<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	<footer>
 		Written by <a href="mailto:3266343194@qq.com">黄博奕</a>.<br>
 		People's Republic of China
