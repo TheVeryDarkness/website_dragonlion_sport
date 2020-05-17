@@ -46,7 +46,7 @@ const videoSrcData = `
 		全国龙狮锦标赛男子传统, ./video/2019/全国舞龙舞狮锦标赛/传统/20191109ctwl.mp4, http://videoflv.sports.cn/201911/20191109ctwl.mp4, http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html
 			南理工紫金学院, 2499, 2870
 			扬州工职院, 3026, 3512
-			常州大学, 6026, 6555
+			常州大学, 3626, 4155
 	2018
 		亚洲龙狮锦标赛
 			台湾, ./video/2018/亚洲舞龙舞狮锦标赛/台湾队.mp4, https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b, https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video, 0, 545
@@ -138,6 +138,7 @@ function nextNodesAndAll(nodes, selectedIndex) {
 // Begin
 var nodes1, nodes2, nodes3, nodes4, nodes5;
 const tree = makeAMultiTree(videoSrcData.substring(videoSrcData.indexOf('\n') + 1, videoSrcData.lastIndexOf('\n')));
+var videoTimeBegin, videoTimeEnd;
 updateSelectBox(0);
 // End
 
@@ -167,30 +168,26 @@ function updateSelectBox(boxIndex) {
 				;
 			else clearVideoSrc();
 
-			var range;
-			if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value, range))
+			if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value))
 				;
-			else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value, range))
+			else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value))
 				;
 			else {
 				displayVideoTimeRange.innerText = "";
 				return;
 			}
-
-			videoTimeBegin = range[1];
-			videoTimeEnd = range[2];
 			displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 			updateVideo();
 	}
 }
-function loadTimeRange(value, range) {
+function loadTimeRange(value, begin, end) {
 	if (value.length == 3) {
-		range[0] = value[1];
-		range[1] = value[2];
+		videoTimeBegin = value[1];
+		videoTimeEnd = value[2];
 	}
 	else if (value.length == 6) {
-		range[0] = value[4];
-		range[1] = value[5];
+		videoTimeBegin = value[4];
+		videoTimeEnd = value[5];
 	}
 	else return false;
 	return true;
