@@ -303,3 +303,12 @@ function searchInAllNodes(keyWord) {
 		}
 	}
 }
+function chooseSearch() {
+	var indexesSet = recordSearch[searchResults.selectedIndex];
+	s1.selectedIndex = indexesSet[0];
+	s2.selectedIndex = indexesSet[1];
+	s3.selectedIndex = indexesSet[2];
+	s4.selectedIndex = indexesSet[3];
+	s5.selectedIndex = indexesSet[4];
+	updateSelectBox(6);
+}
