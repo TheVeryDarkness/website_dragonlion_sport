@@ -58,15 +58,17 @@ const videoSrcData = `
 const difficultyA = `
 
 `;
-function Node(value) {
-	this.value = value.split(',');
-	this.sub = new Array(0);
-	this.toString = function () {
-		var str = new String(this.value);
-		for (const child of this.sub) {
-			str += child.toString();
-		}
-		return str;
+class Node {
+	constructor(value) {
+		this.value = value.split(',');
+		this.sub = new Array(0);
+		this.toString = function () {
+			var str = new String(this.value);
+			for (const child of this.sub) {
+				str += child.toString();
+			}
+			return str;
+		};
 	}
 }
 function headTableCount(str) {
@@ -77,29 +79,32 @@ function headTableCount(str) {
 		else break;
 	return count;
 }
-function MultiTree(strings) {
-	this.root = new Array();
-	this.toString = function () {
-		return this.root.toString();
-	}
-	var nodesStack = new Array();//里面存的都是Node对象
-
-	while (true) {
-		var value = strings.shift();
-		var depth = headTableCount(value);
-		while (depth < nodesStack.length)
-			nodesStack.pop();
-		// push
-		{
-			if (depth > nodesStack.length)
-				console.log("Debug failed. Unexpected indent.");
-			var tmp = new Node(value.replace(/[\t]+/g, ''));
-			if (nodesStack.length > 0)
-				nodesStack[nodesStack.length - 1].sub.push(tmp);
-			else this.root.push(tmp);
-			nodesStack.push(tmp);
+class MultiTree {
+	constructor(strings) {
+		this.root = new Array();
+		this.toString = function () {
+			return this.root.toString();
+		};
+		var nodesStack = new Array(); //里面存的都是Node对象
+		while (true) {
+			var value = strings.shift();
+			var depth = headTableCount(value);
+			while (depth < nodesStack.length)
+				nodesStack.pop();
+			// push
+			{
+				if (depth > nodesStack.length)
+					console.log("Debug failed. Unexpected indent.");
+				var tmp = new Node(value.replace(/[\t]+/g, ''));
+				if (nodesStack.length > 0)
+					nodesStack[nodesStack.length - 1].sub.push(tmp);
+				else
+					this.root.push(tmp);
+				nodesStack.push(tmp);
+			}
+			if (strings.length === 0)
+				break;
 		}
-		if (strings.length === 0) break;
 	}
 }
 function makeAMultiTree(str) {
