@@ -1,6 +1,8 @@
 /*
 	Pay attention to the data format:
-	group name, local cache path, source video path, source webpage path
+		length = 3: name, time range begin, time range end
+		length = 4: name, local cache path, source video path, source webpage path
+		length = 6: name, local cache path, source video path, source webpage path, time range begin, time range end
 */
 const videoSrcData = `
 舞龙
@@ -159,19 +161,16 @@ function updateSelectBox(boxIndex) {
 		case 5:
 			trackBack(boxIndex);
 		default:
-			if (s4.selectedIndex !== 0 && nodes4[s4.selectedIndex].value.length == 4) {
-				loadVideoSrc(nodes3, s3.selectedIndex);
-				video.load();
-			}
-			else if (s3.selectedIndex !== 0 && nodes3[s3.selectedIndex].value.length == 4) {
-				loadVideoSrc(nodes4, s4.selectedIndex);
-				video.load();
-			}
-			else clearVideoSrc();
-			var range;
-			if (s5.selectedIndex !== 0 && (range = nodes5[s5.selectedIndex].value).length == 3)
+			if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4, s4.selectedIndex))
 				;
-			else if (s4.selectedIndex !== 0 && (range = nodes4[s4.selectedIndex].value).length == 3)
+			else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3, s3.selectedIndex))
+				;
+			else clearVideoSrc();
+
+			var range;
+			if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value, range))
+				;
+			else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value, range))
 				;
 			else {
 				displayVideoTimeRange.innerText = "";
@@ -184,6 +183,18 @@ function updateSelectBox(boxIndex) {
 			updateVideo();
 	}
 }
+function loadTimeRange(value, range) {
+	if (value.length == 3) {
+		range[0] = value[1];
+		range[1] = value[2];
+	}
+	else if (value.length == 6) {
+		range[0] = value[4];
+		range[1] = value[5];
+	}
+	else return false;
+	return true;
+}
 function refreshSelectBox() {
 	s1.selectedIndex = s2.selectedIndex = s3.selectedIndex = s4.selectedIndex = s5.selectedIndex = 0;
 }
@@ -195,11 +206,16 @@ function clearVideoSrc() {
 	video.load();
 }
 function loadVideoSrc(nodes, selectedIndex) {
-	localVideoCache.src = nodes[selectedIndex].value[1];
-	originVideoURL.href = nodes[selectedIndex].value[2];
-	sourceVideo.src = nodes[selectedIndex].value[2];
-	originWebpage.href = nodes[selectedIndex].value[3];
-	video.load();
+	var node = nodes[selectedIndex];
+	if (node.value.length == 6 || node.value.length == 4) {
+		localVideoCache.src = nodes[selectedIndex].value[1];
+		originVideoURL.href = nodes[selectedIndex].value[2];
+		sourceVideo.src = nodes[selectedIndex].value[2];
+		originWebpage.href = nodes[selectedIndex].value[3];
+		video.load();
+	}
+	else return false;
+	return true;
 }
 function updateVideo() {
 	video.currentTime = videoTimeBegin;
