@@ -257,12 +257,6 @@ function trackBack(boxIndex) {
 function secToTime(seconds) {
 	return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
 }
-function findInNodes(keyWord, nodes) {
-	for (const n of nodes) {
-		if (n.value[0].Math(keyWord))
-			searchResults.options += n.value[0];
-	}
-}
 function value0ToString() {
 	var rev = new Array();
 	for (const node of arguments) {
