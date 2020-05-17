@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Training</title>
+	<title>Training Guideline</title>
 	<meta lang="zh-Hans-CN" charset="utf-8">
 	<style type="text/css">
 		body {
@@ -29,7 +29,11 @@
 		}
 
 		input.textSearch {
-			width: 99%;
+			width: fit-content;
+		}
+
+		input.buttonSearch {
+			float: right;
 		}
 
 		select.search {
@@ -55,37 +59,39 @@
 <body>
 	<header>
 		<fieldset>
-			<div class="selectSet">
-				<label for="s1">运动项目</label>
-				<select id="s1" onchange="updateSelectBox(1)" autocomplete="off">
-					<option selected="selected">全选</option>
-				</select>
-			</div>
-			<div class="selectSet">
-				<label for="s2">年份</label>
-				<select id="s2" onchange="updateSelectBox(2)" autocomplete="off">
-					<option selected="selected">全选</option>
-				</select>
-			</div>
-			<div class="selectSet">
-				<label for="s3">赛事</label>
-				<select id="s3" onchange="updateSelectBox(3)" autocomplete="off">
-					<option selected="selected">全选</option>
-				</select>
-			</div>
-			<div class="selectSet">
-				<label for="s4">队伍</label>
-				<select id="s4" onchange="updateSelectBox(4)" autocomplete="off">
-					<option selected="selected">全选</option>
-				</select>
-			</div>
-			<div class="selectSet">
-				<label for="s5">动作</label>
-				<select id="s5" onchange="updateSelectBox(5)" autocomplete="off">
-					<option selected="selected">全选</option>
-				</select>
-			</div>
-			<input class="buttonReplay" type="button" onclick="updateSelectBox(6)" value="重新播放">
+			<form action="javascript:updateSelectBox(6)">
+				<div class="selectSet">
+					<label for="s1">运动项目</label>
+					<select id="s1" onchange="updateSelectBox(1)" autocomplete="off">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s2">年份</label>
+					<select id="s2" onchange="updateSelectBox(2)" autocomplete="off">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s3">赛事</label>
+					<select id="s3" onchange="updateSelectBox(3)" autocomplete="off">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s4">队伍</label>
+					<select id="s4" onchange="updateSelectBox(4)" autocomplete="off">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s5">动作</label>
+					<select id="s5" onchange="updateSelectBox(5)" autocomplete="off">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<input class="buttonReplay" type="submit" value="重新播放">
+			</form>
 		</fieldset>
 	</header>
 	<main>
@@ -105,9 +111,11 @@
 				<source id="sourceVideo">
 			</video>
 			<div class="externalLinks">
-				<input class="textSearch" id="textSearchInAll" onchange="searchInSelectedNodes(textSearchInAll.value)"
-					placeholder="输入关键词以搜索" type="text">
-				<select required class="search" id="searchResults" size=5></select>
+				<form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
+					<input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" type="text">
+					<input class="buttonSearch" type="submit" value="Search">
+				</form>
+				<select required class="search" id="searchResults" size=8></select>
 				<p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
 				<ul>
 					<li>
@@ -364,6 +372,7 @@
 			originVideoURL.href = "";
 			sourceVideo.src = "";
 			originWebpage.href = "";
+			video.load();
 		}
 		function loadVideoSrc(nodes, selectedIndex) {
 			localVideoCache.src = nodes[selectedIndex].value[1];
@@ -416,8 +425,49 @@
 					searchResults.options += n.value[0];
 			}
 		}
-		function searchInSelectedNodes(keyWord) {
+		function value0ToString() {
+			var rev = new Array();
+			for (const node of arguments) {
+				rev.push(node.value[0].toString());
+			}
+			return rev;
+		}
+		function addOption(selectBox, text) {
+			selectBox.options.length = selectBox.options.length + 1;
+			selectBox.options[selectBox.options.length - 1].text = text;
+		}
+		function searchInAllNodes(keyWord) {
+			if (keyWord == null) return;
 			searchResults.options.length = 0;
+			for (const index1 in nodes1) {
+				var node1 = nodes1[index1];
+				if (node1.value[0].match(keyWord))
+					addOption(searchResults, value0ToString(node1));
+				var next1 = nextNodes(nodes1, index1);
+				for (const index2 in next1) {
+					var node2 = next1[index2];
+					if (node2.value[0].match(keyWord))
+						addOption(searchResults, value0ToString(node2, node1));
+					var next2 = nextNodes(nodes2, index2);
+					for (const index3 in next2) {
+						var node3 = nodes3[index3];
+						if (node3.value[0].match(keyWord))
+							addOption(searchResults, value0ToString(node3, node2, node1));
+						var next3 = nextNodes(nodes3, index3);
+						for (const index4 in next3) {
+							var node4 = nodes4[index4];
+							if (node4.value[0].match(keyWord))
+								addOption(searchResults, value0ToString(node4, node3, node2, node1));
+							var next4 = nextNodes(nodes4, index4);
+							for (const index5 in next4) {
+								var node5 = nodes5[index5];
+								if (node5.value[0].match(keyWord))
+									addOption(searchResults, value0ToString(node5, node4, node3, node2, node1));
+							}
+						}
+					}
+				}
+			}
 		}
 	//-->
 	</script>
