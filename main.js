@@ -142,6 +142,7 @@ function nextNodesAndAll(nodes, selectedIndex) {
 }
 // Begin
 var nodes1, nodes2, nodes3, nodes4, nodes5;
+var recordSearch = new Array;
 const tree = makeAMultiTree(videoSrcData.substring(videoSrcData.indexOf('\n') + 1, videoSrcData.lastIndexOf('\n')));
 var videoTimeBegin, videoTimeEnd;
 updateSelectBox(0);
@@ -271,30 +272,31 @@ function addOption(selectBox, text) {
 function searchInAllNodes(keyWord) {
 	if (keyWord == null) return;
 	searchResults.options.length = 0;
+	recordSearch.length = 0;
 	for (const index1 in nodes1) {
 		var node1 = nodes1[index1];
 		if (node1.value[0].match(keyWord))
-			addOption(searchResults, value0ToString(node1));
+			addOption(searchResults, value0ToString(node1)), recordSearch.push(new Array(index1, 0, 0, 0, 0));
 		var next1 = nextNodes(nodes1, index1);
 		for (const index2 in next1) {
 			var node2 = next1[index2];
 			if (node2.value[0].match(keyWord))
-				addOption(searchResults, value0ToString(node2, node1));
+				addOption(searchResults, value0ToString(node2, node1)), recordSearch.push(new Array(index1, index2, 0, 0, 0));
 			var next2 = nextNodes(nodes2, index2);
 			for (const index3 in next2) {
 				var node3 = nodes3[index3];
 				if (node3.value[0].match(keyWord))
-					addOption(searchResults, value0ToString(node3, node2, node1));
+					addOption(searchResults, value0ToString(node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, 0, 0));
 				var next3 = nextNodes(nodes3, index3);
 				for (const index4 in next3) {
 					var node4 = nodes4[index4];
 					if (node4.value[0].match(keyWord))
-						addOption(searchResults, value0ToString(node4, node3, node2, node1));
+						addOption(searchResults, value0ToString(node4, node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, index4, 0));
 					var next4 = nextNodes(nodes4, index4);
 					for (const index5 in next4) {
 						var node5 = nodes5[index5];
 						if (node5.value[0].match(keyWord))
-							addOption(searchResults, value0ToString(node5, node4, node3, node2, node1));
+							addOption(searchResults, value0ToString(node5, node4, node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, index4, index5));
 					}
 				}
 			}
