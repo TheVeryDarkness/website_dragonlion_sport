@@ -2,121 +2,51 @@
 <html>
 
 <head>
-	<title>Training Guideline</title>
-	<meta lang="zh-Hans-CN" charset="utf-8">
-	<style type="text/css">
-		fieldset {
-			background-color: #f0efe7;
-			color: #384058;
-			vertical-align: bottom;
-			border-style: ridge;
-		}
-
-		main {
-			background-color: #fcfaff;
-		}
-
-		div.selectSet {
-			color: inherit;
-			float: left;
-			vertical-align: text-bottom;
-		}
-
-		select {
-			color: inherit;
-		}
-
-		input.buttonReplay {
-			color: inherit;
-			float: left;
-			vertical-align: bottom;
-		}
-
-		small.videoInfo {
-			color: rosybrown;
-		}
-
-		a {
-			color: inherit;
-		}
-
-		video {
-			margin-top: 1.2em;
-			width: 75%;
-			height: 75%;
-		}
-
-		input.textSearch {
-			width: calc(99% - 5em);
-			float: left;
-		}
-
-		input.buttonSearch {
-			float: right;
-		}
-
-		select.search {
-			color: inherit;
-			width: 100%;
-		}
-
-		div.externalLinks {
-			background-color: #f5fff9;
-			border-style: groove;
-			border-color: #999999;
-			color: indigo;
-			float: right;
-			font-size: 90%;
-			width: calc(24% - 6px);
-		}
-
-		footer {
-			vertical-align: bottom;
-			text-align: center;
-		}
-	</style>
+    <title>Training Guideline</title>
+    <meta lang="zh-Hans-CN" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body>
-	<header>
-		<fieldset>
-			<form action="javascript:updateSelectBox(6)" autocomplete="off">
-				<div class="selectSet">
-					<label for="s1">运动项目</label>
-					<select id="s1" onchange="updateSelectBox(1)">
+    <header>
+        <fieldset>
+            <form action="javascript:updateSelectBox(6)" autocomplete="off">
+                <div class="selectSet">
+                    <label for="s1">运动项目</label>
+                    <select id="s1" onchange="updateSelectBox(1)">
 						<option selected="selected">全选</option>
 					</select>
-				</div>
-				<div class="selectSet">
-					<label for="s2">年份</label>
-					<select id="s2" onchange="updateSelectBox(2)">
+                </div>
+                <div class="selectSet">
+                    <label for="s2">年份</label>
+                    <select id="s2" onchange="updateSelectBox(2)">
 						<option selected="selected">全选</option>
 					</select>
-				</div>
-				<div class="selectSet">
-					<label for="s3">赛事</label>
-					<select id="s3" onchange="updateSelectBox(3)">
+                </div>
+                <div class="selectSet">
+                    <label for="s3">赛事</label>
+                    <select id="s3" onchange="updateSelectBox(3)">
 						<option selected="selected">全选</option>
 					</select>
-				</div>
-				<div class="selectSet">
-					<label for="s4">队伍</label>
-					<select id="s4" onchange="updateSelectBox(4)">
+                </div>
+                <div class="selectSet">
+                    <label for="s4">队伍</label>
+                    <select id="s4" onchange="updateSelectBox(4)">
 						<option selected="selected">全选</option>
 					</select>
-				</div>
-				<div class="selectSet">
-					<label for="s5">动作</label>
-					<select id="s5" onchange="updateSelectBox(5)">
+                </div>
+                <div class="selectSet">
+                    <label for="s5">动作</label>
+                    <select id="s5" onchange="updateSelectBox(5)">
 						<option selected="selected">全选</option>
 					</select>
-				</div>
-				<input class="buttonReplay" type="submit" value="重新播放">
-			</form>
-		</fieldset>
-	</header>
-	<main>
-		<small class="videoInfo">
+                </div>
+                <input class="buttonReplay" type="submit" value="重新播放">
+            </form>
+        </fieldset>
+    </header>
+    <main>
+        <small class="videoInfo">
 			（温馨提示：请注意流量）视频时间范围：
 			(
 			<a id="displayVideoTimeRange"></a>
@@ -125,86 +55,82 @@
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
 		</small>
-		<div>
-			<video id="video" controls type="video/mp4">
+        <div>
+            <video id="video" controls type="video/mp4">
 				浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 				<source id="localVideoCache">
 				<source id="sourceVideo">
 			</video>
-			<div class="externalLinks">
-				<form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
-					<input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" type="text">
-					<input class="buttonSearch" type="submit" value="Search">
-				</form>
-				<select required class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
-				<p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
-				<ul>
-					<li>
-						<a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
-						<ul>
-							<li><a href="http://dragonlion.sport.org.cn/home/jcsp/">精彩视频</a></li>
-						</ul>
-					</li>
-					<li><a href="http://www.sports.edu.cn/">中国学生体育网</a></li>
-					<li><a href="http://www.cudld.com/index">中国大学生体育协会舞龙舞狮分会（疑已弃用）</a></li>
-					<li>
-						<a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/">中南大学舞龙舞狮精品课程</a>
-						<ul>
-							<li><a
-									href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/ShouKeJiaoAn/wulongjianggao/国际舞龙舞狮竞赛规则、裁判法.htm">
+            <div class="externalLinks">
+                <form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
+                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" type="text">
+                    <input class="buttonSearch" type="submit" value="Search">
+                </form>
+                <select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
+                <p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
+                <ul>
+                    <li>
+                        <a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
+                        <ul>
+                            <li><a href="http://dragonlion.sport.org.cn/home/jcsp/">精彩视频</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="http://www.sports.edu.cn/">中国学生体育网</a></li>
+                    <li><a href="http://www.cudld.com/index">中国大学生体育协会舞龙舞狮分会（疑已弃用）</a></li>
+                    <li>
+                        <a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/">中南大学舞龙舞狮精品课程</a>
+                        <ul>
+                            <li><a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/ShouKeJiaoAn/wulongjianggao/国际舞龙舞狮竞赛规则、裁判法.htm">
 									龙狮文化系列讲座之国际舞龙舞狮竞赛规则、裁判法
 								</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="https://mooc1-1.chaoxing.com/course/205382137.html">超星发现民族传统体育——舞龙（城建俞宇老师）</a>
-					</li>
-					<li>
-						<a href="https://www.icourses.cn/sCourse/course_6711.html">爱课程舞龙舞狮（中南黄益苏老师）</a>
-					</li>
-					<li>
-						<a href="http://www.ocasia.org">亚洲奥林匹克理事会</a>
-						<ul>
-							<li>
-								<a href="http://www.ocasia.org/sports/72-dragon-lion-dance-dl.html">龙狮运动</a>
-							</li>
-							<li>
-								<a
-									href="http://www.ocasia.org/sports/federations/43-international-dragon-lion-dance-federation.html">IDLDF</a>
-							</li>
-							<li>
-								<a
-									href="http://www.ocasia.org/sports/federations/13-dragon-lion-dances-federation-of-asia.html">DLDFA</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="http://www.hkcmaa.com.hk/eng/intro/activities.html">香港中国国术龙狮协会</a>
-					</li>
-					<li>
-						<a href="https://usdldf.org/about-usdldf/">The United States Dragon & Lion Dance Federation</a>
-					</li>
-					<li>
-						<a href="https://wuzong.com/activities.php">新加坡武术龙狮总会</a>
-					</li>
-					<li>
-						<a href="http://www.sdliondance.com/index.html">Southern Sea Dragon and Lion Dance
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="https://mooc1-1.chaoxing.com/course/205382137.html">超星发现民族传统体育——舞龙（城建俞宇老师）</a>
+                    </li>
+                    <li>
+                        <a href="https://www.icourses.cn/sCourse/course_6711.html">爱课程舞龙舞狮（中南黄益苏老师）</a>
+                    </li>
+                    <li>
+                        <a href="http://www.ocasia.org">亚洲奥林匹克理事会</a>
+                        <ul>
+                            <li>
+                                <a href="http://www.ocasia.org/sports/72-dragon-lion-dance-dl.html">龙狮运动</a>
+                            </li>
+                            <li>
+                                <a href="http://www.ocasia.org/sports/federations/43-international-dragon-lion-dance-federation.html">IDLDF</a>
+                            </li>
+                            <li>
+                                <a href="http://www.ocasia.org/sports/federations/13-dragon-lion-dances-federation-of-asia.html">DLDFA</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://www.hkcmaa.com.hk/eng/intro/activities.html">香港中国国术龙狮协会</a>
+                    </li>
+                    <li>
+                        <a href="https://usdldf.org/about-usdldf/">The United States Dragon & Lion Dance Federation</a>
+                    </li>
+                    <li>
+                        <a href="https://wuzong.com/activities.php">新加坡武术龙狮总会</a>
+                    </li>
+                    <li>
+                        <a href="http://www.sdliondance.com/index.html">Southern Sea Dragon and Lion Dance
 							Association</a>
-					</li>
-					<li>
-						<a href="https://culturachina.cl/">中智文化艺术中心</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</main>
-	<script type="text/javascript" defer src="main.js"></script>
-	<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-	<footer>
-		Written by <a href="mailto:3266343194@qq.com">黄博奕</a>.<br>
-		People's Republic of China
-	</footer>
+                    </li>
+                    <li>
+                        <a href="https://culturachina.cl/">中智文化艺术中心</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" defer src="main.js"></script>
+    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+    <footer>
+        Written by <a href="mailto:3266343194@qq.com">黄博奕</a>.<br> People's Republic of China
+    </footer>
 </body>
 
 </html>
