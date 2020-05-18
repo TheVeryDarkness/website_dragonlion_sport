@@ -1,0 +1,15 @@
+fieldset {
+        background-color: #f0efe7;
+        color: #384058;
+    }
+    main {
+        background-color: #fcfaff;
+    }
+    small.videoInfo {
+        color: rosybrown;
+    }
+    div.externalLinks {
+        background-color: #f5fff9;
+        border-color: #999999;
+        color: indigo;
+    }
