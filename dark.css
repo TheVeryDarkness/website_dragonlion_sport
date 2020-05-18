@@ -9,6 +9,13 @@ body {
     background-color: #222025;
 }
 
+select {
+    background-color: inherit;
+    scrollbar-color: dark;
+    scrollbar-arrow-color: #111111;
+    -ms-scrollbar-arrow-color: #111111;
+}
+
 small.videoInfo {
     color: #65606a;
 }
@@ -30,6 +37,7 @@ input.buttonSearch {
 }
 
 select.search {
+    background-color: inherit;
     scrollbar-color: dark;
 }
 
