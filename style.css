@@ -1,59 +1,69 @@
-@media(prefers-color-scheme:light) {
-    fieldset {
-        background-color: #f0efe7;
-        color: #384058;
-        vertical-align: bottom;
-        border-style: ridge;
-    }
-    main {
-        background-color: #fcfaff;
-    }
-    div.selectSet {
-        color: inherit;
-        float: left;
-        vertical-align: text-bottom;
-    }
-    select {
-        color: inherit;
-    }
-    input.buttonReplay {
-        color: inherit;
-        float: left;
-        vertical-align: bottom;
-    }
-    small.videoInfo {
-        color: rosybrown;
-    }
-    a {
-        color: inherit;
-    }
-    video {
-        margin-top: 1.2em;
-        width: 75%;
-        height: 75%;
-    }
-    input.textSearch {
-        width: calc(99% - 5em);
-        float: left;
-    }
-    input.buttonSearch {
-        float: right;
-    }
-    select.search {
-        color: inherit;
-        width: 100%;
-    }
-    div.externalLinks {
-        background-color: #f5fff9;
-        border-style: groove;
-        border-color: #999999;
-        color: indigo;
-        float: right;
-        font-size: 90%;
-        width: calc(24% - 6px);
-    }
-    footer {
-        vertical-align: bottom;
-        text-align: center;
-    }
+fieldset {
+    background-color: #f0efe7;
+    color: #384058;
+    vertical-align: bottom;
+    border-style: ridge;
+}
+
+main {
+    background-color: #fcfaff;
+}
+
+div.selectSet {
+    color: inherit;
+    float: left;
+    vertical-align: text-bottom;
+}
+
+select {
+    color: inherit;
+}
+
+input.buttonReplay {
+    color: inherit;
+    float: left;
+    vertical-align: bottom;
+}
+
+small.videoInfo {
+    color: rosybrown;
+}
+
+a {
+    color: inherit;
+}
+
+video {
+    margin-top: 1.2em;
+    width: 75%;
+    height: 75%;
+}
+
+input.textSearch {
+    width: calc(99% - 5em);
+    float: left;
+}
+
+input.buttonSearch {
+    float: right;
+}
+
+select.search {
+    color: inherit;
+    width: 100%;
+}
+
+div.externalLinks {
+    background-color: #f5fff9;
+    border-style: groove;
+    border-color: #999999;
+    color: indigo;
+    float: right;
+    font-size: 90%;
+    width: calc(24% - 6px);
+}
+
+footer {
+    vertical-align: bottom;
+    text-align: center;
 }
