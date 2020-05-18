@@ -14,12 +14,12 @@ else {
 var on;
 
 function turnOn() {
-    linkSchemeStyle.href = "./light.css";
+    linkSchemeStyle.href = "./css/light.css";
     on = true;
 }
 
 function turnOff() {
-    linkSchemeStyle.href = "./dark.css";
+    linkSchemeStyle.href = "./css/dark.css";
     on = false;
 }
 
