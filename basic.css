@@ -3,12 +3,17 @@ body {
     background-color: black;
 }
 
-fieldset {
+fieldset.top {
     vertical-align: bottom;
     border-style: ridge;
 }
 
+div {
+    clear: both;
+}
+
 div.selectSet {
+    clear: none;
     color: inherit;
     float: left;
     vertical-align: text-bottom;
