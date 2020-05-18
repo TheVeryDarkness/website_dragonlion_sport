@@ -1,119 +1,115 @@
-@media(prefers-color-scheme:light) {
-    fieldset {
-        background-color: #f0efe7;
-        color: #384058;
-        vertical-align: bottom;
-        border-style: ridge;
-    }
-    main {
-        background-color: #fcfaff;
-    }
-    div.selectSet {
-        color: inherit;
-        float: left;
-        vertical-align: text-bottom;
-    }
-    select {
-        color: inherit;
-    }
-    input.buttonReplay {
-        color: inherit;
-        float: left;
-        vertical-align: bottom;
-    }
-    small.videoInfo {
-        color: rosybrown;
-    }
-    a {
-        color: inherit;
-    }
-    video {
-        margin-top: 1.2em;
-        width: 75%;
-        height: 75%;
-    }
-    input.textSearch {
-        width: calc(99% - 5em);
-        float: left;
-    }
-    input.buttonSearch {
-        float: right;
-    }
-    select.search {
-        color: inherit;
-        width: 100%;
-    }
-    div.externalLinks {
-        background-color: #f5fff9;
-        border-style: groove;
-        border-color: #999999;
-        color: indigo;
-        float: right;
-        font-size: 90%;
-        width: calc(24% - 6px);
-    }
-    footer {
-        vertical-align: bottom;
-        text-align: center;
-    }
-}
-
-@media(prefers-color-scheme:dark) {
-    fieldset {
-        background-color: #f0efe7;
-        color: #384058;
-        vertical-align: bottom;
-        border-style: ridge;
-    }
-    main {
-        background-color: #fcfaff;
-    }
-    div.selectSet {
-        color: inherit;
-        float: left;
-        vertical-align: text-bottom;
-    }
-    select {
-        color: inherit;
-    }
-    input.buttonReplay {
-        color: inherit;
-        float: left;
-        vertical-align: bottom;
-    }
-    small.videoInfo {
-        color: rosybrown;
-    }
-    a {
-        color: inherit;
-    }
-    video {
-        margin-top: 1.2em;
-        width: 75%;
-        height: 75%;
-    }
-    input.textSearch {
-        width: calc(99% - 5em);
-        float: left;
-    }
-    input.buttonSearch {
-        float: right;
-    }
-    select.search {
-        color: inherit;
-        width: 100%;
-    }
-    div.externalLinks {
-        background-color: #f5fff9;
-        border-style: groove;
-        border-color: #999999;
-        color: indigo;
-        float: right;
-        font-size: 90%;
-        width: calc(24% - 6px);
-    }
-    footer {
-        vertical-align: bottom;
-        text-align: center;
-    }
-}
+		.fieldset {
+		    vertical-align: bottom;
+		    border-style: ridge;
+		}
+		
+		.div.selectSet {
+		    color: inherit;
+		    float: left;
+		    vertical-align: text-bottom;
+		}
+		
+		.select {
+		    color: inherit;
+		    background: inherit;
+		    scrollbar-color: inherit;
+		}
+		
+		.input.buttonReplay {
+		    color: inherit;
+		    float: left;
+		    vertical-align: bottom;
+		}
+		
+		.a {
+		    color: inherit;
+		}
+		
+		.video {
+		    margin-top: 1.2em;
+		    width: 75%;
+		    height: 75%;
+		}
+		
+		.input.textSearch {
+		    width: calc(99% - 5em);
+		    float: left;
+		}
+		
+		.input.buttonSearch {
+		    float: right;
+		}
+		
+		.select.search {
+		    color: inherit;
+		    width: 100%;
+		}
+		
+		.div.externalLinks {
+		    border-style: groove;
+		    float: right;
+		    font-size: 90%;
+		    width: calc(24% - 6px);
+		}
+		
+		.footer {
+		    vertical-align: bottom;
+		    text-align: center;
+		}
+		
+		@media all {
+		    .fieldset {
+		        background-color: #f0efe7;
+		        color: #384058;
+		    }
+		    .body {
+		        background-color: #fcfaff;
+		    }
+		    .small.videoInfo {
+		        color: rosybrown;
+		    }
+		    .div.externalLinks {
+		        background-color: #f5fff9;
+		        border-color: #999999;
+		        color: indigo;
+		    }
+		}
+		
+		@media (prefers-color-scheme: dark) {
+		    .fieldset {
+		        background-color: #302f27;
+		        color: #7a708a;
+		        border-color: #555555;
+		        scrollbar-color: dark;
+		    }
+		    .body {
+		        background-color: #222025;
+		    }
+		    .small.videoInfo {
+		        color: #65606a;
+		    }
+		    .input.buttonReplay {
+		        background-color: inherit;
+		        border-color: inherit;
+		    }
+		    .input.textSearch {
+		        background-color: inherit;
+		        color: inherit;
+		    }
+		    .input.buttonSearch {
+		        background-color: inherit;
+		        border-color: inherit;
+		        color: inherit;
+		    }
+		    .select.search {
+		        scrollbar-color: dark;
+		    }
+		    .div.externalLinks {
+		        background-color: #1a1424;
+		        border-color: #111111;
+		        color: #606f6a;
+		    }
+		    .footer {
+		        color: #777777;
+		    }
+		}
