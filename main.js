@@ -297,19 +297,19 @@ function searchInAllNodes(keyWord) {
         for (const index2 in node1.sub) {
             const node2 = node1.sub[index2];
             if (node2.value[0].match(keyWord))
-                addOption(searchResults, value0ToString(node2, node1)), recordSearch.push(new Array(index1, index2, 0, 0, 0));
+                addOption(searchResults, value0ToString(node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, 0, 0, 0));
             for (const index3 in node2.sub) {
                 const node3 = node2.sub[index3];
                 if (node3.value[0].match(keyWord))
-                    addOption(searchResults, value0ToString(node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, 0, 0));
+                    addOption(searchResults, value0ToString(node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, 0, 0));
                 for (const index4 in node3.sub) {
                     const node4 = node3.sub[index4];
                     if (node4.value[0].match(keyWord))
-                        addOption(searchResults, value0ToString(node4, node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, index4, 0));
+                        addOption(searchResults, value0ToString(node4, node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, Number(index4) + 1, 0));
                     for (const index5 in node4.sub) {
                         const node5 = node4.sub[index5];
                         if (node5.value[0].match(keyWord))
-                            addOption(searchResults, value0ToString(node5, node4, node3, node2, node1)), recordSearch.push(new Array(index1, index2, index3, index4, index5));
+                            addOption(searchResults, value0ToString(node5, node4, node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, Number(index4) + 1, Number(index5) + 1));
                     }
                 }
             }
