@@ -4,11 +4,11 @@
 <head>
     <title>Training Guideline</title>
     <meta lang="zh-Hans-CN" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./basic.css">
-    <link rel="preload" as="style" href="./light.css">
-    <link rel="preload" as="style" href="./dark.css">
+    <link rel="stylesheet" type="text/css" href="./css/basic.css">
+    <link rel="preload" as="style" href="./css/light.css">
+    <link rel="preload" as="style" href="./css/dark.css">
     <link rel="stylesheet" type="text/css" id="linkSchemeStyle">
-    <script src="./load.js"></script>
+    <script src="./js/load.js"></script>
 </head>
 
 <body>
@@ -66,7 +66,9 @@
         </video>
         <div class="externalLinks">
             <div>
-                <form action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)" autocomplete="off">
+                <form
+                    action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)"
+                    autocomplete="off">
                     <a href="data/table1.html" target="_blank">难度表</a>
                     <select id="a1" onchange="showActions()">
                         <option>A级</option>
@@ -152,7 +154,7 @@
             </ul>
         </div>
     </main>
-    <script type="text/javascript" defer src="main.js"></script>
+    <script type="text/javascript" defer src="./js/main.js"></script>
     <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
     <footer>
         <small id="lightIndication" onclick="change()">本来无物何处尘埃</small><br />Written by <a
