@@ -17,3 +17,4 @@ web.config
 desktop.ini
 
 .vscode/**
+*.zip
