@@ -1,44 +1,44 @@
-.fieldset {
+fieldset {
     background-color: #302f27;
     color: #7a708a;
     border-color: #555555;
     scrollbar-color: dark;
 }
 
-.main {
+body {
     background-color: #222025;
 }
 
-.small.videoInfo {
+small.videoInfo {
     color: #65606a;
 }
 
-.input.buttonReplay {
+input.buttonReplay {
     background-color: inherit;
     border-color: inherit;
 }
 
-.input.textSearch {
+input.textSearch {
     background-color: inherit;
     color: inherit;
 }
 
-.input.buttonSearch {
+input.buttonSearch {
     background-color: inherit;
     border-color: inherit;
     color: inherit;
 }
 
-.select.search {
+select.search {
     scrollbar-color: dark;
 }
 
-.div.externalLinks {
+div.externalLinks {
     background-color: #1a1424;
     border-color: #111111;
     color: #606f6a;
 }
 
-.footer {
+footer {
     color: #777777;
 }
