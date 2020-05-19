@@ -212,23 +212,27 @@ function updateSelectBox(boxIndex) {
         case 5:
             trackBack(boxIndex);
         default:
-            if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4, s4.selectedIndex))
-                ;
-            else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3, s3.selectedIndex))
-                ;
-            else clearVideoSrc();
-
-            if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value))
-                ;
-            else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value))
-                ;
-            else {
-                displayVideoTimeRange.innerText = "";
-                return;
-            }
-            displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
-            updateVideo();
+            loadFromSelected();
     }
+}
+
+function loadFromSelected() {
+    if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4, s4.selectedIndex))
+        ;
+    else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3, s3.selectedIndex))
+        ;
+    else clearVideoSrc();
+
+    if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value))
+        ;
+    else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value))
+        ;
+    else {
+        displayVideoTimeRange.innerText = "";
+        return;
+    }
+    displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
+    updateVideo();
 }
 
 function loadTimeRange(value, begin, end) {
@@ -358,17 +362,26 @@ function searchInAllNodes(keyWord) {
 function chooseSearch() {
     var indexesSet = recordSearch[searchResults.selectedIndex];
     s1.selectedIndex = indexesSet[0];
-    updateSelectBox(1);
-    s2.selectedIndex = indexesSet[1];
-    updateSelectBox(2);
-    s3.selectedIndex = indexesSet[2];
-    updateSelectBox(3);
-    s4.selectedIndex = indexesSet[3];
-    updateSelectBox(4);
-    s5.selectedIndex = indexesSet[4];
-    updateSelectBox(5);
-}
 
+    nodes2 = nextNodesAndAll(nodes1, indexesSet[0]);
+    fillSelectBoxWithNodes(s2, nodes2);
+    s2.selectedIndex = indexesSet[1];
+
+    nodes3 = nextNodesAndAll(nodes2, indexesSet[1]);
+    fillSelectBoxWithNodes(s3, nodes3);
+    s3.selectedIndex = indexesSet[2];
+
+    nodes4 = nextNodesAndAll(nodes3, indexesSet[2]);
+    fillSelectBoxWithNodes(s4, nodes4);
+    s4.selectedIndex = indexesSet[3];
+
+    nodes5 = nextNodesAndAll(nodes4, indexesSet[3]);
+    fillSelectBoxWithNodes(s5, nodes5);
+    s5.selectedIndex = indexesSet[4];
+
+    loadFromSelected();
+}
+showActions();
 function showActions() {
     if (a1.selectedIndex !== -1 && a2.selectedIndex !== -1) {
         a3.options.length = 0;
