@@ -8,7 +8,9 @@ fieldset.top {
     border-style: ridge;
 }
 
-div {
+div.area {
+    width: 100%;
+    margin-bottom: 0.4em;
     clear: both;
 }
 
@@ -35,8 +37,8 @@ a {
 
 video {
     margin-top: 1.2em;
-    width: 80%;
-    height: 80%;
+    width: 79%;
+    height: 79%;
 }
 
 input {
