@@ -35,8 +35,18 @@ a {
 
 video {
     margin-top: 1.2em;
-    width: 75%;
-    height: 75%;
+    width: 80%;
+    height: 80%;
+}
+
+input {
+    color: inherit;
+    background-color: inherit;
+}
+
+input.wholeline {
+    width: 100%;
+    float: left;
 }
 
 input.textSearch {
@@ -53,16 +63,34 @@ select.search {
     width: 100%;
 }
 
-div.externalLinks {
+div.sideBar {
     border-style: groove;
     float: right;
     font-size: 90%;
-    width: calc(24% - 6px);
+    width: calc(20% - 6px);
+}
+
+div.bottom {
+    margin-top: 2em;
+    color: inherit;
+}
+
+div.bottom.info {
+    margin-top: initial;
+    color: inherit;
+    column-count: 4;
+    font-size: 80%;
+    margin-bottom: 1em;
 }
 
 footer {
+    color: inherit;
     vertical-align: bottom;
     text-align: center;
+}
+
+small.switch {
+    font-size: smaller;
 }
 
 table {

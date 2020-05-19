@@ -41,12 +41,12 @@ select.search {
     scrollbar-color: dark;
 }
 
-div.externalLinks {
+div.sideBar {
     background-color: #1a1424;
     border-color: #111111;
     color: #606f6a;
 }
 
-footer {
+div.bottom {
     color: #777777;
 }

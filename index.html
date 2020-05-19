@@ -64,7 +64,7 @@
             <source id="localVideoCache">
             <source id="sourceVideo">
         </video>
-        <div class="externalLinks">
+        <div class="sideBar">
             <div>
                 <form
                     action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)"
@@ -93,7 +93,21 @@
                 </form>
                 <select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
             </div>
-            <p>本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：</p>
+            <form
+                action="javascript:void(0);">
+                <input class="wholeline" type="file" id="uploadFile">
+                <input type="password" id="uploadPswd">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+    </main>
+    <script type="text/javascript" defer src="./js/data.js" type="module"></script>
+    <script type="text/javascript" defer src="./js/main.js"></script>
+    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+    <div class="bottom">
+        <hr>
+        <div class="bottom info">
+            本网站由同济大学龙狮协会整理。以下是龙狮运动相关链接：
             <ul>
                 <li>
                     <a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
@@ -153,14 +167,11 @@
                 </li>
             </ul>
         </div>
-    </main>
-    <script type="text/javascript" defer src="./js/data.js" type="module"></script>
-    <script type="text/javascript" defer src="./js/main.js"></script>
-    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-    <footer>
-        <small id="lightIndication" onclick="change()">本来无物何处尘埃</small><br />Written by <a
-            href="mailto:3266343194@qq.com">黄博奕</a>.<br> People's Republic of China
-    </footer>
+        <footer>
+            <small class="switch" id="lightIndication" onclick="change()">本来无物何处尘埃</small><br />Written by <a
+                href="mailto:3266343194@qq.com">黄博奕</a>.<br> People's Republic of China
+        </footer>
+    </div>
 </body>
 
 </html>
