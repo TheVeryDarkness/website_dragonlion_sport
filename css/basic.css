@@ -3,8 +3,36 @@ body {
     background-color: black;
 }
 
+hr {
+    width: 100%;
+    display: inline-block;
+}
+
+header > h1 {
+    margin-left: 1%;
+}
+
+ul.menu {
+    text-align: left;
+    list-style: none;
+    display: inline;
+    clear: both;
+}
+
+ul.menu > li {
+    font-size: large;
+    text-align: center;
+    display: block;
+    float: left;
+    width: 10%;
+}
+
+ul.menu > li > a {
+    text-decoration: none;
+}
+
 header {
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 fieldset.top {
