@@ -3,6 +3,10 @@ body {
     background-color: black;
 }
 
+header {
+    margin-top: 15%;
+}
+
 fieldset.top {
     vertical-align: bottom;
     border-style: ridge;
