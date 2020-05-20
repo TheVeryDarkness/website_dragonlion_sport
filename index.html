@@ -97,7 +97,7 @@
             </div>
             <div class="area">
                 <form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
-                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" type="text">
+                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" oninput="searchInAllNodes(textSearchInAll.value)" type="text">
                     <input class="buttonSearch" type="submit" value="Search">
                 </form>
                 <select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
