@@ -1,15 +1,15 @@
 header {
-    color: #7a708a;
+    color: #70707a;
 }
 
 fieldset.top {
-    background-color: #302f27;
+    background-color: #2d2a30;
     border-color: #555555;
     scrollbar-color: dark;
 }
 
 body {
-    background-color: #222025;
+    background-color: #212023;
 }
 
 select {
@@ -20,7 +20,7 @@ select {
 }
 
 small.videoInfo {
-    color: #65606a;
+    color: #646064;
 }
 
 input.buttonReplay {
@@ -45,7 +45,7 @@ select.search {
 }
 
 div.sideBar {
-    background-color: #1a1424;
+    background-color: #1f1c24;
     border-color: #111111;
     color: #606f6a;
 }

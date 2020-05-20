@@ -1,5 +1,5 @@
 header {
-    color: #384058;
+    color: #585048;
 }
 
 fieldset.top {
@@ -7,7 +7,7 @@ fieldset.top {
 }
 
 body {
-    background-color: #fbf9ff;
+    background-color: #fffaf8;
 }
 
 small.videoInfo {
@@ -15,7 +15,11 @@ small.videoInfo {
 }
 
 div.sideBar {
-    background-color: #fbfffd;
+    background-color: #fffbfd;
     border-color: #999999;
     color: indigo;
+}
+
+div.bottom {
+    color:#200000;
 }
