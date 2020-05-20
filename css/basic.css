@@ -41,7 +41,6 @@ fieldset.top {
 }
 
 div.area {
-    width: 100%;
     margin-bottom: 0.4em;
     clear: both;
 }
@@ -104,11 +103,10 @@ div.sideBar {
     width: calc(20% - 6px);
 }
 
-div.bottom.info {
+.bottom.info {
     margin-top: initial;
     color: inherit;
-    column-count: 4;
-    font-size: 80%;
+    column-count: 2;
     margin-bottom: 1em;
 }
 
