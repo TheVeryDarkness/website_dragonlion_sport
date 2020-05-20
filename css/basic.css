@@ -104,11 +104,6 @@ div.sideBar {
     width: calc(20% - 6px);
 }
 
-div.bottom {
-    margin-top: 2em;
-    color: inherit;
-}
-
 div.bottom.info {
     margin-top: initial;
     color: inherit;

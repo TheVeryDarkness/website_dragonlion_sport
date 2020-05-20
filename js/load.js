@@ -1,25 +1,29 @@
-if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-    turnOff();
-else if (window.matchMedia("(prefers-color-scheme: light)").matches)
-    turnOn();
-else if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
-    turnOn();
-else {
-    var date = new Date();
-    if (date.getHours() >= 22 || date.getHours() <= 6)
+var root;
+function init(rootpath) {
+    root = rootpath;
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
         turnOff();
-    else turnOn();
+    else if (window.matchMedia("(prefers-color-scheme: light)").matches)
+        turnOn();
+    else if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
+        turnOn();
+    else {
+        var date = new Date();
+        if (date.getHours() >= 22 || date.getHours() <= 6)
+            turnOff();
+        else turnOn();
+    }
 }
 
 var on;
 
 function turnOn() {
-    linkSchemeStyle.href = "./css/light.css";
+    linkSchemeStyle.href = root + "./css/light.css";
     on = true;
 }
 
 function turnOff() {
-    linkSchemeStyle.href = "./css/dark.css";
+    linkSchemeStyle.href = root + "./css/dark.css";
     on = false;
 }
 
