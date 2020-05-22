@@ -14,11 +14,11 @@ header > h1 {
 }
 
 header {
-    background-image: url("../pic/background/light.jpg");
     background-position: right top;
     background-repeat: no-repeat;
     background-clip: content-box;
     background-size: contain;
+    background-color: transparent;
 }
 
 ul.menu {

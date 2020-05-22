@@ -4,6 +4,7 @@
 
 header {
     color: var(--top-color);
+    background-image: url("../pic/background/sakura-light.png");
 }
 
 fieldset.top {
