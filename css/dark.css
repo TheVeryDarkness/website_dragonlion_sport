@@ -1,8 +1,12 @@
+:root {
+    --top-color: #70707a;
+}
 header {
-    color: #70707a;
+    color: var(--top-color);
 }
 
 fieldset.top {
+    color: var(--top-color);
     background-color: #2d2a30;
     border-color: #555555;
     scrollbar-color: dark;
@@ -50,6 +54,6 @@ div.sideBar {
     color: #606f6a;
 }
 
-div.bottom {
+.text.normal {
     color: #777777;
 }
