@@ -9,7 +9,16 @@ hr {
 }
 
 header > h1 {
+    padding-top: 12%;
     margin-left: 1%;
+}
+
+header {
+    background-image: url("../pic/background/light.jpg");
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-size: contain;
 }
 
 ul.menu {
@@ -29,10 +38,6 @@ ul.menu > li {
 
 ul.menu > li > a {
     text-decoration: none;
-}
-
-header {
-    margin-top: 10%;
 }
 
 fieldset.top {

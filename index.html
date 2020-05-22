@@ -14,6 +14,7 @@
 
 <body>
     <header>
+        <p class="background"></p>
         <h1>龙狮运动视频导引</h1>
         <div class="area">
             <ul class="menu">
@@ -23,6 +24,8 @@
             </ul>
         </div>
         <hr>
+    </header>
+    <main>
         <fieldset class="top">
             <form action="javascript:updateSelectBox(6)" autocomplete="off">
                 <div class="selectSet">
@@ -67,8 +70,6 @@
             <a id="originWebpage">源网页</a>
             <a id="originVideoURL">源视频</a>
         </small>
-    </header>
-    <main>
         <video id="video" controls type="video/mp4" autoplay>
             浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
             <source id="localVideoCache">
@@ -97,7 +98,8 @@
             </div>
             <div class="area">
                 <form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
-                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" oninput="searchInAllNodes(textSearchInAll.value)" type="text">
+                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索"
+                        oninput="searchInAllNodes(textSearchInAll.value)" type="text">
                     <input class="buttonSearch" type="submit" value="Search">
                 </form>
                 <select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>

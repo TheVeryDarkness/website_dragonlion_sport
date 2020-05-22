@@ -3,6 +3,7 @@ header {
 }
 
 fieldset.top {
+    color: #585048;
     background-color: #f0efe7;
 }
 
@@ -17,7 +18,7 @@ small.videoInfo {
 div.sideBar {
     background-color: #fffbfd;
     border-color: #999999;
-    color: indigo;
+    color: #200050;
 }
 
 div.bottom {
