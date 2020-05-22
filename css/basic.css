@@ -104,9 +104,9 @@ div.sideBar {
 }
 
 .bottom.info {
+    margin: auto;
     margin-top: initial;
     color: inherit;
-    column-count: 2;
     margin-bottom: 1em;
 }
 
@@ -120,7 +120,12 @@ small.switch {
     font-size: smaller;
 }
 
+caption {
+    font-size: x-large;
+}
+
 table {
+    margin: auto;
     border-style: solid;
     border-width: 1px;
 }
