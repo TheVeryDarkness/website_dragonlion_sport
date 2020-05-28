@@ -19,9 +19,11 @@ function upload() {
          redirect_uri=oob&\
          scope=basic,netdisk", false);
          */
-        xmlhttp.open("POST", "https://openapi.baidu.com/rest/2.0/passport/users/getInfo?\
-        access_token=121.0c569b3a3855809613f1e363ce50f6a7.Ysvv7yEy--di2GMIpygTt2QslN4ikhscdHmU0sL._nEJfw", false);
-        //xmlhttp.withCredentials = true;
+        xmlhttp.open("GET", "https://pcs.baidu.com/rest/2.0/pcs/quota?\
+        method=info&\
+        access_token=121.0c569b3a3855809613f1e363ce50f6a7.Ysvv7yEy--di2GMIpygTt2QslN4ikhscdHmU0sL._nEJfw".replace(/[ \t\n]/g, ''),
+            false);
+        xmlhttp.withCredentials = true;
         xmlhttp.setRequestHeader('Content-Type', 'application/json')
         /*
         xmlhttp.setRequestHeader('Access-Control-Max-Age', '3628800');
@@ -34,8 +36,10 @@ function upload() {
         alert(xmlhttp.responseText);
     } catch (error) {
         alert("https://pan.baidu.com/disk/home");
+        throw error;
     }
 }
+
 `
 https://openapi.baidu.com/oauth/2.0/authorize?
 	response_type=token&
