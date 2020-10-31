@@ -1,13 +1,17 @@
 class Node {
     constructor(value) {
-        this.value = value.split(',');
+        const info = value.split(',');
+        const range = info.length == 3 ? [info[1], info[2]] : info.length == 6 ? [info[4], info[5]] : null
+        const src = info.length == 4 || info.length == 6 ? info[2] : null
+        const origin = info.length == 4 || info.length == 6 ? info[3] : null
+
+        this.value = info[0];
+        if (range) this.range = range
+        if (src) this.src = src
+        if (origin) this.origin = origin
         this.sub = new Array(0);
         this.toString = function () {
-            var str = new String(this.value);
-            for (const child of this.sub) {
-                str += child.toString();
-            }
-            return str;
+            return JSON.stringify(this);
         };
     }
 }
@@ -20,6 +24,8 @@ function headTableCount(str) {
         else break;
     return count;
 }
+var dbg_data = { sport: [], time: [], event: [], team: [], action: [] }
+var dbg_array = []
 class MultiTree {
     constructor(strings) {
         this.root = new Array();
@@ -30,6 +36,40 @@ class MultiTree {
         while (true) {
             var value = strings.shift();
             var depth = headTableCount(value);
+            if (false && nodesStack.length == 5) {
+                const quickParse = function (e) {
+                    var res = {
+                        value: e[0]
+                    }
+                    const begin = e.length == 3 ? e[1] : e.length == 6 ? e[4] : null
+                    const end = e.length == 3 ? e[2] : e.length == 6 ? e[5] : null
+                    const src = e.length == 4 || length == 6 ? e[2] : null
+                    const origin = e.length == 4 || length == 6 ? e[3] : null
+                    if (begin) res.begin = begin
+                    if (end) res.end = end
+                    if (src) res.src = src
+                    if (origin) res.origin = origin
+                    return res
+                }
+                const sport = { value: nodesStack[0].value[0] }
+                const time = { value: nodesStack[1].value[0] }
+                const event = quickParse(nodesStack[2].value)
+                const team = quickParse(nodesStack[3].value)
+                const action = quickParse(nodesStack[4].value)
+                dbg_data.sport.push(sport)
+                dbg_data.time.push(time)
+                dbg_data.event.push(event)
+                dbg_data.team.push(team)
+                dbg_data.action.push(action)
+                dbg_array.push({
+                    sport: sport,
+                    time: time,
+                    event: event,
+                    team: team,
+                    action: action,
+                })
+
+            }
             while (depth < nodesStack.length)
                 nodesStack.pop();
             // push
@@ -61,7 +101,7 @@ const selectBoxMaxSize = 5;
 function fillSelectBoxWithSubValues(selectBox, subArray) {
     selectBox.options.length = subArray.length;
     for (const i in subArray) {
-        selectBox.options[i].text = subArray[i].value[0];
+        selectBox.options[i].text = subArray[i].value;
     }
 }
 
@@ -125,9 +165,9 @@ function loadFromSelected() {
         ;
     else clearVideoSrc();
 
-    if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex].value))
+    if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex]))
         ;
-    else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex].value))
+    else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex]))
         ;
     else {
         displayVideoTimeRange.innerText = "";
@@ -137,14 +177,11 @@ function loadFromSelected() {
     updateVideo();
 }
 
-function loadTimeRange(value, begin, end) {
-    if (value.length == 3) {
-        videoTimeBegin = value[1];
-        videoTimeEnd = value[2];
-    } else if (value.length == 6) {
-        videoTimeBegin = value[4];
-        videoTimeEnd = value[5];
-    } else return false;
+function loadTimeRange(node) {
+    const begin = node.range[0];
+    const end = node.range[1];
+    videoTimeBegin = begin;
+    videoTimeEnd = end;
     return true;
 }
 
@@ -163,10 +200,10 @@ function clearVideoSrc() {
 function loadVideoSrc(nodes, selectedIndex) {
     var node = nodes[selectedIndex];
     if (node.value.length == 6 || node.value.length == 4) {
-        localVideoCache.src = nodes[selectedIndex].value[1];
-        originVideoURL.href = nodes[selectedIndex].value[2];
-        sourceVideo.src = nodes[selectedIndex].value[2];
-        originWebpage.href = nodes[selectedIndex].value[3];
+        localVideoCache.src = nodes[selectedIndex].cache;
+        originVideoURL.href = nodes[selectedIndex].src;
+        sourceVideo.src = nodes[selectedIndex].src;
+        originWebpage.href = nodes[selectedIndex].origin;
         video.load();
     } else return false;
     return true;
@@ -218,7 +255,7 @@ function secToTime(seconds) {
 function value0ToString() {
     var rev = new Array();
     for (const node of arguments) {
-        rev.push(node.value[0].toString());
+        rev.push(node.value.toString());
     }
     return rev;
 }
@@ -236,23 +273,23 @@ function searchInAllNodes(keyWord) {
     for (const index1 in nodes1) {
         if (index1 == 0) continue;
         const node1 = nodes1[index1];
-        if (node1.value[0].match(keyWord))
+        if (node1.value.match(keyWord))
             addOption(searchResults, value0ToString(node1)), recordSearch.push(new Array(index1, 0, 0, 0, 0));
         for (const index2 in node1.sub) {
             const node2 = node1.sub[index2];
-            if (node2.value[0].match(keyWord))
+            if (node2.value.match(keyWord))
                 addOption(searchResults, value0ToString(node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, 0, 0, 0));
             for (const index3 in node2.sub) {
                 const node3 = node2.sub[index3];
-                if (node3.value[0].match(keyWord))
+                if (node3.value.match(keyWord))
                     addOption(searchResults, value0ToString(node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, 0, 0));
                 for (const index4 in node3.sub) {
                     const node4 = node3.sub[index4];
-                    if (node4.value[0].match(keyWord))
+                    if (node4.value.match(keyWord))
                         addOption(searchResults, value0ToString(node4, node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, Number(index4) + 1, 0));
                     for (const index5 in node4.sub) {
                         const node5 = node4.sub[index5];
-                        if (node5.value[0].match(keyWord))
+                        if (node5.value.match(keyWord))
                             addOption(searchResults, value0ToString(node5, node4, node3, node2, node1)), recordSearch.push(new Array(index1, Number(index2) + 1, Number(index3) + 1, Number(index4) + 1, Number(index5) + 1));
                     }
                 }
