@@ -229,8 +229,8 @@ function loadVideoSrc(nodes, selectedIndex) {
         res = true;
     }
 
-    if (node.bilibili) {
-        embededFrame.src = node.bilibili + "&t=" + node.range[0];
+    if (node.frame) {
+        embededFrame.src = node.frame + "&t=" + node.range[0];
         switchDisplayMode("iframe");
         res = true;
     } else if (node.origin) {
