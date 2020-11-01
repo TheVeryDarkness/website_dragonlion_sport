@@ -76,6 +76,7 @@ video.video {
     width: 79%;
     height: 79%;
     float: left;
+    display: block;
 }
 
 iframe.video {

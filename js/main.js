@@ -129,7 +129,7 @@ function nextNodesAndAll(nodes, selectedIndex) {
 // Begin
 var nodes1, nodes2, nodes3, nodes4, nodes5;
 var recordSearch = new Array;
-const tree = makeAMultiTree(videoSrcData);
+const tree = dataInJSON;
 var videoTimeBegin, videoTimeEnd;
 updateSelectBox(0);
 // End
@@ -197,6 +197,17 @@ function clearVideoSrc() {
     video.load();
 }
 
+function switchDisplayMode(mode) {
+    if (mode == "video") {
+        video.style.display = "block";
+        embededFrame.style.display = "none";
+    }
+    else if (mode == "iframe") {
+        video.style.display = "none";
+        embededFrame.style.display = "block";
+    }
+}
+
 // Return true if source is specified
 function loadVideoSrc(nodes, selectedIndex) {
     var node = nodes[selectedIndex];
@@ -210,15 +221,11 @@ function loadVideoSrc(nodes, selectedIndex) {
     if (node.src) {
         originVideoURL.href = node.src;
         sourceVideo.src = node.src;
-        sourceVideo.style.display = "block";
-        embededFrame.style.display = "none";
-        res = true;
-    } else if (node.origin) {
-        sourceVideo.style.display = "none";
-        embededFrame.style.display = "block";
-    }
-    if (res)
+        switchDisplayMode("video");
         video.load();
+        res = true;
+    } else if (node.origin)
+        switchDisplayMode("iframe");
 
     if (node.origin) {
         originWebpage.href = node.origin;
