@@ -81,8 +81,8 @@ video.video {
 
 iframe.video {
     margin-top: 0.6em;
-    width: 79%;
-    height: 79%;
+    width: 76vw;
+    height: 47vw;
     float: left;
     display: none;
 }

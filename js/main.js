@@ -169,6 +169,8 @@ function loadFromSelected() {
         ;
     else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex]))
         ;
+    else if (s3.selectedIndex !== 0 && loadTimeRange(nodes3[s3.selectedIndex]))
+        ;
     else {
         displayVideoTimeRange.innerText = "";
         return;
@@ -191,9 +193,10 @@ function refreshSelectBox() {
 
 function clearVideoSrc() {
     localVideoCache.src = "";
-    originVideoURL.href = "";
+    originVideoURL.href = "javascript:void(0)";
     sourceVideo.src = "";
-    originWebpage.href = "";
+    originWebpage.href = "about:blank";
+    embededFrame.src = "about:blank"
     video.load();
 }
 
@@ -224,13 +227,20 @@ function loadVideoSrc(nodes, selectedIndex) {
         switchDisplayMode("video");
         video.load();
         res = true;
-    } else if (node.origin)
+    }
+
+    if (node.bilibili) {
+        embededFrame.src = node.bilibili + "&t=" + node.range[0];
         switchDisplayMode("iframe");
+        res = true;
+    } else if (node.origin) {
+        embededFrame.src = node.origin;
+        switchDisplayMode("iframe");
+        res = true;
+    }
 
     if (node.origin) {
         originWebpage.href = node.origin;
-        embededFrame.src = node.origin;
-        res = true;
     }
 
     return res;
