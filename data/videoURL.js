@@ -1,8 +1,11 @@
 /*
-        Pay attention to the data format:
-                length = 3: name, time range begin, time range end
-                length = 4: name, local cache path, source video path, source webpage path
-                length = 6: name, local cache path, source video path, source webpage path, time range begin, time range end
+        Pay attention to the data rank:
+            value
+            range
+            origin
+            frame
+            from
+            sub
 */
 const dataInJSON = {
     "root": [
@@ -29,192 +32,168 @@ const dataInJSON = {
                                             "range": [
                                                 "68",
                                                 "124"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "绕场跳龙五次",
                                             "range": [
                                                 "126",
                                                 "152"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "正反腾跃前进",
                                             "range": [
                                                 "156",
                                                 "176"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "快速游龙",
                                             "range": [
                                                 "180",
                                                 "190"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "连续快腾进三次",
                                             "range": [
                                                 "190",
                                                 "210"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "造型（尾盘，龙头戏珠）",
                                             "range": [
                                                 "210",
                                                 "230"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "大横8字花（成型四次）",
                                             "range": [
                                                 "230",
                                                 "260"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "左右螺旋跳龙接摇船",
                                             "range": [
                                                 "260",
                                                 "281"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "大立圆螺旋行进",
                                             "range": [
                                                 "282",
                                                 "305"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "起伏圆盘",
                                             "range": [
                                                 "305",
                                                 "321"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "双杆",
                                             "range": [
                                                 "321",
                                                 "357"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "造型（菱形）",
                                             "range": [
                                                 "356",
                                                 "363"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "换位跳龙",
                                             "range": [
                                                 "363",
                                                 "377"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "绕身舞龙",
                                             "range": [
                                                 "377",
                                                 "386"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "站腿",
                                             "range": [
                                                 "386",
                                                 "397"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "起伏圆盘接穿龙尾",
                                             "range": [
                                                 "397",
                                                 "406"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "卧龙腾飞",
                                             "range": [
                                                 "405",
                                                 "414"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "躺肩挂腰（直躺挂腰）",
                                             "range": [
                                                 "413",
                                                 "427"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "造型（立龙）",
                                             "range": [
                                                 "427",
                                                 "448"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "龙脱衣",
                                             "range": [
                                                 "445",
                                                 "455"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "跳龙行进",
                                             "range": [
                                                 "458",
                                                 "476"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "斜盘跳龙连续三次",
                                             "range": [
                                                 "475",
                                                 "490"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "原地螺旋跳龙连续五次接直躺",
                                             "range": [
                                                 "490",
                                                 "509"
-                                            ],
-                                            "sub": []
+                                            ]
                                         },
                                         {
                                             "value": "造型（龙腾九霄）",
                                             "range": [
                                                 "509",
                                                 "533"
-                                            ],
-                                            "sub": []
+                                            ]
                                         }
                                     ]
                                 },
@@ -346,6 +325,7 @@ const dataInJSON = {
                             ],
                             "origin": "https://www.bilibili.com/video/BV1f4411k7dd",
                             "frame": "https://player.bilibili.com/player.html?aid=66976421&bvid=BV1f4411k7dd&cid=116141312&page=1",
+                            "from": "bilibili",
                             "sub": []
                         }
                     ]
@@ -382,8 +362,9 @@ const dataInJSON = {
                                         "0",
                                         "528"
                                     ],
-                                    "src": "https://apd-67bf74619d6c7a48ac8124737de6c033.v.smtcdns.com/om.tc.qq.com/A1hb4tnPq1wr7VwaejiBKxaxfPq2TJeTVWew0mVBQxWs/uwMROfz2r5zBIaQXGdGnC2dfJ7xNfFa-OUQWNxqkLPBi52XA/h0394te13o9.p712.1.mp4?sdtfrom=v1010&amp;guid=a69a6db3fe1251fb13e1b0d4970313b2&amp;vkey=B1D2EC46A6FD127263D4A9E6EA7B36E14FE1FDD5892DAA92AA91AC41FF104BF976998379C3E95B4760528F98A98ABF6AA69BB48ED463D53ACC7D00A64EC8C0E8EF2DC3758C9F767640DA70BF67B04AFCFCAA3F93886C81227028A1B3D10EEDA408BF9A47898CD3E83ADC6F7A62AC393E82AC17F4FF33A110529C4C9CC9F87D17",
                                     "origin": "https://v.qq.com/x/page/h0394te13o9.html",
+                                    "frame": "https://v.qq.com/txp/iframe/player.html?vid=h0394te13o9",
+                                    "from": "vqq",
                                     "sub": []
                                 }
                             ]

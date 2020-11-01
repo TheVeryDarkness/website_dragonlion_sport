@@ -80,6 +80,7 @@ video.video {
 }
 
 iframe.video {
+    border: 0;
     margin-top: 0.6em;
     width: 76vw;
     height: 47vw;

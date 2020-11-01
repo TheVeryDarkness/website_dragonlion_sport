@@ -180,11 +180,14 @@ function loadFromSelected() {
 }
 
 function loadTimeRange(node) {
-    const begin = node.range[0];
-    const end = node.range[1];
-    videoTimeBegin = begin;
-    videoTimeEnd = end;
-    return true;
+    if (node.range) {
+        const begin = node.range[0];
+        const end = node.range[1];
+        videoTimeBegin = begin;
+        videoTimeEnd = end;
+        return true;
+    }
+    return false;
 }
 
 function refreshSelectBox() {
@@ -230,7 +233,10 @@ function loadVideoSrc(nodes, selectedIndex) {
     }
 
     if (node.frame) {
-        embededFrame.src = node.frame + "&t=" + node.range[0];
+        if (node.from == "bilibili")
+            embededFrame.src = node.frame + "&high_quality=1&t=" + node.range[0];
+        else
+            embededFrame.src = node.frame
         switchDisplayMode("iframe");
         res = true;
     } else if (node.origin) {
