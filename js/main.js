@@ -197,16 +197,36 @@ function clearVideoSrc() {
     video.load();
 }
 
+// Return true if source is specified
 function loadVideoSrc(nodes, selectedIndex) {
     var node = nodes[selectedIndex];
-    if (node.value.length == 6 || node.value.length == 4) {
-        localVideoCache.src = nodes[selectedIndex].cache;
-        originVideoURL.href = nodes[selectedIndex].src;
-        sourceVideo.src = nodes[selectedIndex].src;
-        originWebpage.href = nodes[selectedIndex].origin;
+    var res = false;
+
+    if (node.cache) {
+        localVideoCache.src = node.cache;
+        res = true;
+    }
+
+    if (node.src) {
+        originVideoURL.href = node.src;
+        sourceVideo.src = node.src;
+        sourceVideo.style.display = "block";
+        embededFrame.style.display = "none";
+        res = true;
+    } else if (node.origin) {
+        sourceVideo.style.display = "none";
+        embededFrame.style.display = "block";
+    }
+    if (res)
         video.load();
-    } else return false;
-    return true;
+
+    if (node.origin) {
+        originWebpage.href = node.origin;
+        embededFrame.src = node.origin;
+        res = true;
+    }
+
+    return res;
 }
 
 function updateVideo() {

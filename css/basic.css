@@ -71,10 +71,19 @@ a {
     color: inherit;
 }
 
-video {
-    margin-top: 1.2em;
+video.video {
+    margin-top: 0.6em;
     width: 79%;
     height: 79%;
+    float: left;
+}
+
+iframe.video {
+    margin-top: 0.6em;
+    width: 79%;
+    height: 79%;
+    float: left;
+    display: none;
 }
 
 input {

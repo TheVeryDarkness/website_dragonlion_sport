@@ -67,11 +67,13 @@
             <a id="originWebpage">源网页</a>
             <a id="originVideoURL">源视频</a>
         </small>
-        <video id="video" controls type="video/mp4" autoplay>
+        <video id="video" class="video" controls type="video/mp4" autoplay>
             浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
             <source id="localVideoCache">
             <source id="sourceVideo">
         </video>
+        <iframe id="embededFrame" class="video" src=""
+            sandbox="allow-same-origin allow-scripts">浏览器不支持HTML内嵌框架，请使用高版本浏览器或点击链接</iframe>
         <div class="sideBar">
             <div class="area">
                 <form
@@ -118,7 +120,10 @@
         <hr>
         <footer>
             <small class="switch" id="lightIndication" onclick="change()">本来无物何处尘埃</small>
-            <br />Written by
+            <br />
+            <a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/issues">Send feedback.</a>
+            <br />
+            Written by
             <a href="mailto:1853308@tongji.edu.com">黄博奕</a>
             .
             <br /> People's Republic of China
