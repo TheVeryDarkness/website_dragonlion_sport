@@ -118,7 +118,9 @@ function selectedNodes(nodes, selectedIndex) {
 function nextNodes(nodes, selectedIndex) {
 	var rev = new Array();
 	for (const node of selectedNodes(nodes, selectedIndex))
-		rev = rev.concat(node.sub);
+		if (node.sub)
+			rev = rev.concat(node.sub);
+		else console.log("Node '", node.value, "' miss property 'sub'.");
 	return rev;
 }
 const all = "全选";
@@ -159,12 +161,6 @@ function updateSelectBox(boxIndex) {
 }
 
 function loadFromSelected() {
-	if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4, s4.selectedIndex))
-		;
-	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3, s3.selectedIndex))
-		;
-	else clearVideoSrc();
-
 	if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex]))
 		;
 	else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex]))
@@ -175,6 +171,13 @@ function loadFromSelected() {
 		displayVideoTimeRange.innerText = "";
 		return;
 	}
+
+	if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4[s4.selectedIndex]))
+		;
+	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3[s3.selectedIndex]))
+		;
+	else clearVideoSrc();
+
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 	updateVideo();
 }
@@ -194,16 +197,20 @@ function refreshSelectBox() {
 	s1.selectedIndex = s2.selectedIndex = s3.selectedIndex = s4.selectedIndex = s5.selectedIndex = 0;
 }
 
+const emptyURL = "javascript:void(0)";
+const emptyPage = "about:blank";
+const emptySrc = "";
 function clearVideoSrc() {
-	localVideoCache.src = "";
-	originVideoURL.href = "javascript:void(0)";
-	sourceVideo.src = "";
-	originWebpage.href = "about:blank";
-	embededFrame.src = "about:blank"
+	localVideoCache.src = emptySrc;
+	originVideoURL.href = emptyURL;
+	sourceVideo.src = emptySrc;
+	originWebpage.href = emptyPage;
+	embededFrame.src = emptyPage;
 	video.load();
 }
 
-function switchDisplayMode(mode) {
+// video|iframe
+function switchActiveLabel(mode) {
 	if (mode == "video") {
 		video.style.display = "block";
 		embededFrame.style.display = "none";
@@ -212,44 +219,71 @@ function switchDisplayMode(mode) {
 		video.style.display = "none";
 		embededFrame.style.display = "block";
 	}
+	else console.error("Unrecognized mode '", mode, "'.")
+}
+
+
+var displayMode = "";
+var displayNode = null
+
+// html5|player|page
+function displayAs(node, mode) {
+	displayMode = mode;
+	displayNode = node;
+
+	if (mode == "html5") {
+		sourceVideo.src = node.src;
+		switchActiveLabel("video");
+		video.load();
+	} else if (mode == "player") {
+		if (node.from == "bilibili")
+			//See http://docs.bilibili.cn/wiki
+			//Reference:
+			//	https://blog.csdn.net/xinshou_caizhu/article/details/94028606
+			//	https://www.bilibili.com/read/cv5293665/
+			embededFrame.src = node.frame + "&high_quality=1&t=" + videoTimeBegin;
+		else if (node.from == "vqq")
+			//See https://m.v.qq.com/txp/v3/src/iframeapi/new.html
+			embededFrame.src = node.frame + "&show1080p=1&starttime=" + videoTimeBegin;
+		else if (node.from == "youku")
+			//See http://open.iqiyi.com/lib/play.html,
+			//	or http://static-d.iqiyi.com/ext/openapi/iQiyi_Gragonfly_coop_20190304.pdf
+			//Reference:
+			//	https://open.iqiyi.com/help/qa/play.html
+			//	https://cloud.tencent.com/developer/article/1494396
+			embededFrame.src = node.frame + "&starttime=" + videoTimeBegin + "&endtime=" + videoTimeEnd;
+		else {
+			embededFrame.src = node.frame;
+			console.log("Unrecognized source: ", node.from)
+		}
+		switchActiveLabel("iframe");
+	} else if (mode == "page") {
+		embededFrame.src = node.origin;
+		switchActiveLabel("iframe");
+	} else console.error("Unrecognized mode '", mode, "'.")
 }
 
 // Return true if source is specified
-function loadVideoSrc(nodes, selectedIndex) {
-	var node = nodes[selectedIndex];
-	var res = false;
-
-	if (node.cache) {
-		localVideoCache.src = node.cache;
-		res = true;
-	}
+function loadVideoSrc(node) {
+	originVideoURL.href = node.src ? node.src : emptyURL;
+	originWebpage.href = node.origin ? node.origin : emptyPage;
 
 	if (node.src) {
-		originVideoURL.href = node.src;
-		sourceVideo.src = node.src;
-		switchDisplayMode("video");
-		video.load();
-		res = true;
-	}
-
-	if (node.frame) {
-		if (node.from == "bilibili")
-			embededFrame.src = node.frame + "&high_quality=1&t=" + node.range[0];
-		else
-			embededFrame.src = node.frame
-		switchDisplayMode("iframe");
-		res = true;
+		displayAs(node, "html5");
+	} else if (node.frame) {
+		displayAs(node, "player");
 	} else if (node.origin) {
-		embededFrame.src = node.origin;
-		switchDisplayMode("iframe");
-		res = true;
-	}
+		displayAs(node, "page");
+	} else return false;
+	return true;
+}
 
-	if (node.origin) {
-		originWebpage.href = node.origin;
-	}
+function switchDisplayMode() {
+	const displayModes = ["html5", "player", "page"]
+	const node = displayNode;
+	const index = displayModes.indexOf(displayMode);
 
-	return res;
+	displayAs(node, displayModes[(index + 1) % displayModes.length])
 }
 
 function updateVideo() {
