@@ -18,7 +18,7 @@ const dataInJSON = {
 						{
 							"value": "全国龙狮锦标赛男子规定",
 							"src": "http://videoflv.sports.cn/201911/20191110wlgd.mp4",
-							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542357.html",
+							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019/1121/325648.html",
 							"sub": [
 								{
 									"value": "南京理工大学",
@@ -246,7 +246,7 @@ const dataInJSON = {
 								"2502"
 							],
 							"src": "http://videoflv.sports.cn/201911/20191109ctwl.mp4",
-							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html",
+							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019/1121/325639.html",
 							"sub": [
 								{
 									"value": "常州大学",
@@ -289,7 +289,7 @@ const dataInJSON = {
 								"4250"
 							],
 							"src": "http://videoflv.sports.cn/201911/20191109ctwl.mp4",
-							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019-11-21/542338.html",
+							"origin": "http://dragonlion.sport.org.cn/home/zhxw/2019/1121/325639.html",
 							"sub": [
 								{
 									"value": "南理工紫金学院",
@@ -342,8 +342,7 @@ const dataInJSON = {
 										"0",
 										"545"
 									],
-									"src": "https://vdept.bdstatic.com/444d344556374a725846455836434e45/4776724a7577736b/f4c86b25279a6eaa775b4d3a042aa451a2d6cc923c0450266f1f009b98283a128e8840db7382378714a5db1d4eeae572.mp4?auth_key=1589559633-0-0-ced45b37f19a492a2ee0c77633a4f81b",
-									"origin": "https://haokan.baidu.com/v?vid=1349428518790328525&pd=bjh&fr=bjhauthor&type=video",
+									"origin": "https://haokan.baidu.com/v?vid=1349428518790328525&pd=pcshare",
 									"sub": []
 								}
 							]
