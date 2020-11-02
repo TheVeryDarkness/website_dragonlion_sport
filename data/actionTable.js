@@ -1,6 +1,6 @@
 var tableActionLevel;
 {
-    const actionLevelData = `
+	const actionLevelData = `
 原地8字舞龙，行进8字舞龙，单跪舞龙，套头舞龙，搁脚舞龙，扯旗舞龙，靠背舞龙，横移(跳)步舞龙，起伏8字舞龙；
 直线行进，曲线行进，走(跑)圆场，滑步行进，起伏行进，单侧起伏小圆场，矮步跑圆场，直线(曲线、圆场)行进越障碍；
 穿龙尾，越龙尾，首尾穿(越)肚；
@@ -17,24 +17,24 @@ var tableActionLevel;
 快速连续斜盘跳龙(3次以上)，快速连续螺旋跳龙(4次以上)，快速连续螺旋跳龙磨转(6次以上)，快速左右螺旋跳龙(左右各3次以上)，快速连续磨盘跳龙(3次以上)；
 大横8字花慢行进(成型4次以上)，坐肩后仰成平盘起伏旋转(一周以上)。
 `.replace(/[ \t\n]+/g, '').split('。');
-    const numLevels = 3;
-    const numCategory = 5;
-    while (actionLevelData[actionLevelData.length - 1] == "")
-        actionLevelData.pop();
-    if (actionLevelData.length != numLevels)
-        console.log("Debug failed! There should be " + numLevels + " levels.");
+	const numLevels = 3;
+	const numCategory = 5;
+	while (actionLevelData[actionLevelData.length - 1] == "")
+		actionLevelData.pop();
+	if (actionLevelData.length != numLevels)
+		console.log("Debug failed! There should be " + numLevels + " levels.");
 
-    tableActionLevel = new Array();
-    for (const level of actionLevelData) {
-        var tmp = new Array();
-        for (const category of level.split('；')) {
-            tmp[tmp.length] = category.split('，');
-        }
-        while (tmp[tmp.length - 1] == "")
-            tmp.pop();
-        if (tmp.length != numCategory)
-            console.log("Debug failed! There should be " + numCategory + " categories.");
-        tableActionLevel[tableActionLevel.length] = tmp;
-    }
+	tableActionLevel = new Array();
+	for (const level of actionLevelData) {
+		var tmp = new Array();
+		for (const category of level.split('；')) {
+			tmp[tmp.length] = category.split('，');
+		}
+		while (tmp[tmp.length - 1] == "")
+			tmp.pop();
+		if (tmp.length != numCategory)
+			console.log("Debug failed! There should be " + numCategory + " categories.");
+		tableActionLevel[tableActionLevel.length] = tmp;
+	}
 }
 const tableAction = tableActionLevel;

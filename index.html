@@ -2,108 +2,107 @@
 <html>
 
 <head>
-    <title>Training Guideline</title>
-    <meta lang="zh-Hans-CN" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./css/basic.css">
-    <link rel="stylesheet" type="text/css" id="linkSchemeStyle">
-    <script src="./js/load.js" onload="init('')"></script>
+	<title>Training Guideline</title>
+	<meta lang="zh-Hans-CN" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./css/basic.css">
+	<link rel="stylesheet" type="text/css" id="linkSchemeStyle">
+	<script src="./js/load.js" onload="init('')"></script>
 </head>
 
 <body>
-    <header>
-        <p class="background"></p>
-        <h1>龙狮运动视频导引</h1>
-        <div class="area">
-            <ul class="menu">
-                <li><a href="">主页</a></li>
-                <li><a target="_blank" href="./data/table1.html">难度表</a></li>
-                <li><a target="_blank" href="./data/links.html">相关链接</a></li>
-            </ul>
-        </div>
-    </header>
-    <hr>
-    <main>
-        <fieldset class="top">
-            <form action="javascript:updateSelectBox(6)" autocomplete="off">
-                <div class="selectSet">
-                    <label for="s1">运动项目</label>
-                    <select id="s1" onchange="updateSelectBox(1)">
-                        <option selected="selected">全选</option>
-                    </select>
-                </div>
-                <div class="selectSet">
-                    <label for="s2">年份</label>
-                    <select id="s2" onchange="updateSelectBox(2)">
-                        <option selected="selected">全选</option>
-                    </select>
-                </div>
-                <div class="selectSet">
-                    <label for="s3">赛事</label>
-                    <select id="s3" onchange="updateSelectBox(3)">
-                        <option selected="selected">全选</option>
-                    </select>
-                </div>
-                <div class="selectSet">
-                    <label for="s4">队伍</label>
-                    <select id="s4" onchange="updateSelectBox(4)">
-                        <option selected="selected">全选</option>
-                    </select>
-                </div>
-                <div class="selectSet">
-                    <label for="s5">动作</label>
-                    <select id="s5" onchange="updateSelectBox(5)">
-                        <option selected="selected">全选</option>
-                    </select>
-                </div>
-                <input class="buttonReplay" type="submit" value="重新播放">
-            </form>
-        </fieldset>
-        <small class="videoInfo">
-            （温馨提示：请注意流量）视频时间范围：
-            (
-            <a id="displayVideoTimeRange"></a>
-            )
-            视频加载自网络：
-            <a id="originWebpage">源网页</a>
-            <a id="originVideoURL">源视频</a>
-        </small>
-        <video id="video" class="video" controls type="video/mp4" autoplay>
-            浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
-            <source id="localVideoCache">
-            <source id="sourceVideo">
-        </video>
-        <iframe id="embededFrame" class="video" sandbox="allow-same-origin allow-scripts" src="about:blank"
-            allowfullscreen="true">浏览器不支持HTML内嵌框架，请使用高版本浏览器或点击链接</iframe>
-        <div class="sideBar">
-            <div class="area">
-                <form
-                    action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)"
-                    autocomplete="off">
-                    <select id="a1" onchange="showActions()">
-                        <option selected="selected">A级</option>
-                        <option>B级</option>
-                        <option>C级</option>
-                    </select>
-                    <select id="a2" onchange="showActions()">
-                        <option selected="selected">8字舞龙动作</option>
-                        <option>游龙动作</option>
-                        <option>穿腾动作</option>
-                        <option>翻滚动作</option>
-                        <option>组图造型动作</option>
-                    </select>
-                    <select id="a3"></select>
-                    <input class="buttonSearch" type="submit" value="Go">
-                </form>
-            </div>
-            <div class="area">
-                <form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
-                    <input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索"
-                        oninput="searchInAllNodes(textSearchInAll.value)" type="text">
-                    <input class="buttonSearch" type="submit" value="Search">
-                </form>
-                <select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
-            </div>
-            <!--Upload not available.
+	<header>
+		<p class="background"></p>
+		<h1>龙狮运动视频导引</h1>
+		<div class="area">
+			<ul class="menu">
+				<li><a href="">主页</a></li>
+				<li><a target="_blank" href="./data/table1.html">难度表</a></li>
+				<li><a target="_blank" href="./data/links.html">相关链接</a></li>
+			</ul>
+		</div>
+	</header>
+	<hr>
+	<main>
+		<fieldset class="top">
+			<form action="javascript:updateSelectBox(6)" autocomplete="off">
+				<div class="selectSet">
+					<label for="s1">运动项目</label>
+					<select id="s1" onchange="updateSelectBox(1)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s2">年份</label>
+					<select id="s2" onchange="updateSelectBox(2)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s3">赛事</label>
+					<select id="s3" onchange="updateSelectBox(3)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s4">队伍</label>
+					<select id="s4" onchange="updateSelectBox(4)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s5">动作</label>
+					<select id="s5" onchange="updateSelectBox(5)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<input class="buttonReplay" type="submit" value="重新播放">
+			</form>
+		</fieldset>
+		<small class="videoInfo">
+			（温馨提示：请注意流量）视频时间范围：
+			(
+			<a id="displayVideoTimeRange"></a>
+			)
+			视频加载自网络：
+			<a id="originWebpage">源网页</a>
+			<a id="originVideoURL">源视频</a>
+		</small>
+		<video id="video" class="video" controls type="video/mp4" autoplay>
+			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+			<source id="localVideoCache">
+			<source id="sourceVideo">
+		</video>
+		<iframe id="embededFrame" class="video" sandbox="allow-same-origin allow-scripts" src="about:blank"
+			allowfullscreen="true">浏览器不支持HTML内嵌框架，请使用高版本浏览器或点击链接</iframe>
+		<div class="sideBar">
+			<div class="area">
+				<form action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)"
+					autocomplete="off">
+					<select id="a1" onchange="showActions()">
+						<option selected="selected">A级</option>
+						<option>B级</option>
+						<option>C级</option>
+					</select>
+					<select id="a2" onchange="showActions()">
+						<option selected="selected">8字舞龙动作</option>
+						<option>游龙动作</option>
+						<option>穿腾动作</option>
+						<option>翻滚动作</option>
+						<option>组图造型动作</option>
+					</select>
+					<select id="a3"></select>
+					<input class="buttonSearch" type="submit" value="Go">
+				</form>
+			</div>
+			<div class="area">
+				<form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
+					<input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索"
+						oninput="searchInAllNodes(textSearchInAll.value)" type="text">
+					<input class="buttonSearch" type="submit" value="Search">
+				</form>
+				<select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
+			</div>
+			<!--Upload not available.
             <div>
                 <form action="javascript:upload()">
                     <input class="wholeline" type="file" id="uploadFile">
@@ -112,26 +111,26 @@
                 </form>
             </div>
             -->
-        </div>
-    </main>
-    <script type="text/javascript" defer src="./data/videoURL.js"></script>
-    <script type="text/javascript" defer src="./data/actionTable.js"></script>
-    <script type="text/javascript" defer src="./js/main.js"></script>
-    <script type="text/javascript" defer src="./js/upload.js"></script>
-    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-    <div class="text normal">
-        <hr>
-        <footer>
-            <small class="switch" id="lightIndication" onclick="change()">本来无物何处尘埃</small>
-            <br />
-            <a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/issues">Send feedback.</a>
-            <br />
-            Written by
-            <a href="mailto:1853308@tongji.edu.com">黄博奕</a>
-            .
-            <br /> People's Republic of China
-        </footer>
-    </div>
+		</div>
+	</main>
+	<script type="text/javascript" defer src="./data/videoURL.js"></script>
+	<script type="text/javascript" defer src="./data/actionTable.js"></script>
+	<script type="text/javascript" defer src="./js/main.js"></script>
+	<script type="text/javascript" defer src="./js/upload.js"></script>
+	<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+	<div class="text normal">
+		<hr>
+		<footer>
+			<small class="switch" id="lightIndication" onclick="change()">本来无物何处尘埃</small>
+			<br />
+			<a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/issues">Send feedback.</a>
+			<br />
+			Written by
+			<a href="mailto:1853308@tongji.edu.com">黄博奕</a>
+			.
+			<br /> People's Republic of China
+		</footer>
+	</div>
 </body>
 
 </html>
