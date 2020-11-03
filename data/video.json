@@ -1,21 +1,4 @@
-/*
-	Format:
-		sport
-			time
-				event
-					group
-						action
-	Rank (Suggestion):
-		value
-		range
-		score(for group)
-		src
-		origin
-		frame
-		from
-		sub
-*/
-const dataInJSON = {
+{
 	"root": [
 		{
 			"value": "舞龙",

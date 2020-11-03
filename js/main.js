@@ -131,9 +131,12 @@ function nextNodesAndAll(nodes, selectedIndex) {
 // Begin
 var nodes1, nodes2, nodes3, nodes4, nodes5;
 var recordSearch = new Array;
-const tree = dataInJSON;
+var tree = {};
+fetchVideoSrc().then(res => {
+	tree = res;
+	updateSelectBox(0);
+}).catch(e => { console.error(e); throw e; });
 var videoTimeBegin, videoTimeEnd;
-updateSelectBox(0);
 // End
 
 function updateSelectBox(boxIndex) {
@@ -172,6 +175,7 @@ function loadFromSelected() {
 		return;
 	}
 
+	clearVideoSrc();
 	if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4[s4.selectedIndex]))
 		;
 	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3[s3.selectedIndex]))
@@ -201,7 +205,6 @@ const emptyURL = "javascript:void(0)";
 const emptyPage = "about:blank";
 const emptySrc = "";
 function clearVideoSrc() {
-	localVideoCache.src = emptySrc;
 	originVideoURL.href = emptyURL;
 	sourceVideo.src = emptySrc;
 	originWebpage.href = emptyPage;
@@ -251,7 +254,7 @@ function displayAs(node, mode) {
 			//Reference:
 			//	https://open.iqiyi.com/help/qa/play.html
 			//	https://cloud.tencent.com/developer/article/1494396
-			embededFrame.src = node.frame + "&starttime=" + videoTimeBegin + "&endtime=" + videoTimeEnd;
+			embededFrame.src = node.frame + "?starttime=" + videoTimeBegin + "&endtime=" + videoTimeEnd;
 		else {
 			embededFrame.src = node.frame;
 			console.log("Unrecognized source: ", node.from)
