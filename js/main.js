@@ -136,7 +136,7 @@ fetchVideoSrc().then(res => {
 	tree = res;
 	updateSelectBox(0);
 }).catch(e => { console.error(e); throw e; });
-var videoTimeBegin, videoTimeEnd;
+var videoTimeBegin = 0, videoTimeEnd = Infinity;
 // End
 
 function updateSelectBox(boxIndex) {
@@ -170,20 +170,18 @@ function loadFromSelected() {
 		;
 	else if (s3.selectedIndex !== 0 && loadTimeRange(nodes3[s3.selectedIndex]))
 		;
-	else {
-		displayVideoTimeRange.innerText = "";
-		return;
-	}
+	else displayVideoTimeRange.innerText = "";
 
 	clearVideoSrc();
-	if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4[s4.selectedIndex]))
+	if (s5.selectedIndex !== 0 && loadVideoSrc(nodes5[s5.selectedIndex]))
+		;
+	else if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4[s4.selectedIndex]))
 		;
 	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3[s3.selectedIndex]))
 		;
 	else clearVideoSrc();
 
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
-	updateVideo();
 }
 
 function loadTimeRange(node) {
@@ -205,6 +203,8 @@ const emptyURL = "javascript:void(0)";
 const emptyPage = "about:blank";
 const emptySrc = "";
 function clearVideoSrc() {
+	videoTimeBegin = 0;
+	videoTimeEnd = Infinity;
 	originVideoURL.href = emptyURL;
 	sourceVideo.src = emptySrc;
 	originWebpage.href = emptyPage;
@@ -226,8 +226,8 @@ function switchActiveLabel(mode) {
 }
 
 
-var displayMode = "";
-var displayNode = null
+var displayMode = "html5";
+var displayNode = { src: emptySrc, from: "", origin: emptyPage }
 
 // html5|player|page
 function displayAs(node, mode) {
@@ -238,6 +238,7 @@ function displayAs(node, mode) {
 		sourceVideo.src = node.src;
 		switchActiveLabel("video");
 		video.load();
+		updateVideo();
 	} else if (mode == "player") {
 		if (node.from == "bilibili")
 			//See http://docs.bilibili.cn/wiki
@@ -257,7 +258,7 @@ function displayAs(node, mode) {
 			embededFrame.src = node.frame + "?starttime=" + videoTimeBegin + "&endtime=" + videoTimeEnd;
 		else {
 			embededFrame.src = node.frame;
-			console.log("Unrecognized source: ", node.from)
+			console.log("Unrecognized video source: '", node.from, "'")
 		}
 		switchActiveLabel("iframe");
 	} else if (mode == "page") {
