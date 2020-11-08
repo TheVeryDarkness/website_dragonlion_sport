@@ -4,7 +4,7 @@
 
 header {
     color: var(--top-color);
-		filter: brightness(0.4);
+    filter: brightness(0.4);
     background-image: url("../pic/background/sakura-prettied-prettied.png");
 }
 
