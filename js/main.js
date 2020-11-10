@@ -110,6 +110,7 @@ function loadFromSelected() {
 			additionalInfo.innerText += getAddtionalInfo(node[selected]);
 		}
 	}
+	additionalInfo.hidden = !additionalInfo.innerText.Length;
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
 
