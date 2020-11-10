@@ -1,9 +1,8 @@
 function defaultNode(value) {
 	return { "value": value, sub: [] };
 }
-var dbg_data = { sport: [], time: [], event: [], team: [], action: [] }
-var dbg_array = []
-const selectBoxMaxSize = 5;
+// var dbg_data = { sport: [], time: [], event: [], team: [], action: [] };
+// var dbg_array = [];
 
 function fillSelectBoxWithSubValues(selectBox, subArray) {
 	selectBox.options.length = subArray.length;
@@ -37,40 +36,41 @@ function nextNodesAndAll(nodes, selectedIndex) {
 }
 // Begin
 var s = [
+	document.getElementById("s0"),
 	document.getElementById("s1"),
 	document.getElementById("s2"),
 	document.getElementById("s3"),
-	document.getElementById("s4"),
-	document.getElementById("s5")
+	document.getElementById("s4")
 ];
 var nodes = [[], [], [], [], []];
 var recordSearch = new Array;
 var tree = {};
 fetchVideoSrc().then(res => {
 	tree = res;
-	updateSelectBox(0);
+	updateSelectBox(-1);
 }).catch(e => { console.error(e); throw e; });
 var videoTimeBegin = 0, videoTimeEnd = NaN;
 // End
 
+// boxIndex is the index of the box whose selected index is changed
 function updateSelectBox(boxIndex) {
 	switch (boxIndex) {
+		case -1:
+			nodes[0] = new Array(defaultNode(all)).concat(tree.root); //运动项目
+			fillSelectBoxWithNodes(s[0], nodes[0]);
 		case 0:
-			nodes[1] = new Array(defaultNode(all)).concat(tree.root); //运动项目
-			fillSelectBoxWithNodes(s1, nodes[1]);
+			nodes[1] = nextNodesAndAll(nodes[0], s0.selectedIndex); //年份
+			fillSelectBoxWithNodes(s[1], nodes[1]);
 		case 1:
-			nodes[2] = nextNodesAndAll(nodes[1], s1.selectedIndex); //年份
-			fillSelectBoxWithNodes(s2, nodes[2]);
+			nodes[2] = nextNodesAndAll(nodes[1], s[1].selectedIndex); //赛事
+			fillSelectBoxWithNodes(s[2], nodes[2]);
 		case 2:
-			nodes[3] = nextNodesAndAll(nodes[2], s2.selectedIndex); //赛事
-			fillSelectBoxWithNodes(s3, nodes[3]);
+			nodes[3] = nextNodesAndAll(nodes[2], s[2].selectedIndex); //队伍
+			fillSelectBoxWithNodes(s[3], nodes[3]);
 		case 3:
-			nodes[4] = nextNodesAndAll(nodes[3], s3.selectedIndex); //队伍
-			fillSelectBoxWithNodes(s4, nodes[4]);
+			nodes[4] = nextNodesAndAll(nodes[3], s[3].selectedIndex); //动作
+			fillSelectBoxWithNodes(s[4], nodes[4]);
 		case 4:
-			nodes[5] = nextNodesAndAll(nodes[4], s4.selectedIndex); //动作
-			fillSelectBoxWithNodes(s5, nodes[5]);
-		case 5:
 			trackBack(boxIndex);
 		default:
 			loadFromSelected();
@@ -84,24 +84,24 @@ function getAddtionalInfo(node) {
 // Contains video source, video range and addtional information
 function loadFromSelected() {
 	clearVideoSrc();
-	if (s5.selectedIndex !== 0 && loadTimeRange(nodes[5][s5.selectedIndex]))
+	if (s[4].selectedIndex !== 0 && loadTimeRange(nodes[4][s[4].selectedIndex]))
 		;
-	else if (s4.selectedIndex !== 0 && loadTimeRange(nodes[4][s4.selectedIndex]))
+	else if (s[3].selectedIndex !== 0 && loadTimeRange(nodes[3][s[3].selectedIndex]))
 		;
-	else if (s3.selectedIndex !== 0 && loadTimeRange(nodes[3][s3.selectedIndex]))
+	else if (s[2].selectedIndex !== 0 && loadTimeRange(nodes[2][s[2].selectedIndex]))
 		;
 	else displayVideoTimeRange.innerText = "";
 
-	if (s5.selectedIndex !== 0 && loadVideoSrc(nodes[5][s5.selectedIndex]))
+	if (s[4].selectedIndex !== 0 && loadVideoSrc(nodes[4][s[4].selectedIndex]))
 		;
-	else if (s4.selectedIndex !== 0 && loadVideoSrc(nodes[4][s4.selectedIndex]))
+	else if (s[3].selectedIndex !== 0 && loadVideoSrc(nodes[3][s[3].selectedIndex]))
 		;
-	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes[3][s3.selectedIndex]))
+	else if (s[2].selectedIndex !== 0 && loadVideoSrc(nodes[2][s[2].selectedIndex]))
 		;
 	else clearVideoSrc();
 
 	additionalInfo.innerText = "";
-	for (let index = 1; index < nodes.length; index++) {
+	for (let index = 0; index < nodes.length; index++) {
 		const node = nodes[index];
 		const selected = s[index];
 		if (node[selected]) {
@@ -129,7 +129,7 @@ function loadTimeRange(node) {
 }
 
 function refreshSelectBox() {
-	s1.selectedIndex = s2.selectedIndex = s3.selectedIndex = s4.selectedIndex = s5.selectedIndex = 0;
+	s[0].selectedIndex = s[1].selectedIndex = s[2].selectedIndex = s[3].selectedIndex = s[4].selectedIndex = 0;
 }
 
 const emptyURL = "javascript:void(0)";
@@ -249,15 +249,15 @@ function track(selectBoxSup, selectBoxSub, nodesSup) {
 
 function trackBack(boxIndex) {
 	switch (boxIndex) {
-		case 5:
-			track(s4, s5, nodes[4]);
 		case 4:
-			track(s3, s4, nodes[3]);
+			track(s[3], s[4], nodes[3]);
 		case 3:
-			track(s2, s3, nodes[2]);
+			track(s[2], s[3], nodes[2]);
 		case 2:
-			track(s1, s2, nodes[1]);
+			track(s[1], s[2], nodes[1]);
 		case 1:
+			track(s[0], s[1], nodes[0]);
+		case 0:
 		default:
 	}
 }
@@ -284,9 +284,9 @@ function searchInAllNodes(keyWord) {
 	searchResults.options.length = 0;
 	recordSearch.length = 0;
 	//index below is 
-	for (const index1 in nodes[1]) {
+	for (const index1 in nodes[0]) {
 		if (index1 == 0) continue;
-		const node1 = nodes[1][index1];
+		const node1 = nodes[0][index1];
 		if (node1.value.match(keyWord))
 			addOption(searchResults, value0ToString(node1)), recordSearch.push(new Array(index1, 0, 0, 0, 0));
 		for (const index2 in node1.sub) {
@@ -314,23 +314,23 @@ function searchInAllNodes(keyWord) {
 
 function chooseSearch() {
 	var indexesSet = recordSearch[searchResults.selectedIndex];
-	s1.selectedIndex = indexesSet[0];
+	s0.selectedIndex = indexesSet[0];
 
-	nodes[2] = nextNodesAndAll(nodes[1], indexesSet[0]);
-	fillSelectBoxWithNodes(s2, nodes[2]);
-	s2.selectedIndex = indexesSet[1];
+	nodes[1] = nextNodesAndAll(nodes[0], indexesSet[0]);
+	fillSelectBoxWithNodes(s[1], nodes[1]);
+	s[1].selectedIndex = indexesSet[1];
 
-	nodes[3] = nextNodesAndAll(nodes[2], indexesSet[1]);
-	fillSelectBoxWithNodes(s3, nodes[3]);
-	s3.selectedIndex = indexesSet[2];
+	nodes[2] = nextNodesAndAll(nodes[1], indexesSet[1]);
+	fillSelectBoxWithNodes(s[2], nodes[2]);
+	s[2].selectedIndex = indexesSet[2];
 
-	nodes[4] = nextNodesAndAll(nodes[3], indexesSet[2]);
-	fillSelectBoxWithNodes(s4, nodes[4]);
-	s4.selectedIndex = indexesSet[3];
+	nodes[3] = nextNodesAndAll(nodes[2], indexesSet[2]);
+	fillSelectBoxWithNodes(s[3], nodes[3]);
+	s[3].selectedIndex = indexesSet[3];
 
-	nodes[5] = nextNodesAndAll(nodes[4], indexesSet[3]);
-	fillSelectBoxWithNodes(s5, nodes[5]);
-	s5.selectedIndex = indexesSet[4];
+	nodes[4] = nextNodesAndAll(nodes[3], indexesSet[3]);
+	fillSelectBoxWithNodes(s[4], nodes[4]);
+	s[4].selectedIndex = indexesSet[4];
 
 	loadFromSelected();
 }
