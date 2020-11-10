@@ -36,33 +36,40 @@ function nextNodesAndAll(nodes, selectedIndex) {
 	return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));
 }
 // Begin
-var nodes1, nodes2, nodes3, nodes4, nodes5;
+var s = [
+	document.getElementById("s1"),
+	document.getElementById("s2"),
+	document.getElementById("s3"),
+	document.getElementById("s4"),
+	document.getElementById("s5")
+];
+var nodes = [[], [], [], [], []];
 var recordSearch = new Array;
 var tree = {};
 fetchVideoSrc().then(res => {
 	tree = res;
 	updateSelectBox(0);
 }).catch(e => { console.error(e); throw e; });
-var videoTimeBegin = 0, videoTimeEnd = Infinity;
+var videoTimeBegin = 0, videoTimeEnd = NaN;
 // End
 
 function updateSelectBox(boxIndex) {
 	switch (boxIndex) {
 		case 0:
-			nodes1 = new Array(defaultNode(all)).concat(tree.root); //运动项目
-			fillSelectBoxWithNodes(s1, nodes1);
+			nodes[1] = new Array(defaultNode(all)).concat(tree.root); //运动项目
+			fillSelectBoxWithNodes(s1, nodes[1]);
 		case 1:
-			nodes2 = nextNodesAndAll(nodes1, s1.selectedIndex); //年份
-			fillSelectBoxWithNodes(s2, nodes2);
+			nodes[2] = nextNodesAndAll(nodes[1], s1.selectedIndex); //年份
+			fillSelectBoxWithNodes(s2, nodes[2]);
 		case 2:
-			nodes3 = nextNodesAndAll(nodes2, s2.selectedIndex); //赛事
-			fillSelectBoxWithNodes(s3, nodes3);
+			nodes[3] = nextNodesAndAll(nodes[2], s2.selectedIndex); //赛事
+			fillSelectBoxWithNodes(s3, nodes[3]);
 		case 3:
-			nodes4 = nextNodesAndAll(nodes3, s3.selectedIndex); //队伍
-			fillSelectBoxWithNodes(s4, nodes4);
+			nodes[4] = nextNodesAndAll(nodes[3], s3.selectedIndex); //队伍
+			fillSelectBoxWithNodes(s4, nodes[4]);
 		case 4:
-			nodes5 = nextNodesAndAll(nodes4, s4.selectedIndex); //动作
-			fillSelectBoxWithNodes(s5, nodes5);
+			nodes[5] = nextNodesAndAll(nodes[4], s4.selectedIndex); //动作
+			fillSelectBoxWithNodes(s5, nodes[5]);
 		case 5:
 			trackBack(boxIndex);
 		default:
@@ -76,28 +83,33 @@ function getAddtionalInfo(node) {
 
 // Contains video source, video range and addtional information
 function loadFromSelected() {
-	if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex]))
+	clearVideoSrc();
+	if (s5.selectedIndex !== 0 && loadTimeRange(nodes[5][s5.selectedIndex]))
 		;
-	else if (s4.selectedIndex !== 0 && loadTimeRange(nodes4[s4.selectedIndex]))
+	else if (s4.selectedIndex !== 0 && loadTimeRange(nodes[4][s4.selectedIndex]))
 		;
-	else if (s3.selectedIndex !== 0 && loadTimeRange(nodes3[s3.selectedIndex]))
+	else if (s3.selectedIndex !== 0 && loadTimeRange(nodes[3][s3.selectedIndex]))
 		;
 	else displayVideoTimeRange.innerText = "";
 
-	clearVideoSrc();
-	if (s5.selectedIndex !== 0 && loadVideoSrc(nodes5[s5.selectedIndex]))
+	if (s5.selectedIndex !== 0 && loadVideoSrc(nodes[5][s5.selectedIndex]))
 		;
-	else if (s4.selectedIndex !== 0 && loadVideoSrc(nodes4[s4.selectedIndex]))
+	else if (s4.selectedIndex !== 0 && loadVideoSrc(nodes[4][s4.selectedIndex]))
 		;
-	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3[s3.selectedIndex]))
+	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes[3][s3.selectedIndex]))
 		;
 	else clearVideoSrc();
+
 	additionalInfo.innerText = "";
-	additionalInfo.innerText += getAddtionalInfo(nodes1[s1.selectedIndex]);
-	additionalInfo.innerText += getAddtionalInfo(nodes2[s2.selectedIndex]);
-	additionalInfo.innerText += getAddtionalInfo(nodes3[s3.selectedIndex]);
-	additionalInfo.innerText += getAddtionalInfo(nodes4[s4.selectedIndex]);
-	additionalInfo.innerText += getAddtionalInfo(nodes5[s5.selectedIndex]);
+	for (let index = 1; index < nodes.length; index++) {
+		const node = nodes[index];
+		const selected = s[index];
+		if (node[selected]) {
+			additionalInfo.innerText += node[selected].value;
+			additionalInfo.innerText += ":\n\t";
+			additionalInfo.innerText += getAddtionalInfo(node[selected]);
+		}
+	}
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
 
@@ -124,7 +136,7 @@ const emptyPage = "about:blank";
 const emptySrc = "";
 function clearVideoSrc() {
 	videoTimeBegin = 0;
-	videoTimeEnd = Infinity;
+	videoTimeEnd = NaN;
 	originVideoURL.href = emptyURL;
 	sourceVideo.src = emptySrc;
 	originWebpage.href = emptyPage;
@@ -237,13 +249,13 @@ function track(selectBoxSup, selectBoxSub, nodesSup) {
 function trackBack(boxIndex) {
 	switch (boxIndex) {
 		case 5:
-			track(s4, s5, nodes4);
+			track(s4, s5, nodes[4]);
 		case 4:
-			track(s3, s4, nodes3);
+			track(s3, s4, nodes[3]);
 		case 3:
-			track(s2, s3, nodes2);
+			track(s2, s3, nodes[2]);
 		case 2:
-			track(s1, s2, nodes1);
+			track(s1, s2, nodes[1]);
 		case 1:
 		default:
 	}
@@ -271,9 +283,9 @@ function searchInAllNodes(keyWord) {
 	searchResults.options.length = 0;
 	recordSearch.length = 0;
 	//index below is 
-	for (const index1 in nodes1) {
+	for (const index1 in nodes[1]) {
 		if (index1 == 0) continue;
-		const node1 = nodes1[index1];
+		const node1 = nodes[1][index1];
 		if (node1.value.match(keyWord))
 			addOption(searchResults, value0ToString(node1)), recordSearch.push(new Array(index1, 0, 0, 0, 0));
 		for (const index2 in node1.sub) {
@@ -303,20 +315,20 @@ function chooseSearch() {
 	var indexesSet = recordSearch[searchResults.selectedIndex];
 	s1.selectedIndex = indexesSet[0];
 
-	nodes2 = nextNodesAndAll(nodes1, indexesSet[0]);
-	fillSelectBoxWithNodes(s2, nodes2);
+	nodes[2] = nextNodesAndAll(nodes[1], indexesSet[0]);
+	fillSelectBoxWithNodes(s2, nodes[2]);
 	s2.selectedIndex = indexesSet[1];
 
-	nodes3 = nextNodesAndAll(nodes2, indexesSet[1]);
-	fillSelectBoxWithNodes(s3, nodes3);
+	nodes[3] = nextNodesAndAll(nodes[2], indexesSet[1]);
+	fillSelectBoxWithNodes(s3, nodes[3]);
 	s3.selectedIndex = indexesSet[2];
 
-	nodes4 = nextNodesAndAll(nodes3, indexesSet[2]);
-	fillSelectBoxWithNodes(s4, nodes4);
+	nodes[4] = nextNodesAndAll(nodes[3], indexesSet[2]);
+	fillSelectBoxWithNodes(s4, nodes[4]);
 	s4.selectedIndex = indexesSet[3];
 
-	nodes5 = nextNodesAndAll(nodes4, indexesSet[3]);
-	fillSelectBoxWithNodes(s5, nodes5);
+	nodes[5] = nextNodesAndAll(nodes[4], indexesSet[3]);
+	fillSelectBoxWithNodes(s5, nodes[5]);
 	s5.selectedIndex = indexesSet[4];
 
 	loadFromSelected();
