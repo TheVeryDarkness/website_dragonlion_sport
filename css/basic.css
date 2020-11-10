@@ -50,6 +50,10 @@ div.area {
     clear: both;
 }
 
+p.info {
+	margin: 0;
+}
+
 div.selectSet {
     clear: none;
     color: inherit;

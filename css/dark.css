@@ -16,6 +16,10 @@ hr {
 	filter: brightness(0.4);
 }
 
+iframe {
+	filter: brightness(0.8);
+}
+
 fieldset.top {
     color: var(--top-color);
     background-color: #2d2a30;

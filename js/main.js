@@ -78,7 +78,7 @@ function updateSelectBox(boxIndex) {
 }
 
 function getAddtionalInfo(node) {
-	return node && node.comment ? node.comment : "";
+	return node && node.comment ? node.comment[0].content : "";
 }
 
 // Contains video source, video range and addtional information
@@ -100,17 +100,17 @@ function loadFromSelected() {
 		;
 	else clearVideoSrc();
 
-	additionalInfo.innerText = "";
 	for (let index = 0; index < nodes.length; index++) {
+		const info = document.getElementById("i" + String(index));
 		const node = nodes[index];
-		const selected = s[index];
-		if (node[selected]) {
-			additionalInfo.innerText += node[selected].value;
-			additionalInfo.innerText += ":\n\t";
-			additionalInfo.innerText += getAddtionalInfo(node[selected]);
+		const selected = s[index].selectedIndex;
+		if (selected !== 0 && node[selected]) {
+			info.innerText += node[selected].value;
+			info.innerText += ": ";
+			info.innerText += getAddtionalInfo(node[selected]);
 		}
+		info.hidden = !info.innerText;
 	}
-	additionalInfo.hidden = !additionalInfo.innerText.Length;
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
 
