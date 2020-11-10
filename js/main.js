@@ -1,101 +1,8 @@
-class Node {
-	constructor(value) {
-		const info = value.split(',');
-		const range = info.length == 3 ? [info[1], info[2]] : info.length == 6 ? [info[4], info[5]] : null
-		const src = info.length == 4 || info.length == 6 ? info[2] : null
-		const origin = info.length == 4 || info.length == 6 ? info[3] : null
-
-		this.value = info[0];
-		if (range) this.range = range
-		if (src) this.src = src
-		if (origin) this.origin = origin
-		this.sub = new Array(0);
-		this.toString = function () {
-			return JSON.stringify(this);
-		};
-	}
-}
-
-function headTableCount(str) {
-	var count = 0;
-	for (const c of str)
-		if (c === '\t')
-			++count;
-		else break;
-	return count;
+function defaultNode(value) {
+	return { "value": value, sub: [] };
 }
 var dbg_data = { sport: [], time: [], event: [], team: [], action: [] }
 var dbg_array = []
-class MultiTree {
-	constructor(strings) {
-		this.root = new Array();
-		this.toString = function () {
-			return this.root.toString();
-		};
-		var nodesStack = new Array(); //里面存的都是Node对象
-		while (true) {
-			var value = strings.shift();
-			var depth = headTableCount(value);
-			if (false && nodesStack.length == 5) {
-				const quickParse = function (e) {
-					var res = {
-						value: e[0]
-					}
-					const begin = e.length == 3 ? e[1] : e.length == 6 ? e[4] : null
-					const end = e.length == 3 ? e[2] : e.length == 6 ? e[5] : null
-					const src = e.length == 4 || length == 6 ? e[2] : null
-					const origin = e.length == 4 || length == 6 ? e[3] : null
-					if (begin) res.begin = begin
-					if (end) res.end = end
-					if (src) res.src = src
-					if (origin) res.origin = origin
-					return res
-				}
-				const sport = { value: nodesStack[0].value[0] }
-				const time = { value: nodesStack[1].value[0] }
-				const event = quickParse(nodesStack[2].value)
-				const team = quickParse(nodesStack[3].value)
-				const action = quickParse(nodesStack[4].value)
-				dbg_data.sport.push(sport)
-				dbg_data.time.push(time)
-				dbg_data.event.push(event)
-				dbg_data.team.push(team)
-				dbg_data.action.push(action)
-				dbg_array.push({
-					sport: sport,
-					time: time,
-					event: event,
-					team: team,
-					action: action,
-				})
-
-			}
-			while (depth < nodesStack.length)
-				nodesStack.pop();
-			// push
-			{
-				if (depth > nodesStack.length)
-					console.log("Debug failed. Unexpected indent.");
-				var tmp = new Node(value.replace(/[\t]+/g, ''));
-				if (nodesStack.length > 0)
-					nodesStack[nodesStack.length - 1].sub.push(tmp);
-				else
-					this.root.push(tmp);
-				nodesStack.push(tmp);
-			}
-			if (strings.length === 0)
-				break;
-		}
-	}
-}
-
-function makeAMultiTree(str) {
-	strings = str.split('\n');
-	var rev = new MultiTree(strings);
-	if (strings.length > 0)
-		console.log("Debug failed. Unexpected tree termination.");
-	return rev;
-}
 const selectBoxMaxSize = 5;
 
 function fillSelectBoxWithSubValues(selectBox, subArray) {
@@ -126,7 +33,7 @@ function nextNodes(nodes, selectedIndex) {
 const all = "全选";
 
 function nextNodesAndAll(nodes, selectedIndex) {
-	return new Array(new Node(all)).concat(nextNodes(nodes, selectedIndex));
+	return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));
 }
 // Begin
 var nodes1, nodes2, nodes3, nodes4, nodes5;
@@ -142,7 +49,7 @@ var videoTimeBegin = 0, videoTimeEnd = Infinity;
 function updateSelectBox(boxIndex) {
 	switch (boxIndex) {
 		case 0:
-			nodes1 = new Array(new Node(all)).concat(tree.root); //运动项目
+			nodes1 = new Array(defaultNode(all)).concat(tree.root); //运动项目
 			fillSelectBoxWithNodes(s1, nodes1);
 		case 1:
 			nodes2 = nextNodesAndAll(nodes1, s1.selectedIndex); //年份
@@ -163,6 +70,11 @@ function updateSelectBox(boxIndex) {
 	}
 }
 
+function getAddtionalInfo(node) {
+	return node && node.comment ? node.comment : "";
+}
+
+// Contains video source, video range and addtional information
 function loadFromSelected() {
 	if (s5.selectedIndex !== 0 && loadTimeRange(nodes5[s5.selectedIndex]))
 		;
@@ -180,17 +92,25 @@ function loadFromSelected() {
 	else if (s3.selectedIndex !== 0 && loadVideoSrc(nodes3[s3.selectedIndex]))
 		;
 	else clearVideoSrc();
-
+	additionalInfo.innerText = "";
+	additionalInfo.innerText += getAddtionalInfo(nodes1[s1.selectedIndex]);
+	additionalInfo.innerText += getAddtionalInfo(nodes2[s2.selectedIndex]);
+	additionalInfo.innerText += getAddtionalInfo(nodes3[s3.selectedIndex]);
+	additionalInfo.innerText += getAddtionalInfo(nodes4[s4.selectedIndex]);
+	additionalInfo.innerText += getAddtionalInfo(nodes5[s5.selectedIndex]);
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
 
 function loadTimeRange(node) {
 	if (node.range) {
-		const begin = node.range[0];
-		const end = node.range[1];
-		videoTimeBegin = begin;
-		videoTimeEnd = end;
-		return true;
+		if (node.range[0] && node.range[1]) {
+			const begin = node.range[0];
+			const end = node.range[1];
+			videoTimeBegin = begin;
+			videoTimeEnd = end;
+			return true;
+		}
+		console.log("Node \'", node.value, "\' has a illegal value for property 'range'");
 	}
 	return false;
 }
