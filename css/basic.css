@@ -1,157 +1,183 @@
 body {
-    /*Must be overriden*/
-    background-color: black;
+  /*Must be overriden*/
+  background-color: black;
 }
 
 hr {
-    width: 100%;
-    display: inline-block;
+  width: 100%;
+  display: inline-block;
 }
 
 header > h1 {
-    padding-top: 12%;
-    margin-left: 1%;
+  padding-top: 12%;
+  margin-left: 1%;
 }
 
 header {
-    background-position: right top;
-    background-repeat: no-repeat;
-    background-clip: content-box;
-    background-size: contain;
-    background-color: transparent;
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  background-size: contain;
+  background-color: transparent;
 }
 
 ul.menu {
-    text-align: left;
-    list-style: none;
-    display: inline;
-    clear: both;
+  text-align: left;
+  list-style: none;
+  display: inline;
+  clear: both;
 }
 
 ul.menu > li {
-    font-size: large;
-    text-align: center;
-    display: block;
-    float: left;
-    width: 10%;
+  font-size: large;
+  text-align: center;
+  display: block;
+  float: left;
+  width: 10%;
 }
 
 ul.menu > li > a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 fieldset.top {
-    vertical-align: bottom;
-    border-style: ridge;
+  vertical-align: bottom;
+  border-style: ridge;
 }
 
 div.area {
-    margin-bottom: 0.4em;
-    clear: both;
+  margin-bottom: 0.4em;
+  clear: both;
 }
 
 p.info {
-	margin: 0;
+  margin: 0;
 }
 
 div.selectSet {
-    clear: none;
-    color: inherit;
-    float: left;
-    vertical-align: text-bottom;
+  clear: none;
+  color: inherit;
+  float: left;
+  vertical-align: text-bottom;
 }
 
 select {
-    color: inherit;
+  color: inherit;
 }
 
 input.buttonReplay {
-    color: inherit;
-    float: left;
-    vertical-align: bottom;
+  color: inherit;
+  float: left;
+  vertical-align: bottom;
 }
 
 a {
-    color: inherit;
-}
-
-video.video {
-    margin-top: 0.6em;
-    width: 79%;
-    height: 79%;
-    float: left;
-    display: block;
-}
-
-iframe.video {
-    border: 0;
-    margin-top: 0.6em;
-    width: 76vw;
-    height: 42.75vw;
-    float: left;
-    display: none;
+  color: inherit;
 }
 
 input {
-    color: inherit;
-    background-color: inherit;
+  color: inherit;
+  background-color: inherit;
 }
 
 input.wholeline {
-    width: 100%;
-    float: left;
+  width: 100%;
+  float: left;
 }
 
 input.textSearch {
-    width: calc(99% - 5em);
-    float: left;
+  width: calc(99% - 5em);
+  float: left;
 }
 
 input.buttonSearch {
-    float: right;
+  float: right;
 }
 
 select.search {
-    color: inherit;
-    width: 100%;
+  color: inherit;
+  width: 100%;
 }
 
 div.sideBar {
-    border-style: groove;
-    float: right;
-    font-size: 90%;
+  border-style: groove;
+}
+
+video.video {
+  margin-top: 0.6em;
+  width: 79%;
+  height: 79%;
+  float: left;
+  display: block;
+}
+iframe.video {
+  border: 0;
+  margin-top: 0.6em;
+  width: 76vw;
+  height: 42.75vw;
+  float: left;
+  display: none;
+}
+@media (min-aspect-ratio: 16/9) {
+  div.sideBar {
     width: calc(20% - 6px);
+    font-size: 90%;
+    float: right;
+  }
+  video.video {
+    width: 79%;
+    height: 79%;
+  }
+  iframe.video {
+    width: 76vw;
+    height: 42.75vw;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  div.sideBar {
+    width: fit-content;
+    clear: both;
+    float: left;
+  }
+  video.video {
+    width: 100%;
+    height: 100%;
+  }
+  iframe.video {
+    width: 100vw;
+    height: 56.25vw;
+  }
 }
 
 .bottom.info {
-    margin: auto;
-    margin-top: initial;
-    color: inherit;
-    margin-bottom: 1em;
+  margin: auto;
+  margin-top: initial;
+  color: inherit;
+  margin-bottom: 1em;
 }
 
 footer {
-    color: inherit;
-    vertical-align: bottom;
-    text-align: center;
+  color: inherit;
+  vertical-align: bottom;
+  text-align: center;
 }
 
 small.switch {
-    font-size: smaller;
+  font-size: smaller;
 }
 
 caption {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 table {
-    margin: auto;
-    border-style: solid;
-    border-width: 1px;
+  margin: auto;
+  border-style: solid;
+  border-width: 1px;
 }
 
 td {
-    border-style: solid;
-    border-width: 1px;
-    padding: 0;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0;
 }
