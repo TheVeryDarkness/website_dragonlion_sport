@@ -1,3 +1,13 @@
+@media (max-width: 480px) {
+  :root {
+    font-size: 32px;
+  }
+}
+@media (min-width: 480px) {
+  :root {
+    font-size: 16px;
+  }
+}
 body {
   /*Must be overriden*/
   background-color: black;
@@ -29,7 +39,7 @@ ul.menu {
 }
 
 ul.menu > li {
-  font-size: large;
+  font-size: 1.3em;
   text-align: center;
   display: block;
   float: left;
@@ -62,6 +72,7 @@ div.selectSet {
 }
 
 select {
+  font-size: inherit;
   color: inherit;
 }
 
@@ -76,6 +87,7 @@ a {
 }
 
 input {
+  font-size: inherit;
   color: inherit;
   background-color: inherit;
 }
@@ -86,7 +98,7 @@ input.wholeline {
 }
 
 input.textSearch {
-  width: calc(99% - 5em);
+  width: calc(100% - 5em);
   float: left;
 }
 
@@ -105,23 +117,19 @@ div.sideBar {
 
 video.video {
   margin-top: 0.6em;
-  width: 79%;
-  height: 79%;
   float: left;
   display: block;
 }
 iframe.video {
   border: 0;
   margin-top: 0.6em;
-  width: 76vw;
-  height: 42.75vw;
   float: left;
   display: none;
 }
 @media (min-aspect-ratio: 16/9) {
   div.sideBar {
     width: calc(20% - 6px);
-    font-size: 90%;
+    font-size: 0.9em;
     float: right;
   }
   video.video {
@@ -163,11 +171,7 @@ footer {
 }
 
 small.switch {
-  font-size: smaller;
-}
-
-caption {
-  font-size: x-large;
+  font-size: 0.8em;
 }
 
 table {
