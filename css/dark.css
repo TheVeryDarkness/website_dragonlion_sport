@@ -4,16 +4,16 @@
 
 header {
     color: var(--top-color);
-    filter: brightness(0.4);
+    filter: brightness(0.5);
     background-image: url("../pic/background/sakura-prettied-prettied.png");
 }
 
 header > h1, header > div {
-	filter: brightness(2.5);
+	filter: brightness(2);
 }
 
 hr {
-	filter: brightness(0.4);
+	filter: brightness(0.5);
 }
 
 iframe {
