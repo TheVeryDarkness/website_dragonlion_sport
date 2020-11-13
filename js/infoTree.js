@@ -30,15 +30,14 @@ async function initTree(callback) {
 	race
 		.then(res => {
 			tree = res;
-			callback();
-			document.getElementById("loadStatus").value = "刷新";
-			console.log("Storing video data.");
+			callback(true);
 			fetcher.addVideoSrcToLocalStorage(tree);
+			console.log("Video data stored.");
 		})
 		.catch(e => {
 			console.error(e);
+			callback(false);
 			fetcher.removeVideoSrcFromLocalStorage();
-			document.getElementById("loadStatus").value = "重试";
 			console.log("Local storage removed. Refresh to reload.")
 			alert("Failed to load video data properly by any means.");
 		});
