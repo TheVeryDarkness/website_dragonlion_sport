@@ -24,7 +24,6 @@ async function initTree(callback) {
 			alert("Failed to load video data properly by any means.");
 		});
 }
-var videoTimeBegin = 0, videoTimeEnd = NaN;
 
 function defaultNode(value) {
 	return { "value": value, sub: [] };
