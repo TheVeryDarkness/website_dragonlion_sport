@@ -9,9 +9,9 @@ var s = [
 	document.getElementById("s4")
 ];
 var callbackOnUpdate = () => { console.log("Not specified."); };
-initTree(() => { updateSelectBox(-1); });
 
-function init(callback) {
+function initSelect(callback) {
+	initTree(() => { updateSelectBox(-1); });
 	callbackOnUpdate = callback;
 }
 
