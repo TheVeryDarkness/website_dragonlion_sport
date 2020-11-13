@@ -111,6 +111,12 @@ function clearVideoSrc() {
 	embededFrame.src = emptyPage;
 	video.load();
 }
+function getAddtionalInfo(node) {
+	return node && node.comment ? node.comment[0].content : "";
+}
+function secToTime(seconds) {
+	return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
+}
 // Contains video source, video range and addtional information
 function loadFromSelected() {
 	clearVideoSrc();

@@ -48,19 +48,3 @@ const all = "全选";
 function nextNodesAndAll(nodes, selectedIndex) {
 	return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));
 }
-
-function getAddtionalInfo(node) {
-	return node && node.comment ? node.comment[0].content : "";
-}
-
-function secToTime(seconds) {
-	return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
-}
-
-function value0ToString() {
-	var rev = new Array();
-	for (const node of arguments) {
-		rev.push(node.value.toString());
-	}
-	return rev;
-}

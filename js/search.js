@@ -5,6 +5,13 @@
 */
 var recordSearch = new Array;
 
+function value0ToString() {
+	var rev = new Array();
+	for (const node of arguments) {
+		rev.push(node.value.toString());
+	}
+	return rev;
+}
 function searchInAllNodes(keyWord) {
 	if (keyWord == null) return;
 	searchResults.options.length = 0;
