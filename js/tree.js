@@ -21,7 +21,7 @@ async function initTree(callback) {
 			console.error(e);
 			fetcher.removeVideoSrcFromLocalStorage();
 			console.log("Local storage removed. Refresh to reload.")
-			alert("Failed to load video data by any means.");
+			alert("Failed to load video data properly by any means.");
 		});
 }
 var videoTimeBegin = 0, videoTimeEnd = NaN;

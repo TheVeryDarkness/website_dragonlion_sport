@@ -72,6 +72,10 @@ select {
   color: inherit;
 }
 
+select#searchResults {
+  overflow-y: auto;
+}
+
 input.buttonReplay {
   color: inherit;
   border-color: inherit;
