@@ -46,9 +46,10 @@ function updateSelectBox(boxIndex) {
 			nodes[4] = nextNodesAndAll(nodes[3], s[3].selectedIndex); //动作
 			fillSelectBoxWithNodes(s[4], nodes[4]);
 		case 4:
-			trackBack(boxIndex);
-		default:
 			callbackOnUpdate();
+			break;
+		default:
+			console.error("Unexpected index ", boxIndex);
 	}
 }
 
