@@ -208,9 +208,7 @@ function loadFromSelected() {
 		const node = nodes[index];
 		const selected = s[index].selectedIndex;
 		if (selected !== 0 && node[selected]) {
-			info.innerText += node[selected].value;
-			info.innerText += ": ";
-			info.innerText += getAddtionalInfo(node[selected]);
+			info.innerText = node[selected].value + ": " + getAddtionalInfo(node[selected]);
 		}
 		info.hidden = !info.innerText;
 	}
