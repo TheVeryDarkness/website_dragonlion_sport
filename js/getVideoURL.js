@@ -17,8 +17,11 @@
 */
 class videoSourceFetcher {
 	constructor() {
+		if (!localStorage)
+			console.log("Local storage not supported.");
 		this.fetchVideoSrcFromLocalStorage = function () {
 			return new Promise((resolve, reject) => {
+				if (!localStorage) reject("Not support action");
 				const fromLocalStorage = localStorage.getItem("video");
 				if (fromLocalStorage)
 					resolve(JSON.parse(fromLocalStorage));
@@ -27,10 +30,12 @@ class videoSourceFetcher {
 			});
 		};
 		this.removeVideoSrcFromLocalStorage = function () {
-			localStorage.removeItem("video");
+			if (localStorage)
+				localStorage.removeItem("video");
 		};
 		this.addVideoSrcToLocalStorage = function (tree) {
-			localStorage.setItem("video", JSON.stringify(tree));
+			if (localStorage)
+				localStorage.setItem("video", JSON.stringify(tree));
 		};
 		this.fetchVideoSrcFromSameSite = function () {
 			return fetch('data/video.json', { method: "GET" }).then(res => { return res.json() });

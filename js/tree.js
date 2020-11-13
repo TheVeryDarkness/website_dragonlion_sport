@@ -5,11 +5,26 @@ var nodes = [[], [], [], [], []];
 var tree = {};
 async function initTree(callback) {
 	var fetcher = new videoSourceFetcher();
-	var race = Promise.any([
-		fetcher.fetchVideoSrcFromLocalStorage(),
-		fetcher.fetchVideoSrcFromSameSite(),
-		fetcher.fetchVideoSrcFromGitHub()
-	]);
+	// WeiXin browser does not support any yet
+	var race =
+		Promise.any ?
+			Promise.any([
+				fetcher.fetchVideoSrcFromLocalStorage(),
+				fetcher.fetchVideoSrcFromSameSite(),
+				fetcher.fetchVideoSrcFromGitHub()
+			])
+			:
+			fetcher.fetchVideoSrcFromLocalStorage()
+				.catch(e => {
+					console.log(e);
+					return fetcher.fetchVideoSrcFromSameSite();
+				}).catch(e => {
+					console.log(e);
+					return fetcher.fetchVideoSrcFromGitHub();
+				}).catch(e => {
+					console.log(e);
+					alert("Can't load by any mean.")
+				});
 	race
 		.then(res => {
 			tree = res;
