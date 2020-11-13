@@ -27,7 +27,7 @@
 	<hr>
 	<main>
 		<fieldset class="top">
-			<form action="javascript:updateSelectBox(6);" autocomplete="off">
+			<form action="javascript:initSelect();" autocomplete="off">
 				<div class="selectSet">
 					<label for="s0">运动项目</label>
 					<select id="s0" onchange="updateSelectBox(0);">
@@ -58,8 +58,9 @@
 						<option selected="selected">全选</option>
 					</select>
 				</div>
-				<input class="buttonReplay" type="submit" value="重新播放">
+				<input class="buttonReplay" type="submit" value="重新加载">
 				<input class="buttonReplay" type="button" value="切换播放模式" onclick="switchDisplayMode()"></input>
+				<div id="loadStatus">等待加载</div>
 			</form>
 		</fieldset>
 		<small class="videoInfo">
