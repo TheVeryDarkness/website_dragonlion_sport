@@ -37,6 +37,7 @@ function searchInAllNodes(keyWord) {
 		}
 	}
 }
+// Use option searched out to fill select box and load.
 function chooseSearch() {
 	var indexesSet = recordSearch[searchResults.selectedIndex];
 	s0.selectedIndex = indexesSet[0];
@@ -58,6 +59,10 @@ function chooseSearch() {
 	s[4].selectedIndex = indexesSet[4];
 
 	loadFromSelected();
+}
+function addOption(selectBox, text) {
+	selectBox.options.length = selectBox.options.length + 1;
+	selectBox.options[selectBox.options.length - 1].text = text;
 }
 function showActions() {
 	if (a1.selectedIndex !== -1 && a2.selectedIndex !== -1) {

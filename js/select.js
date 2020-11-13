@@ -188,10 +188,6 @@ function trackBack(boxIndex) {
 		default:
 	}
 }
-function addOption(selectBox, text) {
-	selectBox.options.length = selectBox.options.length + 1;
-	selectBox.options[selectBox.options.length - 1].text = text;
-}
 // Contains video source, video range and addtional information
 function loadFromSelected() {
 	clearVideoSrc();
