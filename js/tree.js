@@ -3,10 +3,27 @@
 */
 var nodes = [[], [], [], [], []];
 var tree = {};
-fetchVideoSrc().then(res => {
-	tree = res;
-	updateSelectBox(-1);
-}).catch(e => { console.error(e); throw e; });
+async function initTree(callback) {
+	var fetcher = new videoSourceFetcher();
+	var race = Promise.any([
+		fetcher.fetchVideoSrcFromLocalStorage(),
+		fetcher.fetchVideoSrcFromSameSite(),
+		fetcher.fetchVideoSrcFromGitHub()
+	]);
+	race
+		.then(res => {
+			tree = res;
+			callback();
+			console.log("Storing video data.");
+			fetcher.addVideoSrcToLocalStorage(tree);
+		})
+		.catch(e => {
+			console.error(e);
+			fetcher.removeVideoSrcFromLocalStorage();
+			console.log("Local storage removed. Refresh to reload.")
+			alert("Failed to load video data by any means.");
+		});
+}
 var videoTimeBegin = 0, videoTimeEnd = NaN;
 
 function defaultNode(value) {

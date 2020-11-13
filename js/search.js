@@ -4,13 +4,6 @@
 	require getActionTable
 */
 var recordSearch = new Array;
-var s = [
-	document.getElementById("s0"),
-	document.getElementById("s1"),
-	document.getElementById("s2"),
-	document.getElementById("s3"),
-	document.getElementById("s4")
-];
 
 function searchInAllNodes(keyWord) {
 	if (keyWord == null) return;

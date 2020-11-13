@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>可视化管理</title>
+	<link type="text/css" rel="stylesheet" href="../css/basic.css">
+	<link rel="stylesheet" type="text/css" id="linkSchemeStyle">
+	<script src="../js/load.js" onload="init('../')"></script>
+</head>
+
+<body>
+	<header></header>
+	<main>
+		<fieldset class="top">
+			<form action="javascript:updateSelectBox(-1)" autocomplete="off">
+				<div class="selectSet">
+					<label for="s0">运动项目</label>
+					<select id="s0" onchange="updateSelectBox(0)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s1">年份</label>
+					<select id="s1" onchange="updateSelectBox(1)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s2">赛事</label>
+					<select id="s2" onchange="updateSelectBox(2)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s3">队伍</label>
+					<select id="s3" onchange="updateSelectBox(3)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s4">动作</label>
+					<select id="s4" onchange="updateSelectBox(4)">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<input class="buttonReplay" type="submit" value="刷新">
+			</form>
+		</fieldset>
+	</main>
+</body>
+
+</html>

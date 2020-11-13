@@ -5,7 +5,15 @@ const emptyURL = "javascript:void(0)";
 const emptyPage = "about:blank";
 const emptySrc = "";
 var displayMode = "html5";
-var displayNode = { src: emptySrc, from: "", origin: emptyPage }
+var displayNode = { src: emptySrc, from: "", origin: emptyPage };
+var s = [
+	document.getElementById("s0"),
+	document.getElementById("s1"),
+	document.getElementById("s2"),
+	document.getElementById("s3"),
+	document.getElementById("s4")
+];
+initTree(arg => updateSelectBox(-1));
 
 function fillSelectBoxWithSubValues(selectBox, subArray) {
 	selectBox.options.length = subArray.length;
