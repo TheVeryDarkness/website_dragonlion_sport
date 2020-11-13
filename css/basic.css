@@ -1,3 +1,8 @@
+:root {
+  font-size: 24px;
+  font-family: "Cursive", "KaiTi_GB2312", "DFKai-SB", "FangSong",
+    "FangSong_GB2312";
+}
 body {
   /*Must be overriden*/
   background-color: black;
@@ -63,11 +68,13 @@ div.selectSet {
 
 select {
   font-size: inherit;
+  font-family: inherit;
   color: inherit;
 }
 
 input.buttonReplay {
   color: inherit;
+  border-color: inherit;
   float: left;
   vertical-align: bottom;
 }
@@ -78,6 +85,7 @@ a {
 
 input {
   font-size: inherit;
+  font-family: inherit;
   color: inherit;
   background-color: inherit;
 }
