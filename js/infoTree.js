@@ -31,14 +31,14 @@ async function initTree(callback) {
 		.then(res => {
 			tree = res;
 			callback();
-			document.getElementById("loadStatus").innerText = "";
+			document.getElementById("loadStatus").value = "刷新";
 			console.log("Storing video data.");
 			fetcher.addVideoSrcToLocalStorage(tree);
 		})
 		.catch(e => {
 			console.error(e);
 			fetcher.removeVideoSrcFromLocalStorage();
-			document.getElementById("loadStatus").innerText = "加载失败";
+			document.getElementById("loadStatus").value = "重试";
 			console.log("Local storage removed. Refresh to reload.")
 			alert("Failed to load video data properly by any means.");
 		});
