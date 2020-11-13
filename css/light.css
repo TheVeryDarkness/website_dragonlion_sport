@@ -1,31 +1,31 @@
 :root {
-    --top-color: #585048;
+  --top-color: #585048;
 }
 
 header {
-    color: var(--top-color);
-    background-image: url("../pic/background/sakura-background.png");
+  color: var(--top-color);
+  background-image: url("../pic/background/sakura-background.png");
 }
 
 fieldset.top {
-    color: var(--top-color);
-    background-color: #f0efe7;
+  color: var(--top-color);
+  background-color: #f0efe7;
 }
 
 body {
-    background-color: #fffaf8;
+  background-color: #fffaf8;
 }
 
 small.videoInfo {
-    color: rosybrown;
+  color: rosybrown;
 }
 
 div.sideBar {
-    background-color: #fffbfd;
-    border-color: #999999;
-    color: #200050;
+  background-color: #fffbfd;
+  border-color: #999999;
+  color: #200050;
 }
 
 div.text.normal {
-    color:#200000;
+  color: #200000;
 }

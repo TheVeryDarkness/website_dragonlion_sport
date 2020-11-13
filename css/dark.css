@@ -1,74 +1,75 @@
 :root {
-    --top-color: #70707a;
+  --top-color: #70707a;
 }
 
 header {
-    color: var(--top-color);
-    filter: brightness(0.5);
-    background-image: url("../pic/background/sakura-background.png");
+  color: var(--top-color);
+  filter: brightness(0.5);
+  background-image: url("../pic/background/sakura-background.png");
 }
 
-header > h1, header > div {
-	filter: brightness(2);
+header > h1,
+header > div {
+  filter: brightness(2);
 }
 
 hr {
-	filter: brightness(0.5);
+  filter: brightness(0.5);
 }
 
 iframe {
-	filter: brightness(0.8);
+  filter: brightness(0.8);
 }
 
 fieldset.top {
-    color: var(--top-color);
-    background-color: #2d2a30;
-    border-color: #555555;
-    scrollbar-color: dark;
+  color: var(--top-color);
+  background-color: #2d2a30;
+  border-color: #555555;
+  scrollbar-color: dark;
 }
 
 body {
-    background-color: #212023;
+  background-color: #212023;
 }
 
 select {
-    background-color: inherit;
-    scrollbar-color: dark;
-    scrollbar-arrow-color: #111111;
-    -ms-scrollbar-arrow-color: #111111;
+  background-color: inherit;
+  scrollbar-color: dark;
+  scrollbar-arrow-color: #111111;
+  -ms-scrollbar-arrow-color: #111111;
 }
 
 small.videoInfo {
-    color: #646064;
+  color: #646064;
 }
 
 input.buttonReplay {
-    background-color: inherit;
-    border-color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
 input.textSearch {
-    background-color: inherit;
-    color: inherit;
+  background-color: inherit;
+  color: inherit;
 }
 
 input.buttonSearch {
-    background-color: inherit;
-    border-color: inherit;
-    color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+  color: inherit;
 }
 
 select.search {
-    background-color: inherit;
-    scrollbar-color: dark;
+  background-color: inherit;
+  scrollbar-color: dark;
 }
 
 div.sideBar {
-    background-color: #1f1c24;
-    border-color: #444444;
-    color: #606f6a;
+  background-color: #1f1c24;
+  border-color: #444444;
+  color: #606f6a;
 }
 
 .text.normal {
-    color: #777777;
+  color: #777777;
 }
