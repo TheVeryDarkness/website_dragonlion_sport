@@ -1,5 +1,5 @@
 /*
-	require tree.js
+	require infoTree.js
 */
 var s = [
 	document.getElementById("s0"),

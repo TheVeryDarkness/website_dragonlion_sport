@@ -3,6 +3,8 @@
 */
 var nodes = [[], [], [], [], []];
 var tree = {};
+const all = "全选";
+
 async function initTree(callback) {
 	var fetcher = new videoSourceFetcher();
 	// WeiXin browser does not support any yet
@@ -58,7 +60,6 @@ function nextNodes(nodes, selectedIndex) {
 		else console.log("Node '", node.value, "' miss property 'sub'.");
 	return rev;
 }
-const all = "全选";
 
 function nextNodesAndAll(nodes, selectedIndex) {
 	return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));

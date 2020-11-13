@@ -1,5 +1,5 @@
 /* 
-	require tree.js
+	require infoTree.js
 	require select.js
 	require getActionTable
 */
