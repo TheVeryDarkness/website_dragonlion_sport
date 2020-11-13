@@ -29,6 +29,8 @@ function fillSelectBoxWithNodes(selectBox, nodes) {
 // Just update select boxes' contents
 // boxIndex is the index of the box whose selected index is changed
 function updateSelectBox(boxIndex) {
+	if (boxIndex > 0 && s[boxIndex - 1].selectedIndex == 0)
+		trackBack(boxIndex);
 	switch (boxIndex) {
 		case -1:
 			nodes[0] = new Array(defaultNode(all)).concat(tree.root); //运动项目
