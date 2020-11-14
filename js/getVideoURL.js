@@ -1,4 +1,6 @@
 /*
+	require root.js
+
 	Format:
 		sport
 			time
@@ -38,7 +40,7 @@ class videoSourceFetcher {
 				localStorage.setItem("video", JSON.stringify(tree));
 		};
 		this.fetchVideoSrcFromSameSite = function () {
-			return fetch('data/video.json', { method: "GET" }).then(res => { return res.json() });
+			return fetch(rootPath + 'data/video.json', { method: "GET" }).then(res => { return res.json() });
 		};
 		this.fetchVideoSrcFromGitHub = function () {
 			return fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', { method: "GET" }).then(res => { return res.json() });

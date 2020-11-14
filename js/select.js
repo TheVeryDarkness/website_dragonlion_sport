@@ -38,17 +38,21 @@ function updateSelectBox(boxIndex) {
 			nodes[0] = new Array(defaultNode(all)).concat(tree.root); //运动项目
 			fillSelectBoxWithNodes(s[0], nodes[0]);
 		case 0:
-			nodes[1] = nextNodesAndAll(nodes[0], s0.selectedIndex); //年份
+			nodes[1] = nextNodesAndAll(nodes[0], s[0].selectedIndex); //年份
 			fillSelectBoxWithNodes(s[1], nodes[1]);
+			s[1].selectedIndex = 0;
 		case 1:
 			nodes[2] = nextNodesAndAll(nodes[1], s[1].selectedIndex); //赛事
 			fillSelectBoxWithNodes(s[2], nodes[2]);
+			s[2].selectedIndex = 0;
 		case 2:
 			nodes[3] = nextNodesAndAll(nodes[2], s[2].selectedIndex); //队伍
 			fillSelectBoxWithNodes(s[3], nodes[3]);
+			s[3].selectedIndex = 0;
 		case 3:
 			nodes[4] = nextNodesAndAll(nodes[3], s[3].selectedIndex); //动作
 			fillSelectBoxWithNodes(s[4], nodes[4]);
+			s[4].selectedIndex = 0;
 		case 4:
 			callbackOnUpdate();
 			break;

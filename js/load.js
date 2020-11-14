@@ -1,6 +1,4 @@
-var root;
-function init(rootpath) {
-	root = rootpath;
+function initLight() {
 	if (window.matchMedia("(prefers-color-scheme: dark)").matches)
 		turnOff();
 	else if (window.matchMedia("(prefers-color-scheme: light)").matches)
@@ -18,12 +16,12 @@ function init(rootpath) {
 var on;
 
 function turnOn() {
-	linkSchemeStyle.href = root + "./css/light.css";
+	linkSchemeStyle.href = rootPath + "./css/light.css";
 	on = true;
 }
 
 function turnOff() {
-	linkSchemeStyle.href = root + "./css/dark.css";
+	linkSchemeStyle.href = rootPath + "./css/dark.css";
 	on = false;
 }
 

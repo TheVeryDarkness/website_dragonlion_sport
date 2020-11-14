@@ -7,12 +7,13 @@
 	<link rel="icon" href="../pic/icon/DragonLion.png" type=”image/x-icon”>
 	<link type="text/css" rel="stylesheet" href="../css/basic.css">
 	<link rel="stylesheet" type="text/css" id="linkSchemeStyle">
-	<script src="../js/load.js" onload="init('../')"></script>
+	<script type="text/javascript" src="../js/root.js" onload="initRoot('../')"></script>
+	<script type="text/javascript" src="../js/load.js" onload="initLight()"></script>
 </head>
 
 <body>
 	<header>
-		<h1>网站视频数据管理</h1>
+		<h1 onclick="change()">网站视频数据管理</h1>
 		<div class="area">
 			<ul class="menu">
 				<li><a target="_self" href="../index.html">主页</a></li>
@@ -22,10 +23,11 @@
 			</ul>
 		</div>
 	</header>
-	<hr>
+	<hr />
 	<main>
+		<p id="lightIndication" hidden></p>
 		<fieldset class="top">
-			<form action="javascript:updateSelectBox(-1)" autocomplete="off">
+			<form action="javascript:initSelect(showLastSpecified)" autocomplete="off">
 				<div class="selectSet">
 					<label for="s0">运动项目</label>
 					<select id="s0" onchange="updateSelectBox(0)">
@@ -56,14 +58,24 @@
 						<option selected="selected">全选</option>
 					</select>
 				</div>
-				<input class="buttonReplay" type="submit" value="等待" id="loadStatus">
+				<input class="buttonReplay" type="submit" value="等待" id="loadStatus" />
+				<input class="buttonReplay" type="button" value="生成"
+					onclick="result.textContent = JSON.stringify(tree);makeFile('result.json',result.textContent);" />
 			</form>
 		</fieldset>
+		<ul id="nodeProperties" class="text normal"> </ul>
+		<br />
+		<p class="text normal">
+			编辑完成后，您可以点击“生成”按钮，复制下方的内容或下载生成的JSON文件，然后将其提交到
+			<a href="https://github.com/TheVeryDarkness/sport_data/issues">GitHub issues</a>
+			。如果您没有GitHub账号，可以联系<a href="mailto:1853308@tongji.edu.cn">当前的维护者</a>。
+		</p>
+		<p id="result" class="text normal"></p>
 	</main>
 	<script type="text/javascript" defer src="../js/getVideoURL.js"></script>
 	<script type="text/javascript" defer src="../js/infoTree.js"></script>
-	<script type="text/javascript" defer src="../js/select.js"
-		onload="initSelect(()=>{console.log('Not implemented yet.')})"></script>
+	<script type="text/javascript" defer src="../js/videoManager.js"></script>
+	<script type="text/javascript" defer src="../js/select.js" onload="initSelect(showLastSpecified)"></script>
 </body>
 
 </html>

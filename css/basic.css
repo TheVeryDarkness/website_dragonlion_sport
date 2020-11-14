@@ -56,7 +56,7 @@ ul.menu {
 
 ul.menu > li {
   font-size: 1.3em;
-  text-align: center;
+  text-align: left;
   display: block;
   float: left;
   width: 10%;
@@ -76,6 +76,13 @@ div.area {
   clear: both;
 }
 
+p{
+	text-indent: 2em;
+}
+p.sub {
+  margin: 0;
+  text-indent: 2em;
+}
 p.info {
   margin: 0;
 }
@@ -97,13 +104,6 @@ select#searchResults {
   overflow-y: auto;
 }
 
-input.buttonReplay {
-  color: inherit;
-  border-color: inherit;
-  float: left;
-  vertical-align: bottom;
-}
-
 a {
   color: inherit;
 }
@@ -120,12 +120,24 @@ input.wholeline {
   float: left;
 }
 
+input.buttonReplay {
+  color: inherit;
+  border-color: inherit;
+  float: left;
+  vertical-align: bottom;
+}
+
 input.textSearch {
   width: calc(100% - 5em);
   float: left;
 }
 
 input.buttonSearch {
+  float: right;
+}
+
+input.left {
+  text-align: end;
   float: right;
 }
 
@@ -207,4 +219,8 @@ td {
   border-style: solid;
   border-width: 1px;
   padding: 0;
+}
+
+.text.normal {
+  overflow-wrap: break-word;
 }

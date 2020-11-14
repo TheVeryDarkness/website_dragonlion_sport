@@ -9,7 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="./css/basic.css" id="linkSchemeStyle" />
 	<link rel="preload" type="image/png" href="./pic/background/sakura-background.png" as="image" />
 	<link rel="prefetch" type="application/json" href="./data/video.json" />
-	<script type="text/javascript" src="./js/load.js" onload="init('')"></script>
+	<script type="text/javascript" src="./js/root.js" onload="initRoot('')"></script>
+	<script type="text/javascript" src="./js/load.js" onload=" initLight()"></script>
 </head>
 
 <body>
@@ -129,8 +130,7 @@
 	<script type="text/javascript" defer src="./js/videoDisplayer.js"></script>
 	<script type="text/javascript" defer src="./js/select.js" onload="initSelect(loadFromSelected)"></script>
 	<script type="text/javascript" defer src="./js/getActionTable.js"></script>
-	<script type="text/javascript" defer src="./js/search.js"></script>
-	<script type="text/javascript" defer src="./js/main.js"></script>
+	<script type="text/javascript" defer src="./js/search.js" onload="showActions()"></script>
 	<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	<div class="text normal">
 		<hr>
