@@ -22,5 +22,8 @@ desktop.ini
 # folder copy
 *.zip
 
-# bat for quick push
+# bat for fast push
 *.bat
+
+# npm's data
+package-lock.json

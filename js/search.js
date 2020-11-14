@@ -3,6 +3,8 @@
 	require select.js
 	require getActionTable
 */
+import { nextNodesAndAll } from "./infoTree"
+export { goSearch, showActions };
 var recordSearch = new Array;
 
 function value0ToString() {

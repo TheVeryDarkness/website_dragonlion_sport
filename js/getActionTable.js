@@ -1,3 +1,4 @@
+export { tableActionLevel };
 const tableActionLevel = [
 	[
 		["原地8字舞龙", "行进8字舞龙", "单跪舞龙", "套头舞龙", "搁脚舞龙", "扯旗舞龙", "靠背舞龙", "横移(跳)步舞龙", "起伏8字舞龙"],

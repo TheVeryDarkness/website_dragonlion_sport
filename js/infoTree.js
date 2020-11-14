@@ -1,6 +1,8 @@
 /*
 	require getvideoURL.js
 */
+import { videoSourceFetcher } from "./getVideoURL"
+export { nodes, tree, initTree, nextNodesAndAll };
 var nodes = [[], [], [], [], []];
 var tree = {};
 const all = "全选";

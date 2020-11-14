@@ -1,3 +1,6 @@
+import { rootPath } from "./root"
+export { initLight, change };
+
 function initLight() {
 	if (window.matchMedia("(prefers-color-scheme: dark)").matches)
 		turnOff();

@@ -17,6 +17,8 @@
 		from
 		sub
 */
+import { rootPath } from "./root";
+export { videoSourceFetcher };
 class videoSourceFetcher {
 	constructor() {
 		if (!localStorage)

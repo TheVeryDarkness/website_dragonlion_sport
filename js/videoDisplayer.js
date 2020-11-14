@@ -1,3 +1,4 @@
+export { loadFromSelected }
 var videoTimeBegin = 0, videoTimeEnd = NaN;
 const emptyURL = "javascript:void(0)";
 const emptyPage = "about:blank";

@@ -1,3 +1,5 @@
+export { showLastSpecified, generate };
+
 var specified = {};
 function showNode(node) {
 	specified = node;

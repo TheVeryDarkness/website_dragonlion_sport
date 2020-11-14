@@ -1,6 +1,8 @@
 /*
 	require infoTree.js
 */
+import { nextNodesAndAll, initTree } from "./infoTree"
+export { initSelect, updateSelectBox };
 var s = [
 	document.getElementById("s0"),
 	document.getElementById("s1"),
@@ -59,11 +61,6 @@ function updateSelectBox(boxIndex) {
 		default:
 			console.error("Unexpected index ", boxIndex);
 	}
-}
-
-
-function refreshSelectBox() {
-	s[0].selectedIndex = s[1].selectedIndex = s[2].selectedIndex = s[3].selectedIndex = s[4].selectedIndex = 0;
 }
 
 function track(selectBoxSup, selectBoxSub, nodesSup) {
