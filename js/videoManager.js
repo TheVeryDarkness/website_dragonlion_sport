@@ -147,9 +147,3 @@ function loadFromSelected() {
 	}
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
-function showStatus(res) {
-	if (res)
-		document.getElementById("loadStatus").value = "刷新";
-	else
-		document.getElementById("loadStatus").value = "重试";
-}

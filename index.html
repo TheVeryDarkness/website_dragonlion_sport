@@ -58,7 +58,7 @@
 						<option selected="selected">全选</option>
 					</select>
 				</div>
-				<input id="loadStatus" class="buttonReplay" type="submit" value="等待">
+				<input class="buttonReplay" type="submit" value="等待" id="loadStatus">
 				<input class="buttonReplay" type="button" value="切换" onclick="switchDisplayMode()"></input>
 			</form>
 		</fieldset>
@@ -125,8 +125,7 @@
 	<script type="text/javascript" defer src="./js/getVideoURL.js"></script>
 	<script type="text/javascript" defer src="./js/infoTree.js"></script>
 	<script type="text/javascript" defer src="./js/videoManager.js"></script>
-	<script type="text/javascript" defer src="./js/select.js"
-		onload="initSelect(res=>{if(res)loadFromSelected();showSatus(res);})"></script>
+	<script type="text/javascript" defer src="./js/select.js" onload="initSelect(loadFromSelected)"></script>
 	<script type="text/javascript" defer src="./js/getActionTable.js"></script>
 	<script type="text/javascript" defer src="./js/search.js"></script>
 	<script type="text/javascript" defer src="./js/main.js"></script>

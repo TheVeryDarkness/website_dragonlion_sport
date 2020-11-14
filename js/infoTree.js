@@ -5,8 +5,18 @@ var nodes = [[], [], [], [], []];
 var tree = {};
 const all = "全选";
 
+function showStatus(res) {
+	const ls = document.getElementById("loadStatus");
+	if (!ls)
+		console.error("Name an element to show the status of loading.");
+	else if (res)
+		ls.value = "刷新";
+	else
+		ls.value = "重试";
+}
+
 async function initTree(callback) {
-	var fetcher = new videoSourceFetcher();
+	const fetcher = new videoSourceFetcher();
 	// WeiXin browser does not support any yet
 	var race =
 		Promise.any ?
@@ -30,13 +40,14 @@ async function initTree(callback) {
 	race
 		.then(res => {
 			tree = res;
-			callback(true);
+			callback();
+			showStatus(true);
 			fetcher.addVideoSrcToLocalStorage(tree);
 			console.log("Video data stored.");
 		})
 		.catch(e => {
 			console.error(e);
-			callback(false);
+			showStatus(false);
 			fetcher.removeVideoSrcFromLocalStorage();
 			console.log("Local storage removed. Refresh to reload.")
 			alert("Failed to load video data properly by any means.");
