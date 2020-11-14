@@ -1,8 +1,8 @@
 /*
 	require infoTree.js
 */
-import { nextNodesAndAll, initTree } from "./infoTree"
-export { initSelect, updateSelectBox };
+import { nextNodesAndAll, initTree, nodes, defaultNode, tree } from "./infoTree"
+export { initSelect, updateSelectBox, s };
 var s = [
 	document.getElementById("s0"),
 	document.getElementById("s1"),
@@ -37,7 +37,7 @@ function updateSelectBox(boxIndex) {
 		trackBack(boxIndex);
 	switch (boxIndex) {
 		case -1:
-			nodes[0] = new Array(defaultNode(all)).concat(tree.root); //运动项目
+			nodes[0] = new Array(defaultNode()).concat(tree.root); //运动项目
 			fillSelectBoxWithNodes(s[0], nodes[0]);
 		case 0:
 			nodes[1] = nextNodesAndAll(nodes[0], s[0].selectedIndex); //年份

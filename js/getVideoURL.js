@@ -28,7 +28,7 @@ class videoSourceFetcher {
 				if (!localStorage) reject("Not support action");
 				const fromLocalStorage = localStorage.getItem("video");
 				if (!fromLocalStorage)
-					reject("No such item in local storage.");
+					return reject("No such item in local storage.");
 				try {
 					const parsed = JSON.parse(fromLocalStorage);
 					resolve(parsed);
@@ -46,11 +46,13 @@ class videoSourceFetcher {
 			if (localStorage)
 				localStorage.setItem("video", JSON.stringify(tree));
 		};
-		this.fetchVideoSrcFromSameSite = function () {
-			return fetch(rootPath + 'data/video.json', { method: "GET" }).then(res => { return res.json() });
+		this.fetchVideoSrcFromSameSite = async function () {
+			const res = await fetch(rootPath + 'data/video.json', { method: "GET" });
+			return res.json();
 		};
-		this.fetchVideoSrcFromGitHub = function () {
-			return fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', { method: "GET" }).then(res => { return res.json() });
+		this.fetchVideoSrcFromGitHub = async function () {
+			const res = await fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', { method: "GET" });
+			return res.json();
 		};
 		return this;
 	}

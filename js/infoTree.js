@@ -2,7 +2,7 @@
 	require getvideoURL.js
 */
 import { videoSourceFetcher } from "./getVideoURL"
-export { nodes, tree, initTree, nextNodesAndAll };
+export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
 var nodes = [[], [], [], [], []];
 var tree = {};
 const all = "全选";
@@ -53,7 +53,7 @@ function initTree(callback) {
 		});
 }
 
-function defaultNode(value) {
+function defaultNode(value = all) {
 	return { "value": value, sub: [] };
 }
 //Return nodes

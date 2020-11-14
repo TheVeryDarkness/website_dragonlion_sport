@@ -1,4 +1,6 @@
-export { loadFromSelected }
+import { nodes } from "./infoTree"
+import { s } from "./select"
+export { loadFromSelected, switchDisplayMode }
 var videoTimeBegin = 0, videoTimeEnd = NaN;
 const emptyURL = "javascript:void(0)";
 const emptyPage = "about:blank";

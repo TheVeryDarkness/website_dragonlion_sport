@@ -4,7 +4,7 @@ module.exports = {
 	],
 	output: {
 		path: __dirname,
-		filename: "./packed/bundle.js"
+		filename: "./packed/index-bundle.js"
 	},
 	module: {
 		rules: [

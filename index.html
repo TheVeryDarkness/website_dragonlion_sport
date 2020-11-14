@@ -26,39 +26,39 @@
 	<hr />
 	<main>
 		<fieldset class="top">
-			<form action="javascript:initSelect(loadFromSelected);" autocomplete="off">
+			<form id="chooseItem" autocomplete="off">
 				<div class="selectSet">
 					<label for="s0">运动项目</label>
-					<select id="s0" onchange="updateSelectBox(0);">
+					<select id="s0">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s1">年份</label>
-					<select id="s1" onchange="updateSelectBox(1);">
+					<select id="s1">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s2">赛事</label>
-					<select id="s2" onchange="updateSelectBox(2);">
+					<select id="s2">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s3">队伍</label>
-					<select id="s3" onchange="updateSelectBox(3);">
+					<select id="s3">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s4">动作</label>
-					<select id="s4" onchange="updateSelectBox(4);">
+					<select id="s4">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<input class="buttonReplay" type="submit" value="等待" id="loadStatus" />
-				<input class="buttonReplay" type="button" value="切换" onclick="switchDisplayMode()" />
+				<input class="buttonReplay" type="button" value="切换" id="playMode" />
 			</form>
 		</fieldset>
 		<small class="videoInfo">
@@ -81,8 +81,7 @@
 		<!--allow-forms allow-pointer-lock-->
 		<div class="sideBar">
 			<div class="area">
-				<form action="javascript:a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)"
-					autocomplete="off">
+				<form id="chooseAction" autocomplete="off">
 					<select id="a1" onchange="showActions()">
 						<option selected="selected">A级</option>
 						<option>B级</option>
@@ -100,12 +99,11 @@
 				</form>
 			</div>
 			<div class="area">
-				<form action="javascript:searchInAllNodes(textSearchInAll.value)" autocomplete="off">
-					<input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索"
-						oninput="searchInAllNodes(textSearchInAll.value)" type="text">
+				<form id="searchName" autocomplete="off">
+					<input class="textSearch" id="textSearchInAll" placeholder="输入关键词以搜索" type="text">
 					<input class="buttonSearch" type="submit" value="Search">
 				</form>
-				<select class="search" id="searchResults" onchange="chooseSearch()" size=8></select>
+				<select class="search" id="searchResults" size=8></select>
 				<p id="i0" class="info" ondblclick="javascript:alert(i0.textContent)"></p>
 				<p id="i1" class="info" ondblclick="javascript:alert(i1.textContent)"></p>
 				<p id="i2" class="info" ondblclick="javascript:alert(i2.textContent)"></p>
@@ -123,12 +121,12 @@
 			-->
 		</div>
 	</main>
-	<script type="text/javascript" src="./packed/bundle.js"></script>
+	<script type="text/javascript" defer src="./packed/index-bundle.js"></script>
 	<noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
 	<div class="text normal">
 		<hr>
 		<footer>
-			<small class="switch" id="lightIndication" onclick="change()">本来无物何处尘埃</small>
+			<small class="switch" id="lightIndication">本来无物何处尘埃</small>
 			<br />
 			<a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/">Maintain</a>ed by
 			<a href="mailto:1853308@tongji.edu.com">黄博奕</a>
