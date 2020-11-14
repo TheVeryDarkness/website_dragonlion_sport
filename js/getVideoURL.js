@@ -25,10 +25,15 @@ class videoSourceFetcher {
 			return new Promise((resolve, reject) => {
 				if (!localStorage) reject("Not support action");
 				const fromLocalStorage = localStorage.getItem("video");
-				if (fromLocalStorage)
-					resolve(JSON.parse(fromLocalStorage));
-				else
+				if (!fromLocalStorage)
 					reject("No such item in local storage.");
+				try {
+					const parsed = JSON.parse(fromLocalStorage);
+					resolve(parsed);
+				} catch (error) {
+					console.log("Data in local storage not available.");
+					reject(error);
+				}
 			});
 		};
 		this.removeVideoSrcFromLocalStorage = function () {
