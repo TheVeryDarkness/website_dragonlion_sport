@@ -1,15 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
 
 <head>
 	<title>视频导引</title>
-	<meta lang="zh-Hans-CN" charset="utf-8">
-	<link rel="icon" href="./pic/icon/DragonLion.png" type=”image/x-icon”>
-	<link rel="stylesheet" type="text/css" href="./css/basic.css">
-	<link rel="stylesheet" type="text/css" id="linkSchemeStyle">
+	<meta charset="utf-8" />
+	<link rel="icon" href="./pic/icon/DragonLion.png" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="./css/basic.css" />
+	<link rel="stylesheet" type="text/css" href="" id="linkSchemeStyle" />
 	<link rel="preload" type="image/png" href="./pic/background/sakura-background.png" as="image" />
-	<link rel="prefetch" type="application/json" href="./data/video.json">
-	<script src="./js/load.js" onload="init('')"></script>
+	<link rel="prefetch" type="application/json" href="./data/video.json" />
+	<script type="text/javascript" src="./js/load.js" onload="init('')"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 			</ul>
 		</div>
 	</header>
-	<hr>
+	<hr />
 	<main>
 		<fieldset class="top">
 			<form action="javascript:initSelect();" autocomplete="off">
@@ -58,8 +58,8 @@
 						<option selected="selected">全选</option>
 					</select>
 				</div>
-				<input class="buttonReplay" type="submit" value="等待" id="loadStatus">
-				<input class="buttonReplay" type="button" value="切换" onclick="switchDisplayMode()"></input>
+				<input class="buttonReplay" type="submit" value="等待" id="loadStatus" />
+				<input class="buttonReplay" type="button" value="切换" onclick="switchDisplayMode()" />
 			</form>
 		</fieldset>
 		<small class="videoInfo">
@@ -71,12 +71,11 @@
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
 		</small>
-		<video id="video" class="video" controls type="video/mp4" autoplay>
-			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+		<video id="video" class="video" controls autoplay>
 			<source id="sourceVideo">
+			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 		</video>
-		<iframe id="embededFrame" class="video" sandbox="allow-same-origin allow-scripts" src="about:blank"
-			allowfullscreen="true">浏览器不支持HTML内嵌框架，请使用高版本浏览器或点击链接</iframe>
+		<iframe id="embededFrame" class="video" sandbox="allow-same-origin allow-top-navigation-by-user-activation allow-scripts" src="about:blank" allow="fullscreen"></iframe>
 		<!--allow-forms allow-pointer-lock-->
 		<div class="sideBar">
 			<div class="area">

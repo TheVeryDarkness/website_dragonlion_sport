@@ -18,25 +18,22 @@ function showStatus(res) {
 async function initTree(callback) {
 	const fetcher = new videoSourceFetcher();
 	// WeiXin browser does not support any yet
-	var race =
-		Promise.any ?
-			Promise.any([
-				fetcher.fetchVideoSrcFromLocalStorage(),
-				fetcher.fetchVideoSrcFromSameSite(),
-				fetcher.fetchVideoSrcFromGitHub()
-			])
-			:
-			fetcher.fetchVideoSrcFromLocalStorage()
-				.catch(e => {
-					console.log(e);
-					return fetcher.fetchVideoSrcFromSameSite();
-				}).catch(e => {
-					console.log(e);
-					return fetcher.fetchVideoSrcFromGitHub();
-				}).catch(e => {
-					console.log(e);
-					alert("Can't load by any mean.")
-				});
+	var race = (Promise.any ?
+		Promise.any([
+			fetcher.fetchVideoSrcFromLocalStorage(),
+			fetcher.fetchVideoSrcFromSameSite(),
+			fetcher.fetchVideoSrcFromGitHub()
+		]) : fetcher.fetchVideoSrcFromLocalStorage()
+			.catch(e => {
+				console.log(e);
+				return fetcher.fetchVideoSrcFromSameSite();
+			}).catch(e => {
+				console.log(e);
+				return fetcher.fetchVideoSrcFromGitHub();
+			}).catch(e => {
+				console.log(e);
+				alert("Can't load by any mean.")
+			}));
 	race
 		.then(res => {
 			tree = res;

@@ -43,5 +43,6 @@ class videoSourceFetcher {
 		this.fetchVideoSrcFromGitHub = function () {
 			return fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', { method: "GET" }).then(res => { return res.json() });
 		};
+		return this;
 	}
 };
