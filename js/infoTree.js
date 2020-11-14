@@ -15,7 +15,7 @@ function showStatus(res) {
 		ls.value = "重试";
 }
 
-async function initTree(callback) {
+function initTree(callback) {
 	const fetcher = new videoSourceFetcher();
 	// WeiXin browser does not support any yet
 	var race = (Promise.any ?
