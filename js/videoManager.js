@@ -79,5 +79,4 @@ function makeFile(name, text) {
 function generate() {
 	result.textContent = JSON.stringify(tree, null, 1);
 	makeFile('result.json', result.textContent);
-	// mailLabel.href = "mailto:1853308@tongji.edu.cn?body=" + JSON.stringify(tree);
 }
