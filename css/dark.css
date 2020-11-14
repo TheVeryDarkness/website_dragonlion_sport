@@ -1,9 +1,16 @@
 :root {
-  --top-color: #70707a;
+  --main-text-color: #70707a;
+  --main-border-color: #555555;
+  --main-background-color: #212023;
+  --sub-background-color: #2e2b2c;
+  --sub-border-color: #444444;
+  --sub-text-color: #626460;
+  --normal-text-color: #777777;
+  --arrow-color: #111111;
 }
 
 header {
-  color: var(--top-color);
+  color: var(--main-text-color);
   filter: brightness(0.5);
   background-image: url("../pic/background/sakura-background.png");
 }
@@ -22,25 +29,25 @@ iframe {
 }
 
 fieldset.top {
-  color: var(--top-color);
-  background-color: #2d2a30;
-  border-color: #555555;
+  color: var(--main-text-color);
+  background-color: var(--sub-background-color);
+  border-color: var(--main-border-color);
   scrollbar-color: dark;
 }
 
 body {
-  background-color: #212023;
+  background-color: var(--main-background-color);
 }
 
 select {
   background-color: inherit;
   scrollbar-color: dark;
-  scrollbar-arrow-color: #111111;
-  -ms-scrollbar-arrow-color: #111111;
+  scrollbar-arrow-color: var(--arrow-color);
+  -ms-scrollbar-arrow-color: var(--arrow-color);
 }
 
 small.videoInfo {
-  color: #646064;
+  color: var(--sub-text-color);
 }
 
 input.buttonReplay {
@@ -66,11 +73,11 @@ select.search {
 
 div.sideBar,
 textarea {
-  background-color: #1f1c24;
-  border-color: #444444;
-  color: #606f6a;
+  background-color: var(--sub-background-color);
+  border-color: var(--sub-border-color);
+  color: var(--sub-text-color);
 }
 
 .text.normal {
-  color: #777777;
+  color: var(--normal-text-color);
 }
