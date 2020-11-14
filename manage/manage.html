@@ -59,8 +59,7 @@
 					</select>
 				</div>
 				<input class="buttonReplay" type="submit" value="等待" id="loadStatus" />
-				<input class="buttonReplay" type="button" value="生成"
-					onclick="result.textContent = JSON.stringify(tree);makeFile('result.json',result.textContent);" />
+				<input class="buttonReplay" type="button" value="生成" onclick="generate()" />
 			</form>
 		</fieldset>
 		<ul id="nodeProperties" class="text normal"> </ul>
@@ -68,9 +67,9 @@
 		<p class="text normal">
 			编辑完成后，您可以点击“生成”按钮，复制下方的内容或下载生成的JSON文件，然后将其提交到
 			<a href="https://github.com/TheVeryDarkness/sport_data/issues">GitHub issues</a>
-			。如果您没有GitHub账号，可以联系<a href="mailto:1853308@tongji.edu.cn">当前的维护者</a>。
+			。如果您没有GitHub账号，可以联系<a id="mailLabel" href="mailto:1853308@tongji.edu.cn">当前的维护者</a>。
 		</p>
-		<p id="result" class="text normal"></p>
+		<textarea readonly="true" id="result" class="text normal"></textarea>
 	</main>
 	<script type="text/javascript" defer src="../js/getVideoURL.js"></script>
 	<script type="text/javascript" defer src="../js/infoTree.js"></script>

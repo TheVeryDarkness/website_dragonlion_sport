@@ -20,7 +20,8 @@ small.videoInfo {
   color: rosybrown;
 }
 
-div.sideBar {
+div.sideBar,
+textarea {
   background-color: #fffbfd;
   border-color: #999999;
   color: #200050;

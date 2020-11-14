@@ -76,8 +76,8 @@ div.area {
   clear: both;
 }
 
-p{
-	text-indent: 2em;
+p {
+  text-indent: 2em;
 }
 p.sub {
   margin: 0;
@@ -223,4 +223,11 @@ td {
 
 .text.normal {
   overflow-wrap: break-word;
+}
+
+textarea {
+  font-size: inherit;
+  width: 100%;
+  height: fit-content;
+  min-height: 10em;
 }

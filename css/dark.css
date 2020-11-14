@@ -64,7 +64,8 @@ select.search {
   scrollbar-color: dark;
 }
 
-div.sideBar {
+div.sideBar,
+textarea {
   background-color: #1f1c24;
   border-color: #444444;
   color: #606f6a;

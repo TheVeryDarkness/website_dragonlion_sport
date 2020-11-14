@@ -65,14 +65,19 @@ function showLastSpecified(end = s.length) {
 	showNode(lastSpecifiedNode(end));
 }
 function makeFile(name, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', name);
- 
-  element.style.display = 'none';
-  document.body.appendChild(element);
- 
-  element.click();
- 
-  document.body.removeChild(element);
+	var element = document.createElement('a');
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', name);
+
+	element.style.display = 'none';
+	document.body.appendChild(element);
+
+	element.click();
+
+	document.body.removeChild(element);
+}
+function generate() {
+	result.textContent = JSON.stringify(tree, null, 1);
+	makeFile('result.json', result.textContent);
+	// mailLabel.href = "mailto:1853308@tongji.edu.cn?body=" + JSON.stringify(tree);
 }
