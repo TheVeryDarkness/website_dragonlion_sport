@@ -16,5 +16,11 @@ _notes/
 web.config
 desktop.ini
 
+# vscode configuration
 .vscode/**
+
+# folder copy
 *.zip
+
+# bat for quick push
+*.bat
