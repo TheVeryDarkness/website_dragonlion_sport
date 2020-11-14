@@ -1,10 +1,11 @@
 :root {
   --main-text-color: #70707a;
-  --main-border-color: #555555;
   --main-background-color: #212023;
+  --main-border-color: #555555;
+  --sub-text-color: #626460;
   --sub-background-color: #2e2b2c;
   --sub-border-color: #444444;
-  --sub-text-color: #626460;
+  --sub-sub-background-color: #1f1c24;
   --normal-text-color: #777777;
   --arrow-color: #111111;
 }

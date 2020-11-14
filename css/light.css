@@ -1,32 +1,38 @@
 :root {
-  --top-color: #585048;
+  --main-text-color: #585048;
+  --main-background-color: #fffaf8;
+  --sub-text-color: rosybrown;
+  --sub-background-color: #f0efe7;
+  --sub-border-color: #999999;
+  --sub-sub-background-color: #fffbfa;
+  --normal-text-color: #200000;
 }
 
 header {
-  color: var(--top-color);
+  color: var(--main-text-color);
   background-image: url("../pic/background/sakura-background.png");
 }
 
 fieldset.top {
-  color: var(--top-color);
-  background-color: #f0efe7;
+  color: var(--main-text-color);
+  background-color: var(--sub-background-color);
 }
 
 body {
-  background-color: #fffaf8;
+  background-color: var(--main-background-color);
 }
 
 small.videoInfo {
-  color: rosybrown;
+  color: var(--sub-text-color);
 }
 
 div.sideBar,
 textarea {
-  background-color: #fffbfd;
-  border-color: #999999;
-  color: #200050;
+  background-color: var(--sub-background-color);
+  border-color: var(--sub-border-color);
+  color: var(--sub-text-color);
 }
 
 div.text.normal {
-  color: #200000;
+  color: var(--normal-text-color);
 }
