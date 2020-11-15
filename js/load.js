@@ -1,6 +1,7 @@
 import { rootPath } from "./root"
 export { initLight, change };
 
+import("../css/basic.css")
 const dark = require("../css/light.css");
 const light = require("../css/light.css");
 function initLight() {

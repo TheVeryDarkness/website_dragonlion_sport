@@ -34,19 +34,19 @@ module.exports = {
 			"chunks": ["index"]
 		}),
 		new HtmlWebpackPlugin({
-			"filename": "links.html",
+			"filename": "links/links.html",
 			"template": "links/links.html",
 			"scriptLoading": "defer",
 			"chunks": ["links"]
 		}),
 		new HtmlWebpackPlugin({
-			"filename": "reference.html",
+			"filename": "reference/reference.html",
 			"template": "reference/reference.html",
 			"scriptLoading": "defer",
 			"chunks": ["reference"]
 		}),
 		new HtmlWebpackPlugin({
-			"filename": "manage.html",
+			"filename": "manage/manage.html",
 			"template": "manage/manage.html",
 			"scriptLoading": "defer",
 			"chunks": ["manage"]
