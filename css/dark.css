@@ -41,7 +41,7 @@ body {
 }
 
 select {
-  background-color: inherit;
+  background-color: var(--sub-sub-background-color);
   scrollbar-color: dark;
   scrollbar-arrow-color: var(--arrow-color);
   -ms-scrollbar-arrow-color: var(--arrow-color);

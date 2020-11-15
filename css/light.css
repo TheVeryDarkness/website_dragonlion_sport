@@ -22,6 +22,10 @@ body {
   background-color: var(--main-background-color);
 }
 
+select {
+  background-color: var(--sub-sub-background-color);
+}
+
 small.videoInfo {
   color: var(--sub-text-color);
 }
