@@ -12,7 +12,7 @@ function showStatus(res) {
 	if (!ls)
 		console.error("Name an element to show the status of loading.");
 	else if (res)
-		ls.value = "刷新";
+		ls.value = "重置";
 	else
 		ls.value = "重试";
 }
