@@ -11,7 +11,7 @@ module.exports = {
 		manage: "./js/entry/manage.js",
 	},
 	output: {
-		path: __dirname + "/packed",
+		path: __dirname + "/docs",
 		filename: "[name]-bundle.js"
 	},
 	module: {
