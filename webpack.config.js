@@ -36,6 +36,15 @@ module.exports = {
 			}
 		]
 	},
+	optimization: {
+		splitChunks: {
+			chunks: "all",
+			minChunks: 1,
+			minSize: 30000,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			"filename": "index.html",
