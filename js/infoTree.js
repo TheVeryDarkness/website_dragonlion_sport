@@ -1,7 +1,7 @@
 /*
 	require getvideoURL.js
 */
-import { videoSourceFetcher } from "./getVideoURL"
+import { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromSameSite, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
 export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
 var nodes = [[], [], [], [], []];
 var tree = {};
@@ -18,21 +18,19 @@ function showStatus(res) {
 }
 
 function initTree(callback) {
-	const fetcher = new videoSourceFetcher();
-
 	// Some browsers do not support 'any' yet
 	var race = (Promise.any ?
 		Promise.any([
-			fetcher.fetchVideoSrcFromLocalStorage(),
-			fetcher.fetchVideoSrcFromSameSite(),
-			fetcher.fetchVideoSrcFromGitHub()
-		]) : fetcher.fetchVideoSrcFromLocalStorage()
+			fetchVideoSrcFromLocalStorage(),
+			fetchVideoSrcFromSameSite(),
+			fetchVideoSrcFromGitHub()
+		]) : fetchVideoSrcFromLocalStorage()
 			.catch(e => {
 				console.log(e);
-				return fetcher.fetchVideoSrcFromSameSite();
+				return fetchVideoSrcFromSameSite();
 			}).catch(e => {
 				console.log(e);
-				return fetcher.fetchVideoSrcFromGitHub();
+				return fetchVideoSrcFromGitHub();
 			}).catch(e => {
 				console.log(e);
 				alert("Can't load by any mean.")
@@ -42,15 +40,15 @@ function initTree(callback) {
 			tree = res;
 			callback();
 			showStatus(true);
-			fetcher.addVideoSrcToLocalStorage(tree);
+			addVideoSrcToLocalStorage(tree);
 			console.log("Video data stored.");
 		})
 		.catch(e => {
 			console.log(e);
-			fetcher.removeVideoSrcFromLocalStorage();
+			removeVideoSrcFromLocalStorage();
 			console.log("Local storage removed. Refresh to reload.");
 			console.log("Can't fecth from outside. Using embeded data.");
-			fetcher.embededVideoSrc()
+			embededVideoSrc()
 				.then(res => {
 					tree = res;
 					callback();
