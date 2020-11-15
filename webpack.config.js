@@ -4,11 +4,11 @@
 //  https://webpack.js.org/loaders/style-loader/
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
+	mode: "production",
 	entry: {
 		index: "./js/entry/index.js",
-		links: "./js/entry/links.js",
-		reference: "./js/entry/reference.js",
-		manage: "./js/entry/manage.js",
+		normal: "./js/entry/normal.js",
+		manage: "./js/entry/manage.js"
 	},
 	output: {
 		path: __dirname + "/docs",
@@ -48,14 +48,14 @@ module.exports = {
 			"filename": "links/links.html",
 			"template": "links/links.html",
 			"scriptLoading": "defer",
-			"chunks": ["links"],
+			"chunks": ["normal"],
 			"favicon": "pic/icon/DragonLion.png"
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "reference/reference.html",
 			"template": "reference/reference.html",
 			"scriptLoading": "defer",
-			"chunks": ["reference"],
+			"chunks": ["normal"],
 			"favicon": "pic/icon/DragonLion.png"
 		}),
 		new HtmlWebpackPlugin({
