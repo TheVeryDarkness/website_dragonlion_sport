@@ -24,10 +24,6 @@
     font-size: 14px;
   }
 }
-body {
-  /*Must be overriden*/
-  background-color: black;
-}
 
 hr {
   width: 100%;
