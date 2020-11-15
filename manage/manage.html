@@ -7,13 +7,12 @@
 	<link rel="icon" href="../pic/icon/DragonLion.png" type=”image/x-icon”>
 	<link type="text/css" rel="stylesheet" href="../css/basic.css">
 	<link rel="stylesheet" type="text/css" id="linkSchemeStyle">
-	<script type="text/javascript" src="../js/root.js" onload="initRoot('../')"></script>
-	<script type="text/javascript" src="../js/load.js" onload="initLight()"></script>
+	<script type="text/javascript" defer src="../packed/manage-bundle.js"></script>
 </head>
 
 <body>
 	<header>
-		<h1 onclick="change()">网站视频数据管理</h1>
+		<h1 id="lightSwitch">网站视频数据管理</h1>
 		<div class="area">
 			<ul class="menu">
 				<li><a target="_self" href="../index.html">主页</a></li>
@@ -27,39 +26,39 @@
 	<main>
 		<p id="lightIndication" hidden></p>
 		<fieldset class="top">
-			<form action="javascript:initSelect(showLastSpecified)" autocomplete="off">
+			<form id="selectItem" autocomplete="off">
 				<div class="selectSet">
 					<label for="s0">运动项目</label>
-					<select id="s0" onchange="updateSelectBox(0)">
+					<select id="s0">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s1">年份</label>
-					<select id="s1" onchange="updateSelectBox(1)">
+					<select id="s1">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s2">赛事</label>
-					<select id="s2" onchange="updateSelectBox(2)">
+					<select id="s2">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s3">队伍</label>
-					<select id="s3" onchange="updateSelectBox(3)">
+					<select id="s3">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<div class="selectSet">
 					<label for="s4">动作</label>
-					<select id="s4" onchange="updateSelectBox(4)">
+					<select id="s4">
 						<option selected="selected">全选</option>
 					</select>
 				</div>
 				<input class="buttonReplay" type="submit" value="等待" id="loadStatus" />
-				<input class="buttonReplay" type="button" value="生成" onclick="generate()" />
+				<input class="buttonReplay" type="button" value="生成" id="generateJSON" />
 			</form>
 		</fieldset>
 		<ul id="nodeProperties" class="text normal"> </ul>
@@ -67,14 +66,11 @@
 		<p class="text normal">
 			编辑完成后，您可以点击“生成”按钮，复制下方的内容或下载生成的JSON文件，然后将其提交到
 			<a href="https://github.com/TheVeryDarkness/sport_data/issues">GitHub issues</a>
-			。如果您没有GitHub账号，可以联系<a id="mailLabel" href="mailto:1853308@tongji.edu.cn&subject='Data Update Request.'">当前的维护者</a>。
+			。如果您没有GitHub账号，可以联系<a id="mailLabel"
+				href="mailto:1853308@tongji.edu.cn&subject='Data Update Request.'">当前的维护者</a>。
 		</p>
 		<textarea readonly="true" id="result" class="text normal"></textarea>
 	</main>
-	<script type="text/javascript" defer src="../js/getVideoURL.js"></script>
-	<script type="text/javascript" defer src="../js/infoTree.js"></script>
-	<script type="text/javascript" defer src="../js/videoManager.js"></script>
-	<script type="text/javascript" defer src="../js/select.js" onload="initSelect(showLastSpecified)"></script>
 </body>
 
 </html>

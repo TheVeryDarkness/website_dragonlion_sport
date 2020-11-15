@@ -1,10 +1,13 @@
 module.exports = {
-	entry: [
-		"./js/entry/index.js",
-	],
+	entry: {
+		index: "./js/entry/index.js",
+		links: "./js/entry/links.js",
+		reference: "./js/entry/reference.js",
+		manage: "./js/entry/manage.js",
+	},
 	output: {
 		path: __dirname,
-		filename: "./packed/index-bundle.js"
+		filename: "./packed/[name]-bundle.js"
 	},
 	module: {
 		rules: [
