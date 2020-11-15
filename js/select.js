@@ -2,7 +2,7 @@
 	require infoTree.js
 */
 import { nextNodesAndAll, initTree, nodes, defaultNode, tree } from "./infoTree"
-export { initSelect, updateSelectBox, s };
+export { initSelect, updateSelectBox, s, fillSelectBoxWithNodes };
 var s = [
 	document.getElementById("s0"),
 	document.getElementById("s1"),

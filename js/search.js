@@ -4,9 +4,10 @@
 	require getActionTable
 */
 import { nextNodesAndAll, nodes } from "./infoTree"
-import { s } from "./select"
+import { s, fillSelectBoxWithNodes } from "./select"
 import { tableActionLevel } from "./getActionTable"
-export { goSearch, showActions, chooseSearch };
+import { loadFromSelected } from "./videoDisplayer"
+export { goSearch, showActions, chooseSearch, searchInAllNodes };
 var recordSearch = new Array;
 
 function value0ToString() {
