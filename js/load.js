@@ -1,6 +1,8 @@
 import { rootPath } from "./root"
 export { initLight, change };
 
+const dark = require("../css/light.css");
+const light = require("../css/light.css");
 function initLight() {
 	if (window.matchMedia("(prefers-color-scheme: dark)").matches)
 		turnOff();
@@ -19,12 +21,12 @@ function initLight() {
 var on;
 
 function turnOn() {
-	linkSchemeStyle.href = rootPath + "./css/light.css";
+	linkSchemeStyle.href = dark;
 	on = true;
 }
 
 function turnOff() {
-	linkSchemeStyle.href = rootPath + "./css/dark.css";
+	linkSchemeStyle.href = light;
 	on = false;
 }
 

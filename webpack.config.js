@@ -1,3 +1,4 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	entry: {
 		index: "./js/entry/index.js",
@@ -6,17 +7,49 @@ module.exports = {
 		manage: "./js/entry/manage.js",
 	},
 	output: {
-		path: __dirname,
-		filename: "./packed/[name]-bundle.js"
+		path: __dirname + "/packed",
+		filename: "[name]-bundle.js"
 	},
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
 				use: [
-					"style-loader", "css-loader?minimize"
+					"style-loader", "css-loader"
+				]
+			},
+			{
+				test: /\.png$/,
+				use: [
+					"url-loader"
 				]
 			}
 		]
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			"filename": "index.html",
+			"template": "index.html",
+			"scriptLoading": "defer",
+			"chunks": ["index"]
+		}),
+		new HtmlWebpackPlugin({
+			"filename": "links.html",
+			"template": "links/links.html",
+			"scriptLoading": "defer",
+			"chunks": ["links"]
+		}),
+		new HtmlWebpackPlugin({
+			"filename": "reference.html",
+			"template": "reference/reference.html",
+			"scriptLoading": "defer",
+			"chunks": ["reference"]
+		}),
+		new HtmlWebpackPlugin({
+			"filename": "manage.html",
+			"template": "manage/manage.html",
+			"scriptLoading": "defer",
+			"chunks": ["manage"]
+		}),
+	]
 };
