@@ -33,7 +33,8 @@ function initTree(callback) {
 				return fetchVideoSrcFromGitHub();
 			}).catch(e => {
 				console.log(e);
-				alert("Can't load by any mean.")
+				alert("Can't load by any mean.");
+				throw "Load failure.";
 			}));
 	race
 		.then(res => {

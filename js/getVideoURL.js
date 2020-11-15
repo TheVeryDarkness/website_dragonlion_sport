@@ -53,9 +53,9 @@ function addVideoSrcToLocalStorage(tree) {
 };
 async function fetchVideoSrcFromSameSite() {
 	const res = await fetch(rootPath + 'data/video.json', request);
-	return res.json();
+	if (res.ok) return res.json(); else throw res.statusText;
 };
 async function fetchVideoSrcFromGitHub() {
 	const res = await fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', request);
-	return res.json();
+	if (res.ok) return res.json(); else throw res.statusText;
 };
