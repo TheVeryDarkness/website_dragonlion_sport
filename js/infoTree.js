@@ -19,7 +19,8 @@ function showStatus(res) {
 
 function initTree(callback) {
 	const fetcher = new videoSourceFetcher();
-	// WeiXin browser does not support any yet
+
+	// Some browsers do not support 'any' yet
 	var race = (Promise.any ?
 		Promise.any([
 			fetcher.fetchVideoSrcFromLocalStorage(),
@@ -45,11 +46,21 @@ function initTree(callback) {
 			console.log("Video data stored.");
 		})
 		.catch(e => {
-			console.error(e);
-			showStatus(false);
+			console.log(e);
 			fetcher.removeVideoSrcFromLocalStorage();
-			console.log("Local storage removed. Refresh to reload.")
-			alert("Failed to load video data properly by any means.");
+			console.log("Local storage removed. Refresh to reload.");
+			console.log("Can't fecth from outside. Using embeded data.");
+			fetcher.embededVideoSrc()
+				.then(res => {
+					tree = res;
+					callback();
+					showStatus(true);
+				})
+				.catch(error => {
+					console.log(error);
+					showStatus(false);
+					alert("Failed to load video data properly by any means.");
+				});
 		});
 }
 

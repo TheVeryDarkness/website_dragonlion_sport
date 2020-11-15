@@ -19,18 +19,23 @@
 */
 import { rootPath } from "./root";
 export { videoSourceFetcher };
+const request = { method: "GET", mode: "cors", referrer: "no-referrer" };
 class videoSourceFetcher {
 	constructor() {
-		if (!localStorage)
+		if (!sessionStorage)
 			console.log("Local storage not supported.");
+		this.embededVideoSrc = function () {
+			const s = require("../data/video.json");
+			return new Promise((resolve, reject) => { resolve(s); });
+		}
 		this.fetchVideoSrcFromLocalStorage = function () {
 			return new Promise((resolve, reject) => {
-				if (!localStorage) reject("Not support action");
-				const fromLocalStorage = localStorage.getItem("video");
-				if (!fromLocalStorage)
+				if (!sessionStorage) reject("Not support action");
+				const fromSessionStorage = sessionStorage.getItem("video");
+				if (!fromSessionStorage)
 					return reject("No such item in local storage.");
 				try {
-					const parsed = JSON.parse(fromLocalStorage);
+					const parsed = JSON.parse(fromSessionStorage);
 					resolve(parsed);
 				} catch (error) {
 					console.log("Data in local storage not available.");
@@ -39,19 +44,19 @@ class videoSourceFetcher {
 			});
 		};
 		this.removeVideoSrcFromLocalStorage = function () {
-			if (localStorage)
-				localStorage.removeItem("video");
+			if (sessionStorage)
+				sessionStorage.removeItem("video");
 		};
 		this.addVideoSrcToLocalStorage = function (tree) {
-			if (localStorage)
-				localStorage.setItem("video", JSON.stringify(tree));
+			if (sessionStorage)
+				sessionStorage.setItem("video", JSON.stringify(tree));
 		};
 		this.fetchVideoSrcFromSameSite = async function () {
-			const res = await fetch(rootPath + 'data/video.json', { method: "GET" });
+			const res = await fetch(rootPath + 'data/video.json', request);
 			return res.json();
 		};
 		this.fetchVideoSrcFromGitHub = async function () {
-			const res = await fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', { method: "GET" });
+			const res = await fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', request);
 			return res.json();
 		};
 		return this;
