@@ -47,8 +47,9 @@ function initTree(callback) {
 		.catch(e => {
 			console.log(e);
 			removeVideoSrcFromLocalStorage();
+			console.error("Can't fecth from outside.");
 			console.log("Local storage removed. Refresh to reload.");
-			console.log("Can't fecth from outside. Using embeded data.");
+			alert("Using embeded data.");
 			embededVideoSrc()
 				.then(res => {
 					tree = res;
