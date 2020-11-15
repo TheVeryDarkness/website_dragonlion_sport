@@ -15,7 +15,13 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: [
-					"style-loader", "css-loader"
+					{
+						loader: "style-loader",
+						options: { "injectType": "lazyStyleTag" }
+					},
+					{
+						loader: "css-loader",
+					}
 				]
 			},
 			{
@@ -31,25 +37,29 @@ module.exports = {
 			"filename": "index.html",
 			"template": "index.html",
 			"scriptLoading": "defer",
-			"chunks": ["index"]
+			"chunks": ["index"],
+			"favicon": "pic/icon/DragonLion.png"
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "links/links.html",
 			"template": "links/links.html",
 			"scriptLoading": "defer",
-			"chunks": ["links"]
+			"chunks": ["links"],
+			"favicon": "pic/icon/DragonLion.png"
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "reference/reference.html",
 			"template": "reference/reference.html",
 			"scriptLoading": "defer",
-			"chunks": ["reference"]
+			"chunks": ["reference"],
+			"favicon": "pic/icon/DragonLion.png"
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "manage/manage.html",
 			"template": "manage/manage.html",
 			"scriptLoading": "defer",
-			"chunks": ["manage"]
+			"chunks": ["manage"],
+			"favicon": "pic/icon/DragonLion.png"
 		}),
 	]
 };

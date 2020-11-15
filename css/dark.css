@@ -13,7 +13,6 @@
 header {
   color: var(--main-text-color);
   filter: brightness(0.5);
-  background-image: url("../pic/background/sakura-background.png");
 }
 
 header > h1,
