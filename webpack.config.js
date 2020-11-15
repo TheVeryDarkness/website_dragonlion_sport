@@ -1,3 +1,7 @@
+// For HtmlWebpackPlugin, see:
+//  https://github.com/jantimon/html-webpack-plugin
+// For style-loader, see:
+//  https://webpack.js.org/loaders/style-loader/
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	entry: {
