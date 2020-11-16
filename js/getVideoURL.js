@@ -52,7 +52,7 @@ function addVideoSrcToLocalStorage(tree) {
 async function fetchVideoSrcFromGitHub() {
 	const res = await fetch(
 		'https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', {
-		method: "GET", mode: "", referrer: "no-referrer"
+		method: "GET", mode: "cors", referrer: "no-referrer"
 	});
 	if (res.ok) return res.json(); else throw res.statusText;
 };
