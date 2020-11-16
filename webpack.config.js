@@ -45,7 +45,7 @@ module.exports = {
 					{
 						loader: "url-loader",
 						options: {
-							limit: 15000,
+							limit: 10240,
 							fallback: 'file-loader',
 							name: 'images/[name].[hash].[ext]',
 						}
@@ -80,7 +80,7 @@ module.exports = {
 		splitChunks: {
 			chunks: "all",
 			minChunks: 1,
-			minSize: 30000,
+			minSize: 10240,
 			maxAsyncRequests: 5,
 			maxInitialRequests: 3
 		}
