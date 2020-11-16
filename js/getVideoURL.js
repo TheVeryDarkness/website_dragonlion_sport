@@ -17,8 +17,7 @@
 		from
 		sub
 */
-export { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromSameSite, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
-const request = { method: "GET", mode: "cors", referrer: "no-referrer" };
+export { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
 
 if (!sessionStorage)
 	console.log("Local storage not supported.");
@@ -50,11 +49,10 @@ function addVideoSrcToLocalStorage(tree) {
 	if (sessionStorage)
 		sessionStorage.setItem("video", JSON.stringify(tree));
 };
-async function fetchVideoSrcFromSameSite() {
-	const res = await fetch('../data/video.json', request);
-	if (res.ok) return res.json(); else throw res.statusText;
-};
 async function fetchVideoSrcFromGitHub() {
-	const res = await fetch('https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', request);
+	const res = await fetch(
+		'https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', {
+		method: "GET", mode: "", referrer: "no-referrer"
+	});
 	if (res.ok) return res.json(); else throw res.statusText;
 };

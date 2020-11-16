@@ -1,7 +1,7 @@
 /*
 	require getvideoURL.js
 */
-import { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromSameSite, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
+import { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
 export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
 var nodes = [[], [], [], [], []];
 var tree = {};
@@ -22,16 +22,13 @@ function initTree(callback) {
 	var race = (Promise.any ?
 		Promise.any([
 			fetchVideoSrcFromLocalStorage(),
-			fetchVideoSrcFromSameSite(),
 			fetchVideoSrcFromGitHub()
 		]) : fetchVideoSrcFromLocalStorage()
 			.catch(e => {
 				console.log(e);
-				return fetchVideoSrcFromSameSite();
-			}).catch(e => {
-				console.log(e);
 				return fetchVideoSrcFromGitHub();
-			}).catch(e => {
+			})
+			.catch(e => {
 				console.log(e);
 				alert("Can't load by any mean.");
 				throw "Load failure.";
