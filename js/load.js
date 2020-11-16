@@ -5,6 +5,12 @@ import { default as dark } from "../css/dark.css";//lazy
 import { default as light } from "../css/light.css";//lazy
 light.use();
 dark.use();
+{
+	var curtainStyle = document.getElementById("curtain");
+	if (curtainStyle)
+		curtainStyle.parentNode.removeChild(curtainStyle);
+	else console.error("No curtain style");
+}
 
 function initLight() {
 	if (window.matchMedia("(prefers-color-scheme: dark)").matches)

@@ -2,9 +2,7 @@
 //  https://github.com/jantimon/html-webpack-plugin
 // For style-loader, see:
 //  https://webpack.js.org/loaders/style-loader/
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
 module.exports = {
 	mode: "production",
@@ -14,7 +12,7 @@ module.exports = {
 		manage: "./js/entry/manage.js"
 	},
 	output: {
-		publicPath: __dirname,
+		publicPath: __dirname + "/docs",
 		path: __dirname + "/docs",
 		filename: "[name]-bundle.js"
 	},
@@ -36,7 +34,7 @@ module.exports = {
 				test: /basic\.css$/,
 				use: [
 					{
-						loader: MiniCssExtractPlugin.loader
+						loader: "style-loader"
 					},
 					{
 						loader: "css-loader",
@@ -90,14 +88,6 @@ module.exports = {
 		}
 	},
 	plugins: [
-		new MiniCssExtractPlugin({
-			filename: "[name].css",
-			chunkFilename: "[id].css"
-		}),
-		new HTMLInlineCSSWebpackPlugin({
-			filter: (s) => true,
-			replace: { removeTarget: true, target: "<style></style>" }
-		}),
 		new HtmlWebpackPlugin({
 			"filename": "index.html",
 			"template": "index.html",
