@@ -91,10 +91,15 @@ div.selectSet {
   vertical-align: text-bottom;
 }
 
+select.search {
+  color: inherit;
+  width: 100%;
+}
 select {
   font-size: inherit;
   font-family: inherit;
-  color: inherit;
+	color: inherit;
+	background-color: inherit;
 }
 
 select#searchResults {
@@ -119,6 +124,7 @@ input.wholeline {
 
 input.buttonReplay {
   color: inherit;
+  background-color: inherit;
   border-color: inherit;
   float: left;
   vertical-align: bottom;
@@ -127,20 +133,20 @@ input.buttonReplay {
 input.textSearch {
   width: calc(100% - 5em);
   float: left;
+  background-color: inherit;
+  color: inherit;
 }
 
 input.buttonSearch {
   float: right;
+  background-color: inherit;
+  border-color: inherit;
+  color: inherit;
 }
 
 input.left {
   text-align: end;
   float: right;
-}
-
-select.search {
-  color: inherit;
-  width: 100%;
 }
 
 div.sideBar {

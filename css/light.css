@@ -6,10 +6,22 @@
   --sub-border-color: #999999;
   --sub-sub-background-color: #fffbfa;
   --normal-text-color: #200000;
+	--arrow-color: #cccccc;
+  scrollbar-color: auto;
+  scrollbar-arrow-color: var(--arrow-color);
+  -ms-scrollbar-arrow-color: var(--arrow-color);
 }
 
 header {
   color: var(--main-text-color);
+  filter: brightness(1);
+}
+
+header > h1,
+header > div,
+hr,
+iframe {
+  filter: brightness(1);
 }
 
 fieldset.top {
@@ -36,6 +48,6 @@ textarea {
   color: var(--sub-text-color);
 }
 
-div.text.normal {
+.text.normal {
   color: var(--normal-text-color);
 }

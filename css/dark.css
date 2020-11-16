@@ -7,7 +7,10 @@
   --sub-border-color: #444444;
   --sub-sub-background-color: #1f1c24;
   --normal-text-color: #777777;
-  --arrow-color: #111111;
+	--arrow-color: #111111;
+  scrollbar-color: dark;
+  scrollbar-arrow-color: var(--arrow-color);
+  -ms-scrollbar-arrow-color: var(--arrow-color);
 }
 
 header {
@@ -32,7 +35,6 @@ fieldset.top {
   color: var(--main-text-color);
   background-color: var(--sub-background-color);
   border-color: var(--main-border-color);
-  scrollbar-color: dark;
 }
 
 body {
@@ -41,34 +43,10 @@ body {
 
 select {
   background-color: var(--sub-sub-background-color);
-  scrollbar-color: dark;
-  scrollbar-arrow-color: var(--arrow-color);
-  -ms-scrollbar-arrow-color: var(--arrow-color);
 }
 
 small.videoInfo {
   color: var(--sub-text-color);
-}
-
-input.buttonReplay {
-  background-color: inherit;
-  border-color: inherit;
-}
-
-input.textSearch {
-  background-color: inherit;
-  color: inherit;
-}
-
-input.buttonSearch {
-  background-color: inherit;
-  border-color: inherit;
-  color: inherit;
-}
-
-select.search {
-  background-color: inherit;
-  scrollbar-color: dark;
 }
 
 div.sideBar,
