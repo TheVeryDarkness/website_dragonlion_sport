@@ -17,7 +17,6 @@
 		from
 		sub
 */
-import { rootPath } from "./root";
 export { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromSameSite, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
 const request = { method: "GET", mode: "cors", referrer: "no-referrer" };
 
@@ -52,7 +51,7 @@ function addVideoSrcToLocalStorage(tree) {
 		sessionStorage.setItem("video", JSON.stringify(tree));
 };
 async function fetchVideoSrcFromSameSite() {
-	const res = await fetch(rootPath + 'data/video.json', request);
+	const res = await fetch('../data/video.json', request);
 	if (res.ok) return res.json(); else throw res.statusText;
 };
 async function fetchVideoSrcFromGitHub() {

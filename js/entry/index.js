@@ -1,5 +1,3 @@
-import { initRoot } from "../root";
-initRoot('');
 import { change, initLight } from "../load";
 initLight();
 import { loadFromSelected } from "../videoDisplayer";

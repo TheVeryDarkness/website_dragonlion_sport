@@ -1,10 +1,8 @@
-import { rootPath } from "./root"
 export { initLight, change };
 
-import { default as basic } from "../css/basic.css";
-import { default as dark } from "../css/dark.css";
-import { default as light } from "../css/light.css";
-basic.use();
+import "../css/basic.css";//Non-lazy
+import { default as dark } from "../css/dark.css";//lazy
+import { default as light } from "../css/light.css";//lazy
 light.use();
 dark.use();
 
