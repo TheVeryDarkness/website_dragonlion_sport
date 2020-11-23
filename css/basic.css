@@ -83,7 +83,6 @@ p.sub {
 p.info {
   margin: 0;
 }
-
 div.selectSet {
   clear: none;
   color: inherit;
@@ -98,8 +97,8 @@ select.search {
 select {
   font-size: inherit;
   font-family: inherit;
-	color: inherit;
-	background-color: inherit;
+  color: inherit;
+  background-color: inherit;
 }
 
 select#searchResults {
