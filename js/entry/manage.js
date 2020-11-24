@@ -1,7 +1,7 @@
 import { change, initLight } from "../load";
 initLight();
 import { s, initSelect, updateSelectBox } from "../select"
-import { showLastSpecified, generate } from "../videoManager"
+import { showLastSpecified, generate, addProperty } from "../videoManager"
 initSelect(showLastSpecified);
 for (let index = 0; index < s.length; index++) {
 	const sb = s[index];
@@ -13,3 +13,4 @@ document.getElementById("selectItem").onsubmit = (event) => {
 	initSelect(showLastSpecified);
 };
 document.getElementById("generateJSON").onclick = generate;
+document.getElementById("tagAddProperty").onclick = addProperty;

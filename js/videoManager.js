@@ -1,21 +1,43 @@
 import { nodes, tree } from "./infoTree"
 import { s } from "./select"
-export { showLastSpecified, generate };
+export { addProperty, showLastSpecified, generate };
 
+const keyToBeFilled = "somewhat";
 // Current specified node to be modifyied
 var specified = {};
 // resultTreeJSON is a node
 function showJSON() {
 	resultTreeJSON.textContent = JSON.stringify(tree, null, 1);
 }
+function addProperty(event) {
+	if (!specified.value) {
+		alert("Choose a named node first.");
+	} else if (specified[keyToBeFilled] === undefined) {
+		if (confirm("Sure to add a property?")) {
+			specified[keyToBeFilled] = "";
+			showNode(specified);
+			showJSON();
+		}
+	}
+	else alert("Fill empty-key property first.");
+}
 function renderPropertyToDocumentNode(key, element, node) {
 	switch (key) {
 		case "sub":
 			var arr = [];
-			for (const iterator of element) {
+			for (const iterator of element)
 				arr.push(iterator.value);
-			}
-			return document.createTextNode(arr);
+			var text = document.createElement("div");
+			text.innerHTML = arr;
+			text.onclick = (event) => {
+				if (confirm("Sure to add a node?")) {
+					var newNode = { value: "" };
+					specified.sub.push(newNode);
+					showNode(newNode);
+					showJSON();
+				}
+			};
+			return text;
 		case 'range':
 			var form = document.createElement("form");
 			// Standarize to array
@@ -53,9 +75,7 @@ function renderPropertyToDocumentNode(key, element, node) {
 			};
 			form.appendChild(input0);
 			form.appendChild(input1);
-
 			return form;
-
 		default:
 			if (typeof (element) != 'string')
 				console.error("It's recommended to provide another tool for non-string preperty '", key, "'.");
@@ -84,12 +104,26 @@ function showNode(node) {
 			++index;
 			const element = node[key];
 
-			const child = document.createElement("li");
+			const li = document.createElement("li");
+
 			const p = document.createElement("p");
 			p.className = "sub";
-			const label = document.createElement("label");
-			label.innerText = key;
-			label.for = "display-li-" + index;
+
+			var label;
+			if (key != keyToBeFilled) {
+				label = document.createElement("label");
+				label.innerText = key;
+				label.for = "display-li-" + index;
+			} else {
+				label = document.createElement("input");
+				label.value = key;
+				label.onchange = (event) => {
+					specified[event.target.value] = specified[keyToBeFilled];
+					delete specified[keyToBeFilled];
+					showNode(specified);
+					showJSON();
+				}
+			}
 
 			var box = renderPropertyToDocumentNode(key, element, node);
 			if (!box) {
@@ -98,10 +132,17 @@ function showNode(node) {
 			}
 			box.id = "display-li-" + index;
 
+			li.onclick = (event) => {
+				if (event.target.nodeName == "LI" && confirm("Sure to remove the property?")) {
+					delete specified[key];
+					showNode(specified);
+					showJSON();
+				}
+			};
 			p.appendChild(box);
-			label.appendChild(p);
-			child.appendChild(label);
-			ul.appendChild(child);
+			li.appendChild(label);
+			li.appendChild(p);
+			ul.appendChild(li);
 		}
 	}
 }
