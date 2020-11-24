@@ -65,19 +65,12 @@ module.exports = {
 					{
 						loader: 'image-webpack-loader',
 						options: {
-							mozjpeg: {
-								progressive: true,
-								quality: 65,
-							},
 							optipng: {
 								enabled: true,
 							},
 							pngquant: {
 								quality: [0.65, 0.90],
 								speed: 4,
-							},
-							gifsicle: {
-								interlaced: false,
 							},
 							webp: {
 								quality: 75,
@@ -94,7 +87,7 @@ module.exports = {
 			minChunks: 1,
 			minSize: 1024,
 			maxAsyncRequests: 5,
-			maxInitialRequests: 3
+			maxInitialRequests: 4
 		}
 	},
 	plugins: [
