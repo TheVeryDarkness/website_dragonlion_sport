@@ -4,6 +4,17 @@
 //  https://webpack.js.org/loaders/style-loader/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const htmlMinifyOption = {
+	collapseWhitespace: true,
+	removeComments: true,
+	removeRedundantAttributes: true,
+	removeScriptTypeAttributes: true,
+	removeStyleLinkTypeAttributes: true,
+	useShortDoctype: true,
+	minifyCSS: true,
+	html5: true,
+	minifyURLs: true
+};
 module.exports = {
 	mode: "production",
 	entry: {
@@ -91,25 +102,29 @@ module.exports = {
 			"filename": "index.html",
 			"template": "index.html",
 			"chunks": ["index"],
-			"favicon": "pic/icon/DragonLion.png"
+			"favicon": "pic/icon/DragonLion.png",
+			"minify": htmlMinifyOption
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "links/links.html",
 			"template": "links/links.html",
 			"chunks": ["normal"],
-			"favicon": "pic/icon/DragonLion.png"
+			"favicon": "pic/icon/DragonLion.png",
+			"minify": htmlMinifyOption
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "reference/reference.html",
 			"template": "reference/reference.html",
 			"chunks": ["normal"],
-			"favicon": "pic/icon/DragonLion.png"
+			"favicon": "pic/icon/DragonLion.png",
+			"minify": htmlMinifyOption
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "manage/manage.html",
 			"template": "manage/manage.html",
 			"chunks": ["manage"],
-			"favicon": "pic/icon/DragonLion.png"
+			"favicon": "pic/icon/DragonLion.png",
+			"minify": htmlMinifyOption
 		})
 	]
 };

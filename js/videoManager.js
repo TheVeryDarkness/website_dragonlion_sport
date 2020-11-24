@@ -2,9 +2,12 @@ import { nodes, tree } from "./infoTree"
 import { s } from "./select"
 export { addProperty, showLastSpecified, generate };
 
+// To be filled
 const keyToBeFilled = "somewhat";
 // Current specified node to be modifyied
 var specified = {};
+// Init
+showJSON();
 // resultTreeJSON is a node
 function showJSON() {
 	resultTreeJSON.textContent = JSON.stringify(tree, null, 1);
@@ -174,8 +177,12 @@ function makeFile(name, text) {
 	document.body.removeChild(element);
 }
 function generate() {
-	if (resultTreeJSON.textContent !== JSON.stringify(tree, null, 1))
+	if (process.env.NODE_ENV == "development" && resultTreeJSON.textContent !== JSON.stringify(tree, null, 1)) {
 		console.error("Data in textarea is modified somewhere.");
+		console.log(resultTreeJSON.textContent);
+		console.log(JSON.stringify(tree, null, 1));
+	}
 	showJSON();
 	makeFile('result.json', resultTreeJSON.textContent);
 }
+// console.log(process.env.NODE_ENV);
