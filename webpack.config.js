@@ -84,12 +84,14 @@ module.exports = {
 	optimization: {
 		splitChunks: {
 			chunks: "all",
-			minChunks: 1,
+			minChunks: 2,
 			minSize: 1024,
-			maxAsyncRequests: 5,
+			maxSize: 40960,
+			maxAsyncRequests: 3,
 			maxInitialRequests: 4
 		}
 	},
+	watch: true,
 	plugins: [
 		new HtmlWebpackPlugin({
 			"filename": "index.html",
