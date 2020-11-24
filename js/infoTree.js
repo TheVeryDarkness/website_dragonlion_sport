@@ -1,7 +1,7 @@
 /*
 	require getvideoURL.js
 */
-import { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
+import { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, fetchVideoSrcFromGitee, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
 export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
 var nodes = [[], [], [], [], []];
 var tree = {};
@@ -22,11 +22,16 @@ function initTree(callback) {
 	var race = (Promise.any ?
 		Promise.any([
 			fetchVideoSrcFromLocalStorage(),
-			fetchVideoSrcFromGitHub()
+			fetchVideoSrcFromGitHub(),
+			fetchVideoSrcFromGitee()
 		]) : fetchVideoSrcFromLocalStorage()
 			.catch(e => {
 				console.log(e);
 				return fetchVideoSrcFromGitHub();
+			})
+			.catch(e => {
+				console.log(e);
+				return fetchVideoSrcFromGitee();
 			})
 			.catch(e => {
 				console.log(e);
@@ -47,7 +52,7 @@ function initTree(callback) {
 			console.error("Can't fecth from outside.");
 			console.log("Local storage removed. Refresh to reload.");
 			alert("Using embeded data.");
-			embededVideoSrc()
+			getEmbededVideoSrc()
 				.then(res => {
 					tree = res;
 					callback();

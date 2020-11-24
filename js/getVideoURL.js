@@ -17,12 +17,12 @@
 		from
 		sub
 */
-export { embededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
+export { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, fetchVideoSrcFromGitee, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
 
 if (!sessionStorage)
 	console.log("Local storage not supported.");
 
-function embededVideoSrc() {
+function getEmbededVideoSrc() {
 	const s = require("../data/video.json");
 	return new Promise((resolve, reject) => { resolve(s); });
 }
@@ -53,6 +53,13 @@ async function fetchVideoSrcFromGitHub() {
 	const res = await fetch(
 		'https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json', {
 		method: "GET", mode: "cors", referrer: "no-referrer"
+	});
+	if (res.ok) return res.json(); else throw res.statusText;
+};
+async function fetchVideoSrcFromGitee() {
+	const res = await fetch(
+		'https://gitee.com/TheVeryDarkness/sport_data/raw/main/video.json', {
+		method: "GET", mode: "no-cors", referrer: "no-referrer"
 	});
 	if (res.ok) return res.json(); else throw res.statusText;
 };

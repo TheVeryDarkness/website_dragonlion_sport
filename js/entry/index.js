@@ -16,6 +16,7 @@ document.getElementById("chooseItem").onsubmit = (event) => {
 	initSelect(loadFromSelected)
 };
 document.getElementById("playMode").onclick = switchDisplayMode;
+document.getElementById("replayVideo").onclick = loadFromSelected;
 document.getElementById("chooseAction").onsubmit = (event) => {
 	event.preventDefault();
 	a3.selectedIndex < 0 ? showActions() : goSearch(a3.options[a3.selectedIndex].text)

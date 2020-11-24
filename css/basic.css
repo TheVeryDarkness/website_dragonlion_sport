@@ -87,7 +87,7 @@ div.selectSet {
   clear: none;
   color: inherit;
   float: left;
-  vertical-align: text-bottom;
+  vertical-align: bottom;
 }
 
 select.search {
@@ -121,11 +121,12 @@ input.wholeline {
   float: left;
 }
 
-input.buttonReplay {
+fieldset.top > form > input.button {
   color: inherit;
   background-color: inherit;
   border-color: inherit;
   float: left;
+  padding: 0;
   vertical-align: bottom;
 }
 
