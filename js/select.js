@@ -13,10 +13,10 @@ var s = [
 var callbackOnUpdate = () => { console.log("Not specified."); };
 
 function initSelect(callback) {
-	initTree(() => { updateSelectBox(-1); });
 	if (!callback)
 		console.error("Callback not available.");
 	else callbackOnUpdate = callback;
+	return initTree(() => { updateSelectBox(-1); });
 }
 
 function fillSelectBoxWithSubValues(selectBox, subArray) {

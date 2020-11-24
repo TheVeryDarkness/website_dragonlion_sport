@@ -38,7 +38,7 @@ function initTree(callback) {
 				alert("Can't load by any mean.");
 				throw "Load failure.";
 			}));
-	race
+	return race
 		.then(res => {
 			tree = res;
 			callback();
