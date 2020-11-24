@@ -1,8 +1,8 @@
 import { change, initLight } from "../load";
 initLight();
 import { s, initSelect, updateSelectBox } from "../select"
-import { showLastSpecified, generate, addProperty } from "../videoManager"
-initSelect(showLastSpecified);
+import { showLastSpecified, generate, addProperty, showJSON } from "../videoManager"
+initSelect(() => { showLastSpecified(); showJSON(); });
 for (let index = 0; index < s.length; index++) {
 	const sb = s[index];
 	sb.onchange = () => updateSelectBox(index);

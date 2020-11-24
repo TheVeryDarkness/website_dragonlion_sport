@@ -1,13 +1,11 @@
 import { nodes, tree } from "./infoTree"
 import { s } from "./select"
-export { addProperty, showLastSpecified, generate };
+export { addProperty, showLastSpecified, generate, showJSON };
 
 // To be filled
 const keyToBeFilled = "somewhat";
 // Current specified node to be modifyied
 var specified = {};
-// Init
-showJSON();
 // resultTreeJSON is a node
 function showJSON() {
 	resultTreeJSON.textContent = JSON.stringify(tree, null, 1);
