@@ -6,7 +6,6 @@ export { showLastSpecified, generate };
 var specified = {};
 // resultTreeJSON is a node
 function showJSON() {
-	console.log(JSON.stringify(tree));
 	resultTreeJSON.textContent = JSON.stringify(tree, null, 1);
 }
 function renderPropertyToDocumentNode(key, element, node) {
