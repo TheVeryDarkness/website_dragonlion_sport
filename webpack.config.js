@@ -92,6 +92,10 @@ module.exports = {
 		}
 	},
 	watch: true,
+	watchOptions: {
+		ignored: /(\.vscode|\.git|docs|node_modules)/,
+		poll: 1000
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			"filename": "index.html",
