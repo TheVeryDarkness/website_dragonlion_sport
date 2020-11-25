@@ -21,6 +21,8 @@ export { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGit
 
 if (!sessionStorage)
 	console.log("Local storage not supported.");
+if (!fetch)
+	alert("Fetch api is not supported, consider using another browser.");
 
 function getEmbededVideoSrc() {
 	const s = require("../data/video.json");
@@ -31,7 +33,7 @@ function fetchVideoSrcFromLocalStorage() {
 		if (!sessionStorage) reject("Not support action");
 		const fromSessionStorage = sessionStorage.getItem("video");
 		if (!fromSessionStorage)
-			return reject("No such item in local storage.");
+			return reject("No item named video in local storage.");
 		try {
 			const parsed = JSON.parse(fromSessionStorage);
 			resolve(parsed);

@@ -1,5 +1,6 @@
-import { change, initLight } from "../load";
-initLight();
+import { change } from "../load";
+const Switch = document.getElementById("lightSwitch");
+Switch.onclick = () => { change(Switch); };
 import { loadFromSelected } from "../videoDisplayer";
 import { initSelect, updateSelectBox } from "../select";
 initSelect(loadFromSelected);
@@ -25,6 +26,5 @@ document.getElementById("searchName").onsubmit = (event) => {
 	event.preventDefault();
 	searchInAllNodes(textSearchInAll.value);
 };
-textSearchInAll.oninput = () => searchInAllNodes(textSearchInAll.value);
-searchResults.onchange = chooseSearch;
-lightIndication.onclick = change;
+document.getElementById("textSearchInAll").oninput = () => searchInAllNodes(textSearchInAll.value);
+document.getElementById("searchResults").onchange = chooseSearch;

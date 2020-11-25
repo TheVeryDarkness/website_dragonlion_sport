@@ -1,3 +1,2 @@
-import { change, initLight } from "../load";
-initLight();
+import { change } from "../load";
 document.getElementById("lightSwitch").onclick = change;

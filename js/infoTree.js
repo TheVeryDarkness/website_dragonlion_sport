@@ -12,33 +12,30 @@ function showStatus(res) {
 	if (!ls)
 		console.error("Name an element to show the status of loading.");
 	else if (res)
-		ls.value = "重置";
+		ls.value = "刷新";
 	else
 		ls.value = "重试";
 }
 
 function initTree(callback) {
 	// Some browsers do not support 'any' yet
-	var race = (Promise.any ?
-		Promise.any([
-			fetchVideoSrcFromLocalStorage(),
-			fetchVideoSrcFromGitHub(),
-			fetchVideoSrcFromGitee()
-		]) : fetchVideoSrcFromLocalStorage()
-			.catch(e => {
-				console.log(e);
-				return fetchVideoSrcFromGitHub();
-			})
-			.catch(e => {
-				console.log(e);
-				return fetchVideoSrcFromGitee();
-			})
-			.catch(e => {
-				console.log(e);
-				alert("Can't load by any mean.");
-				throw "Load failure.";
-			}));
-	return race
+	return fetchVideoSrcFromLocalStorage()
+		.catch(e => {
+			console.log(e);
+			console.log("Can't load from local storage.");
+			return fetchVideoSrcFromGitHub();
+		})
+		.catch(e => {
+			console.log(e);
+			console.log("Can't load from github.");
+			return fetchVideoSrcFromGitee();
+		})
+		.catch(e => {
+			console.log(e);
+			console.log("Can't load from gitee.");
+			alert("Can't load from web.")
+			throw "Load failure.";
+		})
 		.then(res => {
 			tree = res;
 			callback();
