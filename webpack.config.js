@@ -19,7 +19,8 @@ module.exports = {
 	mode: "production",
 	entry: {
 		index: "./js/entry/index.js",
-		normal: "./js/entry/normal.js",
+		links: "./js/entry/links.js",
+		reference: "./js/entry/reference.js",
 		manage: "./js/entry/manage.js"
 	},
 	output: {
@@ -107,14 +108,14 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			"filename": "links/links.html",
 			"template": "links/links.html",
-			"chunks": ["normal"],
+			"chunks": ["links"],
 			"favicon": "pic/icon/DragonLion.png",
 			"minify": htmlMinifyOption
 		}),
 		new HtmlWebpackPlugin({
 			"filename": "reference/reference.html",
 			"template": "reference/reference.html",
-			"chunks": ["normal"],
+			"chunks": ["reference"],
 			"favicon": "pic/icon/DragonLion.png",
 			"minify": htmlMinifyOption
 		}),

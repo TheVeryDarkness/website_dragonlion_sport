@@ -72,7 +72,7 @@
 			<a id="originWebpage">源网页</a>
 			<a id="originVideoURL">源视频</a>
 		</small>
-		<video class="video" controls autoplay>
+		<video id="video" class="video" controls autoplay>
 			<source id="sourceVideo" src="">
 			浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
 		</video>
@@ -84,18 +84,8 @@
 		<div class="sideBar">
 			<div class="area">
 				<form id="chooseAction" autocomplete="off">
-					<select id="a1" onchange="showActions()">
-						<option selected="selected">A级</option>
-						<option>B级</option>
-						<option>C级</option>
-					</select>
-					<select id="a2" onchange="showActions()">
-						<option selected="selected">8字舞龙动作</option>
-						<option>游龙动作</option>
-						<option>穿腾动作</option>
-						<option>翻滚动作</option>
-						<option>组图造型动作</option>
-					</select>
+					<select id="a1" onchange="showActions()"></select>
+					<select id="a2" onchange="showActions()"></select>
 					<select id="a3"></select>
 					<input class="buttonSearch" type="submit" value="Go">
 				</form>

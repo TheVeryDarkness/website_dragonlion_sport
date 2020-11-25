@@ -1,14 +1,24 @@
 /* 
-	require infoTree.js
-	require select.js
-	require getActionTable
+	a1
+	a2
+	a3
 */
 import { nextNodesAndAll, nodes } from "./infoTree"
 import { s, fillSelectBoxWithNodes } from "./select"
-import { tableActionLevel } from "./getActionTable"
+import { tableActionLevel, actionLevels, actionCategories } from "./getActionTable"
 import { loadFromSelected } from "./videoDisplayer"
 export { goSearch, showActions, chooseSearch, searchInAllNodes };
 var recordSearch = new Array;
+actionLevels.forEach((value) => {
+	var op = document.createElement("option");
+	op.text = value;
+	a1.options.add(op);
+});
+actionCategories.forEach((value) => {
+	var op = document.createElement("option");
+	op.text = value;
+	a2.options.add(op);
+});
 
 function value0ToString() {
 	var rev = new Array();

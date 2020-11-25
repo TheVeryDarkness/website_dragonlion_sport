@@ -227,6 +227,11 @@ td {
 .text.normal {
   overflow-wrap: break-word;
 }
+table > caption,
+table > th,
+td {
+  text-align: center;
+}
 
 textarea {
   font-size: inherit;
