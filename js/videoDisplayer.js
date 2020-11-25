@@ -115,7 +115,14 @@ function clearVideoSrc() {
 	video.load();
 }
 function getAddtionalInfo(node) {
-	return node && node.comment ? node.comment[0].content : "";
+	if (node && node.comment) {
+		var res = [];
+		for (const value of node.comment) {
+			res.push(String(value.name + ": " + value.content));
+		}
+		return res;
+	}
+	else return [];
 }
 function secToTime(seconds) {
 	return Math.floor(seconds / 3600) + ':' + Math.floor(seconds % 3600 / 60) + ':' + seconds % 60;
@@ -139,14 +146,29 @@ function loadFromSelected() {
 		;
 	else clearVideoSrc();
 
+	// Display comments on this node.
 	for (let index = 0; index < nodes.length; index++) {
 		const info = document.getElementById("i" + String(index));
 		const node = nodes[index];
 		const selected = s[index].selectedIndex;
 		if (selected !== 0 && node[selected]) {
-			info.innerText = node[selected].value + ": " + getAddtionalInfo(node[selected]);
+			while (info.childNodes.length > 0)
+				info.removeChild(info.childNodes[0]);
+			{
+				var p = document.createElement("p");
+				p.className = "info";
+				p.textContent = node[selected].value + ": ";
+				info.appendChild(p);
+			}
+			const arr = getAddtionalInfo(node[selected]);
+			arr.forEach(value => {
+				var p = document.createElement("p");
+				p.className = "sub";
+				p.textContent = value;
+				info.appendChild(p);
+			})
 		}
-		info.hidden = !info.innerText;
+		info.hidden = info.childNodes.length <= 1;
 	}
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }

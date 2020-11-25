@@ -4,6 +4,7 @@ export { addProperty, showLastSpecified, generate, showJSON };
 
 // To be filled
 const keyToBeFilled = "somewhat";
+const nameToBeFilled = "unnamed";
 // Current specified node to be modifyied
 var specified = {};
 // resultTreeJSON is a node
@@ -16,7 +17,9 @@ function addProperty(event) {
 	} else if (specified[keyToBeFilled] === undefined) {
 		if (confirm("Sure to add a property?")) {
 			specified[keyToBeFilled] = "";
-			showNode(specified);
+			// showNode();
+			const form = document.getElementById("nodeProperties");
+			form.appendChild(renderPropertyToLi(keyToBeFilled, specified[keyToBeFilled], specified))
 			showJSON();
 		}
 	}
@@ -29,7 +32,7 @@ function renderPropertyToDocumentNode(key, element, node) {
 			for (const iterator of element)
 				arr.push(iterator.value);
 			var text = document.createElement("div");
-			text.innerHTML = arr;
+			text.textContent = "[" + String(arr) + "]";
 			text.onclick = (event) => {
 				if (confirm("Sure to add a node?")) {
 					var newNode = { value: "" };
@@ -77,6 +80,43 @@ function renderPropertyToDocumentNode(key, element, node) {
 			form.appendChild(input0);
 			form.appendChild(input1);
 			return form;
+		case 'comment':
+			const renderAComment = function (value, index) {
+				var set = document.createElement("div");
+				set.className = "fieldset";
+
+				var name = document.createElement("input");
+				name.value = value.name;
+				name.onchange = (event) => {
+					specified.comment[index].name = event.target.value;
+					showJSON();
+				};
+				name.ondblclick = (event) => {
+					if (confirm("Sure to add a comment?")) {
+						var newComment = { "name": nameToBeFilled, "content": "" };
+						specified.comment.push(newComment);
+						showJSON();
+						const form = event.target.parentNode.parentNode;
+						form.appendChild(renderAComment(newComment, form.childNodes.length));
+					}
+				}
+
+				var content = document.createElement("input");
+				content.value = value.content;
+				content.onchange = (event) => {
+					specified.comment[index].content = event.target.value;
+					showJSON();
+				};
+
+				set.appendChild(name);
+				set.appendChild(content);
+				return set;
+			};
+			var form = document.createElement("form");
+			element.forEach((value, index) => {
+				form.appendChild(renderAComment(value, index));
+			});
+			return form;
 		default:
 			if (typeof (element) != 'string')
 				console.error("It's recommended to provide another tool for non-string preperty '", key, "'.");
@@ -89,7 +129,50 @@ function renderPropertyToDocumentNode(key, element, node) {
 			return input;
 	}
 }
+function renderPropertyToLi(key, element, node) {
+	const li = document.createElement("li");
+
+	const p = document.createElement("p");
+	p.className = "sub";
+
+	var label;
+	if (key != keyToBeFilled) {
+		label = document.createElement("label");
+		label.innerText = key;
+		label.for = "display-li-" + nodeProperties.childNodes.length;
+	} else {
+		label = document.createElement("input");
+		label.value = key;
+		label.onchange = (event) => {
+			specified[event.target.value] = specified[keyToBeFilled];
+			delete specified[keyToBeFilled];
+			showNode(specified);
+			showJSON();
+		}
+	}
+
+	var box = renderPropertyToDocumentNode(key, element, node);
+	if (!box) {
+		console.error("Illegal value.");
+		return;
+	}
+	box.id = "display-li-" + nodeProperties.childNodes.length;
+
+	li.onclick = (event) => {
+		if (event.target.nodeName == "LI" && confirm("Sure to remove the property?")) {
+			delete specified[key];
+			// showNode();
+			event.target.remove();
+			showJSON();
+		}
+	};
+	p.appendChild(box);
+	li.appendChild(label);
+	li.appendChild(p);
+	return li;
+}
 function showNode(node) {
+	if (node == specified) console.log("This could be optimized for efficiency.");
 	specified = node;
 	const ul = document.getElementById("nodeProperties");
 	if (!ul) {
@@ -99,51 +182,10 @@ function showNode(node) {
 	while (ul.childNodes.length > 0) {
 		ul.removeChild(ul.lastChild);
 	}
-	var index = 0;
 	for (const key in node) {
 		if (node.hasOwnProperty(key)) {
-			++index;
 			const element = node[key];
-
-			const li = document.createElement("li");
-
-			const p = document.createElement("p");
-			p.className = "sub";
-
-			var label;
-			if (key != keyToBeFilled) {
-				label = document.createElement("label");
-				label.innerText = key;
-				label.for = "display-li-" + index;
-			} else {
-				label = document.createElement("input");
-				label.value = key;
-				label.onchange = (event) => {
-					specified[event.target.value] = specified[keyToBeFilled];
-					delete specified[keyToBeFilled];
-					showNode(specified);
-					showJSON();
-				}
-			}
-
-			var box = renderPropertyToDocumentNode(key, element, node);
-			if (!box) {
-				console.error("Illegal value.");
-				continue;
-			}
-			box.id = "display-li-" + index;
-
-			li.onclick = (event) => {
-				if (event.target.nodeName == "LI" && confirm("Sure to remove the property?")) {
-					delete specified[key];
-					showNode(specified);
-					showJSON();
-				}
-			};
-			p.appendChild(box);
-			li.appendChild(label);
-			li.appendChild(p);
-			ul.appendChild(li);
+			ul.appendChild(renderPropertyToLi(key, element, node));
 		}
 	}
 }
