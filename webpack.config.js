@@ -3,6 +3,7 @@
 // For style-loader, see:
 //  https://webpack.js.org/loaders/style-loader/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const htmlMinifyOption = {
 	collapseWhitespace: true,
@@ -25,7 +26,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + "/docs",
-		filename: "[name]-bundle.js"
+		filename: "[name]-[contenthash].js"
 	},
 	module: {
 		rules: [
@@ -98,6 +99,7 @@ module.exports = {
 		poll: 1000
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			"filename": "index.html",
 			"template": "index.html",
