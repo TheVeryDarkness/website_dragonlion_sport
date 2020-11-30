@@ -7,9 +7,42 @@ const keyToBeFilled = "somewhat";
 const nameToBeFilled = "unnamed";
 // Current specified node to be modifyied
 var specified = {};
-// resultTreeJSON is a node
+//
+var specifiedNodeIndex = 0;
+var totalLineCount = 0;
+
+
+function count(obj) {
+	if (obj === specified)
+		specifiedNodeIndex = totalLineCount;
+	++totalLineCount;
+	if (typeof obj == "object") {// Otherwise should not be iterated
+		for (const key in obj) {
+			const element = obj[key];
+			count(element);
+		}
+		if (!(obj instanceof Array && obj.length == 0))
+			++totalLineCount;
+	}
+	return obj;
+};
+function relocateJSON() {
+	specifiedNodeIndex = totalLineCount = 0;
+	count(tree);
+	{
+		const area = document.getElementById("resultTreeJSON");
+		area.scrollTop = area.scrollHeight / totalLineCount * specifiedNodeIndex;
+	}
+	console.log(String(specifiedNodeIndex) + "/" + String(totalLineCount));
+}
+function changeSpecifiedNode(newNode) {
+	specified = newNode;
+	relocateJSON();
+}
+// resultTreeJSON is an element node
 function showJSON() {
 	resultTreeJSON.textContent = JSON.stringify(tree, null, 1);
+	relocateJSON();
 }
 function addProperty(event) {
 	if (!specified.value) {
@@ -173,7 +206,7 @@ function renderPropertyToLi(key, element, node) {
 }
 function showNode(node) {
 	if (node == specified) console.log("This could be optimized for efficiency.");
-	specified = node;
+	changeSpecifiedNode(node);
 	const ul = document.getElementById("nodeProperties");
 	if (!ul) {
 		console.error("No display target.");
@@ -183,10 +216,8 @@ function showNode(node) {
 		ul.removeChild(ul.lastChild);
 	}
 	for (const key in node) {
-		if (node.hasOwnProperty(key)) {
-			const element = node[key];
-			ul.appendChild(renderPropertyToLi(key, element, node));
-		}
+		const element = node[key];
+		ul.appendChild(renderPropertyToLi(key, element, node));
 	}
 }
 function lastSpecifiedNode(end = s.length) {
