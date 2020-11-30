@@ -1,5 +1,5 @@
 export { change };
-
+import { get, set } from "./localStorage";
 import "../css/basic.css";//Non-lazy
 import { default as dark } from "../css/dark.css";//lazy
 import { default as light } from "../css/light.css";//lazy
@@ -8,7 +8,7 @@ dark.use();
 {
 	var curtainStyle = document.getElementById("curtain");
 	if (curtainStyle)
-		curtainStyle.parentNode.removeChild(curtainStyle);
+		curtainStyle.remove();
 	else console.error("No curtain style");
 }
 
@@ -39,10 +39,21 @@ function asLight(lightIndication) {
 }
 
 function change(lightIndication) {
-	if (on) asDark(lightIndication); else asLight(lightIndication);
+	if (on) {
+		asDark(lightIndication);
+		set("scheme", "dark");
+	} else {
+		asLight(lightIndication);
+		set("scheme", "light");
+	}
 }
 
-if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+const s = get("scheme");
+if (s == "dark")
+	turnOff();
+else if (s == "light")
+	turnOn();
+else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
 	turnOff();
 else if (window.matchMedia("(prefers-color-scheme: light)").matches)
 	turnOn();

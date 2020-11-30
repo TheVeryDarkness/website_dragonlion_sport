@@ -18,9 +18,7 @@
 		sub
 */
 export { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, fetchVideoSrcFromGitee, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage };
-
-if (!sessionStorage)
-	console.log("Local storage not supported.");
+const storage = require("./localStorage");
 if (!fetch)
 	alert("Fetch api is not supported, consider using another browser.");
 
@@ -30,9 +28,8 @@ function getEmbededVideoSrc() {
 }
 function fetchVideoSrcFromLocalStorage() {
 	return new Promise((resolve, reject) => {
-		if (!sessionStorage) reject("Not support action");
-		const fromSessionStorage = sessionStorage.getItem("video");
-		if (!fromSessionStorage)
+		const fromSessionStorage = storage.get("video");
+		if (fromSessionStorage == null)
 			return reject("No item named video in local storage.");
 		try {
 			const parsed = JSON.parse(fromSessionStorage);
@@ -44,12 +41,10 @@ function fetchVideoSrcFromLocalStorage() {
 	});
 };
 function removeVideoSrcFromLocalStorage() {
-	if (sessionStorage)
-		sessionStorage.removeItem("video");
+	storage.remove("video");
 };
 function addVideoSrcToLocalStorage(tree) {
-	if (sessionStorage)
-		sessionStorage.setItem("video", JSON.stringify(tree));
+	storage.set("video", JSON.stringify(tree));
 };
 async function fetchVideoSrcFromGitHub() {
 	const res = await fetch(

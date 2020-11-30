@@ -239,4 +239,5 @@ textarea {
   width: 100%;
   height: fit-content;
   min-height: 10em;
+  resize: vertical;
 }

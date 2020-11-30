@@ -1,6 +1,7 @@
 /*
 	require getvideoURL.js
 */
+const storage = require("./localStorage");
 import { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, fetchVideoSrcFromGitee, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
 export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
 var nodes = [[], [], [], [], []];
@@ -21,32 +22,37 @@ function initTree(callback) {
 	// Some browsers do not support 'any' yet
 	return fetchVideoSrcFromLocalStorage()
 		.catch(e => {
+			storage.set("status", "");
 			console.log(e);
 			console.log("Can't load from local storage.");
-			return fetchVideoSrcFromGitHub();
+			const res = fetchVideoSrcFromGitHub();
+			storage.set("status", "Success");
+			return res;
 		})
 		.catch(e => {
 			console.log(e);
 			console.log("Can't load from github.");
-			return fetchVideoSrcFromGitee();
+			const res = fetchVideoSrcFromGitee();
+			storage.set("status", "Success");
+			return res;
 		})
 		.catch(e => {
 			console.log(e);
 			console.log("Can't load from gitee.");
-			alert("Can't load from web.")
+			alert("Can't load from web.");
+			storage.set("status", "");
 			throw "Load failure.";
 		})
 		.then(res => {
 			tree = res;
 			callback();
-			showStatus(true);
+			showStatus(storage.get("status"));
 			addVideoSrcToLocalStorage(tree);
 			console.log("Video data stored.");
 		})
 		.catch(e => {
 			console.log(e);
 			removeVideoSrcFromLocalStorage();
-			console.error("Can't fecth from outside.");
 			console.log("Local storage removed. Refresh to reload.");
 			alert("Using embeded data.");
 			getEmbededVideoSrc()
