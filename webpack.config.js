@@ -90,7 +90,7 @@ module.exports = {
 			minSize: 1024,
 			maxSize: 40960,
 			maxAsyncRequests: 3,
-			maxInitialRequests: 4
+			maxInitialRequests: 5
 		}
 	},
 	watch: true,
