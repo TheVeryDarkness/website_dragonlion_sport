@@ -33,7 +33,7 @@ function relocateJSON() {
 		const area = document.getElementById("resultTreeJSON");
 		area.scrollTop = area.scrollHeight / totalLineCount * specifiedNodeIndex;
 	}
-	//vconsole.log(String(specifiedNodeIndex) + "/" + String(totalLineCount));
+	// console.log(String(specifiedNodeIndex) + "/" + String(totalLineCount));
 }
 function changeSpecifiedNode(newNode) {
 	specified = newNode;
