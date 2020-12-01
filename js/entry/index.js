@@ -6,7 +6,7 @@ import { initSelect, updateSelectBox } from "../select";
 initSelect(loadFromSelected);
 import { showActions, chooseSearch, goSearch, searchInAllNodes } from "../search";
 showActions();
-import { s } from "../select"
+import { s } from "../select";
 for (let index = 0; index < s.length; index++) {
 	const sb = s[index];
 	sb.onchange = () => updateSelectBox(index);
