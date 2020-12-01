@@ -1,31 +1,37 @@
 {
-  "name": "website_dragonlion_sport",
-  "private": "true",
-  "author": {
-    "name": "黄博奕",
-    "email": "1853308@tongji.edu.cn"
-  },
-  "bugs": {
-    "url": "https://github.com/TheVeryDarkness/website_dragonlion_sport/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TheVeryDarkness/website_dragonlion_sport/"
-  },
-  "scripts": {
-    "build": "webpack --config webpack.prod.js"
-  },
-  "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^5.0.1",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "next",
-    "image-webpack-loader": "^7.0.1",
-    "style-loader": "^2.0.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-merge": "^5.4.0"
-  },
-  "dependencies": {}
+ "name": "website_dragonlion_sport",
+ "private": "true",
+ "author": {
+  "name": "黄博奕",
+  "email": "1853308@tongji.edu.cn"
+ },
+ "bugs": {
+  "url": "https://github.com/TheVeryDarkness/website_dragonlion_sport/issues"
+ },
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/TheVeryDarkness/website_dragonlion_sport/"
+ },
+ "scripts": {
+  "build": "webpack --config webpack.prod.js"
+ },
+ "devDependencies": {
+  "@babel/core": "^7.12.9",
+  "@babel/preset-env": "^7.12.7",
+  "babel-loader": "^8.2.2",
+  "clean-webpack-plugin": "^3.0.0",
+  "css-loader": "^5.0.1",
+  "file-loader": "^6.2.0",
+  "html-webpack-plugin": "next",
+  "image-webpack-loader": "^7.0.1",
+  "style-loader": "^2.0.0",
+  "url-loader": "^4.1.1",
+  "webpack": "^5.9.0",
+  "webpack-cli": "^4.2.0",
+  "webpack-merge": "^5.4.0"
+ },
+ "dependencies": {},
+ "prettier": {
+  "tabWidth": 1
+ }
 }
