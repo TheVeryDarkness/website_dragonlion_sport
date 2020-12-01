@@ -1,6 +1,7 @@
 /*
 	require infoTree.js
 */
+if (process.env.NODE_ENV == "development") alert("select.js begin");
 import { nextNodesAndAll, initTree, nodes, defaultNode, tree } from "./infoTree"
 export { initSelect, updateSelectBox, s, fillSelectBoxWithNodes };
 var s = [
@@ -10,7 +11,7 @@ var s = [
 	document.getElementById("s3"),
 	document.getElementById("s4")
 ];
-var callbackOnUpdate = () => { console.log("Not specified."); };
+var callbackOnUpdate = (() => { console.log("Not specified."); });
 
 function initSelect(callback) {
 	if (!callback)
@@ -88,3 +89,4 @@ function trackBack(boxIndex) {
 		default:
 	}
 }
+if (process.env.NODE_ENV == "development") alert("select.js end");

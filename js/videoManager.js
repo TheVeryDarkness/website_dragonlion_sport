@@ -1,3 +1,4 @@
+if (process.env.NODE_ENV == "development") alert("videoManager.js begin");
 import { nodes, tree } from "./infoTree"
 import { s } from "./select"
 export { addProperty, showLastSpecified, generate, showJSON };
@@ -256,4 +257,4 @@ function generate() {
 	showJSON();
 	makeFile('result.json', resultTreeJSON.textContent);
 }
-// console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV == "development") alert("videoManager.js end");

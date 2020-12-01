@@ -1,9 +1,9 @@
 export { get, set, remove };
 var get, set, remove;
-var buffer;
-if (!sessionStorage)
+var buffer = {};
+if (!window.sessionStorage)
  console.log("Local storage not supported.");
-if (sessionStorage) {
+if (window.sessionStorage) {
  const storage = sessionStorage;
  get = function (key) {
   return storage.getItem(key);

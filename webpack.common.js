@@ -17,7 +17,6 @@ const htmlMinifyOption = {
 	minifyURLs: true
 };
 module.exports = {
-	mode: "production",
 	entry: {
 		index: "./js/entry/index.js",
 		links: "./js/entry/links.js",

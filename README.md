@@ -11,3 +11,9 @@ git clone --recursive https://github.com/TheVeryDarkness/website_dragonlion_spor
 以将本存储库下载到本地。或者您可以点击右上角的下载按钮，下载压缩包，再将其解压。
 
 如此，您可以直接用浏览器在本地查看。
+
+## 使用说明
+
+## 开发说明
+
+对微信 PC 端浏览器，可以参考https://work.weixin.qq.com/api/doc/90001/90148/90457。

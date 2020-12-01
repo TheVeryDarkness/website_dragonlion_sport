@@ -2,11 +2,10 @@ import { change } from "../load";
 const Switch = document.getElementById("lightSwitch");
 Switch.onclick = () => { change(Switch); };
 import { loadFromSelected } from "../videoDisplayer";
-import { initSelect, updateSelectBox } from "../select";
+import { initSelect, updateSelectBox, s } from "../select";
 initSelect(loadFromSelected);
 import { showActions, chooseSearch, goSearch, searchInAllNodes } from "../search";
 showActions();
-import { s } from "../select";
 for (let index = 0; index < s.length; index++) {
 	const sb = s[index];
 	sb.onchange = () => updateSelectBox(index);

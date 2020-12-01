@@ -1,3 +1,4 @@
+if (process.env.NODE_ENV == "development") alert("load.js begin");
 export { change };
 import { get, set } from "./localStorage";
 import "../css/basic.css";//Non-lazy
@@ -47,21 +48,27 @@ function change(lightIndication) {
 		set("scheme", "light");
 	}
 }
+(() => {
+	const s = get("scheme");
+	if (s == "dark")
+		return turnOff();
+	else if (s == "light")
+		return turnOn();
 
-const s = get("scheme");
-if (s == "dark")
-	turnOff();
-else if (s == "light")
-	turnOn();
-else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-	turnOff();
-else if (window.matchMedia("(prefers-color-scheme: light)").matches)
-	turnOn();
-else if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
-	turnOn();
-else {
-	var date = new Date();
-	if (date.getHours() >= 22 || date.getHours() <= 6)
-		turnOff();
-	else turnOn();
-}
+	if (window.matchMedia) {
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+			return turnOff();
+		else if (window.matchMedia("(prefers-color-scheme: light)").matches)
+			return turnOn();
+		else if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
+			return turnOn();
+	}
+
+	{
+		var date = new Date();
+		if (date.getHours() >= 22 || date.getHours() <= 6)
+			return turnOff();
+		else return turnOn();
+	}
+})();
+if (process.env.NODE_ENV == "development") alert("load.js end");

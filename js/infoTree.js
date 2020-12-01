@@ -1,6 +1,7 @@
 /*
 	require getvideoURL.js
 */
+if (process.env.NODE_ENV == "development") alert("infoTree.js begin")
 const storage = require("./localStorage");
 import { getEmbededVideoSrc, fetchVideoSrcFromLocalStorage, fetchVideoSrcFromGitHub, fetchVideoSrcFromGitee, addVideoSrcToLocalStorage, removeVideoSrcFromLocalStorage } from "./getVideoURL"
 export { nodes, tree, initTree, nextNodesAndAll, defaultNode };
@@ -91,3 +92,4 @@ function nextNodes(nodes, selectedIndex) {
 function nextNodesAndAll(nodes, selectedIndex) {
 	return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));
 }
+if (process.env.NODE_ENV == "development") alert("infoTree.js end")
