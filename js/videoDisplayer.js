@@ -1,4 +1,3 @@
-if (process.env.NODE_ENV == "development") alert("videoDisplayer.js begin");
 import { nodes } from "./infoTree"
 import { s } from "./select"
 export { loadFromSelected, switchDisplayMode }
@@ -173,4 +172,3 @@ function loadFromSelected() {
 	}
 	displayVideoTimeRange.innerText = secToTime(videoTimeBegin) + ', ' + secToTime(videoTimeEnd);
 }
-if (process.env.NODE_ENV == "development") alert("videoDisplayer.js end");

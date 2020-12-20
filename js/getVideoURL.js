@@ -20,8 +20,7 @@
 export {
  getEmbededVideoSrc,
  fetchVideoSrcFromLocalStorage,
- fetchVideoSrcFromGitHub,
- fetchVideoSrcFromGitee,
+ fetchVideoSrcFromWeb,
  addVideoSrcToLocalStorage,
  removeVideoSrcFromLocalStorage,
 };
@@ -30,25 +29,19 @@ const storage = require("./localStorage");
 if (!fetch)
  alert("Fetch api is not supported, consider using another browser.");
 
-function getEmbededVideoSrc() {
- const s = require("../data/video.json");
- return new Promise((resolve, reject) => {
-  resolve(s);
- });
+async function getEmbededVideoSrc() {
+ return require("../data/video.json");
 }
-function fetchVideoSrcFromLocalStorage() {
- return new Promise((resolve, reject) => {
-  const fromSessionStorage = storage.get("video");
-  if (fromSessionStorage == null)
-   return reject("No item named video in local storage.");
-  try {
-   const parsed = JSON.parse(fromSessionStorage);
-   resolve(parsed);
-  } catch (error) {
-   console.log("Data in local storage not available.");
-   reject(error);
-  }
- });
+async function fetchVideoSrcFromLocalStorage() {
+ const fromSessionStorage = storage.get("video");
+ if (fromSessionStorage == null) throw "No item named video in local storage.";
+ try {
+  const parsed = JSON.parse(fromSessionStorage);
+  return parsed;
+ } catch (error) {
+  console.log("Data in local storage not available.");
+  throw error;
+ }
 }
 function removeVideoSrcFromLocalStorage() {
  storage.remove("video");
@@ -56,28 +49,48 @@ function removeVideoSrcFromLocalStorage() {
 function addVideoSrcToLocalStorage(tree) {
  storage.set("video", JSON.stringify(tree));
 }
-function fetchVideoSrcFromGitHub() {
- return fetch(
-  "https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json",
-  {
+const videoSrcUrls = {
+ github: {
+  url: "https://theverydarkness.github.io/sport_data/video.json",
+  init: {
    method: "GET",
    mode: "cors",
    referrer: "no-referrer",
-  }
- ).then((res) => {
-  if (res.ok) return res.json();
-  else throw res;
- });
-}
-function fetchVideoSrcFromGitee() {
- return fetch(
-  "https://gitee.com/TheVeryDarkness/sport_data/raw/main/video.json",
-  {
+  },
+ },
+ raw_github: {
+  url:
+   "https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json",
+  init: {
    method: "GET",
-   mode: "same-origin",
+   mode: "cors",
+   referrer: "no-referrer",
+  },
+ },
+ gitee: {
+  url: "https://gitee.com/TheVeryDarkness/sport_data/raw/main/video.json",
+  init: {
+   method: "GET",
+   mode: "no-cors",
+   referrer: "no-referrer",
+  },
+ },
+};
+async function fetchVideoSrc(desc) {
+ const res = await fetch(desc.url, desc.init);
+ if (res.ok) return res.json();
+ else throw res;
+}
+async function fetchVideoSrcFromWeb() {
+ for (const key in videoSrcUrls) {
+  const element = videoSrcUrls[key];
+  try {
+   const res = await fetchVideoSrc(element);
+   console.log("Successfully fetch from ", key);
+   return res;
+  } catch (e) {
+   console.error("Error occurred when fetch from ", key);
+   console.log(e);
   }
- ).then((res) => {
-  if (res.ok) return res.json();
-  else throw res;
- });
+ }
 }

@@ -3,7 +3,6 @@
 	a2
 	a3
 */
-if (process.env.NODE_ENV == "development") alert("search.js begin")
 import { nextNodesAndAll, nodes } from "./infoTree"
 import { s, fillSelectBoxWithNodes } from "./select"
 import { tableActionLevel, actionLevels, actionCategories } from "./getActionTable"
@@ -99,4 +98,3 @@ function goSearch(text) {
 	textSearchInAll.value = text;
 	searchInAllNodes(text);
 }
-if (process.env.NODE_ENV == "development") alert("search.js end")

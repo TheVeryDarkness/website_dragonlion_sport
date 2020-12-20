@@ -1,4 +1,3 @@
-if (process.env.NODE_ENV == "development") alert("load.js begin");
 export { change };
 import { get, set } from "./localStorage";
 import "../css/basic.css";//Non-lazy
@@ -71,4 +70,3 @@ function change(lightIndication) {
 		else return turnOn();
 	}
 })();
-if (process.env.NODE_ENV == "development") alert("load.js end");

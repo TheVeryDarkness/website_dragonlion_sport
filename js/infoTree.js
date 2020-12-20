@@ -1,13 +1,11 @@
 /*
 	require getvideoURL.js
 */
-if (process.env.NODE_ENV == "development") alert("infoTree.js begin");
 const storage = require("./localStorage");
 import {
  getEmbededVideoSrc,
  fetchVideoSrcFromLocalStorage,
- fetchVideoSrcFromGitHub,
- fetchVideoSrcFromGitee,
+ fetchVideoSrcFromWeb,
  addVideoSrcToLocalStorage,
  removeVideoSrcFromLocalStorage,
 } from "./getVideoURL";
@@ -16,71 +14,64 @@ var nodes = [[], [], [], [], []];
 var tree = {};
 const all = "全选";
 
-function showStatus(res) {
+function showStatus(status) {
  const ls = document.getElementById("loadStatus");
  if (!ls) console.error("Name an element to show the status of loading.");
  else
-  switch (res) {
+  switch (status) {
    case "Success":
     ls.value = "刷新";
     break;
    case "Failed":
     ls.value = "重试";
     break;
+   case null:
+    ls.value = "等待";
+    break;
    default:
     ls.value = "错误";
-    console.error("Unexpected status string.");
+    console.error('Unexpected status string "', status, '"');
     break;
   }
 }
+async function getTree() {
+ storage.set("status", "Success");
+ 
+ try {
+  return await fetchVideoSrcFromLocalStorage();
+ } catch (e) {
+  console.log(e);
+  console.error("Can't load from local storage.");
+ }
 
-function initTree(callback) {
- // Some browsers do not support 'any' yet
- return fetchVideoSrcFromLocalStorage()
-  .catch((e) => {
-   storage.set("status", "Failed");
-   console.error(e);
-   console.log("Can't load from local storage.");
-   const res = fetchVideoSrcFromGitHub();
-   storage.set("status", "Success");
-   return res;
-  })
-  .catch((e) => {
-   console.error(e);
-   console.log("Can't load from github.");
-   const res = fetchVideoSrcFromGitee();
-   storage.set("status", "Success");
-   return res;
-  })
-  .catch((e) => {
-   console.error(e);
-   console.log("Can't load from gitee.");
-   throw e;
-  })
-  .then((res) => {
-   tree = res;
-   callback();
-   showStatus(storage.get("status"));
-   addVideoSrcToLocalStorage(tree);
-   console.log("Video data stored.");
-  })
-  .catch((e) => {
-   console.error(e);
-   removeVideoSrcFromLocalStorage();
-   console.log("Local storage removed. Refresh to reload.");
-   alert("Can't load from web. Using embeded data.");
-   getEmbededVideoSrc()
-    .then((res) => {
-     tree = res;
-     callback();
-     showStatus("Success");
-    })
-    .catch((error) => {
-     console.error(error);
-     showStatus("Failed");
-     alert("Failed to load video data properly by any means.");
-    });
-  });
+ try {
+  return await fetchVideoSrcFromWeb();
+ } catch (e) {
+  console.log(e);
+  console.error("Local storage removed. Refresh to reload.");
+  console.error("Can't load from web. Using embeded data.");
+ }
+
+ storage.set("status", "Failed");
+
+ try {
+  return await getEmbededVideoSrc();
+ } catch (e) {
+  console.log(error);
+  alert("Failed to load video data properly by any means.");
+ }
+
+ throw "All failed.";
+}
+async function initTree(callback) {
+ try {
+  tree = await getTree();
+  callback();
+  addVideoSrcToLocalStorage(tree);
+ } catch (error) {
+  removeVideoSrcFromLocalStorage();
+ }
+ showStatus(storage.get("status"));
 }
 
 function defaultNode(value = all) {
@@ -103,4 +94,3 @@ function nextNodes(nodes, selectedIndex) {
 function nextNodesAndAll(nodes, selectedIndex) {
  return new Array(defaultNode(all)).concat(nextNodes(nodes, selectedIndex));
 }
-if (process.env.NODE_ENV == "development") alert("infoTree.js end");

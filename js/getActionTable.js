@@ -1,4 +1,3 @@
-if (process.env.NODE_ENV == "development") alert("getActionTable.js begin");
 export { tableActionLevel, actionLevels, actionCategories };
 const tree = require("../data/tableDifficulty.json");
 const tableActionLevel = tree.data;// [difficulty][category][action]
@@ -13,4 +12,3 @@ if (actionCategories.length != numCategory)
 for (const level of tableActionLevel)
 	if (level.length != numCategory)
 		console.log("Debug failed! There should be " + numCategory + " categories.");
-if (process.env.NODE_ENV == "development") alert("getActionTable.js end");
