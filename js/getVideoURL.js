@@ -26,6 +26,7 @@ export {
  removeVideoSrcFromLocalStorage,
 };
 const storage = require("./localStorage");
+
 if (!fetch)
  alert("Fetch api is not supported, consider using another browser.");
 
@@ -65,7 +66,7 @@ function fetchVideoSrcFromGitHub() {
   }
  ).then((res) => {
   if (res.ok) return res.json();
-  else throw res.statusText;
+  else throw res;
  });
 }
 function fetchVideoSrcFromGitee() {
@@ -73,11 +74,10 @@ function fetchVideoSrcFromGitee() {
   "https://gitee.com/TheVeryDarkness/sport_data/raw/main/video.json",
   {
    method: "GET",
-   mode: "no-cors",
-   referrer: "no-referrer",
+   mode: "same-origin",
   }
  ).then((res) => {
   if (res.ok) return res.json();
-  else throw res.statusText;
+  else throw res;
  });
 }

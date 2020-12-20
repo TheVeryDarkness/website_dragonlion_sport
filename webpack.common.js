@@ -29,15 +29,6 @@ module.exports = {
  },
  module: {
   rules: [
-   /*
-   {
-    test: /\.js$/,
-    exclude: /(node_modules|bower_components|docs)/,
-    use: {
-     loader: "babel-loader",
-    },
-   },
-   */
    {
     test: /(dark|light)\.css$/,
     use: [

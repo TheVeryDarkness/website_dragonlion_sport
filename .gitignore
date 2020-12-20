@@ -25,5 +25,8 @@ desktop.ini
 # bat for fast push
 *.bat
 
+# log file
+*.log
+
 # npm's data
 package-lock.json
