@@ -1,3 +1,6 @@
 [submodule "data"]
 	path = data
 	url = https://github.com/TheVeryDarkness/sport_data.git
+[submodule "docs"]
+	path = data
+	url = https://github.com/TheVeryDarkness/website_dragonlion_sport_docs.git
