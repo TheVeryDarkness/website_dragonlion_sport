@@ -16,4 +16,4 @@ git clone --recursive https://github.com/TheVeryDarkness/website_dragonlion_spor
 
 ## 开发说明
 
-对微信 PC 端浏览器，可以参考[常见问题](https://work.weixin.qq.com/api/doc/90001/90148/90457)。
+对微信 PC 端浏览器，可以参考[常见问题](https://work.weixin.qq.com/api/doc/90001/90148/90457)。不过由于微信 PC 端浏览器版本比较低，在加载第 1、4 个界面时会出错，建议更换浏览器观看。
