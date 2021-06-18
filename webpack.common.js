@@ -18,28 +18,17 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: "./ts/entry/index.ts",
-  links: "./ts/entry/links.ts",
-  reference: "./ts/entry/reference.ts",
-  manage: "./ts/entry/manage.ts",
+  index: "./js/entry/index.js",
+  links: "./js/entry/links.js",
+  reference: "./js/entry/reference.js",
+  manage: "./js/entry/manage.js",
  },
  output: {
   path: __dirname + "/docs",
   filename: "[name]-[contenthash].js",
  },
- resolve: {
-  extensions: [".ts", ".js"],
- },
  module: {
   rules: [
-   {
-    test: /\.ts$/,
-    use: [
-     {
-      loader: "ts-loader",
-     },
-    ],
-   },
    {
     test: /(dark|light)\.css$/,
     use: [
