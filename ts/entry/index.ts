@@ -1,5 +1,14 @@
+declare const lightSwitch: HTMLElement;
+declare const chooseItem: HTMLFontElement;
+declare const playMode: HTMLInputElement;
+declare const replayVideo: HTMLInputElement;
+declare const chooseAction: HTMLInputElement;
+declare const searchName: HTMLInputElement;
+declare const textSearchInAll: HTMLInputElement;
+declare const searchResults: HTMLSelectElement;
+declare const a3: HTMLSelectElement;
 import { change } from "../load";
-const Switch = document.getElementById("lightSwitch");
+const Switch = lightSwitch;
 Switch.onclick = () => {
  change(Switch);
 };
@@ -18,22 +27,21 @@ for (let index = 0; index < s.length; index++) {
  sb.onchange = () => updateSelectBox(index);
 }
 import { switchDisplayMode } from "../videoDisplayer";
-document.getElementById("chooseItem").onsubmit = (event) => {
+chooseItem.onsubmit = (event) => {
  event.preventDefault();
  initSelect(loadFromSelected);
 };
-document.getElementById("playMode").onclick = switchDisplayMode;
-document.getElementById("replayVideo").onclick = loadFromSelected;
-document.getElementById("chooseAction").onsubmit = (event) => {
+playMode.onclick = switchDisplayMode;
+replayVideo.onclick = loadFromSelected;
+chooseAction.onsubmit = (event) => {
  event.preventDefault();
  a3.selectedIndex < 0
   ? showActions()
   : goSearch(a3.options[a3.selectedIndex].text);
 };
-document.getElementById("searchName").onsubmit = (event) => {
+searchName.onsubmit = (event) => {
  event.preventDefault();
  searchInAllNodes(textSearchInAll.value);
 };
-document.getElementById("textSearchInAll").oninput = () =>
- searchInAllNodes(textSearchInAll.value);
-document.getElementById("searchResults").onchange = chooseSearch;
+textSearchInAll.oninput = () => searchInAllNodes(textSearchInAll.value);
+searchResults.onchange = chooseSearch;

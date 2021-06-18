@@ -24,13 +24,16 @@ export {
  addVideoSrcToLocalStorage,
  removeVideoSrcFromLocalStorage,
 };
-const storage = require("./localStorage");
-
+import * as storage from "./localStorage";
+interface Desc {
+ url: RequestInfo;
+ init: RequestInit;
+}
 if (!fetch)
  alert("Fetch api is not supported, consider using another browser.");
 
 async function getEmbededVideoSrc() {
- return require("../data/video.json");
+ return import("../data/video.json");
 }
 async function fetchVideoSrcFromLocalStorage() {
  const fromSessionStorage = storage.get("video");
@@ -49,7 +52,7 @@ function removeVideoSrcFromLocalStorage() {
 function addVideoSrcToLocalStorage(tree) {
  storage.set("video", JSON.stringify(tree));
 }
-const videoSrcUrls = {
+const videoSrcUrls: { github: Desc; raw_github: Desc; gitee: Desc } = {
  github: {
   url: "https://theverydarkness.github.io/sport_data/video.json",
   init: {
@@ -59,8 +62,7 @@ const videoSrcUrls = {
   },
  },
  raw_github: {
-  url:
-   "https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json",
+  url: "https://raw.githubusercontent.com/TheVeryDarkness/sport_data/main/video.json",
   init: {
    method: "GET",
    mode: "cors",
@@ -76,13 +78,14 @@ const videoSrcUrls = {
   },
  },
 };
-async function fetchVideoSrc(desc) {
+async function fetchVideoSrc(desc: Desc) {
  const res = await fetch(desc.url, desc.init);
  if (res.ok) return res.json();
  else throw res;
 }
 async function fetchVideoSrcFromWeb() {
- for (const key in videoSrcUrls) {
+ let key: keyof typeof videoSrcUrls;
+ for (key in videoSrcUrls) {
   const element = videoSrcUrls[key];
   try {
    const res = await fetchVideoSrc(element);
