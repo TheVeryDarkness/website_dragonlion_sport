@@ -1,2 +1,2 @@
-import { change } from "../load";
-document.getElementById("lightSwitch").onclick = change;
+import { change } from '../load'
+document.getElementById('lightSwitch').onclick = change

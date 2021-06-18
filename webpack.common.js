@@ -19,10 +19,10 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: "./js/entry/index.js",
-  links: "./js/entry/links.js",
-  reference: "./js/entry/reference.js",
-  manage: "./js/entry/manage.js"
+  index: "./src/entry/index.js",
+  links: "./src/entry/links.js",
+  reference: "./src/entry/reference.js",
+  manage: "./src/entry/manage.js"
  },
  output: {
   path: __dirname + "/docs",
@@ -105,6 +105,6 @@ module.exports = {
  plugins: [
   new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
-  new HtmlWebpackPlugin()
+  new HtmlWebpackPlugin({minify:htmlMinifyOption})
  ]
 };
