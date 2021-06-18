@@ -1,27 +1,17 @@
-# website_loonglion_sport
+# 同济大学龙狮协会训练资料网站
 
-> A Vue.js project
+供同济大学龙狮协会学习交流使用。出于多方面的考虑，没有购买服务器，但您可以尝试通过[GitHub Pages](https://theverydarkness.github.io/website_dragonlion_sport/)或[Gitee Pages](http://theverydarkness.gitee.io/website_dragonlion_sport/)进行低速访问。
+您如果安装了 git，可以用命令行运行
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+```cmd
+git clone --recursive https://github.com/TheVeryDarkness/website_dragonlion_sport.git
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+以将本存储库下载到本地。或者您可以点击右上角的下载按钮，下载压缩包，再将其解压。
+如此，您可以直接用浏览器在本地查看。
+
+## 使用说明
+
+## 开发说明
+
+对微信 PC 端浏览器，可以参考[常见问题](https://work.weixin.qq.com/api/doc/90001/90148/90457)。不过由于微信 PC 端浏览器版本比较低，在加载第 1、4 个界面时会出错，建议更换浏览器观看。
