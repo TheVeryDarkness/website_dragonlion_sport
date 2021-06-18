@@ -4,7 +4,6 @@
 //  https://webpack.js.org/loaders/style-loader/
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const htmlMinifyOption = {
  collapseWhitespace: true,
@@ -33,29 +32,6 @@ module.exports = {
    {
     test: /\.vue$/,
     loader: "vue-loader" // 处理以.vue结尾的文件
-   },
-   {
-    test: /(dark|light)\.css$/,
-    use: [
-     {
-      loader: "style-loader",
-      options: { injectType: "lazyStyleTag" }
-     },
-     {
-      loader: "css-loader"
-     }
-    ]
-   },
-   {
-    test: /basic\.css$/,
-    use: [
-     {
-      loader: "style-loader"
-     },
-     {
-      loader: "css-loader"
-     }
-    ]
    },
    {
     test: /\.png$/,
@@ -103,7 +79,6 @@ module.exports = {
   poll: 1000
  },
  plugins: [
-  new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({minify:htmlMinifyOption})
  ]
