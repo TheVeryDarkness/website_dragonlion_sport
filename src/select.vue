@@ -1,5 +1,6 @@
 <template>
   <fieldset class="top">
+    <Tree v-bind:data="video" />
     <form id="selectItem" autocomplete="off">
       <div class="selectSet">
         <label for="s0">运动项目</label>
@@ -38,12 +39,16 @@
 </template>
 
 <script lang="ts">
+import Tree from "@/tree.vue";
+import { defineComponent } from "vue";
 import videoData from "~/data/video.json";
-export default {
+const select = defineComponent({
   data() {
     return { video: videoData };
   },
-};
+  components: { Tree },
+});
+export default select;
 </script>
 
 <style>

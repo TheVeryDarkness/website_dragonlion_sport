@@ -12,8 +12,8 @@
 import Header from "@/choose-page.vue";
 import Select from "@/select.vue";
 import Footer from "@/footer.vue";
-import Vue from "vue";
-const Main = Vue.extend({
+import { defineComponent } from "vue";
+const Main = defineComponent({
   data() {
     return { page: 0 };
   },

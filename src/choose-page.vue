@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 
-const choosePage = Vue.extend({
+const choosePage = defineComponent({
   data() {
     return {
       page: 0,

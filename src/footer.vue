@@ -20,7 +20,7 @@ import "~/css/basic.css";
 // lazy
 import { default as dark } from "~/css/dark.css";
 import { default as light } from "~/css/light.css";
-import Vue from "vue";
+import { defineComponent } from "vue";
 light.use();
 dark.use();
 {
@@ -57,7 +57,7 @@ function getDefault() {
   }
 }
 
-const footer = Vue.extend({
+const footer = defineComponent({
   data: () => {
     return {
       enlightened: getDefault(),

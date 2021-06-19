@@ -3,7 +3,7 @@
 // For style-loader, see:
 //  https://webpack.js.org/loaders/style-loader/
 const path = require('path')
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -33,7 +33,7 @@ module.exports = {
   alias: {
    "@": resolve("src"),
    "~": path.join(__dirname, ".."),
-   'vue$': 'vue/dist/vue.esm.js'
+   'vue$': 'vue/dist/vue.esm-bundler.js'
   },
   extensions: [".js", ".ts"]
  },
