@@ -60,6 +60,8 @@ ul.menu > li {
 }
 
 ul.menu > li > a {
+  font-size: inherit;
+  text-align: left;
   text-decoration: none;
 }
 

@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "experimentalDecorators": true,
+    "baseUrl": "./",
     "emitDecoratorMetadata": true,
-    "noEmitOnError": true,
-    "target": "esnext",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
     "module": "esnext",
-    "strict": true,
+    "moduleResolution": "node",
+    "noEmitOnError": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "moduleResolution": "node"
+    "strict": true,
+    "target": "esnext",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*", "types"],
+  "include": ["src/**/*", "css/css.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

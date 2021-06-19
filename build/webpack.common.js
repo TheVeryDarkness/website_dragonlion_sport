@@ -23,7 +23,7 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: resolve("src/entry/index.ts"),
+  index: resolve("src/index.ts"),
  },
  output: {
   path: __dirname + "/../dist",
@@ -32,8 +32,10 @@ module.exports = {
  resolve: {
   alias: {
    "@": resolve("src"),
+   "~": path.join(__dirname, ".."),
    'vue$': 'vue/dist/vue.esm.js'
-  }
+  },
+  extensions: [".js", ".ts"]
  },
  module: {
   rules: [
@@ -43,7 +45,10 @@ module.exports = {
    },
    {
     test: /\.ts$/,
-    loader: 'ts-loader'
+    loader: 'ts-loader',
+    options: {
+     appendTsSuffixTo: [/\.vue$/],
+    }
    },
    {
     test: /\.js$/,
