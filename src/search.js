@@ -3,6 +3,9 @@
 	a2
 	a3
 */
+const a1 = document.getElementById("a1");
+const a2 = document.getElementById("a2");
+const a3 = document.getElementById("a3");
 import { nextNodesAndAll, nodes } from './infoTree'
 import { s, fillSelectBoxWithNodes } from './select'
 import { tableActionLevel, actionLevels, actionCategories } from './getActionTable'

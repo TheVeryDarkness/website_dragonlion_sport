@@ -23,7 +23,7 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: resolve("src/index.js"),
+  index: resolve("src/entry/index.js"),
  },
  output: {
   path: __dirname + "/../dist",
