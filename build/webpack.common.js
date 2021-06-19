@@ -23,19 +23,29 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: resolve("src/entry/index.js"),
+  index: resolve("src/entry/index.ts"),
  },
  output: {
   path: __dirname + "/../dist",
   filename: "[name]-[contenthash].js"
  },
- resolve: { alias: { "@": resolve("src") } },
+ resolve: {
+  alias: {
+   "@": resolve("src"),
+   'vue$': 'vue/dist/vue.esm.js'
+  }
+ },
  module: {
   rules: [
    {
     test: /\.vue$/,
     loader: "vue-loader" // 处理以.vue结尾的文件
-   }, {
+   },
+   {
+    test: /\.ts$/,
+    loader: 'ts-loader'
+   },
+   {
     test: /\.js$/,
     loader: 'babel-loader',
     include: [resolve('src')]
@@ -113,6 +123,7 @@ module.exports = {
    template: resolve("index.html"),
    filename: "index.html",
    title: "Tongji Dragon&Lion Dance Sport",
+   favicon: resolve("pic/icon/DragonLion.png"),
    minify: htmlMinifyOption
   })
  ]
