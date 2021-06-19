@@ -2,10 +2,14 @@
 //  https://github.com/jantimon/html-webpack-plugin
 // For style-loader, see:
 //  https://webpack.js.org/loaders/style-loader/
+const path = require('path')
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+function resolve(dir) {
+ return path.join(__dirname, '..', dir)
+}
 const htmlMinifyOption = {
  collapseWhitespace: true,
  removeComments: true,
@@ -19,20 +23,22 @@ const htmlMinifyOption = {
 };
 module.exports = {
  entry: {
-  index: "./src/entry/index.js",
-  links: "./src/entry/links.js",
-  reference: "./src/entry/reference.js",
-  manage: "./src/entry/manage.js"
+  index: resolve("src/index.js"),
  },
  output: {
   path: __dirname + "/../dist",
   filename: "[name]-[contenthash].js"
  },
+ resolve: { alias: { "@": resolve("src") } },
  module: {
   rules: [
    {
     test: /\.vue$/,
     loader: "vue-loader" // 处理以.vue结尾的文件
+   }, {
+    test: /\.js$/,
+    loader: 'babel-loader',
+    include: [resolve('src')]
    },
    {
     test: /(dark|light)\.css$/,
@@ -97,12 +103,17 @@ module.exports = {
  },
  watch: true,
  watchOptions: {
-  ignored: /(\.vscode|\.git|docs|node_modules)/,
+  ignored: /(\.vscode|\.git|dist|node_modules)/,
   poll: 1000
  },
  plugins: [
   new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
-  new HtmlWebpackPlugin({ minify: htmlMinifyOption })
+  new HtmlWebpackPlugin({
+   template: resolve("index.html"),
+   filename: "index.html",
+   title: "Tongji Dragon&Lion Dance Sport",
+   minify: htmlMinifyOption
+  })
  ]
 };

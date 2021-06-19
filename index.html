@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>website_loonglion_sport</title>
-</head>
-
-<body>
-  <div id="app"></div>
-  <!-- built files will be auto injected -->
-</body>
-
-</html>
+<html lang="zh-Hans-CN">
+  <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<title>视频导引</title>
+	<style id="curtain">
+		:root {
+			background-color: black;
+		}
+	</style>
+  </head>
+  <body>
+	<header>
+		<h1>龙狮运动视频导引</h1>
+		<div class=" area">
+			<ul class="menu">
+				<li><a target="_self" href="./index.html">主页</a></li>
+				<li><a target="_self" href="./links/links.html">链接</a></li>
+				<li><a target="_self" href="./reference/reference.html">参考</a></li>
+				<li><a target="_self" href="./manage/manage.html">管理</a></li>
+			</ul>
+		</div>
+	</header>
+	<hr />
+	<main>
+		<fieldset class="top">
+			<form id="chooseItem" autocomplete="off">
+				<div class="selectSet">
+					<label for="s0">运动项目</label>
+					<select id="s0">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s1">年份</label>
+					<select id="s1">
+						<option selected="selected">全选</option>
+					</select>
+				</div>
+				<div class="selectSet">
+					<label for="s2">赛事</label>
+					<select id="s2">
+						<option selected="selected">全选</option>
