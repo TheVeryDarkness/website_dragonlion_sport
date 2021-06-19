@@ -25,7 +25,7 @@ module.exports = {
   manage: "./src/entry/manage.js"
  },
  output: {
-  path: __dirname + "/docs",
+  path: __dirname + "/../dist",
   filename: "[name]-[contenthash].js"
  },
  module: {
@@ -41,9 +41,8 @@ module.exports = {
       loader: "style-loader",
       options: { injectType: "lazyStyleTag" }
      },
-     {
-      loader: "css-loader"
-     }
+     { loader: "css-loader" },
+     { loader: "postcss-loader" }
     ]
    },
    {
@@ -52,9 +51,8 @@ module.exports = {
      {
       loader: "style-loader"
      },
-     {
-      loader: "css-loader"
-     }
+     { loader: "css-loader" },
+     { loader: "postcss-loader" }
     ]
    },
    {
