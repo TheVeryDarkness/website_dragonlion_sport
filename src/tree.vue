@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { treeNode } from "./tree";
+import { node } from "./tree";
 import { defineComponent, PropType } from "vue";
 const tree = defineComponent({
   data() {
@@ -27,9 +27,9 @@ const tree = defineComponent({
     };
   },
   props: {
-    root: { type: Object as PropType<treeNode>, required: true },
+    root: { type: Object as PropType<node>, required: true },
     want: {
-      type: Function as PropType<(_: treeNode) => boolean>,
+      type: Function as PropType<(_: node) => boolean>,
       required: true,
     },
   },
