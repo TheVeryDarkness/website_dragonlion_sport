@@ -1,52 +1,61 @@
 <template>
   <fieldset class="top">
-    <Tree v-bind:roots="video.root" />
-    <form id="selectItem" autocomplete="off">
-      <div class="selectSet">
-        <label for="s0">运动项目</label>
-        <select id="s0">
-          <option selected="selected">全选</option>
-        </select>
-      </div>
-      <div class="selectSet">
-        <label for="s1">年份</label>
-        <select id="s1">
-          <option selected="selected">全选</option>
-        </select>
-      </div>
-      <div class="selectSet">
-        <label for="s2">赛事</label>
-        <select id="s2">
-          <option selected="selected">全选</option>
-        </select>
-      </div>
-      <div class="selectSet">
-        <label for="s3">队伍</label>
-        <select id="s3">
-          <option selected="selected">全选</option>
-        </select>
-      </div>
-      <div class="selectSet">
-        <label for="s4">动作</label>
-        <select id="s4">
-          <option selected="selected">全选</option>
-        </select>
-      </div>
-      <input class="button" type="submit" value="等待" id="loadStatus" />
-      <input class="button" type="button" value="生成" id="generateJSON" />
-    </form>
+    <input type="text" v-model="text" />
+    <input type="button" value="搜索" @click="fullSearch()" />
+    <Tree
+      v-for="(root, index) in video.root"
+      :key="index"
+      v-bind:root="root"
+      v-bind:want="search"
+    />
+    <input class="button" type="button" value="生成" id="generateJSON" />
   </fieldset>
 </template>
 
 <script lang="ts">
-import Tree from "@/tree.vue";
+import { default as Tree } from "@/tree.vue";
+import { treeNode } from "./tree";
 import { defineComponent } from "vue";
 import videoData from "~/data/video.json";
+
+function searchInText(a: string, b: string): boolean {
+  return b.includes(a);
+}
+function fullSearch(text: string): (node: treeNode) => boolean {
+  return function (node: treeNode) {
+    for (const key in node) {
+      if (key == "sub") continue;
+      const value = node[key];
+      if (value)
+        if (typeof value == "string") return searchInText(text, value);
+        else
+          for (const element of value)
+            if (typeof element == "string") {
+              if (searchInText(text, element)) return true;
+            } else {
+              if (fullSearch(text)(element)) return true;
+            }
+    }
+    return false;
+  };
+}
+
 const select = defineComponent({
   data() {
-    return { video: videoData };
+    return {
+      video: videoData,
+      text: "输入关键字以搜索",
+      search: (node: treeNode): boolean => {
+        return false;
+      },
+    };
   },
   components: { Tree },
+  methods: {
+    fullSearch() {
+      this.search = fullSearch(this.text);
+    },
+  },
 });
 export default select;
 </script>

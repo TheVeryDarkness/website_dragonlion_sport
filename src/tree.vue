@@ -1,59 +1,62 @@
 <template>
-  <ul style="margin: 0" v-for="(item, index) in roots" :key="index">
-    <li style="list-style: none" @click="changeStatus">
-      <span style="cursor: pointer">
-        {{ item.sub ? (opened ? "&#8594;" : "&#8595;") : "o" }}
-      </span>
-      {{ item.value }}
-    </li>
-    <tree v-if="opened" v-bind:roots="item.sub ? item.sub : []"> </tree>
+  <div style="list-style: none" v-bind:title="root.value">
+    <span style="cursor: pointer" @click="changeStatus">
+      {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
+    </span>
+    {{ root.value }}
+  </div>
+  <ul v-show="open" style="margin: 0">
+    <tree
+      v-for="(item, index) in root.sub"
+      :key="index"
+      v-bind:root="item"
+      v-bind:want="want"
+      @found="_found"
+    />
   </ul>
 </template>
 
 <script lang="ts">
+import { treeNode } from "./tree";
 import { defineComponent, PropType } from "vue";
-interface treeNode {
-  value: string;
-  sub: treeNode[];
-  [key: string]: any;
-}
-function flaten(object: treeNode[]) {
-  var has_sub = true;
-  var res: treeNode[][] = [];
-  var layer: treeNode[] = [];
-  res.push(object);
-  while (has_sub) {
-    has_sub = false;
-    for (const node of res[res.length - 1])
-      if (node.sub && node.sub.length != 0) {
-        has_sub = true;
-        for (const sub of node.sub) layer.push(sub);
-      }
-    res.push(layer);
-    layer = [];
-  }
-  console.log(res);
-  return res;
-}
 const tree = defineComponent({
   data() {
     return {
+      referenced: false,
       opened: false,
     };
   },
   props: {
-    roots: { type: Object as PropType<treeNode[]>, required: true },
-    titles: Array,
-  },
-  computed: {
-    flatened(): treeNode[][] {
-      if (this.roots) return flaten(this.roots);
-      else return [];
+    root: { type: Object as PropType<treeNode>, required: true },
+    want: {
+      type: Function as PropType<(_: treeNode) => boolean>,
+      required: true,
     },
   },
+  computed: {
+    has_sub(): boolean {
+      const sub = this.root.sub;
+      return !!sub && sub.length > 0;
+    },
+    open(): boolean {
+      return this.referenced || this.opened;
+    },
+  },
+  emits: ["found"],
   methods: {
+    _found(foundInSub: boolean) {
+      this.referenced = foundInSub || this.referenced;
+      this.$emit("found", this.referenced || this.want(this.root));
+    },
     changeStatus() {
       this.opened = !this.opened;
+    },
+  },
+  watch: {
+    want(newWant, oldWant) {
+      this.referenced = false;
+      if (!this.root.sub || this.root.sub.length == 0)
+        this.$emit("found", newWant(this.root));
     },
   },
 });

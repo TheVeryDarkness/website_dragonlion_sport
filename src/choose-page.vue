@@ -4,7 +4,7 @@
     <div class="area">
       <ul class="menu">
         <li v-for="(item, index) in shorts" :key="index">
-          <a style="cursor: pointer" @click="update(index)"> {{ item }}</a>
+          <a style="cursor: pointer" @click.stop="update(index)"> {{ item }}</a>
         </li>
       </ul>
     </div>
