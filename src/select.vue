@@ -1,6 +1,6 @@
 <template>
   <fieldset class="top">
-    <Tree v-bind:data="video" />
+    <Tree v-bind:roots="video.root" />
     <form id="selectItem" autocomplete="off">
       <div class="selectSet">
         <label for="s0">运动项目</label>

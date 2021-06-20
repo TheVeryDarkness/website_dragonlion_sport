@@ -5,7 +5,7 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+//const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 function resolve(dir) {
  return path.join(__dirname, '..', dir)
@@ -41,7 +41,8 @@ module.exports = {
   rules: [
    {
     test: /\.vue$/,
-    loader: "vue-loader" // 处理以.vue结尾的文件
+    loader: "vue-loader", // 处理以.vue结尾的文件
+    options: { loaders: { "css": ["vue-style-loader!css-loader"] } }
    },
    {
     test: /\.ts$/,
@@ -122,7 +123,7 @@ module.exports = {
   poll: 1000
  },
  plugins: [
-  new CleanWebpackPlugin(),
+  //new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
    template: resolve("index.html"),

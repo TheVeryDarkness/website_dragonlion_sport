@@ -1,52 +1,59 @@
 <template>
-  <table>
-    <tr
-      v-for="(item, index) in expanded"
-      :key="index"
-      v-bind:value="item.value"
-    >
-      <input v-for="(_item, _index) in data.root" :key="_index" />
-    </tr>
-  </table>
+  <ul style="margin: 0" v-for="(item, index) in roots" :key="index">
+    <li style="list-style: none" @click="changeStatus">
+      <span style="cursor: pointer">
+        {{ item.sub ? (opened ? "&#8594;" : "&#8595;") : "o" }}
+      </span>
+      {{ item.value }}
+    </li>
+    <tree v-if="opened" v-bind:roots="item.sub ? item.sub : []"> </tree>
+  </ul>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 interface treeNode {
   value: string;
   sub: treeNode[];
+  [key: string]: any;
+}
+function flaten(object: treeNode[]) {
+  var has_sub = true;
+  var res: treeNode[][] = [];
+  var layer: treeNode[] = [];
+  res.push(object);
+  while (has_sub) {
+    has_sub = false;
+    for (const node of res[res.length - 1])
+      if (node.sub && node.sub.length != 0) {
+        has_sub = true;
+        for (const sub of node.sub) layer.push(sub);
+      }
+    res.push(layer);
+    layer = [];
+  }
+  console.log(res);
+  return res;
 }
 const tree = defineComponent({
   data() {
-    return { flatened: undefined };
+    return {
+      opened: false,
+    };
   },
-  props: { data: Object, titles: Array },
-  setup(props) {},
+  props: {
+    roots: { type: Object as PropType<treeNode[]>, required: true },
+    titles: Array,
+  },
   computed: {
-    roots(): treeNode[] {
-      return this.data && this.data.root ? this.data.root : [];
+    flatened(): treeNode[][] {
+      if (this.roots) return flaten(this.roots);
+      else return [];
     },
   },
   methods: {
-    flaten(object: {
-      root: { value: string; sub?: treeNode[]; [key: string]: any }[];
-    }) {
-      var has_sub = false;
-      var res = [];
-      var layer = [];
-      res.push(object.root);
-      while (has_sub) {
-        has_sub = false;
-        for (const node of res[res.length - 1])
-          if (node.sub && node.sub.length != 0)
-            for (const sub in node.sub) {
-              layer.push(sub);
-            }
-          else has_sub = false;
-        res.push(layer);
-        layer.splice(0, layer.length);
-      }
-      return res;
+    changeStatus() {
+      this.opened = !this.opened;
     },
   },
 });
