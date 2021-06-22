@@ -221,6 +221,7 @@ table {
   border-width: 1px;
 }
 
+th,
 td {
   border-style: solid;
   border-width: 1px;
@@ -232,7 +233,7 @@ td {
 }
 table > caption,
 table > th,
-td {
+table > td {
   text-align: center;
 }
 

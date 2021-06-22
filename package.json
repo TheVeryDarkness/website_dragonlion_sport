@@ -5,7 +5,7 @@
   "author": "博奕 黄 <1853308@tongji.edu.cn>",
   "private": true,
   "scripts": {
-    "dev": "webpack server --inline --progress --config build/webpack.dev.js",
+    "dev": "webpack serve --inline --progress --config build/webpack.dev.js",
     "start": "npm run dev",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",

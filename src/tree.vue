@@ -4,6 +4,16 @@
       {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
     </span>
     {{ root.value }}
+    <span v-for="(key, index) in ['src', 'origin']" :key="index">
+      <input
+        type="url"
+        size="6"
+        v-bind:disabled="locked"
+        v-if="root[key]"
+        v-model="root[key]"
+        v-bind:title="root[key]"
+      />
+    </span>
   </div>
   <ul v-show="open" style="margin: 0">
     <tree
@@ -11,6 +21,7 @@
       :key="index"
       v-bind:root="item"
       v-bind:want="want"
+      v-bind:locked="locked"
       @found="_found"
     />
   </ul>
@@ -28,6 +39,7 @@ const tree = defineComponent({
   },
   props: {
     root: { type: Object as PropType<node>, required: true },
+    locked: { type: Boolean },
     want: {
       type: Function as PropType<(_: node) => boolean>,
       required: true,

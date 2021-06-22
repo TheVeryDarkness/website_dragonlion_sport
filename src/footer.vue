@@ -2,7 +2,7 @@
   <div class="text normal">
     <hr />
     <footer>
-      <small class="switch" @click="change">本来无物何处尘埃</small>
+      <small class="switch" @click="change">{{ text }}</small>
       <br />
       <a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/"
         >Maintain</a
@@ -60,6 +60,7 @@ function getDefault() {
 const footer = defineComponent({
   data: () => {
     return {
+      text: "本来无物何处尘埃",
       enlightened: getDefault(),
     };
   },
@@ -77,11 +78,13 @@ const footer = defineComponent({
       dark.unuse();
       light.use();
       this.enlightened = true;
+      this.text = "一开灯一切变妄念";
     },
     turnOff() {
       dark.use();
       light.unuse();
       this.enlightened = false;
+      this.text = "一熄灯一切被纪念";
     },
   },
 });

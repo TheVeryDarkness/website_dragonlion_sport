@@ -1,16 +1,21 @@
 <template>
   <fieldset class="top">
-    <input type="text" v-model="level" placeholder="层次" />
-    <input type="text" v-model="key" placeholder="字段" />
+    <input type="text" v-model="key" placeholder="字段" size="6" />
     <input type="text" v-model="text" placeholder="关键字" />
     <input type="button" value="搜索" @click="fullSearch()" />
     <input type="button" value="取消" @click="reset()" />
-    <input class="button" type="button" value="生成" />
+    <input
+      class="button"
+      type="button"
+      v-bind:value="locked ? '编辑' : '生成'"
+      @click="generate"
+    />
     <Tree
       v-for="(root, index) in video.root"
       :key="index"
       v-bind:root="root"
       v-bind:want="search"
+      v-bind:locked="locked"
     />
   </fieldset>
 </template>
@@ -21,6 +26,21 @@ import { node, tree } from "./tree";
 import { defineComponent } from "vue";
 import videoData from "~/data/video.json";
 
+function makeFile(name: string, text: string) {
+  var element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+  );
+  element.setAttribute("download", name);
+
+  element.style.display = "none";
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
 function searchInText(a: string, b: string): boolean {
   return b.includes(a);
 }
@@ -58,9 +78,9 @@ const select = defineComponent({
   data() {
     return {
       video: videoData as tree,
-      level: [0, 6],
       text: "",
       key: "",
+      locked: true,
       search: noSearch,
     };
   },
@@ -71,6 +91,10 @@ const select = defineComponent({
     },
     fullSearch() {
       this.search = fullSearch(this.text, this.key);
+    },
+    generate() {
+      this.locked = !this.locked;
+      if (this.locked) makeFile("result.json", JSON.stringify(this.video));
     },
   },
 });

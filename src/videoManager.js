@@ -11,7 +11,7 @@ var specified = {}
 var specifiedNodeIndex = 0
 var totalLineCount = 0
 
-function count (obj) {
+function count(obj) {
   if (obj === specified) { specifiedNodeIndex = totalLineCount }
   ++totalLineCount
   if (typeof obj === 'object') { // Otherwise should not be iterated
@@ -23,7 +23,7 @@ function count (obj) {
   }
   return obj
 };
-function relocateJSON () {
+function relocateJSON() {
   specifiedNodeIndex = totalLineCount = 0
   count(tree)
   {
@@ -32,16 +32,16 @@ function relocateJSON () {
   }
   // console.log(String(specifiedNodeIndex) + "/" + String(totalLineCount));
 }
-function changeSpecifiedNode (newNode) {
+function changeSpecifiedNode(newNode) {
   specified = newNode
   relocateJSON()
 }
 // resultTreeJSON is an element node
-function showJSON () {
+function showJSON() {
   resultTreeJSON.textContent = JSON.stringify(tree, null, 1)
   relocateJSON()
 }
-function addProperty (event) {
+function addProperty(event) {
   if (!specified.value) {
     alert('Choose a named node first.')
   } else if (specified[keyToBeFilled] === undefined) {
@@ -54,7 +54,7 @@ function addProperty (event) {
     }
   } else alert('Fill empty-key property first.')
 }
-function renderPropertyToDocumentNode (key, element, node) {
+function renderPropertyToDocumentNode(key, element, node) {
   switch (key) {
     case 'sub':
       var arr = []
@@ -150,7 +150,7 @@ function renderPropertyToDocumentNode (key, element, node) {
       return input
   }
 }
-function renderPropertyToLi (key, element, node) {
+function renderPropertyToLi(key, element, node) {
   const li = document.createElement('li')
 
   const p = document.createElement('p')
@@ -192,7 +192,7 @@ function renderPropertyToLi (key, element, node) {
   li.appendChild(p)
   return li
 }
-function showNode (node) {
+function showNode(node) {
   if (node == specified) console.log('This could be optimized for efficiency.')
   changeSpecifiedNode(node)
   const ul = document.getElementById('nodeProperties')
@@ -208,7 +208,7 @@ function showNode (node) {
     ul.appendChild(renderPropertyToLi(key, element, node))
   }
 }
-function lastSpecifiedNode (end = s.length) {
+function lastSpecifiedNode(end = s.length) {
   if (s.length < end) { console.error('Out of Range'); end = s.length }
   var res = -1
   for (let index = 0; index < end; index++) {
@@ -217,22 +217,11 @@ function lastSpecifiedNode (end = s.length) {
   }
   if (res >= 0) { return nodes[res][s[res].selectedIndex] } else return {}
 }
-function showLastSpecified (end = s.length) {
+function showLastSpecified(end = s.length) {
   showNode(lastSpecifiedNode(end))
 }
-function makeFile (name, text) {
-  var element = document.createElement('a')
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
-  element.setAttribute('download', name)
-
-  element.style.display = 'none'
-  document.body.appendChild(element)
-
-  element.click()
-
-  document.body.removeChild(element)
-}
-function generate () {
+export 
+function generate() {
   if (process.env.NODE_ENV == 'development' && resultTreeJSON.textContent !== JSON.stringify(tree, null, 1)) {
     console.error('Data in textarea is modified somewhere.')
     console.log(resultTreeJSON.textContent)
