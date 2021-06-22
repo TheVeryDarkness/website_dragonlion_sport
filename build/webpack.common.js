@@ -5,7 +5,7 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-//const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 function resolve(dir) {
  return path.join(__dirname, '..', dir)
@@ -123,7 +123,7 @@ module.exports = {
   poll: 1000
  },
  plugins: [
-  //new CleanWebpackPlugin(),
+  new CleanWebpackPlugin(),
   new VueLoaderPlugin(),
   new HtmlWebpackPlugin({
    template: resolve("index.html"),
