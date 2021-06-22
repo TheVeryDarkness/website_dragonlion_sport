@@ -12,14 +12,14 @@
       </li>
       <li><a href="http://www.sports.edu.cn/">中国学生体育网</a></li>
       <li>
-        <a href="http://www.cudld.com/index"
-          >中国大学生体育协会舞龙舞狮分会（疑已弃用）</a
-        >
+        <a href="http://www.cudld.com/index">
+          中国大学生体育协会舞龙舞狮分会（疑已弃用）
+        </a>
       </li>
       <li>
-        <a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/"
-          >中南大学舞龙舞狮精品课程</a
-        >
+        <a href="http://netclass.csu.edu.cn/jpkc2009/hunan/wlws/">
+          中南大学舞龙舞狮精品课程
+        </a>
         <ul>
           <li>
             <a
@@ -31,41 +31,43 @@
         </ul>
       </li>
       <li>
-        <a href="https://mooc1-1.chaoxing.com/course/205382137.html"
-          >超星发现民族传统体育——舞龙（城建俞宇老师）</a
-        >
+        <a href="https://mooc1-1.chaoxing.com/course/205382137.html">
+          超星发现民族传统体育——舞龙（城建俞宇老师）
+        </a>
       </li>
       <li>
-        <a href="https://www.icourses.cn/sCourse/course_6711.html"
-          >爱课程舞龙舞狮（中南黄益苏老师）</a
-        >
+        <a href="https://www.icourses.cn/sCourse/course_6711.html">
+          爱课程舞龙舞狮（中南黄益苏老师）
+        </a>
       </li>
       <li>
         <a href="http://www.ocasia.org">亚洲奥林匹克理事会</a>
         <ul>
           <li>
-            <a href="http://www.ocasia.org/sports/72-dragon-lion-dance-dl.html"
-              >龙狮运动</a
-            >
+            <a href="http://www.ocasia.org/sports/72-dragon-lion-dance-dl.html">
+              龙狮运动
+            </a>
           </li>
           <li>
             <a
               href="http://www.ocasia.org/sports/federations/43-international-dragon-lion-dance-federation.html"
-              >IDLDF</a
             >
+              IDLDF
+            </a>
           </li>
           <li>
             <a
               href="http://www.ocasia.org/sports/federations/13-dragon-lion-dances-federation-of-asia.html"
-              >DLDFA</a
             >
+              DLDFA
+            </a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="http://www.hkcmaa.com.hk/eng/intro/activities.html"
-          >香港中国国术龙狮协会</a
-        >
+        <a href="http://www.hkcmaa.com.hk/eng/intro/activities.html">
+          香港中国国术龙狮协会
+        </a>
       </li>
       <li>
         同济龙狮内部资料
@@ -80,17 +82,17 @@
         </ul>
       </li>
       <li>
-        <a href="https://usdldf.org/about-usdldf/"
-          >The United States Dragon & Lion Dance Federation</a
-        >
+        <a href="https://usdldf.org/about-usdldf/">
+          The United States Dragon & Lion Dance Federation
+        </a>
       </li>
       <li>
         <a href="https://wuzong.com/activities.php">新加坡武术龙狮总会</a>
       </li>
       <li>
-        <a href="http://www.sdliondance.com/index.html"
-          >Southern Sea Dragon and Lion Dance Association</a
-        >
+        <a href="http://www.sdliondance.com/index.html">
+          Southern Sea Dragon and Lion Dance Association
+        </a>
       </li>
       <li>
         <a href="https://culturachina.cl/">中智文化艺术中心</a>
@@ -100,8 +102,8 @@
 </template>
 
 <script lang="ts">
-import { createApp } from "vue";
-const links = createApp({});
+import { defineComponent } from "vue";
+const links = defineComponent({});
 export default links;
 </script>
 
