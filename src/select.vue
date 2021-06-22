@@ -23,8 +23,7 @@
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
 import { node, tree } from "./tree";
-import { defineComponent } from "vue";
-import videoData from "~/data/video.json";
+import { defineComponent, PropType } from "vue";
 
 function makeFile(name: string, text: string) {
   var element = document.createElement("a");
@@ -77,13 +76,13 @@ const noSearch = (node: node): boolean => {
 const select = defineComponent({
   data() {
     return {
-      video: videoData as tree,
       text: "",
       key: "",
       locked: true,
       search: noSearch,
     };
   },
+  props: { video: { type: Object as PropType<tree>, required: true } },
   components: { Tree },
   methods: {
     reset() {
