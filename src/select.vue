@@ -18,11 +18,13 @@
       v-bind:locked="locked"
     />
   </fieldset>
+  <Displayer />
 </template>
 
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
 import { node, tree } from "./tree";
+import Displayer from "@/displayer.vue";
 import { defineComponent, PropType } from "vue";
 
 function makeFile(name: string, text: string) {
@@ -83,7 +85,7 @@ const select = defineComponent({
     };
   },
   props: { video: { type: Object as PropType<tree>, required: true } },
-  components: { Tree },
+  components: { Tree, Displayer },
   methods: {
     reset() {
       this.search = noSearch;
