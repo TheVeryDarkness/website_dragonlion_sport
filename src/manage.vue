@@ -25,5 +25,12 @@ const manage = defineComponent({
 export default manage;
 </script>
 
-<style>
+<style scoped>
+textarea {
+  font-size: inherit;
+  width: 100%;
+  height: fit-content;
+  min-height: 10em;
+  resize: vertical;
+}
 </style>

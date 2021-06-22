@@ -57,25 +57,17 @@ module.exports = {
     include: [resolve('src')]
    },
    {
+    test: /basic\.css$/, use: ["style-loader", "css-loader"],
+   },
+   {
     test: /(dark|light)\.css$/,
     use: [
-     {
-      loader: "style-loader",
-      options: { injectType: "lazyStyleTag" }
-     },
+     { loader: "style-loader", options: { injectType: "lazyStyleTag" } },
      { loader: "css-loader" },
-     { loader: "postcss-loader" }
     ]
    },
    {
-    test: /basic\.css$/,
-    use: [
-     {
-      loader: "style-loader"
-     },
-     { loader: "css-loader" },
-     { loader: "postcss-loader" }
-    ]
+    exclude: resolve("css"), test: /\.css$/, use: ['vue-style-loader', 'css-loader']
    },
    {
     test: /\.png$/,
