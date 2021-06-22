@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Row from "@/row.vue";
-import _table from "~/data/tableDifficulty.json";
+import _table from "~/data/tableDifficulty.json"; // [difficulty][category][action]
 const table = defineComponent({
   data() {
     return { data: _table };
