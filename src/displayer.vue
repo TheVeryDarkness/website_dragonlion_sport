@@ -9,8 +9,11 @@ import { segmentInfo, videoInfo } from "@/tree";
 import { defineComponent, PropType } from "vue";
 const Displayer = defineComponent({
   props: {
-    video: { type: Object as PropType<videoInfo>, required: true },
-    segment: { type: Object as PropType<segmentInfo> },
+    video: { type: Object as PropType<videoInfo>, default: {} },
+    segment: {
+      type: Object as PropType<segmentInfo>,
+      default: {},
+    },
   },
 });
 export default Displayer;
