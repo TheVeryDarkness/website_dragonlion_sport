@@ -31,7 +31,7 @@ const table = defineComponent({
 export default table;
 </script>
 
-<style >
+<style>
 table {
   margin: auto;
   border-style: solid;

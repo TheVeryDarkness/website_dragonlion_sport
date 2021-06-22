@@ -32,5 +32,39 @@ const choosePage = defineComponent({
 export default choosePage;
 </script>
 
-<style>
+<style scoped>
+header > h1 {
+  padding-top: 12%;
+  margin-left: 1%;
+}
+
+header {
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  background-size: contain;
+  background-color: transparent;
+  background-image: url("../pic/background/sakura-background.png");
+}
+
+ul {
+  text-align: left;
+  list-style: none;
+  display: inline;
+  clear: both;
+}
+
+ul > li {
+  font-size: 1.3em;
+  text-align: left;
+  display: block;
+  float: left;
+  width: 10%;
+}
+
+ul > li > a {
+  font-size: inherit;
+  text-align: left;
+  text-decoration: none;
+}
 </style>

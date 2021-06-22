@@ -35,5 +35,31 @@ const Main = defineComponent({
 export default Main;
 </script>
 
-<style scoped>
+<style>
+:root {
+  font-family: "Cursive", "KaiTi_GB2312", "DFKai-SB", "FangSong",
+    "FangSong_GB2312";
+  /* To be overriden */
+  font-size: 32px;
+}
+@media (max-width: 720px) {
+  :root {
+    font-size: 28px;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    font-size: 22px;
+  }
+}
+@media (max-width: 320px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media (max-width: 240px) {
+  :root {
+    font-size: 14px;
+  }
+}
 </style>

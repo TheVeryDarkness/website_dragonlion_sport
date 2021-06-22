@@ -2,7 +2,7 @@
   <div class="text normal">
     <hr />
     <footer>
-      <small class="switch" @click="change">{{ text }}</small>
+      <small @click="change">{{ text }}</small>
       <br />
       <a href="https://github.com/TheVeryDarkness/website_dragonlion_sport/"
         >Maintain</a
@@ -91,5 +91,13 @@ const footer = defineComponent({
 export default footer;
 </script>
 
-<style>
+<style scoped>
+footer {
+  color: inherit;
+  vertical-align: bottom;
+  text-align: center;
+}
+small {
+  font-size: 0.8em;
+}
 </style>
