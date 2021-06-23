@@ -1,10 +1,13 @@
 interface videoInfo {
+  frame?: string;
+  from?: string;
+
   src?: string;
+
+  range?: [string, string];
+
   origin?: string;
   comment?: [string, string][];
-}
-interface segmentInfo {
-  range?: [string, string];
 }
 interface node {
   value: string;
@@ -15,10 +18,10 @@ interface node {
   origin?: string;
   comment?: [string, string][];
 }
-export interface action extends segmentInfo, node {
+export interface action extends videoInfo, node {
   value: string;
 }
-export interface team extends videoInfo, segmentInfo, node {
+export interface team extends videoInfo, node {
   value: string;
   sub: action[];
 }
