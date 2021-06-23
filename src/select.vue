@@ -16,14 +16,15 @@
       v-bind:root="root"
       v-bind:want="search"
       v-bind:locked="locked"
+      @choose="chooseNode"
     />
   </fieldset>
-  <Displayer />
+  <Displayer v-bind:node="chosenNode" />
 </template>
 
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
-import { node, tree } from "./tree";
+import { node, tree, videoInfo } from "./tree";
 import Displayer from "@/displayer.vue";
 import { defineComponent, PropType } from "vue";
 
@@ -82,6 +83,7 @@ const select = defineComponent({
       key: "",
       locked: true,
       search: noSearch,
+      chosenNodes: new Array<node>(),
     };
   },
   props: { video: { type: Object as PropType<tree>, required: true } },
@@ -96,6 +98,21 @@ const select = defineComponent({
     generate() {
       this.locked = !this.locked;
       if (this.locked) makeFile("result.json", JSON.stringify(this.video));
+    },
+    chooseNode(...nodes: node[]) {
+      this.chosenNodes = nodes;
+    },
+  },
+  computed: {
+    chosenNode(): videoInfo {
+      const res: { [key: string]: any } = {};
+      this.chosenNodes.forEach((_: videoInfo) => {
+        let key: keyof videoInfo;
+        for (key in _) {
+          if (res[key] == undefined) res[key] = _[key];
+        }
+      });
+      return res;
     },
   },
 });

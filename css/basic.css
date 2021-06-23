@@ -94,30 +94,11 @@ div.sideBar {
   border-style: groove;
 }
 
-video.video {
-  margin-top: 0.6em;
-  float: left;
-  display: block;
-}
-iframe.video {
-  border: 0;
-  margin-top: 0.6em;
-  float: left;
-  display: none;
-}
 @media (min-aspect-ratio: 16/9) {
   div.sideBar {
     width: calc(20% - 6px);
     font-size: 0.9em;
     float: right;
-  }
-  video.video {
-    width: 79%;
-    height: 79%;
-  }
-  iframe.video {
-    width: 76vw;
-    height: 42.75vw;
   }
 }
 @media (max-aspect-ratio: 16/9) {
@@ -125,14 +106,6 @@ iframe.video {
     width: fit-content;
     clear: both;
     float: left;
-  }
-  video.video {
-    width: 100%;
-    height: 100%;
-  }
-  iframe.video {
-    width: 96vw;
-    height: 54vw;
   }
 }
 

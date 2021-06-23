@@ -19,6 +19,9 @@
 import { videoInfo } from "@/tree";
 import { defineComponent, PropType } from "vue";
 const Displayer = defineComponent({
+  data() {
+    return { ended: false, inited: false };
+  },
   props: {
     node: { type: Object as PropType<videoInfo>, default: {} },
     mode: { type: String as PropType<"html5" | "iframe"> },
@@ -35,7 +38,7 @@ const Displayer = defineComponent({
     frame(): string {
       const node = this.node;
       const frame = this.node.frame;
-      if (!frame) return "about:blank";
+      if (!frame) return "";
       if (node.from == "bilibili") {
         // See http://docs.bilibili.cn/wiki
         // Reference:
@@ -60,12 +63,22 @@ const Displayer = defineComponent({
       }
     },
   },
+  watch: {
+    node() {
+      this.inited = false;
+    },
+  },
   methods: {
     check(ev: Event) {
-      console.log(ev);
       const video = ev.target as HTMLVideoElement;
-      if (video.currentTime >= this.range[1]) {
+      if (!this.inited) {
+        video.currentTime = this.range[0];
+        video.play();
+        this.inited = true;
+      }
+      if (!this.ended && video.currentTime >= this.range[1]) {
         video.pause();
+        this.ended = true;
       }
     },
   },
@@ -73,5 +86,36 @@ const Displayer = defineComponent({
 export default Displayer;
 </script>
 
-<style>
+<style scoped>
+video.video {
+  margin-top: 0.6em;
+  float: left;
+  display: block;
+}
+iframe.video {
+  border: 0;
+  margin-top: 0.6em;
+  float: left;
+  display: none;
+}
+@media (min-aspect-ratio: 16/9) {
+  video {
+    width: 79%;
+    height: 79%;
+  }
+  iframe {
+    width: 76vw;
+    height: 42.75vw;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  video {
+    width: 100%;
+    height: 100%;
+  }
+  iframe {
+    width: 96vw;
+    height: 54vw;
+  }
+}
 </style>

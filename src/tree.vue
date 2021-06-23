@@ -3,7 +3,7 @@
     <span style="cursor: pointer" @click="changeStatus">
       {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
     </span>
-    {{ root.value }}
+    <a @click="chooseNode">{{ root.value }}</a>
     <span v-for="(key, index) in ['src', 'origin']" :key="index">
       <input
         type="url"
@@ -23,6 +23,7 @@
       v-bind:want="want"
       v-bind:locked="locked"
       @found="_found"
+      @choose="_choose"
     />
   </ul>
 </template>
@@ -54,7 +55,7 @@ const tree = defineComponent({
       return this.referenced || this.opened;
     },
   },
-  emits: ["found"],
+  emits: ["found", "choose"],
   methods: {
     _found(foundInSub: boolean) {
       this.referenced = foundInSub || this.referenced;
@@ -62,6 +63,12 @@ const tree = defineComponent({
     },
     changeStatus() {
       this.opened = !this.opened;
+    },
+    chooseNode() {
+      this.$emit("choose", this.root);
+    },
+    _choose(...nodes: node[]) {
+      this.$emit("choose", ...nodes, this.root);
     },
   },
   watch: {
