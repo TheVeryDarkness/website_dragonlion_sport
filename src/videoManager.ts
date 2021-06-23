@@ -1,5 +1,3 @@
-import { nodes, tree } from './infoTree'
-import { s } from './select'
 export { addProperty, showLastSpecified, generate, showJSON }
 
 // To be filled
