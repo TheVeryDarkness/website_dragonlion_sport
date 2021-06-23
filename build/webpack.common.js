@@ -122,7 +122,8 @@ module.exports = {
    filename: "index.html",
    title: "Tongji Dragon&Lion Dance Sport",
    favicon: resolve("pic/icon/DragonLion.png"),
-   minify: htmlMinifyOption
+   minify: htmlMinifyOption,
+   inject: true
   })
  ]
 };
