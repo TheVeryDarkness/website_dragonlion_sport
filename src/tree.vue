@@ -4,16 +4,6 @@
       {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
     </span>
     <a @click="chooseNode">{{ root.value }}</a>
-    <span v-for="(key, index) in ['src', 'origin']" :key="index">
-      <input
-        type="url"
-        size="6"
-        v-bind:disabled="locked"
-        v-if="root[key]"
-        v-model="root[key]"
-        v-bind:title="root[key]"
-      />
-    </span>
   </div>
   <ul v-show="open" style="margin: 0">
     <tree
