@@ -46,27 +46,22 @@ export default Main;
 hr {
   z-index: auto;
 }
-@media (max-width: 1800px) {
-  :root {
-    font-size: 40px;
-  }
-}
-@media (max-width: 1440px) {
+@media (max-width: 2400px) {
   :root {
     font-size: 36px;
   }
 }
-@media (max-width: 1320px) {
+@media (max-width: 1800px) {
   :root {
     font-size: 34px;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
   :root {
     font-size: 32px;
   }
 }
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   :root {
     font-size: 30px;
   }

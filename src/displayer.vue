@@ -1,22 +1,24 @@
 <template>
-  <div style="position: fixed; inset: 0" v-if="open" @click="open = !open">
-    <div style="display: flex; margin: 6%; overflow: auto">
-      <fieldset
-        style="width: 100%; height: 100%; overflow: auto"
-        class="top"
-        @click.stop=""
-      >
+  <div
+    id="displayer"
+    style="position: absolute; inset: 0; min-width: 100%; min-height: 100%"
+    v-show="open"
+    @click="open = !open"
+  >
+    <div style="position: absolute; display: flex; margin: 6%; width: 88%">
+      <fieldset style="width: 100%" class="top" @click.stop="">
         <Editor
           v-if="nodes.length"
           v-bind:node="node"
           @update="update"
           ref="editor"
         />
-        <div style="width: 100%; height: 100%">
+        <hr />
+        <div style="width: 100%">
           <video
             v-if="!!video"
             v-bind:src="video"
-            style="min-width: 100%; min-height: 100%"
+            style="min-width: 100%"
             @timeupdate="check"
             controls
             autoplay
@@ -55,8 +57,14 @@ const Displayer = defineComponent({
     },
     range(): [number, number] {
       const range = this.getArr("range");
-      if (range) return [parseInt(range[0]), parseInt(range[1])];
-      else return [0, Infinity];
+      var res: [number, number] = [0, Infinity];
+      if (range) {
+        const r0 = parseInt(range[0]);
+        const r1 = parseInt(range[1]);
+        if (!isNaN(r0)) res[0] = r0;
+        if (!isNaN(r1)) res[1] = r1;
+      }
+      return res;
     },
     frame(): string {
       const from = this.getStr("from");
@@ -113,10 +121,10 @@ const Displayer = defineComponent({
       value: undefined | string | string[] | string[][] | NodeBasic[]
     ) {
       var _node = this.nodes[this.nodes.length - 1];
-      _node[key] = value;
+      if (value == undefined) delete _node[key];
+      else _node[key] = value;
       (this.$refs.editor as typeof Editor).$forceUpdate();
       this.$forceUpdate();
-      console.log(this.nodes);
     },
     getStr<T extends "src" | "frame" | "origin" | "from">(key: T) {
       var value = "";
