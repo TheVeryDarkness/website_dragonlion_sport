@@ -22,13 +22,11 @@
       />
     </div>
   </fieldset>
-  <Displayer v-bind:nodes="chosenNodes" />
 </template>
 
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
-import { NodeBasic, TreeRoot, VideoInfo } from "./tree";
-import Displayer from "@/displayer.vue";
+import { NodeBasic, TreeRoot } from "./tree";
 import { defineComponent, PropType } from "vue";
 
 function makeFile(name: string, text: string) {
@@ -89,11 +87,11 @@ const select = defineComponent({
       key: "",
       locked: true,
       search: noSearch,
-      chosenNodes: new Array<NodeBasic & VideoInfo>(),
     };
   },
   props: { video: { type: Object as PropType<TreeRoot>, required: true } },
-  components: { Tree, Displayer },
+  components: { Tree },
+  emits: ["select"],
   methods: {
     reset() {
       this.search = noSearch;
@@ -106,7 +104,7 @@ const select = defineComponent({
       if (this.locked) makeFile("result.json", JSON.stringify(this.video));
     },
     chooseNode(...nodes: NodeBasic[]) {
-      this.chosenNodes = nodes;
+      this.$emit("select", ...nodes.reverse());
     },
   },
 });

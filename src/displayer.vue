@@ -1,11 +1,9 @@
 <template>
-  <div
-    id="displayer"
-    style="position: absolute; inset: 0; min-width: 100%; min-height: 100%"
-    v-show="open"
-    @click="open = !open"
-  >
-    <div style="position: absolute; display: flex; margin: 6%; width: 88%">
+  <div style="position: absolute; inset: 0" v-show="open" @click="open = !open">
+    <div
+      v-if="open"
+      style="position: absolute; display: flex; margin: 6%; width: 88%"
+    >
       <fieldset style="width: 100%" class="top" @click.stop="">
         <Editor
           v-if="nodes.length"
@@ -13,12 +11,12 @@
           @update="update"
           ref="editor"
         />
-        <hr />
+        <hr v-if="video || frame" />
         <div style="width: 100%">
           <video
             v-if="!!video"
             v-bind:src="video"
-            style="min-width: 100%"
+            style="width: fill"
             @timeupdate="check"
             controls
             autoplay

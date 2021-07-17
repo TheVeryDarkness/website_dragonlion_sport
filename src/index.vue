@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <Header v-on:select-page="update" />
-    <hr />
-    <Select v-bind:video="data" v-if="page == 0 || page == 3" />
-    <Manage v-bind:data="data" v-if="page == 3" />
-    <Links v-if="page == 1" />
-    <Table v-if="page == 2" />
-    <hr />
-    <Footer />
-    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-  </div>
+  <Header v-on:select-page="update" />
+  <hr />
+  <Select v-bind:video="data" v-if="page == 0 || page == 3" @select="select" />
+  <Manage v-bind:data="data" v-if="page == 3" />
+  <Links v-if="page == 1" />
+  <Table v-if="page == 2" />
+  <hr />
+  <Footer />
+  <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+  <Displayer v-bind:nodes="chosenNodes" />
 </template>
 
 <script lang="ts">
@@ -21,17 +20,26 @@ import Links from "@/links.vue";
 import Manage from "@/manage.vue";
 import { defineComponent } from "vue";
 import videoData from "~/data/video.json";
+import { NodeBasic, VideoInfo } from "./tree";
+import Displayer from "@/displayer.vue";
+
 const Main = defineComponent({
   data() {
-    return { page: 0, data: videoData };
+    return {
+      page: 0,
+      data: videoData,
+      chosenNodes: new Array<NodeBasic & VideoInfo>(),
+    };
   },
   methods: {
     update(i: number) {
       this.page = i;
     },
+    select(...nodes: NodeBasic[]) {
+      this.chosenNodes = nodes;
+    },
   },
-  computed: {},
-  components: { Header, Select, Table, Footer, Links, Manage },
+  components: { Header, Select, Table, Footer, Links, Manage, Displayer },
 });
 export default Main;
 </script>

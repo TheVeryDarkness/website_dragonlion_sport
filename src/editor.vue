@@ -32,7 +32,6 @@ const editor = defineComponent({
     deleteKey(e: MouseEvent) {
       const elem = e.target as HTMLElement;
       const key = (elem.parentNode?.childNodes[2] as HTMLInputElement).value;
-      console.log(key);
       this.$emit("update", key, undefined);
     },
     editable(key: string) {
