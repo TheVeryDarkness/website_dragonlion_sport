@@ -26,7 +26,7 @@ module.exports = {
     index: resolve("src/index.ts"),
   },
   output: {
-    path: path.join(__dirname, "..", "dist", "dist"),
+    path: path.join(__dirname, "..", "dist", "docs"),
     filename: "[name]-[contenthash].js",
   },
   resolve: {

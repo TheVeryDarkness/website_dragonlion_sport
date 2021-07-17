@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute; inset: 0" v-show="open" @click="open = !open">
+  <div :style="styleObject" v-show="open" @click="open = !open">
     <div
       v-if="open"
       style="position: absolute; display: flex; margin: 6%; width: 88%"
@@ -16,7 +16,7 @@
           <video
             v-if="!!video"
             v-bind:src="video"
-            style="width: fill"
+            style="width: 100%"
             @timeupdate="check"
             controls
             autoplay
@@ -43,13 +43,21 @@ import { defineComponent, PropType, reactive } from "vue";
 
 const Displayer = defineComponent({
   data() {
-    return { ended: false, inited: false, open: false };
+    return {
+      ended: false,
+      inited: false,
+      open: false,
+      height: document.body.offsetHeight,
+    };
   },
   props: {
     nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
   computed: {
+    styleObject(): Object {
+      return { position: "absolute", inset: 0, height: this.height + "px" };
+    },
     video(): string {
       return this.getStr("src");
     },
@@ -95,6 +103,9 @@ const Displayer = defineComponent({
       return this.nodes[this.nodes.length - 1];
     },
   },
+  mounted() {
+    this.observe();
+  },
   watch: {
     nodes() {
       this.inited = false;
@@ -102,6 +113,19 @@ const Displayer = defineComponent({
     },
   },
   methods: {
+    observe() {
+      const height = Math.max(
+        window.innerHeight,
+        document.documentElement.scrollHeight
+      );
+      if (height != this.height) {
+        this.height = height;
+        this.$forceUpdate();
+      }
+      setTimeout(() => {
+        this.observe();
+      }, 100);
+    },
     check(ev: Event) {
       const video = ev.target as HTMLVideoElement;
       if (!this.inited) {
