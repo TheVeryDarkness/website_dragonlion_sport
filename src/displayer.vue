@@ -18,8 +18,8 @@
             v-bind:src="video"
             style="width: 100%"
             @timeupdate="check"
+            @load="check"
             controls
-            autoplay
           >
             浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
           </video>
@@ -52,6 +52,7 @@ const Displayer = defineComponent({
   },
   props: {
     nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },
+    autoplay: { type: Boolean },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
   computed: {
@@ -130,7 +131,7 @@ const Displayer = defineComponent({
       const video = ev.target as HTMLVideoElement;
       if (!this.inited) {
         video.currentTime = this.range[0];
-        video.play();
+        if (this.autoplay) video.play();
         this.inited = true;
       }
       if (!this.ended && video.currentTime >= this.range[1]) {

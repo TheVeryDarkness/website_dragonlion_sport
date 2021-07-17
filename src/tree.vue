@@ -2,7 +2,7 @@
   <ul>
     <li style="list-style: none; margin: 0; padding: 0">
       <span
-        style="cursor: pointer"
+        v-bind:style="{ cursor: has_sub ? 'pointer' : 'default' }"
         @click="changeStatus"
         v-bind:title="root.value"
       >

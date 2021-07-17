@@ -1,6 +1,6 @@
 <template>
   <p class="text normal">
-    编辑完成后，您可以点击“生成”按钮，复制下方的内容或下载生成的JSON文件，然后将其提交到
+    提示：由于没有服务器，所以选择通过Github存放视频元数据。编辑完成后，您可以点击“生成”按钮，复制下方的内容或下载生成的JSON文件，然后将其提交到
     <a href="https://github.com/TheVeryDarkness/sport_data/issues">
       GitHub issues
     </a>

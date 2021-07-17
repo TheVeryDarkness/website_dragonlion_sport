@@ -8,7 +8,7 @@
   <hr />
   <Footer />
   <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-  <Displayer v-bind:nodes="chosenNodes" />
+  <Displayer v-bind:nodes="chosenNodes" v-bind:autoplay="page == 0" />
 </template>
 
 <script lang="ts">
