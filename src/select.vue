@@ -10,21 +10,24 @@
       v-bind:value="locked ? '编辑' : '生成'"
       @click="generate"
     />
-    <Tree
-      v-for="(root, index) in video.root"
-      :key="index"
-      v-bind:root="root"
-      v-bind:want="search"
-      v-bind:locked="locked"
-      @choose="chooseNode"
-    />
+    <div>
+      <Tree
+        style="margin: 0; padding: 0"
+        v-for="(root, index) in video.root"
+        :key="index"
+        v-bind:root="root"
+        v-bind:want="search"
+        v-bind:locked="locked"
+        @choose="chooseNode"
+      />
+    </div>
   </fieldset>
-  <Displayer v-bind:node="chosenNode" />
+  <Displayer v-bind:node="chosenNode" @update="update" />
 </template>
 
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
-import { node, tree, videoInfo } from "./tree";
+import { NodeBasic, TreeRoot, VideoInfo } from "./tree";
 import Displayer from "@/displayer.vue";
 import { defineComponent, PropType } from "vue";
 
@@ -46,9 +49,12 @@ function makeFile(name: string, text: string) {
 function searchInText(a: string, b: string): boolean {
   return b.includes(a);
 }
-function fullSearch(text: string, _key: string = ""): (node: node) => boolean {
-  return function (node: node) {
-    let key: keyof node;
+function fullSearch(
+  text: string,
+  _key: string = ""
+): (node: NodeBasic) => boolean {
+  return function (node: NodeBasic) {
+    let key: keyof NodeBasic;
     for (key in node) {
       if (key == "sub") continue;
       if (_key != "" && _key != key) continue;
@@ -72,7 +78,7 @@ function fullSearch(text: string, _key: string = ""): (node: node) => boolean {
     return false;
   };
 }
-const noSearch = (node: node): boolean => {
+const noSearch = (node: NodeBasic): boolean => {
   return false;
 };
 
@@ -83,10 +89,10 @@ const select = defineComponent({
       key: "",
       locked: true,
       search: noSearch,
-      chosenNodes: new Array<node>(),
+      chosenNodes: new Array<NodeBasic>(),
     };
   },
-  props: { video: { type: Object as PropType<tree>, required: true } },
+  props: { video: { type: Object as PropType<TreeRoot>, required: true } },
   components: { Tree, Displayer },
   methods: {
     reset() {
@@ -99,15 +105,15 @@ const select = defineComponent({
       this.locked = !this.locked;
       if (this.locked) makeFile("result.json", JSON.stringify(this.video));
     },
-    chooseNode(...nodes: node[]) {
+    chooseNode(...nodes: NodeBasic[]) {
       this.chosenNodes = nodes;
     },
   },
   computed: {
-    chosenNode(): videoInfo {
+    chosenNode(): VideoInfo {
       const res: { [key: string]: any } = {};
-      this.chosenNodes.forEach((_: videoInfo) => {
-        let key: keyof videoInfo;
+      this.chosenNodes.forEach((_: VideoInfo & NodeBasic) => {
+        let key: keyof (VideoInfo & NodeBasic);
         for (key in _) {
           if (res[key] == undefined) res[key] = _[key];
         }

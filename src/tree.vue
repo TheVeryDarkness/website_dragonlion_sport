@@ -1,12 +1,16 @@
 <template>
-  <div style="list-style: none" v-bind:title="root.value">
-    <span style="cursor: pointer" @click="changeStatus">
+  <ul>
+    <span
+      style="cursor: pointer"
+      @click="changeStatus"
+      v-bind:title="root.value"
+    >
       {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
     </span>
     <a @click="chooseNode">{{ root.value }}</a>
-  </div>
-  <ul v-show="open" style="margin: 0">
     <tree
+      style="margin: 0 0 0 6%; padding: 0"
+      v-show="open"
       v-for="(item, index) in root.sub"
       :key="index"
       v-bind:root="item"
@@ -19,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { node } from "./tree";
+import { NodeBasic } from "./tree";
 import { defineComponent, PropType } from "vue";
 const tree = defineComponent({
   data() {
@@ -29,10 +33,10 @@ const tree = defineComponent({
     };
   },
   props: {
-    root: { type: Object as PropType<node>, required: true },
+    root: { type: Object as PropType<NodeBasic>, required: true },
     locked: { type: Boolean },
     want: {
-      type: Function as PropType<(_: node) => boolean>,
+      type: Function as PropType<(_: NodeBasic) => boolean>,
       required: true,
     },
   },
@@ -57,7 +61,7 @@ const tree = defineComponent({
     chooseNode() {
       this.$emit("choose", this.root);
     },
-    _choose(...nodes: node[]) {
+    _choose(...nodes: NodeBasic[]) {
       this.$emit("choose", ...nodes, this.root);
     },
   },

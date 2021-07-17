@@ -1,6 +1,5 @@
 <template>
   <div class="text normal">
-    <hr />
     <footer>
       <small @click="change">{{ text }}</small>
       <br />

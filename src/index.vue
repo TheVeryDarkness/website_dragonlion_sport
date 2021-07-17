@@ -7,6 +7,7 @@
     <Links v-if="page == 1" />
     <Table v-if="page == 2" />
     <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
+    <hr />
     <Footer />
   </div>
 </template>
@@ -40,26 +41,89 @@ export default Main;
   font-family: "Cursive", "KaiTi_GB2312", "DFKai-SB", "FangSong",
     "FangSong_GB2312";
   /* To be overriden */
-  font-size: 32px;
+  font-size: 48px;
 }
-@media (max-width: 720px) {
+hr {
+  z-index: auto;
+}
+@media (max-width: 1800px) {
+  :root {
+    font-size: 40px;
+  }
+}
+@media (max-width: 1440px) {
+  :root {
+    font-size: 36px;
+  }
+}
+@media (max-width: 1320px) {
+  :root {
+    font-size: 34px;
+  }
+}
+@media (max-width: 1200px) {
+  :root {
+    font-size: 32px;
+  }
+}
+@media (max-width: 1080px) {
+  :root {
+    font-size: 30px;
+  }
+}
+@media (max-width: 960px) {
   :root {
     font-size: 28px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 840px) {
+  :root {
+    font-size: 26px;
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    font-size: 24px;
+  }
+}
+@media (max-width: 540px) {
   :root {
     font-size: 22px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 480px) {
+  :root {
+    font-size: 20px;
+  }
+}
+@media (max-width: 420px) {
+  :root {
+    font-size: 18px;
+  }
+}
+@media (max-width: 360px) {
   :root {
     font-size: 16px;
   }
 }
-@media (max-width: 240px) {
+@media (max-width: 320px) {
   :root {
     font-size: 14px;
+  }
+}
+@media (max-width: 280px) {
+  :root {
+    font-size: 12px;
+  }
+}
+@media (max-width: 240px) {
+  :root {
+    font-size: 10px;
+  }
+}
+@media (max-width: 120px) {
+  :root {
+    font-size: 8px;
   }
 }
 </style>

@@ -17,7 +17,7 @@
 		from
 		sub
 */
-import { tree } from "./tree";
+import { TreeRoot as Tree } from "./tree";
 export {
   getEmbededVideoSrc,
   fetchVideoSrcFromLocalStorage,
@@ -26,6 +26,7 @@ export {
   removeVideoSrcFromLocalStorage,
 };
 const storage = require("./localStorage");
+const tree = import("../data/video.json");
 interface source {
   url: string;
   init: RequestInit;
@@ -34,8 +35,8 @@ if (!fetch) {
   alert("Fetch api is not supported, consider using another browser.");
 }
 
-async function getEmbededVideoSrc() {
-  return require("../data/video.json");
+function getEmbededVideoSrc(): Promise<Tree> {
+  return tree;
 }
 async function fetchVideoSrcFromLocalStorage() {
   const fromSessionStorage = storage.get("video");
@@ -51,7 +52,7 @@ async function fetchVideoSrcFromLocalStorage() {
 function removeVideoSrcFromLocalStorage() {
   storage.remove("video");
 }
-function addVideoSrcToLocalStorage(tree: tree) {
+function addVideoSrcToLocalStorage(tree: Tree) {
   storage.set("video", JSON.stringify(tree));
 }
 const videoSrcUrls: { [tag: string]: source } = {

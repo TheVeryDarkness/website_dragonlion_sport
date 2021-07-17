@@ -1,42 +1,43 @@
-interface videoInfo {
+type VideoInfo = {
   frame?: string;
   from?: string;
 
   src?: string;
 
-  range?: [string, string];
+  range?: string[]; //[string, string];
 
   origin?: string;
-  comment?: [string, string][];
-}
-interface node {
+};
+type NodeBasic = {
   value: string;
-  sub?: node[];
+  sub: NodeBasic[];
 
-  range?: [string, string];
-  src?: string;
-  origin?: string;
-  comment?: [string, string][];
-}
-export interface action extends videoInfo, node {
+  comment?: string[][]; //[string, string][];
+  [key: string]: undefined | string | string[] | string[][] | NodeBasic[];
+};
+export interface Action extends VideoInfo, NodeBasic {
   value: string;
 }
-export interface team extends videoInfo, node {
+export interface Team extends VideoInfo, NodeBasic {
   value: string;
-  sub: action[];
+  sub: Action[];
 }
-export interface event extends videoInfo, node {
+export interface Group extends VideoInfo, NodeBasic {
   value: string;
-  sub: team[];
+  sub: Team[];
 }
-export interface year extends node {
+export interface Tournament extends VideoInfo, NodeBasic {
   value: string;
-  sub: event[];
+  sub: Group[];
 }
-export interface sport extends node {
+export interface Year extends NodeBasic {
   value: string;
-  sub: year[];
+  sub: Tournament[];
 }
-export interface tree {
-  root: node[];
+export interface Sport extends NodeBasic {
+  value: string;
+  sub: Year[];
+}
+export interface TreeRoot {
+  root: Sport[];
 }

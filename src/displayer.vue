@@ -1,29 +1,48 @@
 <template>
-  <video
-    v-if="!!video"
-    v-bind:src="video"
-    @timeupdate="check"
-    controls
-    autoplay
-  >
-    浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
-  </video>
-  <iframe
-    v-if="!!frame"
-    v-bind:src="frame"
-    andbox="allow-same-origin allow-top-navigation-by-user-activation allow-scripts"
-  ></iframe>
+  <div style="position: fixed; inset: 0" v-show="open" @click="open = !open">
+    <div
+      style="
+        background-color: rgba(127, 127, 127, 0);
+        display: flex;
+        position: absolute;
+        margin: 5%;
+        width: 90%;
+        height: 90%;
+      "
+    >
+      <fieldset style="width: 100%; height: 100%" class="top" @click.stop="">
+        <Editor v-bind:node="node" />
+        <div>
+          <video
+            v-if="!!video"
+            v-bind:src="video"
+            @timeupdate="check"
+            controls
+            autoplay
+          >
+            浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
+          </video>
+          <iframe
+            v-if="!!frame"
+            v-bind:src="frame"
+            sandbox="allow-same-origin allow-top-navigation-by-user-activation allow-scripts"
+          ></iframe>
+        </div>
+      </fieldset>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { videoInfo } from "@/tree";
+import { NodeBasic, VideoInfo } from "@/tree";
+import Editor from "@/editor.vue";
 import { defineComponent, PropType } from "vue";
 const Displayer = defineComponent({
   data() {
-    return { ended: false, inited: false };
+    return { ended: false, inited: false, open: false };
   },
   props: {
-    node: { type: Object as PropType<videoInfo>, default: {} },
+    node: { type: Object as PropType<VideoInfo & NodeBasic>, default: {} },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
   computed: {
@@ -66,6 +85,7 @@ const Displayer = defineComponent({
   watch: {
     node() {
       this.inited = false;
+      this.open = true;
     },
   },
   methods: {
@@ -82,6 +102,7 @@ const Displayer = defineComponent({
       }
     },
   },
+  components: { Editor },
 });
 export default Displayer;
 </script>
@@ -114,8 +135,8 @@ iframe.video {
     height: 100%;
   }
   iframe {
-    width: 96vw;
-    height: 54vw;
+    min-width: 84vw;
+    min-height: 54vw;
   }
 }
 </style>
