@@ -1,27 +1,34 @@
 <template>
   <div v-for="(value, key) in node" :key="key">
     <div v-if="key != 'sub'">
-      <input size="6" v-if="key == ''" value="" @change.stop="changeKey" />
-      <input size="6" v-if="key != ''" v-bind:value="key" readonly />
+      <span v-if="editable(key)" style="cursor: pointer">-</span>
+      <span v-if="!editable(key)" style="cursor: help">-</span>
+      <input size="6" v-if="key" v-bind:value="key" readonly />
       <input size="32" v-model="node[key]" />
     </div>
   </div>
   <span style="cursor: pointer" @click="addKey">+</span>
+  <input size="6" v-model="new_key" />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { NodeBasic } from "@/tree";
 const editor = defineComponent({
+  data() {
+    return { new_key: "" };
+  },
   props: { node: { type: Object as PropType<NodeBasic>, required: true } },
+  emits: ["update"],
   methods: {
     addKey() {
-      this.$emit("update", "", "");
+      if (this.new_key) {
+        this.$emit("update", this.new_key, "");
+        this.new_key = "";
+      }
     },
-    changeKey(e: Event) {
-      console.log(e);
-      this.$emit("update", (e.target as HTMLInputElement).value, this.node[""]);
-      this.$emit("update", "", undefined);
+    editable(key: string) {
+      return key != "value" && key != "sub";
     },
   },
 });

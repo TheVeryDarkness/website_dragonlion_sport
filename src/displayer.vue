@@ -1,21 +1,22 @@
 <template>
-  <div style="position: fixed; inset: 0" v-show="open" @click="open = !open">
-    <div
-      style="
-        background-color: rgba(127, 127, 127, 0);
-        display: flex;
-        position: absolute;
-        margin: 5%;
-        width: 90%;
-        height: 90%;
-      "
-    >
-      <fieldset style="width: 100%; height: 100%" class="top" @click.stop="">
-        <Editor v-bind:node="node" />
-        <div>
+  <div style="position: fixed; inset: 0" v-if="open" @click="open = !open">
+    <div style="display: flex; margin: 6%; overflow: auto">
+      <fieldset
+        style="width: 100%; height: 100%; overflow: auto"
+        class="top"
+        @click.stop=""
+      >
+        <Editor
+          v-if="nodes.length"
+          v-bind:node="node"
+          @update="update"
+          ref="editor"
+        />
+        <div style="width: 100%; height: 100%">
           <video
             v-if="!!video"
             v-bind:src="video"
+            style="min-width: 100%; min-height: 100%"
             @timeupdate="check"
             controls
             autoplay
@@ -25,6 +26,8 @@
           <iframe
             v-if="!!frame"
             v-bind:src="frame"
+            style="min-width: 78vw; min-height: 52vw"
+            title="内联框架"
             sandbox="allow-same-origin allow-top-navigation-by-user-activation allow-scripts"
           ></iframe>
         </div>
@@ -36,38 +39,39 @@
 <script lang="ts">
 import { NodeBasic, VideoInfo } from "@/tree";
 import Editor from "@/editor.vue";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, reactive } from "vue";
+
 const Displayer = defineComponent({
   data() {
     return { ended: false, inited: false, open: false };
   },
   props: {
-    node: { type: Object as PropType<VideoInfo & NodeBasic>, default: {} },
+    nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
   computed: {
     video(): string {
-      return this.node.src ? this.node.src : "";
+      return this.getStr("src");
     },
     range(): [number, number] {
-      const range = this.node.range;
+      const range = this.getArr("range");
       if (range) return [parseInt(range[0]), parseInt(range[1])];
       else return [0, Infinity];
     },
     frame(): string {
-      const node = this.node;
-      const frame = this.node.frame;
+      const from = this.getStr("from");
+      const frame = this.getStr("frame");
       if (!frame) return "";
-      if (node.from == "bilibili") {
+      if (from == "bilibili") {
         // See http://docs.bilibili.cn/wiki
         // Reference:
         //	https://blog.csdn.net/xinshou_caizhu/article/details/94028606
         //	https://www.bilibili.com/read/cv5293665/
         return frame + "&high_quality=1&t=" + this.range[0];
-      } else if (node.from == "vqq") {
+      } else if (from == "vqq") {
         // See https://m.v.qq.com/txp/v3/src/iframeapi/new.html
         return frame + "&show1080p=1&starttime=" + this.range[0];
-      } else if (node.from == "youku") {
+      } else if (from == "youku") {
         // See http://open.iqiyi.com/lib/play.html,
         //	or http://static-d.iqiyi.com/ext/openapi/iQiyi_Gragonfly_coop_20190304.pdf
         // Reference:
@@ -77,13 +81,16 @@ const Displayer = defineComponent({
           frame + "?starttime=" + this.range[0] + "&endtime=" + this.range[1]
         );
       } else {
-        console.log("Unrecognized video source: '", node.from, "'");
+        console.log("Unrecognized video source: '", from, "'");
         return frame;
       }
     },
+    node(): NodeBasic | VideoInfo {
+      return this.nodes[this.nodes.length - 1];
+    },
   },
   watch: {
-    node() {
+    nodes() {
       this.inited = false;
       this.open = true;
     },
@@ -100,6 +107,32 @@ const Displayer = defineComponent({
         video.pause();
         this.ended = true;
       }
+    },
+    update(
+      key: string,
+      value: undefined | string | string[] | string[][] | NodeBasic[]
+    ) {
+      var _node = this.nodes[this.nodes.length - 1];
+      _node[key] = value;
+      (this.$refs.editor as typeof Editor).$forceUpdate();
+      this.$forceUpdate();
+      console.log(this.nodes);
+    },
+    getStr<T extends "src" | "frame" | "origin" | "from">(key: T) {
+      var value = "";
+      this.nodes.forEach((node: VideoInfo) => {
+        const v = node[key];
+        if (v) value = v;
+      });
+      return value;
+    },
+    getArr<T extends "range">(key: T) {
+      var value: string[] = [];
+      this.nodes.forEach((node: VideoInfo) => {
+        const v = node[key];
+        if (v) value = v;
+      });
+      return value;
     },
   },
   components: { Editor },
@@ -118,25 +151,5 @@ iframe.video {
   margin-top: 0.6em;
   float: left;
   display: none;
-}
-@media (min-aspect-ratio: 16/9) {
-  video {
-    width: 79%;
-    height: 79%;
-  }
-  iframe {
-    width: 76vw;
-    height: 42.75vw;
-  }
-}
-@media (max-aspect-ratio: 16/9) {
-  video {
-    width: 100%;
-    height: 100%;
-  }
-  iframe {
-    min-width: 84vw;
-    min-height: 54vw;
-  }
 }
 </style>

@@ -1,24 +1,26 @@
 <template>
   <ul>
-    <span
-      style="cursor: pointer"
-      @click="changeStatus"
-      v-bind:title="root.value"
-    >
-      {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
-    </span>
-    <a @click="chooseNode">{{ root.value }}</a>
-    <tree
-      style="margin: 0 0 0 6%; padding: 0"
-      v-show="open"
-      v-for="(item, index) in root.sub"
-      :key="index"
-      v-bind:root="item"
-      v-bind:want="want"
-      v-bind:locked="locked"
-      @found="_found"
-      @choose="_choose"
-    />
+    <li style="list-style: none; margin: 0; padding: 0">
+      <span
+        style="cursor: pointer"
+        @click="changeStatus"
+        v-bind:title="root.value"
+      >
+        {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
+      </span>
+      <a @click="chooseNode">{{ root.value }}</a>
+      <tree
+        style="margin: 0 0 0 6%; padding: 0"
+        v-show="open"
+        v-for="(item, index) in root.sub"
+        :key="index"
+        v-bind:root="item"
+        v-bind:want="want"
+        v-bind:locked="locked"
+        @found="_found"
+        @choose="_choose"
+      />
+    </li>
   </ul>
 </template>
 

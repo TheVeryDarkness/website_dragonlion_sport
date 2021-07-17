@@ -6,9 +6,9 @@
     <Manage v-bind:data="data" v-if="page == 3" />
     <Links v-if="page == 1" />
     <Table v-if="page == 2" />
-    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
     <hr />
     <Footer />
+    <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
   </div>
 </template>
 

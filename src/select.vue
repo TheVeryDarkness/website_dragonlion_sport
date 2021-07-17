@@ -22,7 +22,7 @@
       />
     </div>
   </fieldset>
-  <Displayer v-bind:node="chosenNode" @update="update" />
+  <Displayer v-bind:nodes="chosenNodes" />
 </template>
 
 <script lang="ts">
@@ -89,7 +89,7 @@ const select = defineComponent({
       key: "",
       locked: true,
       search: noSearch,
-      chosenNodes: new Array<NodeBasic>(),
+      chosenNodes: new Array<NodeBasic & VideoInfo>(),
     };
   },
   props: { video: { type: Object as PropType<TreeRoot>, required: true } },
@@ -107,18 +107,6 @@ const select = defineComponent({
     },
     chooseNode(...nodes: NodeBasic[]) {
       this.chosenNodes = nodes;
-    },
-  },
-  computed: {
-    chosenNode(): VideoInfo {
-      const res: { [key: string]: any } = {};
-      this.chosenNodes.forEach((_: VideoInfo & NodeBasic) => {
-        let key: keyof (VideoInfo & NodeBasic);
-        for (key in _) {
-          if (res[key] == undefined) res[key] = _[key];
-        }
-      });
-      return res;
     },
   },
 });
