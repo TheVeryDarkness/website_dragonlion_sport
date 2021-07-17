@@ -3,6 +3,18 @@
     <p>以下是搜集自网络的龙狮运动相关链接：</p>
     <ul>
       <li>
+        同济龙狮内部资料
+        <ul>
+          <li>
+            <a
+              href="https://www.notion.so/f26379595686472ea332809fb70e7722?v=66c338926f6549e4ba522b00520c843e"
+            >
+              专属Notion
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
         <a href="http://dragonlion.sport.org.cn/">全国龙狮运动协会</a>
         <ul>
           <li>
@@ -41,6 +53,11 @@
         </a>
       </li>
       <li>
+        <a href="http://www.hkcmaa.com.hk/eng/intro/activities.html">
+          香港中国国术龙狮协会
+        </a>
+      </li>
+      <li>
         <a href="http://www.ocasia.org">亚洲奥林匹克理事会</a>
         <ul>
           <li>
@@ -60,23 +77,6 @@
               href="http://www.ocasia.org/sports/federations/13-dragon-lion-dances-federation-of-asia.html"
             >
               DLDFA
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="http://www.hkcmaa.com.hk/eng/intro/activities.html">
-          香港中国国术龙狮协会
-        </a>
-      </li>
-      <li>
-        同济龙狮内部资料
-        <ul>
-          <li>
-            <a
-              href="https://www.notion.so/f26379595686472ea332809fb70e7722?v=66c338926f6549e4ba522b00520c843e"
-            >
-              专属Notion
             </a>
           </li>
         </ul>
