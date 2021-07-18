@@ -2,7 +2,7 @@
   <ul>
     <li style="list-style: none; margin: 0; padding: 0">
       <span
-        v-bind:style="{ cursor: has_sub ? 'pointer' : 'default' }"
+        v-bind:style="labelStyle"
         @click="changeStatus"
         v-bind:title="root.value"
       >
@@ -10,13 +10,13 @@
       </span>
       <a @click="chooseNode">{{ root.value }}</a>
       <tree
+        ref="_sub"
         style="margin: 0 0 0 6%; padding: 0"
         v-show="open"
-        v-for="(item, index) in root.sub"
-        :key="index"
+        v-for="item in root.sub"
+        :key="item.value"
         v-bind:root="item"
         v-bind:want="want"
-        v-bind:locked="locked"
         @found="_found"
         @choose="_choose"
       />
@@ -36,7 +36,6 @@ const tree = defineComponent({
   },
   props: {
     root: { type: Object as PropType<NodeBasic>, required: true },
-    locked: { type: Boolean },
     want: {
       type: Function as PropType<(_: NodeBasic) => boolean>,
       required: true,
@@ -44,11 +43,17 @@ const tree = defineComponent({
   },
   computed: {
     has_sub(): boolean {
+      console.log(this.$refs._sub);
       const sub = this.root.sub;
       return !!sub && sub.length > 0;
     },
     open(): boolean {
       return this.referenced || this.opened;
+    },
+    labelStyle(): { cursor: string } {
+      return {
+        cursor: this.has_sub ? (this.open ? "zoom-out" : "zoom-in") : "help",
+      };
     },
   },
   emits: ["found", "choose"],
@@ -57,8 +62,9 @@ const tree = defineComponent({
       this.referenced = foundInSub || this.referenced;
       this.$emit("found", this.referenced || this.want(this.root));
     },
-    changeStatus() {
-      this.opened = !this.opened;
+    changeStatus(e: MouseEvent) {
+      if (e.altKey) this.chooseNode();
+      else this.opened = !this.opened;
     },
     chooseNode() {
       this.$emit("choose", this.root);

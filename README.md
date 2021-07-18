@@ -14,7 +14,8 @@ git clone --recursive https://gitee.com/TheVeryDarkness/website_dragonlion_sport
 ```
 
 以将本存储库下载到本地。或者您可以点击右上角的下载按钮，下载压缩包，再将其解压。
-如此，您可以直接用浏览器在本地查看。
+
+如此，您只需:grinning:在本地搭一个服务器，就可以用浏览器在本地查看网站。
 
 ## 使用说明
 
@@ -24,7 +25,7 @@ git clone --recursive https://gitee.com/TheVeryDarkness/website_dragonlion_sport
 
 ### 属性解释
 
-由于懒得做分开处理（其实在移植到 Vue 之前做过的，但就是懒得做，反正没几个人看），所以使用 JSON 语法描述属性值。
+由于没有做分开处理（其实在移植到 Vue 之前做过的，但就是懒得做，反正没几个人看），所以使用 JSON 语法描述属性值。
 
 |   键    |      值      | 可选 |              类型               | 可能的值             |
 | :-----: | :----------: | :--: | :-----------------------------: | -------------------- |

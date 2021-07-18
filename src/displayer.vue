@@ -4,21 +4,33 @@
       v-if="open"
       style="position: absolute; display: flex; margin: 6%; width: 88%"
     >
-      <fieldset style="width: 100%" class="top" @click.stop="">
+      <fieldset
+        style="width: 100%; border-radius: 12px"
+        class="top"
+        @click.stop=""
+      >
         <Editor
           v-if="nodes.length"
           v-bind:node="node"
           @update="update"
+          @choose="choose"
           ref="editor"
         />
         <hr v-if="video || frame" />
+        <input
+          v-if="!!video"
+          ref="_time"
+          size="6"
+          @input="changeTime($event.target.value)"
+        />
         <div style="width: 100%">
           <video
+            ref="_video"
             v-if="!!video"
             v-bind:src="video"
             style="width: 100%"
             @timeupdate="check"
-            @load="check"
+            @loadeddata="check"
             controls
           >
             浏览器不支持HTML5视频，请使用高版本浏览器或点击链接
@@ -39,7 +51,7 @@
 <script lang="ts">
 import { NodeBasic, VideoInfo } from "@/tree";
 import Editor from "@/editor.vue";
-import { defineComponent, PropType, reactive } from "vue";
+import { defineComponent, PropType } from "vue";
 
 const Displayer = defineComponent({
   data() {
@@ -52,9 +64,10 @@ const Displayer = defineComponent({
   },
   props: {
     nodes: { type: Array as PropType<(VideoInfo & NodeBasic)[]>, default: [] },
-    autoplay: { type: Boolean },
+    easy: { type: Boolean },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
+  emits: ["choose"],
   computed: {
     styleObject(): Object {
       return { position: "absolute", inset: 0, height: this.height + "px" };
@@ -127,17 +140,23 @@ const Displayer = defineComponent({
         this.observe();
       }, 100);
     },
+    changeTime(time: number) {
+      const video = this.$refs._video as HTMLVideoElement | null;
+      if (video) video.currentTime = time;
+    },
     check(ev: Event) {
       const video = ev.target as HTMLVideoElement;
       if (!this.inited) {
         video.currentTime = this.range[0];
-        if (this.autoplay) video.play();
+        if (this.easy) video.play();
         this.inited = true;
       }
       if (!this.ended && video.currentTime >= this.range[1]) {
         video.pause();
         this.ended = true;
       }
+      const _time = this.$refs._time as HTMLInputElement;
+      if (_time) _time.value = Math.floor(video.currentTime).toString();
     },
     update(
       key: string,
@@ -148,6 +167,9 @@ const Displayer = defineComponent({
       else _node[key] = value;
       (this.$refs.editor as typeof Editor).$forceUpdate();
       this.$forceUpdate();
+    },
+    choose(node: NodeBasic) {
+      this.$emit("choose", node);
     },
     getStr<T extends "src" | "frame" | "origin" | "from">(key: T) {
       var value = "";

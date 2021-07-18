@@ -2,13 +2,13 @@
   <Header v-on:select-page="update" />
   <hr />
   <Select v-bind:video="data" v-if="page == 0 || page == 3" @select="select" />
-  <Manage v-bind:data="data" v-if="page == 3" />
+  <Manage v-bind:data="data" v-if="page == 3" v-bind:node="chosenNode" />
   <Links v-if="page == 1" />
   <Table v-if="page == 2" />
   <hr />
   <Footer />
   <noscript>浏览器不支持脚本，请使用高版本浏览器或点击链接</noscript>
-  <Displayer v-bind:nodes="chosenNodes" v-bind:autoplay="page == 0" />
+  <Displayer v-bind:nodes="chosenNodes" v-bind:easy="page == 0" />
 </template>
 
 <script lang="ts">
@@ -30,6 +30,12 @@ const Main = defineComponent({
       data: videoData,
       chosenNodes: new Array<NodeBasic & VideoInfo>(),
     };
+  },
+  computed: {
+    chosenNode(): NodeBasic | undefined {
+      if (!this.chosenNodes) return undefined;
+      return this.chosenNodes[this.chosenNodes.length - 1];
+    },
   },
   methods: {
     update(i: number) {

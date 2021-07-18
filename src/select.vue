@@ -4,12 +4,7 @@
     <input type="text" v-model="text" placeholder="关键字" />
     <input type="button" value="搜索" @click="fullSearch()" />
     <input type="button" value="取消" @click="reset()" />
-    <input
-      class="button"
-      type="button"
-      v-bind:value="locked ? '编辑' : '生成'"
-      @click="generate"
-    />
+    <input class="button" type="button" value="生成" @click="generate" />
     <div>
       <Tree
         style="margin: 0; padding: 0"
@@ -17,7 +12,6 @@
         :key="index"
         v-bind:root="root"
         v-bind:want="search"
-        v-bind:locked="locked"
         @choose="chooseNode"
       />
     </div>
@@ -85,7 +79,6 @@ const select = defineComponent({
     return {
       text: "",
       key: "",
-      locked: true,
       search: noSearch,
     };
   },
@@ -100,8 +93,7 @@ const select = defineComponent({
       this.search = fullSearch(this.text, this.key);
     },
     generate() {
-      this.locked = !this.locked;
-      if (this.locked) makeFile("result.json", JSON.stringify(this.video));
+      makeFile("result.json", JSON.stringify(this.video));
     },
     chooseNode(...nodes: NodeBasic[]) {
       this.$emit("select", ...nodes.reverse());

@@ -12,6 +12,7 @@ type NodeBasic = {
   value: string;
   sub: NodeBasic[];
 
+  score?: string;
   comment?: string[][]; //[string, string][];
   [key: string]: undefined | string | string[] | string[][] | NodeBasic[];
 };

@@ -7,7 +7,7 @@
         <ul>
           <li>
             <a
-              href="https://www.notion.so/f26379595686472ea332809fb70e7722?v=66c338926f6549e4ba522b00520c843e"
+              href="https://rift-louse-856.notion.site/aa2c07554b82424b853ec26f01fd842c?v=218d6a331f664d2f916a677d60872ab2"
             >
               专属Notion
             </a>
