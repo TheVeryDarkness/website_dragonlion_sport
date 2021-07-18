@@ -13,7 +13,8 @@
           v-if="nodes.length"
           v-bind:node="node"
           @update="update"
-          @choose="choose"
+          @chooseChild="chooseChild"
+          @chooseParent="chooseParent"
           ref="editor"
         />
         <hr v-if="video || frame" />
@@ -67,7 +68,6 @@ const Displayer = defineComponent({
     easy: { type: Boolean },
     mode: { type: String as PropType<"html5" | "iframe"> },
   },
-  emits: ["choose"],
   computed: {
     styleObject(): Object {
       return { position: "absolute", inset: 0, height: this.height + "px" };
@@ -113,13 +113,14 @@ const Displayer = defineComponent({
         return frame;
       }
     },
-    node(): NodeBasic | VideoInfo {
+    node(): NodeBasic & VideoInfo {
       return this.nodes[this.nodes.length - 1];
     },
   },
   mounted() {
     this.observe();
   },
+  emits: ["modify"],
   watch: {
     nodes() {
       this.inited = false;
@@ -162,14 +163,22 @@ const Displayer = defineComponent({
       key: string,
       value: undefined | string | string[] | string[][] | NodeBasic[]
     ) {
-      var _node = this.nodes[this.nodes.length - 1];
+      var _node = this.node;
       if (value == undefined) delete _node[key];
       else _node[key] = value;
       (this.$refs.editor as typeof Editor).$forceUpdate();
       this.$forceUpdate();
     },
-    choose(node: NodeBasic) {
-      this.$emit("choose", node);
+    chooseChild(index: number) {
+      const n = this.nodes[this.nodes.length - 1].sub[index];
+      if (!n) console.error(n, "is not in", this.nodes);
+      else this.nodes.push(n);
+      this.$forceUpdate();
+    },
+    chooseParent() {
+      if (this.nodes.length > 0) this.nodes.pop();
+      else console.error("No parent node to choose.");
+      this.$forceUpdate();
     },
     getStr<T extends "src" | "frame" | "origin" | "from">(key: T) {
       var value = "";

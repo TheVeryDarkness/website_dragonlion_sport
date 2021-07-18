@@ -27,7 +27,7 @@
     <input size="6" @keyup.enter="addKey" v-model="new_key" />
   </div>
   <div>
-    <label> * </label>
+    <label style="cursor: pointer" @click="$emit('chooseParent')"> * </label>
     <select @input="select">
       <option></option>
       <option v-for="(item, index) in node.sub" :key="index">
@@ -46,7 +46,7 @@ const editor = defineComponent({
     return { new_key: "" };
   },
   props: { node: { type: Object as PropType<NodeBasic>, required: true } },
-  emits: ["update", "choose"],
+  emits: ["update", "chooseChild", "chooseParent"],
   computed: {},
   methods: {
     addKey() {
@@ -97,13 +97,16 @@ const editor = defineComponent({
       //console.log(e, index, options);
       if (index == 0) return;
       else if (index == options.length - 1) {
+        const pos = options.length - 2;
         this.$emit(
           "update",
           "sub",
           this.node.sub.concat([{ value: "!", sub: [] }])
         );
+        this.$emit("chooseChild", pos);
       } else {
-        this.$emit("choose", this.node.sub[index - 1]);
+        this.$emit("chooseChild", index - 1);
+        select.selectedIndex = 0;
       }
     },
     legal(str: string) {

@@ -1,7 +1,12 @@
 <template>
-  <Header v-on:select-page="update" />
+  <Header v-on:select-page="select_page" />
   <hr />
-  <Select v-bind:video="data" v-if="page == 0 || page == 3" @select="select" />
+  <Select
+    v-bind:video="data"
+    v-if="page == 0 || page == 3"
+    @select="select"
+    ref="_select"
+  />
   <Manage v-bind:data="data" v-if="page == 3" v-bind:node="chosenNode" />
   <Links v-if="page == 1" />
   <Table v-if="page == 2" />
@@ -18,7 +23,7 @@ import Footer from "@/footer.vue";
 import Table from "@/table.vue";
 import Links from "@/links.vue";
 import Manage from "@/manage.vue";
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import videoData from "~/data/video.json";
 import { NodeBasic, VideoInfo } from "./tree";
 import Displayer from "@/displayer.vue";
@@ -27,7 +32,7 @@ const Main = defineComponent({
   data() {
     return {
       page: 0,
-      data: videoData,
+      data: reactive(videoData),
       chosenNodes: new Array<NodeBasic & VideoInfo>(),
     };
   },
@@ -38,7 +43,7 @@ const Main = defineComponent({
     },
   },
   methods: {
-    update(i: number) {
+    select_page(i: number) {
       this.page = i;
     },
     select(...nodes: NodeBasic[]) {
@@ -55,7 +60,7 @@ export default Main;
   font-family: "Cursive", "KaiTi_GB2312", "DFKai-SB", "FangSong",
     "FangSong_GB2312";
   /* To be overriden */
-  font-size: 48px;
+  font-size: 42px;
 }
 hr {
   z-index: auto;

@@ -5,15 +5,13 @@
         v-bind:style="labelStyle"
         @click="changeStatus"
         v-bind:title="root.value"
-      >
-        {{ has_sub ? (open ? "&#8594;" : "&#8595;") : "[]" }}
-      </span>
-      <a @click="chooseNode">{{ root.value }}</a>
+        v-text="has_sub ? (open ? '&#8594;' : '&#8595;') : '[]'"
+      ></span>
+      <a v-bind:style="anchorStyle" @click="chooseNode">{{ root.value }}</a>
       <tree
-        ref="_sub"
         style="margin: 0 0 0 6%; padding: 0"
         v-show="open"
-        v-for="item in root.sub"
+        v-for="item in orderedSub"
         :key="item.value"
         v-bind:root="item"
         v-bind:want="want"
@@ -26,7 +24,8 @@
 
 <script lang="ts">
 import { NodeBasic } from "./tree";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, reactive, watch } from "vue";
+import { compare } from "@/compare";
 const tree = defineComponent({
   data() {
     return {
@@ -43,8 +42,7 @@ const tree = defineComponent({
   },
   computed: {
     has_sub(): boolean {
-      console.log(this.$refs._sub);
-      const sub = this.root.sub;
+      const sub = this.sub;
       return !!sub && sub.length > 0;
     },
     open(): boolean {
@@ -55,6 +53,17 @@ const tree = defineComponent({
         cursor: this.has_sub ? (this.open ? "zoom-out" : "zoom-in") : "help",
       };
     },
+    anchorStyle(): { padding: string } {
+      return { padding: "0 0.5em 0 0.5em" };
+    },
+    sub(): NodeBasic[] {
+      return reactive(this.root.sub ? this.root.sub : []);
+    },
+    orderedSub(): NodeBasic[] {
+      return this.sub.sort((a, b) => {
+        return compare(a.value, b.value);
+      });
+    },
   },
   emits: ["found", "choose"],
   methods: {
@@ -63,8 +72,7 @@ const tree = defineComponent({
       this.$emit("found", this.referenced || this.want(this.root));
     },
     changeStatus(e: MouseEvent) {
-      if (e.altKey) this.chooseNode();
-      else this.opened = !this.opened;
+      this.opened = !this.opened;
     },
     chooseNode() {
       this.$emit("choose", this.root);
@@ -76,7 +84,7 @@ const tree = defineComponent({
   watch: {
     want(newWant, oldWant) {
       this.referenced = false;
-      if (!this.root.sub || this.root.sub.length == 0)
+      if (!this.sub || this.sub.length == 0)
         this.$emit("found", newWant(this.root));
     },
   },

@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "webpack serve --inline --progress --config build/webpack.dev.js",
     "start": "npm run dev",
-    "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "webpack --config build/webpack.prod.js"
+    "build-prod": "webpack --config build/webpack.prod.js",
+    "build-dev": "webpack --config build/webpack.dev.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",

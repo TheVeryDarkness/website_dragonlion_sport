@@ -5,11 +5,11 @@
     <input type="button" value="搜索" @click="fullSearch()" />
     <input type="button" value="取消" @click="reset()" />
     <input class="button" type="button" value="生成" @click="generate" />
-    <div>
+    <div v-if="video && video.root">
       <Tree
         style="margin: 0; padding: 0"
-        v-for="(root, index) in video.root"
-        :key="index"
+        v-for="root in orderedSub"
+        :key="root.value"
         v-bind:root="root"
         v-bind:want="search"
         @choose="chooseNode"
@@ -21,7 +21,8 @@
 <script lang="ts">
 import { default as Tree } from "@/tree.vue";
 import { NodeBasic, TreeRoot } from "./tree";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, reactive } from "vue";
+import { compare } from "./compare";
 
 function makeFile(name: string, text: string) {
   var element = document.createElement("a");
@@ -85,6 +86,16 @@ const select = defineComponent({
   props: { video: { type: Object as PropType<TreeRoot>, required: true } },
   components: { Tree },
   emits: ["select"],
+  computed: {
+    _sub(): NodeBasic[] {
+      return reactive(this.video.root);
+    },
+    orderedSub(): NodeBasic[] {
+      return this._sub.sort((a, b) => {
+        return compare(a.value, b.value);
+      });
+    },
+  },
   methods: {
     reset() {
       this.search = noSearch;
